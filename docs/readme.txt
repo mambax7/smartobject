@@ -172,4 +172,4 @@ Support and Feedback
 ====================
 
 We encourage you to visit XOOPS Community forums to get and offer support for this module. Feedback as also always appreciated. A dedicated forum for The SmartFactory modules is available here:
-http://xoops.org/modules/newbb
+https://xoops.org/modules/newbb

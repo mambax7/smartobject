@@ -1,4 +1,4 @@
-![alt XOOPS CMS](http://xoops.org/images/logoXoops4GithubRepository.png)
+![alt XOOPS CMS](https://xoops.org/images/logoXoops4GithubRepository.png)
 ## SmartObject for  [XOOPS CMS 2.5.8+](https://xoops.org)
 [![Software License](https://img.shields.io/badge/license-GPL-brightgreen.svg?style=flat)](LICENSE)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/mambax7/smartobject.svg?style=flat)](https://scrutinizer-ci.com/g/mambax7/smartobject/?branch=master)
@@ -8,9 +8,9 @@
 [![Latest Pre-Release](https://img.shields.io/github/tag/XoopsModules25x/smartobject.svg?style=flat)](https://github.com/XoopsModules25x/smartobject/tags/)
 [![Latest Version](https://img.shields.io/github/release/XoopsModules25x/smartobject.svg?style=flat)](https://github.com/XoopsModules25x/smartobject/releases/)
 
-SmartObject for [XOOPS CMS](http://xoops.org) is a module framework for XOOPS modules, used in Smart-modules. It is not being further developed, and is being replaced by **[XMF (XOOPS Module Framework)](https://www.gitbook.com/book/xoops/xmf-cookbook/details)**
+SmartObject for [XOOPS CMS](https://xoops.org) is a module framework for XOOPS modules, used in Smart-modules. It is not being further developed, and is being replaced by **[XMF (XOOPS Module Framework)](https://www.gitbook.com/book/xoops/xmf-cookbook/details)**
 
-Please visit us on [http://xoops.org](https://xoops.org)
+Please visit us on [https://xoops.org](https://xoops.org)
 
 The upcoming "next generation" version of XOOPS CMS is being crafted on GitHub at: https://github.com/XOOPS
 

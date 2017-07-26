@@ -24,7 +24,7 @@ $modversion['image']       = 'assets/images/logo_module.png';
 $modversion['dirname']     = basename(__DIR__);
 
 // Added by marcan for the About page in admin section
-$modversion['developer_website_url']  = 'http://xoops.org';
+$modversion['developer_website_url']  = 'https://xoops.org';
 $modversion['developer_website_name'] = 'XOOPS';
 $modversion['developer_email']        = '';
 //$modversion['status_version'] = "Final";
@@ -85,7 +85,7 @@ $modversion['warning'] = _CO_SOBJECT_WARNING_BETA;
 
 $modversion['demo_site_url']     = '';
 $modversion['demo_site_name']    = '';
-$modversion['support_site_url']  = 'http://xoops.org';
+$modversion['support_site_url']  = 'https://xoops.org';
 $modversion['support_site_name'] = 'XOOPS';
 $modversion['submit_bug']        = '';
 $modversion['submit_feature']    = '';

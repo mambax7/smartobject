@@ -40,14 +40,14 @@ function editcustomtag($showmenu = false, $customtagid = 0, $clone = false)
     }
 }
 
-include_once __DIR__ . '/admin_header.php';
+require_once __DIR__ . '/admin_header.php';
 smart_loadLanguageFile('smartobject', 'customtag');
 
-include_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
-include_once SMARTOBJECT_ROOT_PATH . 'class/customtag.php';
+require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
+require_once SMARTOBJECT_ROOT_PATH . 'class/customtag.php';
 $smartobjectCustomtagHandler = xoops_getModuleHandler('customtag');
 
-$indexAdmin = new ModuleAdmin();
+$adminObject = \Xmf\Module\Admin::getInstance();
 
 $op = '';
 
@@ -64,7 +64,7 @@ switch ($op) {
         $customtagid = isset($_GET['customtagid']) ? (int)$_GET['customtagid'] : 0;
 
         smart_xoops_cp_header();
-        echo $indexAdmin->addNavigation(basename(__FILE__));
+        $adminObject->displayNavigation(basename(__FILE__));
 
         editcustomtag(true, $customtagid);
         break;
@@ -74,20 +74,20 @@ switch ($op) {
         $customtagid = isset($_GET['customtagid']) ? (int)$_GET['customtagid'] : 0;
 
         smart_xoops_cp_header();
-        echo $indexAdmin->addNavigation(basename(__FILE__));
+        $adminObject->displayNavigation(basename(__FILE__));
 
         editcustomtag(true, $customtagid, true);
         break;
 
     case 'addcustomtag':
-        include_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
+        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
         $controller = new SmartObjectController($smartobjectCustomtagHandler);
         $controller->storeFromDefaultForm(_AM_SOBJECT_CUSTOMTAGS_CREATED, _AM_SOBJECT_CUSTOMTAGS_MODIFIED);
         break;
 
     case 'del':
 
-        include_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
+        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
         $controller = new SmartObjectController($smartobjectCustomtagHandler);
         $controller->handleObjectDeletion();
 
@@ -96,15 +96,15 @@ switch ($op) {
     default:
 
         smart_xoops_cp_header();
-        echo $indexAdmin->addNavigation(basename(__FILE__));
-        $indexAdmin->addItemButton(_AM_SOBJECT_CUSTOMTAGS_CREATE, 'customtag.php?op=mod', 'add', '');
-        echo $indexAdmin->renderButton('left', '');
+        $adminObject->displayNavigation(basename(__FILE__));
+        $adminObject->addItemButton(_AM_SOBJECT_CUSTOMTAGS_CREATE, 'customtag.php?op=mod', 'add', '');
+        $adminObject->displayButton('left', '');
 
         //smart_adminMenu(2, _AM_SOBJECT_CUSTOMTAGS);
 
         smart_collapsableBar('createdcustomtags', _AM_SOBJECT_CUSTOMTAGS, _AM_SOBJECT_CUSTOMTAGS_DSC);
 
-        include_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
+        require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
         $objectTable = new SmartObjectTable($smartobjectCustomtagHandler);
         $objectTable->addColumn(new SmartObjectColumn('name', 'left', 150, 'getCustomtagName'));
         $objectTable->addColumn(new SmartObjectColumn('description', 'left'));
@@ -153,4 +153,4 @@ switch ($op) {
 
 //smart_modFooter();
 //xoops_cp_footer();
-include_once __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';

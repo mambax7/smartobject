@@ -33,15 +33,22 @@ class SmartObjectExport
      * Constructor
      *
      * @param SmartPersistableObjectHandler $objectHandler SmartObjectHandler handling the data we want to export
-     * @param CriteriaElement      $criteria      containing the criteria of the query fetching the objects to be exported
-     * @param array|bool  $fields        fields to be exported. If FALSE then all fields will be exported
-     * @param bool|string $filename      name of the file to be created
-     * @param bool|string $filepath      path where the file will be saved
-     * @param string      $format        format of the ouputed export. Currently only supports CSV
-     * @param array|bool  $options       options of the format to be exported in
+     * @param CriteriaElement               $criteria      containing the criteria of the query fetching the objects to be exported
+     * @param array|bool                    $fields        fields to be exported. If FALSE then all fields will be exported
+     * @param bool|string                   $filename      name of the file to be created
+     * @param bool|string                   $filepath      path where the file will be saved
+     * @param string                        $format        format of the ouputed export. Currently only supports CSV
+     * @param array|bool                    $options       options of the format to be exported in
      */
-    public function __construct(SmartPersistableObjectHandler $objectHandler, CriteriaElement $criteria = null, $fields = false, $filename = false, $filepath = false, $format = 'csv', $options = false)
-    {
+    public function __construct(
+        SmartPersistableObjectHandler $objectHandler,
+        CriteriaElement $criteria = null,
+        $fields = false,
+        $filename = false,
+        $filepath = false,
+        $format = 'csv',
+        $options = false
+    ) {
         $this->handler          = $objectHandler;
         $this->criteria         = $criteria;
         $this->fields           = $fields;
@@ -67,7 +74,8 @@ class SmartObjectExport
             $row = array();
             foreach ($object->vars as $key => $var) {
                 if ((!$this->fields || in_array($key, $this->fields)) && !in_array($key, $this->notDisplayFields)) {
-                    if ($this->outputMethods && isset($this->outputMethods[$key]) && method_exists($object, $this->outputMethods[$key])) {
+                    if ($this->outputMethods && isset($this->outputMethods[$key])
+                        && method_exists($object, $this->outputMethods[$key])) {
                         $method    = $this->outputMethods[$key];
                         $row[$key] = $object->$method();
                     } else {
@@ -151,8 +159,13 @@ class SmartExportRenderer
      * @param string      $format   format of the ouputed export. Currently only supports CSV
      * @param array       $options  options of the format to be exported in
      */
-    public function __construct($data, $filename = false, $filepath = false, $format = 'csv', $options = array('separator' => ';'))
-    {
+    public function __construct(
+        $data,
+        $filename = false,
+        $filepath = false,
+        $format = 'csv',
+        $options = array('separator' => ';')
+    ) {
         $this->data     = $data;
         $this->format   = $format;
         $this->filename = $filename;
@@ -203,7 +216,7 @@ class SmartExportRenderer
     public function valToCsvHelper($val, $separator, $trimFunction)
     {
         if ($trimFunction) {
-            $val = $trimFunction ($val);
+            $val = $trimFunction($val);
         }
         //If there is a separator (;) or a quote (") or a linebreak in the string, we need to quote it.
         $needQuote = false;
@@ -235,8 +248,8 @@ class SmartExportRenderer
 
         switch ($this->format) {
             case 'csv':
-                $separator = isset($this->options['separator']) ? $this->options['separator'] : ';';
-                $firstRow  = implode($separator, $this->data['columnsHeaders']);
+                $separator      = isset($this->options['separator']) ? $this->options['separator'] : ';';
+                $firstRow       = implode($separator, $this->data['columnsHeaders']);
                 $exportFileData .= $firstRow . "\r\n";
 
                 foreach ($this->data['rows'] as $cols) {

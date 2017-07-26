@@ -60,7 +60,7 @@ class SmartMetaGen
      *
      * @credit psylove
      *
-     * @var    string  $string Chaine de caract�re
+     * @var    string $string Chaine de caract�re
      * @return boolean
      */
     public function emptyString($var)
@@ -80,7 +80,7 @@ class SmartMetaGen
     public function generateSeoTitle($title = '', $withExt = true)
     {
         // Transformation de la chaine en minuscule
-        // Codage de la chaine afin d'�viter les erreurs 500 en cas de caract�res impr�vus
+        // Codage de la chaine afin d'éviter les erreurs 500 en cas de caractères imprévus
         $title = rawurlencode(strtolower($title));
 
         // Transformation des ponctuations
@@ -114,10 +114,39 @@ class SmartMetaGen
             '/%7E/', // ~
             "/\./" // .
         );
-        $rep_pat = array('-', '-', '-', '-', '-', '-100', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-at-', '-', '-', '-', '-', '-', '-', '-', '-', '-');
+        $rep_pat = array(
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-100',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-at-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-'
+        );
         $title   = preg_replace($pattern, $rep_pat, $title);
 
-        // Transformation des caract�res accentu�s
+        // Transformation des caractères accentués
         $pattern = array(
             '/%B0/', // °
             '/%E8/', // è
@@ -135,7 +164,7 @@ class SmartMetaGen
             '/%FB/', // û
             '/%F4/', // ô
             '/%F6/', // ö
-        );        
+        );
         $rep_pat = array('-', 'e', 'e', 'e', 'e', 'c', 'a', 'a', 'a', 'i', 'i', 'u', 'u', 'u', 'o', 'o');
         $title   = preg_replace($pattern, $rep_pat, $title);
 
@@ -264,7 +293,7 @@ class SmartMetaGen
     }
 
     /**
-     * @param  int    $maxWords
+     * @param  int $maxWords
      * @return string
      */
     public function createMetaDescription($maxWords = 100)
@@ -326,7 +355,8 @@ class SmartMetaGen
     {
         global $xoopsModuleConfig;
         $keywords = $this->findMetaKeywords($this->_original_title . ' ' . $this->_description, $this->_minChar);
-        if (isset($xoopsModuleConfig) && isset($xoopsModuleConfig['moduleMetaKeywords']) && $xoopsModuleConfig['moduleMetaKeywords'] !== '') {
+        if (isset($xoopsModuleConfig) && isset($xoopsModuleConfig['moduleMetaKeywords'])
+            && $xoopsModuleConfig['moduleMetaKeywords'] !== '') {
             $moduleKeywords = explode(',', $xoopsModuleConfig['moduleMetaKeywords']);
             $keywords       = array_merge($keywords, $moduleKeywords);
         }

@@ -10,7 +10,7 @@
 function smartobject_plugin_smartband()
 {
     global $xoopsConfig;
-    include_once(XOOPS_ROOT_PATH . '/modules/smartband/language/' . $xoopsConfig['language'] . '/main.php');
+    require_once XOOPS_ROOT_PATH . '/modules/smartband/language/' . $xoopsConfig['language'] . '/main.php';
 
     $pluginInfo                             = array();
     $pluginInfo['items']['item']['caption'] = _MD_ARTALBUM_ITEM_CAP;

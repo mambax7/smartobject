@@ -42,7 +42,7 @@ class SmartPrinterFriendly
          * @todo make the output XHTML compliant
          */
 
-        include_once XOOPS_ROOT_PATH . '/class/template.php';
+        require_once XOOPS_ROOT_PATH . '/class/template.php';
 
         $this->_tpl = new XoopsTpl();
 

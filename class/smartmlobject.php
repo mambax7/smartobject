@@ -11,7 +11,7 @@
  */
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
-include_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobject.php';
+require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobject.php';
 
 /**
  * SmartObject base Multilanguage-enabled class
@@ -90,8 +90,8 @@ class SmartMlObject extends SmartObject
     }
 
     /**
-     * @param  bool   $onlyUrl
-     * @param  bool   $withimage
+     * @param  bool $onlyUrl
+     * @param  bool $withimage
      * @return string
      */
     public function getEditLanguageLink($onlyUrl = false, $withimage = true)
@@ -108,32 +108,22 @@ class SmartMlObject extends SmartObject
 class SmartPersistableMlObjectHandler extends SmartPersistableObjectHandler
 {
     /**
-     * @param  null  $criteria
-     * @param  bool  $id_as_key
-     * @param  bool  $as_object
-     * @param  bool  $debug
-     * @param  bool  $language
+     * @param  null $criteria
+     * @param  bool $id_as_key
+     * @param  bool $as_object
+     * @param  bool $debug
+     * @param  bool $language
      * @return array
      */
-    public function getObjects($criteria = null, $id_as_key = false, $as_object = true, $debug = false, $language = false)
-    {
+    public function getObjects(
+        $criteria = null,
+        $id_as_key = false,
+        $as_object = true,
+        $debug = false,
+        $language = false
+    ) {
         // Create the first part of the SQL query to join the "_text" table
-        $sql = 'SELECT * FROM ' .
-               $this->table .
-               ' AS ' .
-               $this->_itemname .
-               ' INNER JOIN ' .
-               $this->table .
-               '_text AS ' .
-               $this->_itemname .
-               '_text ON ' .
-               $this->_itemname .
-               '.' .
-               $this->keyName .
-               '=' .
-               $this->_itemname .
-               '_text.' .
-               $this->keyName;
+        $sql = 'SELECT * FROM ' . $this->table . ' AS ' . $this->_itemname . ' INNER JOIN ' . $this->table . '_text AS ' . $this->_itemname . '_text ON ' . $this->_itemname . '.' . $this->keyName . '=' . $this->_itemname . '_text.' . $this->keyName;
 
         if ($language) {
             // If a language was specified, then let's create a WHERE clause to only return the objects associated with this language

@@ -19,13 +19,13 @@ function smart_customtag_initiate()
 }
 
 if (!defined('SMARTOBJECT_URL')) {
-    include_once(XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php');
+    require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php';
 }
 
 smart_loadLanguageFile('smartobject', 'customtag');
 
-include_once XOOPS_ROOT_PATH . '/modules/smartobject/include/functions.php';
-include_once(SMARTOBJECT_ROOT_PATH . 'class/customtag.php');
+require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/functions.php';
+require_once SMARTOBJECT_ROOT_PATH . 'class/customtag.php';
 
 $smartobjectCustomtagHandler = xoops_getModuleHandler('customtag', 'smartobject');
-$smartobjectCustomTagsObj     = $smartobjectCustomtagHandler->getCustomtagsByName();
+$smartobjectCustomTagsObj    = $smartobjectCustomtagHandler->getCustomtagsByName();

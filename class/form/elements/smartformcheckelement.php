@@ -24,9 +24,9 @@ class SmartFormCheckElement extends XoopsFormCheckBox
         foreach ($this->getOptions() as $value => $name) {
             $ret .= "<input type='checkbox' name='" . $this->getName() . "' value='" . $value . "'";
             if (count($this->getValue()) > 0 && in_array($value, $this->getValue())) {
-                $ret .= " checked='checked'";
+                $ret .= ' checked';
             }
-            $ret .= $this->getExtra() . ' />' . $name . '<br>';
+            $ret .= $this->getExtra() . '>' . $name . '<br>';
         }
 
         return $ret;
@@ -47,7 +47,7 @@ class SmartFormCheckElement extends XoopsFormCheckBox
                 }
 
             }
-            if (hasSelections == false) {
+            if (hasSelections === false) {
                 window.alert(\"{$eltmsg}\"); myform['{$eltname}[]'][0].focus(); return false; }\n";
         } else {
             $js .= "for (var i = 0; i < myform['" . $eltname . "'].length; i++) {
@@ -56,7 +56,7 @@ class SmartFormCheckElement extends XoopsFormCheckBox
                 }
 
             }
-            if (hasSelections == false) {
+            if (hasSelections === false) {
                 window.alert(\"{$eltmsg}\"); myform['{$eltname}'][0].focus(); return false; }\n";
         }
 

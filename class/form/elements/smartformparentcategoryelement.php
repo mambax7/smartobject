@@ -22,9 +22,9 @@ class SmartFormParentCategoryElement extends XoopsFormSelect
         $criteria    = new CriteriaCompo();
         $criteria->setSort('weight, name');
         $categoryHandler = xoops_getModuleHandler('category', $object->handler->_moduleName);
-        $categories       = $categoryHandler->getObjects($criteria);
+        $categories      = $categoryHandler->getObjects($criteria);
 
-        include_once(XOOPS_ROOT_PATH . '/class/tree.php');
+        require_once XOOPS_ROOT_PATH . '/class/tree.php';
         $mytree = new XoopsObjectTree($categories, 'categoryid', 'parentid');
         parent::__construct($object->vars[$key]['form_caption'], $key, $object->getVar($key, 'e'));
 
@@ -54,12 +54,12 @@ class SmartFormParentCategoryElement extends XoopsFormSelect
     public function getOptionArray($tree, $fieldName, $key, $prefix_curr = '', &$ret)
     {
         if ($key > 0) {
-            $value     = $tree->_tree[$key]['obj']->getVar($tree->_myId);
-            $ret[$key] = $prefix_curr . $tree->_tree[$key]['obj']->getVar($fieldName);
+            $value       = $tree->tree[$key]['obj']->getVar($tree->_myId);
+            $ret[$key]   = $prefix_curr . $tree->tree[$key]['obj']->getVar($fieldName);
             $prefix_curr .= '-';
         }
-        if (isset($tree->_tree[$key]['child']) && !empty($tree->_tree[$key]['child'])) {
-            foreach ($tree->_tree[$key]['child'] as $childkey) {
+        if (isset($tree->tree[$key]['child']) && !empty($tree->tree[$key]['child'])) {
+            foreach ($tree->tree[$key]['child'] as $childkey) {
                 $this->getOptionArray($tree, $fieldName, $childkey, $prefix_curr, $ret);
             }
         }

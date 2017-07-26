@@ -7,6 +7,7 @@
  * Credits: Mithrandir
  * Licence: GNU
  */
+
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 class SmartobjectPermissionHandler extends XoopsObjectHandler
@@ -48,6 +49,7 @@ class SmartobjectPermissionHandler extends XoopsObjectHandler
             $allowedgroups            = $gpermHandler->getGroupIds($gperm_name, $id, $smartModule->getVar('mid'));
             $groups[$gperm_name][$id] = $allowedgroups;
         }
+
         //Return the permission array
         return isset($groups[$gperm_name][$id]) ? $groups[$gperm_name][$id] : array();
     }
@@ -130,6 +132,7 @@ class SmartobjectPermissionHandler extends XoopsObjectHandler
                 $permissions[$gperm_name] = $userpermissions;
             }
         }
+
         //Return the permission array
         return isset($permissions[$gperm_name]) ? $permissions[$gperm_name] : array();
     }
@@ -145,15 +148,14 @@ class SmartobjectPermissionHandler extends XoopsObjectHandler
     }
 
     /**
-     * Saves permissions for the selected category
+     * Saves permissions for the selected item
      *
-     *  saveCategory_Permissions()
+     *  saveItem_Permissions()
      *
      * @param  array  $groups    : group with granted permission
-     * @param         $itemid
+     * @param  int    $itemid    categoryID on which we are setting permissions for Categories and Forums
      * @param  string $perm_name : name of the permission
      * @return bool   : TRUE if the no errors occured
-     * @internal param int $categoryID: categoryID on which we are setting permissions for Categories and Forums
      */
 
     public function saveItem_Permissions($groups, $itemid, $perm_name)
@@ -184,7 +186,7 @@ class SmartobjectPermissionHandler extends XoopsObjectHandler
      *
      *  deletePermissions()
      *
-     * @param  integer $itemid     : id of the item for which to delete the permissions
+     * @param  integer $itemid : id of the item for which to delete the permissions
      * @param          $gperm_name
      * @return bool:   TRUE if the no errors occured
      */
@@ -206,8 +208,8 @@ class SmartobjectPermissionHandler extends XoopsObjectHandler
     /**
      * Checks if the user has access to a specific permission on a given object
      *
-     * @param  string   $gperm_name   name of the permission to test
-     * @param  int      $gperm_itemid id of the object to check
+     * @param  string $gperm_name   name of the permission to test
+     * @param  int    $gperm_itemid id of the object to check
      * @return boolean: TRUE if user has access, FALSE if not
      **/
     public function accessGranted($gperm_name, $gperm_itemid)

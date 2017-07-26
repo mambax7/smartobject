@@ -25,8 +25,8 @@ class Scriptaculous extends Prototype
     }
 
     /**
-     * @param      $element_id
-     * @param null $options
+     * @param         $element_id
+     * @param  null   $options
      * @return string
      */
     public function dragable_element($element_id, $options = null)
@@ -35,8 +35,8 @@ class Scriptaculous extends Prototype
     }
 
     /**
-     * @param      $element_id
-     * @param null $options
+     * @param         $element_id
+     * @param  null   $options
      * @return string
      */
     public function drop_receiving_element($element_id, $options = null)
@@ -45,9 +45,9 @@ class Scriptaculous extends Prototype
     }
 
     /**
-     * @param      $name
-     * @param bool $element_id
-     * @param null $js_options
+     * @param         $name
+     * @param  bool   $element_id
+     * @param  null   $js_options
      * @return string
      */
     public function visual_effect($name, $element_id = false, $js_options = null)
@@ -68,8 +68,8 @@ class Scriptaculous extends Prototype
     }
 
     /**
-     * @param      $element_id
-     * @param null $options
+     * @param         $element_id
+     * @param  null   $options
      * @return string
      */
     public function sortabe_element($element_id, $options = null)
@@ -176,9 +176,9 @@ class Scriptaculous extends Prototype
     /////////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * @param      $field_id
-     * @param      $options
-     * @param bool $tag
+     * @param         $field_id
+     * @param         $options
+     * @param  bool   $tag
      * @return string
      */
     public function in_place_editor($field_id, $options, $tag = true)
@@ -231,9 +231,9 @@ class Scriptaculous extends Prototype
     }
 
     /**
-     * @param      $object
-     * @param null $tag_options
-     * @param null $in_place_editor_options
+     * @param         $object
+     * @param  null   $tag_options
+     * @param  null   $in_place_editor_options
      * @return string
      */
     public function in_place_editor_field($object, $tag_options = null, $in_place_editor_options = null)
@@ -297,15 +297,27 @@ class Scriptaculous extends Prototype
     }
 
     /**
-     * @param      $object
-     * @param null $tag_options
-     * @param null $completion_options
+     * @param         $object
+     * @param  null   $tag_options
+     * @param  null   $completion_options
      * @return string
      */
     public function text_field_with_auto_complete($object, $tag_options = null, $completion_options = null)
     {
         $ret_val = isset($completion_options['skip_style']) ? '' : $this->_auto_complete_stylesheet();
-        $ret_val .= '<input autocomplete="off" id="' . $object . '" name="' . $object . '" size="' . (isset($tag_options['size']) ? $tag_options['size'] : 30) . '" type="text" value="' . (isset($tag_options['size']) ? $tag_options['value'] : '') . '" ' . (isset($tag_options['class']) ? 'class = "' . $tag_options['class'] . '" ' : '') . '/>';
+        $ret_val .= '<input autocomplete="off" id="'
+                    . $object
+                    . '" name="'
+                    . $object
+                    . '" size="'
+                    . (isset($tag_options['size']) ? $tag_options['size'] : 30)
+                    . '" type="text" value="'
+                    . (isset($tag_options['size']) ? $tag_options['value'] : '')
+                    . '" '
+                    . (isset($tag_options['class']) ? 'class = "'
+                                                      . $tag_options['class']
+                                                      . '" ' : '')
+                    . '>';
 
         $ret_val .= '<div id="' . $object . '_auto_complete" class="auto_complete"></div>';
         $ret_val .= $this->auto_complete_field($object, $completion_options);

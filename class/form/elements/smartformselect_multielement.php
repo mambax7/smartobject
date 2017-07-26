@@ -9,7 +9,7 @@
  * @package    SmartObject
  * @subpackage SmartObjectForm
  */
-include_once(SMARTOBJECT_ROOT_PATH . 'class/form/elements/smartformselectelement.php');
+require_once SMARTOBJECT_ROOT_PATH . 'class/form/elements/smartformselectelement.php';
 
 /**
  * Class SmartFormSelect_multiElement

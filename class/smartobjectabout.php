@@ -1,5 +1,5 @@
 <?php
-// 
+//
 
 // 2012-01-01 K.OHWADA
 // PHP 5.3: Assigning the return value of new by reference is now deprecated.
@@ -51,9 +51,9 @@ class SmartobjectAbout
 
         $fileName = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/' . $xoopsConfig['language'] . '/modinfo.php';
         if (file_exists($fileName)) {
-            include_once $fileName;
+            require_once $fileName;
         } else {
-            include_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/english/modinfo.php';
+            require_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/english/modinfo.php';
         }
         $this->_aboutTitle = $aboutTitle;
 
@@ -99,16 +99,17 @@ class SmartobjectAbout
 
         smart_xoops_cp_header();
 
+        /** @var XoopsModuleHandler $moduleHandler */
         $moduleHandler = xoops_getHandler('module');
         $versioninfo   = $moduleHandler->get($xoopsModule->getVar('mid'));
 
         //smart_adminMenu(-1, $this->_aboutTitle . " " . $versioninfo->getInfo('name'));
 
-        include_once XOOPS_ROOT_PATH . '/class/template.php';
+        require_once XOOPS_ROOT_PATH . '/class/template.php';
 
         // ---
         // 2012-01-01 PHP 5.3: Assigning the return value of new by reference is now deprecated.
-        //      $this->_tpl =& new XoopsTpl();
+        //      $this->_tpl = new XoopsTpl();
         $this->_tpl = new XoopsTpl();
         // ---
 

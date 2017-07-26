@@ -18,7 +18,7 @@
  */
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 if (!defined('SMARTOBJECT_ROOT_PATH')) {
-    include_once(XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php');
+    require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php';
 }
 /**
  * Include the language constants for the SmartObjectDBUpdater
@@ -28,7 +28,7 @@ $common_file = SMARTOBJECT_ROOT_PATH . 'language/' . $xoopsConfig['language'] . 
 if (!file_exists($common_file)) {
     $common_file = SMARTOBJECT_ROOT_PATH . 'language/english/smartdbupdater.php';
 }
-include($common_file);
+include $common_file;
 
 /**
  * Class SmartDbTable
@@ -132,7 +132,10 @@ class SmartDbTable
             if ($existing_field['Extra']) {
                 $fields[$existing_field['Field']] .= ' ' . $existing_field['Extra'];
             }
-            if (!($existing_field['Default'] === null) && ($existing_field['Default'] || $existing_field['Default'] === '' || $existing_field['Default'] == 0)) {
+            if (!($existing_field['Default'] === null)
+                && ($existing_field['Default']
+                    || $existing_field['Default'] === ''
+                    || $existing_field['Default'] == 0)) {
                 $fields[$existing_field['Field']] .= " default '" . $existing_field['Default'] . "'";
             }
         }
@@ -247,7 +250,7 @@ class SmartDbTable
     /**
      * Invert values 0 to 1 and 1 to 0
      *
-     * @param string $name     name of the field
+     * @param string $name name of the field
      * @param        $newValue
      * @param        $oldValue
      * @internal param string $old old propertie
@@ -809,7 +812,7 @@ class SmartobjectDbupdater
      * @param $module
      * @return bool
      */
-    public function moduleUpgrade(&$module)
+    public function moduleUpgrade(XoopsModule $module)
     {
         $dirname = $module->getVar('dirname');
 

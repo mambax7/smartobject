@@ -11,7 +11,7 @@
  */
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
-include_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartseoobject.php';
+require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartseoobject.php';
 
 /**
  * Class SmartobjectCategory
@@ -111,7 +111,7 @@ class SmartobjectCategory extends SmartSeoObject
      */
     public function getCategoryPath($withAllLink = true, $currentCategory = false)
     {
-        include_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectcontroller.php';
+        require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectcontroller.php';
         $controller = new SmartObjectController($this->handler);
 
         if (!$this->_categoryPath) {

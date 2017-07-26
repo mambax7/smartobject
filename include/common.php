@@ -35,9 +35,9 @@ if (!defined('SMARTOBJECT_IMAGES_ACTIONS_ROOT_PATH')) {
 /**
  * Version of the SmartObject Framework
  */
-include_once(SMARTOBJECT_ROOT_PATH . 'include/version.php');
-include_once(SMARTOBJECT_ROOT_PATH . 'include/functions.php');
-include_once(SMARTOBJECT_ROOT_PATH . 'include/xoops_core_common_functions.php');
+require_once SMARTOBJECT_ROOT_PATH . 'include/version.php';
+require_once SMARTOBJECT_ROOT_PATH . 'include/functions.php';
+require_once SMARTOBJECT_ROOT_PATH . 'include/xoops_core_common_functions.php';
 
 /**
  * Some constants used by the SmartObjects
@@ -66,4 +66,4 @@ $smart_current_page = smart_getCurrentPage();
 // get previous page
 $smart_previous_page = smart_getenv('HTTP_REFERER');
 
-include_once(SMARTOBJECT_ROOT_PATH . 'class/smartloader.php');
+require_once SMARTOBJECT_ROOT_PATH . 'class/smartloader.php';

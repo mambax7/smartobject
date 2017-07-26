@@ -9,10 +9,10 @@
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 if (!defined('SMARTOBJECT_URL')) {
-    include_once(XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php');
+    require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php';
 }
-include_once(SMARTOBJECT_ROOT_PATH . 'class/rating.php');
-include_once(SMARTOBJECT_ROOT_PATH . 'include/functions.php');
+require_once SMARTOBJECT_ROOT_PATH . 'class/rating.php';
+require_once SMARTOBJECT_ROOT_PATH . 'include/functions.php';
 
 smart_loadLanguageFile('smartobject', 'rating');
 
@@ -21,7 +21,7 @@ $module_dirname = $xoopsModule->dirname();
 // Retreive the SmartObject Rating plugin for the current module if it exists
 $smartobjectRatingHandler = xoops_getModuleHandler('rating', 'smartobject');
 $smartobjectPluginHandler = new SmartPluginHandler();
-$pluginObj                  = $smartobjectPluginHandler->getPlugin($module_dirname);
+$pluginObj                = $smartobjectPluginHandler->getPlugin($module_dirname);
 if ($pluginObj) {
     $rating_item = $pluginObj->getItem();
     if ($rating_item) {
@@ -46,7 +46,7 @@ if ($pluginObj) {
                 $xoTheme->addStylesheet(SMARTOBJECT_URL . 'assets/css/module.css');
             } else {
                 //probleme d'inclusion de css apres le flashplayer. Style plac� dans css du theme
-                //$xoopsTpl->assign('smartobject_css',"<link rel='stylesheet' type='text/css' href='".XOOPS_URL."/modules/smartobject/assets/css/module.css' />");
+                //$xoopsTpl->assign('smartobject_css',"<link rel='stylesheet' type='text/css' href='".XOOPS_URL."/modules/smartobject/assets/css/module.css'>");
             }
         }
     }

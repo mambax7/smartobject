@@ -8,8 +8,8 @@
  */
 function smartobject_addto_show($options)
 {
-    include_once(XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php');
-    include_once(SMARTOBJECT_ROOT_PATH . 'class/smartaddto.php');
+    require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php';
+    require_once SMARTOBJECT_ROOT_PATH . 'class/smartaddto.php';
     $smartaddto = new SmartAddTo($options[0]);
     $block      = $smartaddto->renderForBlock();
 
@@ -22,7 +22,7 @@ function smartobject_addto_show($options)
  */
 function smartobject_addto_edit($options)
 {
-    include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+    require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
     $form = '';
 

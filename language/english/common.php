@@ -101,11 +101,9 @@ define('_CO_SOBJECT_LINK_TO_UID', 'To user');
 define('_CO_SOBJECT_LINK_TO_UID_DSC', '');
 define('_CO_SOBJECT_MAKE_SELECTION', 'Make a selection...');
 define('_CO_SOBJECT_META_DESCRIPTION', 'Meta Description');
-define('_CO_SOBJECT_META_DESCRIPTION_DSC',
-       'In order to help Search Engines, you can customize the meta description you would like to use for this article. If you leave this field empty when creating a category, it will automatically be populated with the Summary field of this article.');
+define('_CO_SOBJECT_META_DESCRIPTION_DSC', 'In order to help Search Engines, you can customize the meta description you would like to use for this article. If you leave this field empty when creating a category, it will automatically be populated with the Summary field of this article.');
 define('_CO_SOBJECT_META_KEYWORDS', 'Meta Keywords');
-define('_CO_SOBJECT_META_KEYWORDS_DSC',
-       'In order to help Search Engines, you can customize the keywords you would like to use for this article. If you leave this field empty when creating an article, it will automatically be populated with words from the Summary field of this article.');
+define('_CO_SOBJECT_META_KEYWORDS_DSC', 'In order to help Search Engines, you can customize the keywords you would like to use for this article. If you leave this field empty when creating an article, it will automatically be populated with words from the Summary field of this article.');
 define('_CO_SOBJECT_MODIFY', 'Edit');
 define('_CO_SOBJECT_MODULE_BUG', 'Report a bug for this module');
 define('_CO_SOBJECT_MODULE_DEMO', 'Demo Site');
@@ -182,7 +180,7 @@ define('_CO_SOBJECT_URL_FILE_DSC', "Alternatively, you can use an URL. If you se
 define('_CO_SOBJECT_URL_FILE', 'URL: ');
 define('_CO_SOBJECT_UPLOAD', 'Select a file to upload: ');
 
-define('_CO_SOBJECT_CHANGE_FILE', '<hr/><b>Change File</b><br>');
+define('_CO_SOBJECT_CHANGE_FILE', '<hr><b>Change File</b><br>');
 define('_CO_SOBJECT_CAPTION', 'Caption: ');
 define('_CO_SOBJECT_URLLINK_URL', 'URL: ');
 define('_CO_SOBJECT_DESC', 'Description');

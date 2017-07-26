@@ -9,7 +9,7 @@
  * @subpackage SmartObjectTable
  */
 
-include_once(SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php');
+require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
 
 /**
  * SmartObjectTreeTable class
@@ -25,12 +25,16 @@ class SmartObjectTreeTable extends SmartObjectTable
     /**
      * SmartObjectTreeTable constructor.
      * @param SmartPersistableObjectHandler $objectHandler
-     * @param bool   $criteria
-     * @param array  $actions
-     * @param bool   $userSide
+     * @param bool                          $criteria
+     * @param array                         $actions
+     * @param bool                          $userSide
      */
-    public function __construct(SmartPersistableObjectHandler $objectHandler, $criteria = false, $actions = array('edit', 'delete'), $userSide = false)
-    {
+    public function __construct(
+        SmartPersistableObjectHandler $objectHandler,
+        $criteria = false,
+        $actions = array('edit', 'delete'),
+        $userSide = false
+    ) {
         $this->SmartObjectTable($objectHandler, $criteria, $actions, $userSide);
         $this->_isTree = true;
     }
@@ -38,7 +42,7 @@ class SmartObjectTreeTable extends SmartObjectTable
     /**
      * Get children objects given a specific parentid
      *
-     * @var    int   $parentid id of the parent which children we want to retreive
+     * @var    int $parentid id of the parent which children we want to retreive
      * @return array of SmartObject
      */
     public function getChildrenOf($parentid = 0)
@@ -119,7 +123,7 @@ class SmartObjectTreeTable extends SmartObjectTable
             }
         }
 
-        include_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectcontroller.php';
+        require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectcontroller.php';
         $controller = new SmartObjectController($this->_objectHandler);
 
         if (in_array('edit', $this->_actions)) {

@@ -5,9 +5,10 @@
  *
  * @credit http://addtobookmarks.com/, James Morris and the XoopsInfo team
  */
+
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-class SmartAddto
+class SmartAddTo
 {
     public $_layout;
     public $_method;

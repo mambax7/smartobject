@@ -7,8 +7,8 @@
  * Licence: GNU
  */
 
-include_once __DIR__ . '/admin_header.php';
-include_once(SMARTCONTENT_ROOT_PATH . 'class/dbupdater.php');
+require_once __DIR__ . '/admin_header.php';
+require_once SMARTCONTENT_ROOT_PATH . 'class/dbupdater.php';
 
 smartcontent_xoops_cp_header();
 
@@ -137,9 +137,9 @@ function update_tables_to_300()
     );
 
     echo '<br><b>Checking Modified Downloads table</b><br>';
-    $modHandler = xoops_getModuleHandler('modification', 'wfdownloads');
-    $mod_table  = new WfdownloadsTable('wfdownloads_mod');
-    $fields     = get_table_info($modHandler->table, $mod_fields);
+    $moduleHandler = xoops_getModuleHandler('modification', 'wfdownloads');
+    $mod_table     = new WfdownloadsTable('wfdownloads_mod');
+    $fields        = get_table_info($moduleHandler->table, $mod_fields);
     rename_fields($mod_table, $renamed_fields, $fields, $mod_fields);
     update_table($mod_fields, $fields, $mod_table);
     if ($dbupdater->updateTable($mod_table)) {
@@ -152,7 +152,7 @@ function update_tables_to_300()
         'pid'          => array('Type' => "int(5) unsigned NOT NULL default '0'", 'Default' => true),
         'title'        => array('Type' => "varchar(50) NOT NULL default ''", 'Default' => true),
         'imgurl'       => array('Type' => "varchar(255) NOT NULL default ''", 'Default' => true),
-        'description'  => array('Type' => "text NOT NULL default ''", 'Default' => true),
+        'description'  => array('Type' => "text NULL", 'Default' => true),
         'total'        => array('Type' => "int(11) NOT NULL default '0'", 'Default' => true),
         'summary'      => array('Type' => 'text NOT NULL', 'Default' => false),
         'spotlighttop' => array('Type' => "int(11) NOT NULL default '0'", 'Default' => true),
@@ -351,6 +351,7 @@ switch ($op) {
         $form = new XoopsThemeForm('Upgrade WF-Downloads', 'form', $_SERVER['REQUEST_URI']);
 
         //Is MyDownloads installed?
+        /** @var XoopsModuleHandler $moduleHandler */
         $moduleHandler     = xoops_getHandler('module');
         $mydownloadsModule = $moduleHandler->getByDirname('mydownloads');
         if (is_object($mydownloadsModule)) {
@@ -371,4 +372,4 @@ switch ($op) {
 }
 //wfdownloads_modFooter();
 //xoops_cp_footer();
-include_once __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';

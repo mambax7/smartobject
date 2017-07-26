@@ -1,9 +1,9 @@
 <?php
-// 
+//
 // ------------------------------------------------------------------------ //
 //               XOOPS - PHP Content Management System                      //
 //                   Copyright (c) 2000-2016 XOOPS.org                           //
-//                      <https://xoops.org/>                             //
+//                      <https://xoops.org>                             //
 // ------------------------------------------------------------------------ //
 // This program is free software; you can redistribute it and/or modify     //
 // it under the terms of the GNU General Public License as published by     //
@@ -28,7 +28,7 @@
 // -------------------------------------------------------------------------//
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
-include_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobject.php';
+require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobject.php';
 
 /**
  * Class SmartobjectLink
@@ -84,7 +84,7 @@ class SmartobjectLink extends SmartObject
     }
 
     /**
-     * @param  bool   $withContact
+     * @param  bool $withContact
      * @return string
      */
     public function to_uid($withContact = false)
@@ -105,7 +105,7 @@ class SmartobjectLink extends SmartObject
     }
 
     /**
-     * @param  bool         $full
+     * @param  bool $full
      * @return mixed|string
      */
     public function link($full = false)
@@ -128,17 +128,7 @@ class SmartobjectLink extends SmartObject
      */
     public function getViewItemLink()
     {
-        $ret = '<a href="' .
-               SMARTOBJECT_URL .
-               'admin/link.php?op=view&linkid=' .
-               $this->getVar('linkid') .
-               '"><img src="' .
-               SMARTOBJECT_IMAGES_ACTIONS_URL .
-               'mail_find.png" alt="' .
-               _AM_SOBJECT_SENT_LINK_VIEW .
-               '" title="' .
-               _AM_SOBJECT_SENT_LINK_VIEW .
-               '" /></a>';
+        $ret = '<a href="' . SMARTOBJECT_URL . 'admin/link.php?op=view&linkid=' . $this->getVar('linkid') . '"><img src="' . SMARTOBJECT_IMAGES_ACTIONS_URL . 'mail_find.png" alt="' . _AM_SOBJECT_SENT_LINK_VIEW . '" title="' . _AM_SOBJECT_SENT_LINK_VIEW . '"></a>';
 
         return $ret;
     }

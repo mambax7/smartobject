@@ -24,18 +24,20 @@ class SmartFormImageElement extends XoopsFormElementTray
 
         $objectArray['image'] = str_replace('{XOOPS_URL}', XOOPS_URL, $objectArray['image']);
 
-        if ($object->getVar($key) !== '' && (0 === strpos($object->getVar($key), 'http') || 0 === strpos($object->getVar($key), '{XOOPS_URL}'))) {
-            $this->addElement(new XoopsFormLabel('', "<img src='" . str_replace('{XOOPS_URL}', XOOPS_URL, $object->getVar($key)) . "' alt='' /><br><br>"));
+        if ($object->getVar($key) !== ''
+            && (0 === strpos($object->getVar($key), 'http')
+                || 0 === strpos($object->getVar($key), '{XOOPS_URL}'))) {
+            $this->addElement(new XoopsFormLabel('', "<img src='" . str_replace('{XOOPS_URL}', XOOPS_URL, $object->getVar($key)) . "' alt=''><br><br>"));
         } elseif ($object->getVar($key) !== '') {
-            $this->addElement(new XoopsFormLabel('', "<img src='" . $object_imageurl . $object->getVar($key) . "' alt='' /><br><br>"));
+            $this->addElement(new XoopsFormLabel('', "<img src='" . $object_imageurl . $object->getVar($key) . "' alt=''><br><br>"));
         }
 
-        include_once SMARTOBJECT_ROOT_PATH . 'class/form/elements/smartformfileuploadelement.php';
+        require_once SMARTOBJECT_ROOT_PATH . 'class/form/elements/smartformfileuploadelement.php';
         $this->addElement(new SmartFormFileUploadElement($object, $key));
 
         $this->addElement(new XoopsFormLabel('<div style="height: 10px; padding-top: 8px; font-size: 80%;">' . _CO_SOBJECT_URL_FILE_DSC . '</div>', ''));
-        include_once SMARTOBJECT_ROOT_PATH . 'class/form/elements/smartformtextelement.php';
-        include_once SMARTOBJECT_ROOT_PATH . 'class/form/elements/smartformcheckelement.php';
+        require_once SMARTOBJECT_ROOT_PATH . 'class/form/elements/smartformtextelement.php';
+        require_once SMARTOBJECT_ROOT_PATH . 'class/form/elements/smartformcheckelement.php';
 
         $this->addElement(new XoopsFormLabel('', '<br>' . _CO_SOBJECT_URL_FILE));
         $this->addElement(new SmartFormTextElement($object, 'url_' . $key));

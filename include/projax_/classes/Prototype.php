@@ -67,9 +67,9 @@ class Prototype extends JavaScript
     }
 
     /**
-     * @param       $name
-     * @param  null $options
-     * @param  null $html_options
+     * @param         $name
+     * @param  null   $options
+     * @param  null   $html_options
      * @return string
      */
     public function link_to_remote($name, $options = null, $html_options = null)
@@ -78,8 +78,8 @@ class Prototype extends JavaScript
     }
 
     /**
-     * @param       $field_id
-     * @param  null $options
+     * @param         $field_id
+     * @param  null   $options
      * @return string
      */
     public function observe_field($field_id, $options = null)
@@ -92,8 +92,8 @@ class Prototype extends JavaScript
     }
 
     /**
-     * @param       $form_id
-     * @param  null $options
+     * @param         $form_id
+     * @param  null   $options
      * @return string
      */
     public function observe_form($form_id, $options = null)
@@ -160,7 +160,7 @@ class Prototype extends JavaScript
             $options['with'] = 'Form.serialize(this.form)';
         }
 
-        return '<input type="button" onclick="' . $this->remote_function($options) . '" name="' . $name . '" value ="' . $value . '" />';
+        return '<input type="button" onclick="' . $this->remote_function($options) . '" name="' . $name . '" value ="' . $value . '">';
     }
 
     /**
@@ -212,9 +212,9 @@ class Prototype extends JavaScript
     }
 
     /**
-     * @param       $klass
-     * @param       $name
-     * @param  null $options
+     * @param         $klass
+     * @param         $name
+     * @param  null   $options
      * @return string
      */
     public function _build_observer($klass, $name, $options = null)
@@ -292,8 +292,8 @@ class Prototype extends JavaScript
     }
 
     /**
-     * @param       $id
-     * @param  null $extend
+     * @param         $id
+     * @param  null   $extend
      * @return string
      */
     public function ID($id, $extend = null)
@@ -321,8 +321,8 @@ class Prototype extends JavaScript
     }
 
     /**
-     * @param       $function
-     * @param  null $args
+     * @param         $function
+     * @param  null   $args
      * @return string
      */
     public function call($function, $args = null)
@@ -370,9 +370,9 @@ class Prototype extends JavaScript
     }
 
     /**
-     * @param       $position
-     * @param       $id
-     * @param  null $options_for_render
+     * @param         $position
+     * @param         $id
+     * @param  null   $options_for_render
      * @return string
      */
     public function insert_html($position, $id, $options_for_render = null)
@@ -437,8 +437,8 @@ class Prototype extends JavaScript
     }
 
     /**
-     * @param       $pattern
-     * @param  null $extend
+     * @param         $pattern
+     * @param  null   $extend
      * @return string
      */
     public function select($pattern, $extend = null)

@@ -6,7 +6,7 @@
  * Licence: GNU
  */
 
-include_once __DIR__ . '/header.php';
+require_once __DIR__ . '/header.php';
 require_once SMARTOBJECT_ROOT_PATH . 'class/smartloader.php';
 require_once XOOPS_ROOT_PATH . '/class/template.php';
 

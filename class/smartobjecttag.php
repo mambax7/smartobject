@@ -1,9 +1,9 @@
 <?php
-// 
+//
 // ------------------------------------------------------------------------ //
 //               XOOPS - PHP Content Management System                      //
 //                   Copyright (c) 2000-2016 XOOPS.org                           //
-//                      <https://xoops.org/>                             //
+//                      <https://xoops.org>                             //
 // ------------------------------------------------------------------------ //
 // This program is free software; you can redistribute it and/or modify     //
 // it under the terms of the GNU General Public License as published by     //
@@ -28,7 +28,7 @@
 // -------------------------------------------------------------------------//
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
-include_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartmlobject.php';
+require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartmlobject.php';
 
 /**
  * Class SmartobjectTag
@@ -69,7 +69,7 @@ class SmartobjectTagHandler extends SmartPersistableMlObjectHandler
      */
     public function getLanguages()
     {
-        include_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
+        require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
         $aLanguages     = XoopsLists::getLangList();
         $ret['default'] = _CO_SOBJECT_ALL;
         foreach ($aLanguages as $lang) {

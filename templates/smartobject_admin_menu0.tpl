@@ -117,7 +117,7 @@
     </div>
     <div id="buttonbar">
         <ul>
-            <{foreach from=$adminmenu key=itemnum item=menuitem}>
+            <{foreach from=$adminObject key=itemnum item=menuitem}>
                 <{if $itemnum==$current}>
                     <li id="current">
                         <{else}>
@@ -136,4 +136,4 @@
         </div>
     <{/if}>
 </div> <!-- end wrap -->
-<br style="clear: both;"/>
+<br style="clear: both;">

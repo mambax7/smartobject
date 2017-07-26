@@ -19,11 +19,11 @@ function smart_adsense_initiate_smartytags()
 }
 
 if (!defined('SMARTOBJECT_URL')) {
-    include_once(XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php');
+    require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php';
 }
 
-include_once XOOPS_ROOT_PATH . '/modules/smartobject/include/functions.php';
-include_once(SMARTOBJECT_ROOT_PATH . 'class/adsense.php');
+require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/functions.php';
+require_once SMARTOBJECT_ROOT_PATH . 'class/adsense.php';
 
 $smartobjectAdsenseHandler = xoops_getModuleHandler('adsense', 'smartobject');
-$smartobjectAdsensesObj     = $smartobjectAdsenseHandler->getAdsensesByTag();
+$smartobjectAdsensesObj    = $smartobjectAdsenseHandler->getAdsensesByTag();

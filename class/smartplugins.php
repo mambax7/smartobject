@@ -84,7 +84,7 @@ class SmartPluginHandler
     {
         $pluginName = SMARTOBJECT_ROOT_PATH . 'plugins/' . $dirname . '.php';
         if (file_exists($pluginName)) {
-            include_once($pluginName);
+            require_once $pluginName;
             $function = 'smartobject_plugin_' . $dirname;
             if (function_exists($function)) {
                 $array = $function();
@@ -102,10 +102,10 @@ class SmartPluginHandler
      */
     public function getPluginsArray()
     {
-        include_once(XOOPS_ROOT_PATH . '/class/xoopslists.php');
+        require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
 
         $moduleHandler = xoops_getHandler('module');
-        $criteria       = new CriteriaCompo();
+        $criteria      = new CriteriaCompo();
         $criteria->add(new Criteria('isactive', 1));
         $tempModulesObj = $moduleHandler->getObjects($criteria);
         $modulesObj     = array();

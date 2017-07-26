@@ -744,10 +744,13 @@ Effect.Shake = function (element) {
                                             x: 40, y: 0, duration: 0.1, afterFinishInternal: function (effect) {
                                             new Effect.Move(effect.element,
                                                 {
-                                                    x: -20, y: 0, duration: 0.05, afterFinishInternal: function (effect) {
-                                                    effect.element.undoPositioned();
-                                                    effect.element.setStyle(oldStyle);
-                                                }
+                                                    x: -20,
+                                                    y: 0,
+                                                    duration: 0.05,
+                                                    afterFinishInternal: function (effect) {
+                                                        effect.element.undoPositioned();
+                                                        effect.element.setStyle(oldStyle);
+                                                    }
                                                 })
                                         }
                                         })
@@ -910,11 +913,24 @@ Effect.Grow = function (element) {
         },
         afterFinishInternal: function (effect) {
             new Effect.Parallel(
-                [new Effect.Opacity(effect.element, {sync: true, to: 1.0, from: 0.0, transition: options.opacityTransition}),
-                    new Effect.Move(effect.element, {x: moveX, y: moveY, sync: true, transition: options.moveTransition}),
+                [new Effect.Opacity(effect.element, {
+                    sync: true,
+                    to: 1.0,
+                    from: 0.0,
+                    transition: options.opacityTransition
+                }),
+                    new Effect.Move(effect.element, {
+                        x: moveX,
+                        y: moveY,
+                        sync: true,
+                        transition: options.moveTransition
+                    }),
                     new Effect.Scale(effect.element, 100, {
                         scaleMode: {originalHeight: dims.height, originalWidth: dims.width},
-                        sync: true, scaleFrom: window.opera ? 1 : 0, transition: options.scaleTransition, restoreAfterFinish: true
+                        sync: true,
+                        scaleFrom: window.opera ? 1 : 0,
+                        transition: options.scaleTransition,
+                        restoreAfterFinish: true
                     })
                 ], Object.extend({
                     beforeSetup: function (effect) {
@@ -975,7 +991,11 @@ Effect.Shrink = function (element) {
 
     return new Effect.Parallel(
         [new Effect.Opacity(element, {sync: true, to: 0.0, from: 1.0, transition: options.opacityTransition}),
-            new Effect.Scale(element, window.opera ? 1 : 0, {sync: true, transition: options.scaleTransition, restoreAfterFinish: true}),
+            new Effect.Scale(element, window.opera ? 1 : 0, {
+                sync: true,
+                transition: options.scaleTransition,
+                restoreAfterFinish: true
+            }),
             new Effect.Move(element, {x: moveX, y: moveY, sync: true, transition: options.moveTransition})
         ], Object.extend({
             beforeStartInternal: function (effect) {

@@ -15,10 +15,11 @@
 
 if (!class_exists('Projax')) {
     include __DIR__ . '/classes/JavaScript.php';
-    include 'classes/Prototype.php';
-    include 'classes/Scriptaculous.php';
+    include __DIR__ . '/classes/Prototype.php';
+    include __DIR__ . '/classes/Scriptaculous.php';
 
     // For $projax = new Projax();
+
     /**
      * Class projax
      */

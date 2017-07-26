@@ -15,7 +15,8 @@
         <div style="float: left;">
             <form>
                 <{foreach from=$smartobject_introButtons item=introButton}>
-                <input type="button" name="<{$introButton.name}>" onclick="location='<{$introButton.location}>'" value="<{$introButton.value}>"/>
+                <input type="button" name="<{$introButton.name}>" onclick="location='<{$introButton.location}>'"
+                       value="<{$introButton.value}>">
                 <{/foreach}>
             </form>
         </div>
@@ -25,8 +26,12 @@
         <form name="pick" id="pick" action="<{$smartobject_optionssel_action}>" method="POST" style="margin: 0;">
             <{if $smartobject_quicksearch}>
             <div style="vertical-align: middle; float: right; border: 2px solid #C2CDD6; padding: 5px; background-color: #E6E6E6;">
-                <b><{$smartobject_quicksearch}> :</b> <input style="vertical-align: middle;" type="text" id="quicksearch_<{$smartobject_id}>" name="quicksearch_<{$smartobject_id}>" size="20" maxlength="255"/>
-                <input style="vertical-align: middle;" type="submit" name="button_quicksearch_<{$smartobject_id}>" value="<{$smarty.const._SEARCH}>"/>
+                <b><{$smartobject_quicksearch}> :</b> <input style="vertical-align: middle;" type="text"
+                                                             id="quicksearch_<{$smartobject_id}>"
+                                                             name="quicksearch_<{$smartobject_id}>" size="20"
+                                                             maxlength="255">
+                <input style="vertical-align: middle;" type="submit" name="button_quicksearch_<{$smartobject_id}>"
+                       value="<{$smarty.const._SEARCH}>">
             </div>
             <{/if}>
     </div>
@@ -48,7 +53,8 @@
     <div style="text-align:right; padding-bottom: 3px;"><{$smartobject_pagenav}></div>
     <{/if}>
 
-    <table width="100%" cellspacing="1" cellpadding="2" border="0" style="border-left: 1px solid silver; border-top: 1px solid silver; border-right: 1px solid silver;">
+    <table width="100%" cellspacing="1" cellpadding="2" border="0"
+           style="border-left: 1px solid silver; border-top: 1px solid silver; border-right: 1px solid silver;">
         <tr>
             <td>
                 <{if $smartobject_optionssel_filtersArray}>
@@ -118,11 +124,14 @@
             <{if $smartobject_objects}>
             <{foreach from=$smartobject_objects item=smartobject_object}>
             <{if $smartobject_actionButtons}>
-            <input type='hidden' name='<{$smartobject_id}>_objects[]' id='listed_objects' value='<{$smartobject_object.id}>'/>
+            <input type='hidden' name='<{$smartobject_id}>_objects[]' id='listed_objects'
+                   value='<{$smartobject_object.id}>'>
             <{/if}>
             <tr>
                 <{foreach from=$smartobject_object.columns item=column}>
-                <td class="<{$smartobject_object.class}>" width="<{$column.width}>" align="<{$column.align}>"><{$column.value}></td>
+                <td class="<{$smartobject_object.class}>" width="<{$column.width}>" align="<{$column.align}>">
+                    <{$column.value}>
+                </td>
                 <{/foreach}>
                 <{if $smartobject_object.actions}>
                 <td class="<{$smartobject_object.class}>" align='center'>
@@ -135,12 +144,14 @@
             <{/foreach}>
             <{else}>
             <tr>
-                <td class='head' style='text-align: center; font-weight: bold;' colspan="<{$smartobject_colspan}>"><{$smarty.const._CO_SOBJECT_NO_OBJECT}></td>
+                <td class='head' style='text-align: center; font-weight: bold;' colspan="<{$smartobject_colspan}>">
+                    <{$smarty.const._CO_SOBJECT_NO_OBJECT}>
+                </td>
             </tr>
             <{/if}>
         </table>
         <{if $smartobject_actionButtons || $smartobject_withSelectedActions}>
-        <input type='hidden' name='op' id='op' value=''/>
+        <input type='hidden' name='op' id='op' value=''>
         <{if $smartobject_withSelectedActions}>
         <div style="padding: 5px;text-align: left; border-left: 1px solid silver; border-bottom: 1px solid silver; border-right: 1px solid silver;">
             <{$smarty.const._CO_SOBJECT_WITH_SELECTED}>
@@ -150,13 +161,16 @@
                 <option value=<{$key}>><{$action}></option>
                 <{/foreach}>
             </select>
-            <input type="submit" name="<{$actionButton.op}>" onclick="this.form.elements.op.value='with_selected_actions'" value="<{$smarty.const._CO_SOBJECT_SUBMIT}>"/>
+            <input type="submit" name="<{$actionButton.op}>"
+                   onclick="this.form.elements.op.value='with_selected_actions'"
+                   value="<{$smarty.const._CO_SOBJECT_SUBMIT}>">
         </div>
         <{/if}>
         <{if $smartobject_actionButtons}>
         <div style="padding: 5px;text-align: right; border-left: 1px solid silver; border-bottom: 1px solid silver; border-right: 1px solid silver;">
             <{foreach from=$smartobject_actionButtons item=actionButton}>
-            <input type="submit" name="<{$actionButton.op}>" onclick="this.form.elements.op.value='<{$actionButton.op}>'" value="<{$actionButton.text}>"/>
+            <input type="submit" name="<{$actionButton.op}>"
+                   onclick="this.form.elements.op.value='<{$actionButton.op}>'" value="<{$actionButton.text}>">
             <{/foreach}>
         </div>
         <{/if}>
@@ -170,7 +184,8 @@
     <div style="padding-top:15px; padding-bottom: 5px;">
         <form>
             <{foreach from=$smartobject_introButtons item=introButton}>
-            <input type="button" name="<{$introButton.name}>" onclick="location='<{$introButton.location}>'" value="<{$introButton.value}>"/>
+            <input type="button" name="<{$introButton.name}>" onclick="location='<{$introButton.location}>'"
+                   value="<{$introButton.value}>">
             <{/foreach}>
         </form>
     </div>
@@ -185,7 +200,8 @@
 <br>
 
 <{if $smartobject_printer_friendly_page}>
-<a href="javascript:openWithSelfMain('<{$smartobject_printer_friendly_page}>', 'smartpopup', 700, 519);"><img src="<{$xoops_url}>/modules/smartobject/assets/images/actions/fileprint.png" alt=""/></a>
+<a href="javascript:openWithSelfMain('<{$smartobject_printer_friendly_page}>', 'smartpopup', 700, 519);"><img
+        src="<{$xoops_url}>/modules/smartobject/assets/images/actions/fileprint.png" alt=""></a>
 <{/if}>
 
 
@@ -213,5 +229,5 @@ function Clickheretoprint()
 }
 </script>
 <br>
-<a href="javascript:Clickheretoprint();"><img  src="<{$xoops_url}>/modules/smartobject/assets/images/actions/fileprint.png" alt="" /></a>
+<a href="javascript:Clickheretoprint();"><img  src="<{$xoops_url}>/modules/smartobject/assets/images/actions/fileprint.png" alt=""></a>
 //-->

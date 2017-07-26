@@ -131,14 +131,12 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
      * Constructor - called from child classes
      *
      * @param XoopsDatabase $db           {@link XoopsDatabase}
-     *                                           object
-     * @param                      $itemname
-     * @param string               $keyname      Name of the table key that uniquely identify each {@link SmartObject}
-     * @param string               $idenfierName Name of the field which properly identify the {@link SmartObject}
-     * @param                      $summaryName
-     * @param                      $modulename
+     * @param string        $itemname     Name of the class derived from <a href='psi_element://SmartObject'>SmartObject</a> and which this handler is handling and which this handler is handling
+     * @param string        $keyname      Name of the table key that uniquely identify each {@link SmartObject}
+     * @param string        $idenfierName Name of the field which properly identify the {@link SmartObject}
+     * @param string        $summaryName
+     * @param string        $modulename
      * @internal param string $tablename Name of the table use to store this <a href='psi_element://SmartObject'>SmartObject</a>
-     * @internal param Name $string of the class derived from <a href='psi_element://SmartObject'>SmartObject</a> and which this handler is handling and which this handler is handling
      * @internal param string $page Page name use to basically manage and display the <a href='psi_element://SmartObject'>SmartObject</a>
      * @internal param string $moduleName name of the module
      */
@@ -180,7 +178,7 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
      */
     public function addPermission($perm_name, $caption, $description = false)
     {
-        include_once(SMARTOBJECT_ROOT_PATH . 'class/smartobjectpermission.php');
+        require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectpermission.php';
 
         $this->permissionsArray[] = array(
             'perm_name'   => $perm_name,
@@ -214,8 +212,13 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
      * @param bool $_maxWidth
      * @param bool $_maxHeight
      */
-    public function setUploaderConfig($_uploadPath = false, $_allowedMimeTypes = false, $_maxFileSize = false, $_maxWidth = false, $_maxHeight = false)
-    {
+    public function setUploaderConfig(
+        $_uploadPath = false,
+        $_allowedMimeTypes = false,
+        $_maxFileSize = false,
+        $_maxWidth = false,
+        $_maxHeight = false
+    ) {
         $this->_uploadPath       = $_uploadPath ?: $this->_uploadPath;
         $this->_allowedMimeTypes = $_allowedMimeTypes ?: $this->_allowedMimeTypes;
         $this->_maxFileSize      = $_maxFileSize ?: $this->_maxFileSize;
@@ -235,7 +238,7 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
         $obj = new $this->className($this);
         $obj->setImageDir($this->getImageUrl(), $this->getImagePath());
         if (!$obj->handler) {
-            $obj->handler =& $this;
+            $obj->Handler = $this;
         }
 
         if ($isNew === true) {
@@ -274,7 +277,7 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
      * @param  bool  $debug
      * @param  bool  $criteria
      * @return mixed reference to the <a href='psi_element://SmartObject'>SmartObject</a>, FALSE if failed
-     *                         FALSE if failed
+     *                          FALSE if failed
      */
     public function get($id, $as_object = true, $debug = false, $criteria = false)
     {
@@ -336,15 +339,20 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
      * retrieve objects from the database
      *
      * @param CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
-     * @param bool   $id_as_key use the ID as key for the array?
-     * @param bool   $as_object return an array of objects?
+     * @param bool            $id_as_key use the ID as key for the array?
+     * @param bool            $as_object return an array of objects?
      *
-     * @param  bool  $sql
-     * @param  bool  $debug
+     * @param  bool           $sql
+     * @param  bool           $debug
      * @return array
      */
-    public function getObjects(CriteriaElement $criteria = null, $id_as_key = false, $as_object = true, $sql = false, $debug = false)
-    {
+    public function getObjects(
+        CriteriaElement $criteria = null,
+        $id_as_key = false,
+        $as_object = true,
+        $sql = false,
+        $debug = false
+    ) {
         $ret   = array();
         $limit = $start = 0;
 
@@ -419,10 +427,10 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
      * retrieve objects with debug mode - so will show the query
      *
      * @param CriteriaElement $criteria  {@link CriteriaElement} conditions to be met
-     * @param bool   $id_as_key use the ID as key for the array?
-     * @param bool   $as_object return an array of objects?
+     * @param bool            $id_as_key use the ID as key for the array?
+     * @param bool            $as_object return an array of objects?
      *
-     * @param  bool  $sql
+     * @param  bool           $sql
      * @return array
      */
     public function getObjectsD(CriteriaElement $criteria = null, $id_as_key = false, $as_object = true, $sql = false)
@@ -487,9 +495,9 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
     }
 
     /**
-     * @param  null  $criteria
-     * @param  int   $limit
-     * @param  int   $start
+     * @param  null $criteria
+     * @param  int  $limit
+     * @param  int  $start
      * @return array
      */
     public function getListD($criteria = null, $limit = 0, $start = 0)
@@ -501,10 +509,10 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
      * Retrieve a list of objects as arrays - DON'T USE WITH JOINT KEYS
      *
      * @param CriteriaElement $criteria {@link CriteriaElement} conditions to be met
-     * @param int    $limit    Max number of objects to fetch
-     * @param int    $start    Which record to start at
+     * @param int             $limit    Max number of objects to fetch
+     * @param int             $start    Which record to start at
      *
-     * @param  bool  $debug
+     * @param  bool           $debug
      * @return array
      */
     public function getList(CriteriaElement $criteria = null, $limit = 0, $start = 0, $debug = false)
@@ -554,7 +562,7 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
      * count objects matching a condition
      *
      * @param  CriteriaElement $criteria {@link CriteriaElement} to match
-     * @return int    count of objects
+     * @return int             count of objects
      */
     public function getCount(CriteriaElement $criteria = null)
     {
@@ -604,7 +612,7 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
     /**
      * delete an object from the database
      *
-     * @param  XoopsObject $obj   reference to the object to delete
+     * @param  XoopsObject $obj reference to the object to delete
      * @param  bool        $force
      * @return bool        FALSE if failed.
      */
@@ -769,13 +777,15 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
         } else {
             $sql = 'UPDATE ' . $this->table . ' SET';
             foreach ($fieldsToStoreInDB as $key => $value) {
-                if ((!is_array($this->keyName) && $key == $this->keyName) || (is_array($this->keyName) && in_array($key, $this->keyName))) {
+                if ((!is_array($this->keyName) && $key == $this->keyName)
+                    || (is_array($this->keyName)
+                        && in_array($key, $this->keyName))) {
                     continue;
                 }
                 if (isset($notfirst)) {
                     $sql .= ',';
                 }
-                $sql .= ' ' . $key . ' = ' . $value;
+                $sql      .= ' ' . $key . ' = ' . $value;
                 $notfirst = true;
             }
             if (is_array($this->keyName)) {
@@ -853,11 +863,11 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
     /**
      * Change a value for objects with a certain criteria
      *
-     * @param string $fieldname  Name of the field
-     * @param string $fieldvalue Value to write
+     * @param string          $fieldname  Name of the field
+     * @param string          $fieldvalue Value to write
      * @param CriteriaElement $criteria   {@link CriteriaElement}
      *
-     * @param  bool $force
+     * @param  bool           $force
      * @return bool
      */
     public function updateAll($fieldname, $fieldvalue, CriteriaElement $criteria = null, $force = false)
@@ -951,7 +961,7 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
      * Execute the function associated with an event
      * This method will check if the function is available
      *
-     * @param  string $event           name of the event
+     * @param  string $event name of the event
      * @param         $executeEventObj
      * @return mixed  result of the execution of the function or FALSE if the function was not executed
      * @internal param object $obj $object on which is performed the event
@@ -980,7 +990,7 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
     }
 
     /**
-     * @param  bool   $withprefix
+     * @param  bool $withprefix
      * @return string
      */
     public function getIdentifierName($withprefix = true)

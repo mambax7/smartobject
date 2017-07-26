@@ -40,12 +40,12 @@ function editclass($showmenu = false, $adsenseid = 0, $clone = false)
     }
 }
 
-include_once __DIR__ . '/admin_header.php';
-include_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
-include_once SMARTOBJECT_ROOT_PATH . 'class/adsense.php';
+require_once __DIR__ . '/admin_header.php';
+require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
+require_once SMARTOBJECT_ROOT_PATH . 'class/adsense.php';
 $smartobjectAdsenseHandler = xoops_getModuleHandler('adsense');
 smart_loadLanguageFile('smartobject', 'adsense');
-$indexAdmin = new ModuleAdmin();
+$adminObject = \Xmf\Module\Admin::getInstance();
 
 $op = '';
 
@@ -62,7 +62,7 @@ switch ($op) {
         $adsenseid = isset($_GET['adsenseid']) ? (int)$_GET['adsenseid'] : 0;
 
         smart_xoops_cp_header();
-        echo $indexAdmin->addNavigation(basename(__FILE__));
+        $adminObject->displayNavigation(basename(__FILE__));
 
         editclass(true, $adsenseid);
         break;
@@ -72,27 +72,27 @@ switch ($op) {
         $adsenseid = isset($_GET['adsenseid']) ? (int)$_GET['adsenseid'] : 0;
 
         smart_xoops_cp_header();
-        echo $indexAdmin->addNavigation(basename(__FILE__));
+        $adminObject->displayNavigation(basename(__FILE__));
 
         editclass(true, $adsenseid, true);
         break;
 
     case 'addadsense':
-        if (@include_once SMARTOBJECT_ROOT_PATH . 'include/captcha/captcha.php') {
+        if (@require_once SMARTOBJECT_ROOT_PATH . 'include/captcha/captcha.php') {
             $xoopsCaptcha = XoopsCaptcha::getInstance();
             if (!$xoopsCaptcha->verify()) {
                 redirect_header('javascript:history.go(-1);', 3, $xoopsCaptcha->getMessage());
                 exit;
             }
         }
-        include_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
+        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
         $controller = new SmartObjectController($smartobjectAdsenseHandler);
         $controller->storeFromDefaultForm(_AM_SOBJECT_ADSENSES_CREATED, _AM_SOBJECT_ADSENSES_MODIFIED);
         break;
 
     case 'del':
 
-        include_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
+        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
         $controller = new SmartObjectController($smartobjectAdsenseHandler);
         $controller->handleObjectDeletion();
 
@@ -101,13 +101,13 @@ switch ($op) {
     default:
 
         smart_xoops_cp_header();
-        echo $indexAdmin->addNavigation(basename(__FILE__));
+        $adminObject->displayNavigation(basename(__FILE__));
 
         //smart_adminMenu(3, _AM_SOBJECT_ADSENSES);
 
         smart_collapsableBar('createdadsenses', _AM_SOBJECT_ADSENSES, _AM_SOBJECT_ADSENSES_DSC);
 
-        include_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
+        require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
         $objectTable = new SmartObjectTable($smartobjectAdsenseHandler);
         $objectTable->addColumn(new SmartObjectColumn('description', 'left'));
         $objectTable->addColumn(new SmartObjectColumn(_AM_SOBJECT_ADSENSE_TAG, 'center', 200, 'getXoopsCode'));
@@ -154,4 +154,4 @@ switch ($op) {
 
 //smart_modFooter();
 //xoops_cp_footer();
-include_once __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';

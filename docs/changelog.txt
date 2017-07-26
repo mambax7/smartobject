@@ -1,16 +1,50 @@
-<b><u>=> Version 1.12 RC 1 (2016-03-28)</u></b>
+<h5>1.12 RC 2  [2017-07-20]</h5>
+<hr>
+
+- XOOPS 2.5.9, PHP 7 (mamba)
+- Converted to XOOPS 2.5.8 Admin GUI (mamba)
+- removed @version (mamba)
+- PSR-2 code cosmetics (mamba)
+- addNavigation(basename(__FILE__))  (mamba)
+- dirname(__FILE__) to __DIR__ (mamba)
+- replaced < br /> with < br > (mamba)
+- Unnecessary double quotes (mamba)
+- reference mismatch (mamba)
+- Hardening to type safe (mamba)
+- update Help (mamba)
+- changed _handler to Handler (mamba)
+- removed '/' from void HTML elements (&lt;br&gt;, &lt;img&gt;, etc) (mamba)
+- HTML 5: removed 'selected' and 'checked' (mamba)
+- updated file headers for consistency (mamba)
+- renamed several $indexAdmin with $adminObject for consistency (mamba)
+- Updates for PayPal changes (zyspec)
+- added Contributing.md (mamba)
+- moved functions to Utility class (mamba)
+- include_once to require_once (mamba)
+- php-cs-fixer updates (mamba)
+- started conversion to XMF (mamba)
+    &nbsp;&nbsp;- updated addInfoBoxLine entries (mamba)
+    &nbsp;&nbsp;- displayNavigation(basename(__FILE__))  (mamba)
+    &nbsp;&nbsp;- changed to ->displayButton('left') (mamba)
+
+<h5>1.12 RC 1 [2016-03-28]</h5>
+<hr>
+
 - XOOPS 2.5.8 and PHP 7 updates (mamba)
 
-<b><u>=> Version 1.11 Beta 3 (2013-04-30)</u></b>
+<h5>1.11 Beta 3 [2013-04-30]</h5>
+<hr>
 
 - moved all images, CSS, and JS files to /assets (mamba)
 - renamed .html Smarty templates to .tpl (mamba)
 
-<b><u>=> Version 1.11 Beta 2 (2013-04-30)</u></b>
+<h5>1.11 Beta 2 [2013-04-30]</h5>
+<hr>
 
 - Converted to XOOPS 2.5.5 Admin GUI (mamba)
 
-<b><u>=> Version 1.10 (2012-03-31)</u></b>
+<h5>1.10 [2012-03-31]</h5>
+<hr>
 
 This version adds the following changes to 1.0.1 because the offical development site was lost.
 <a href="http://linux2.ohwada.net/" target="_blank">K.OHWADA - Happy Linux</a>
@@ -38,18 +72,21 @@ Fixed bugs for PDF (ohwada):
 (4) undedined _MD_POSTEDON
 (5) mojibake (character garble) in Japanese
 
-<b><u>=> Version 1.0.1 Final (2008-07-05)</u></b>
+<h5>1.0.1 Final [2008-07-05]</h5>
+<hr>
 
 - Fixed : XOOPS logo removed from admin footer
 - Fixed : INBOX logo in admin footer changed to used an image inside SmartObject images folder instead of linking to an image on the web
 - Added : Addition of a preference to turn off all SmartModules admin footer
 
 
-<b><u>=> Version 1.0 Final (2008-04-13)</u></b>
+<h5>1.0 Final [2008-04-13]</h5>
+<hr>
 
 - Fixed : a few bugs fixed throughout the module
 
-<b><u>=> Version 0.92 RC (2007-09-21)</u></b>
+<h5>0.92 RC [2007-09-21]</h5>
+<hr>
 
 - Added : Rating system feature
 - Added : Custom tag feature
@@ -64,6 +101,7 @@ Fixed bugs for PDF (ohwada):
 
 
 
-<b><u>=> Version 0.8 Beta (2006-09-27)</u></b>
+<h5>0.8 Beta [2006-09-27]</h5>
+<hr>
 
 - First public release of the module.

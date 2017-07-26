@@ -19,11 +19,11 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsform/formelement.php';
  * Usage
  *
  * For form creation:
- * 1 Add [include_once XOOPS_ROOT_PATH."/Frameworks/captcha/formcaptcha.php";] to class/xoopsformloader.php, OR add to the file that uses CAPTCHA before calling XoopsFormCaptcha
+ * 1 Add [require_once XOOPS_ROOT_PATH."/Frameworks/captcha/formcaptcha.php";] to class/xoopsformloader.php, OR add to the file that uses CAPTCHA before calling XoopsFormCaptcha
  * 2 Add form element where proper: $xoopsform->addElement(new XoopsFormCaptcha($caption, $name, $skipmember, ...);
  *
  * For verification:
- *   if (@include_once XOOPS_ROOT_PATH."/class/captcha/xoopscaptcha.php") {
+ *   if (@require_once XOOPS_ROOT_PATH."/class/captcha/xoopscaptcha.php") {
  *      $xoopsCaptcha = XoopsCaptcha::getInstance();
  *      if (! $xoopsCaptcha->verify() ) {
  *          echo $xoopsCaptcha->getMessage();
@@ -51,8 +51,16 @@ class XoopsFormCaptcha extends XoopsFormElement
      * @param int     $backgroundnum  Number of background images in image mode
      *
      */
-    public function __construct($caption = '', $name = 'xoopscaptcha', $skipmember = null, $numchar = null, $minfontsize = null, $maxfontsize = null, $backgroundtype = null, $backgroundnum = null)
-    {
+    public function __construct(
+        $caption = '',
+        $name = 'xoopscaptcha',
+        $skipmember = null,
+        $numchar = null,
+        $minfontsize = null,
+        $maxfontsize = null,
+        $backgroundtype = null,
+        $backgroundnum = null
+    ) {
         if (!class_exists('XoopsCaptcaha')) {
             require_once SMARTOBJECT_ROOT_PATH . '/include/captcha/captcha.php';
         }

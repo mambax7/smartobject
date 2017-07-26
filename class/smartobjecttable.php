@@ -39,8 +39,15 @@ class SmartObjectColumn
      * @param bool   $customCaption
      * @param bool   $sortable
      */
-    public function __construct($keyname, $align = 'left', $width = false, $customMethodForValue = false, $param = false, $customCaption = false, $sortable = true)
-    {
+    public function __construct(
+        $keyname,
+        $align = 'left',
+        $width = false,
+        $customMethodForValue = false,
+        $param = false,
+        $customCaption = false,
+        $sortable = true
+    ) {
         $this->_keyname              = $keyname;
         $this->_align                = $align;
         $this->_width                = $width;
@@ -144,14 +151,17 @@ class SmartObjectTable
      * Constructor
      *
      * @param SmartPersistableObjectHandler $objectHandler {@link SmartPersistableObjectHandler}
-     * @param CriteriaElement          $criteria
+     * @param CriteriaElement               $criteria
      * @param array                         $actions       array representing the actions to offer
      *
      * @param bool                          $userSide
-     * @internal param array $columns array representing the columns to display in the table
      */
-    public function __construct(SmartPersistableObjectHandler $objectHandler, CriteriaElement $criteria = null, $actions = array('edit', 'delete'), $userSide = false)
-    {
+    public function __construct(
+        SmartPersistableObjectHandler $objectHandler,
+        CriteriaElement $criteria = null,
+        $actions = array('edit', 'delete'),
+        $userSide = false
+    ) {
         $this->_id            = $objectHandler->className;
         $this->_objectHandler = $objectHandler;
 
@@ -343,7 +353,8 @@ class SmartObjectTable
         smart_setCookieVar($_SERVER['PHP_SELF'] . '_' . $this->_id . '_sortsel', $this->_sortsel);
         $fieldsForSorting = $this->_tempObject->getFieldsForSorting($this->_sortsel);
 
-        if (isset($this->_tempObject->vars[$this->_sortsel]['itemName']) && $this->_tempObject->vars[$this->_sortsel]['itemName']) {
+        if (isset($this->_tempObject->vars[$this->_sortsel]['itemName'])
+            && $this->_tempObject->vars[$this->_sortsel]['itemName']) {
             $this->_criteria->setSort($this->_tempObject->vars[$this->_sortsel]['itemName'] . '.' . $this->_sortsel);
         } else {
             $this->_criteria->setSort($this->_objectHandler->_itemname . '.' . $this->_sortsel);
@@ -401,8 +412,9 @@ class SmartObjectTable
                         //$object->initiateCustomFields();
                     }
                     if ($column->_keyname === 'checked') {
-                        $value = '<input type ="checkbox" name="selected_smartobjects[]" value="' . $object->id() . '" />';
-                    } elseif ($column->_customMethodForValue && method_exists($object, $column->_customMethodForValue)) {
+                        $value = '<input type ="checkbox" name="selected_smartobjects[]" value="' . $object->id() . '">';
+                    } elseif ($column->_customMethodForValue
+                              && method_exists($object, $column->_customMethodForValue)) {
                         $method = $column->_customMethodForValue;
                         if ($column->_param) {
                             $value = $object->$method($column->_param);
@@ -445,7 +457,7 @@ class SmartObjectTable
                     }
                 }
 
-                include_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectcontroller.php';
+                require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectcontroller.php';
                 $controller = new SmartObjectController($this->_objectHandler);
 
                 if ((!is_array($this->_actions)) || in_array('edit', $this->_actions)) {
@@ -508,10 +520,10 @@ class SmartObjectTable
                 $field = array();
                 if (is_array($value)) {
                     $field['caption']  = $key;
-                    $field['selected'] = $this->_filtersel == $key ? "selected='selected'" : '';
+                    $field['selected'] = $this->_filtersel == $key ? 'selected' : '';
                 } else {
                     $field['caption']  = $this->_tempObject->vars[$key]['form_caption'];
-                    $field['selected'] = $this->_filtersel == $key ? "selected='selected'" : '';
+                    $field['selected'] = $this->_filtersel == $key ? 'selected' : '';
                 }
                 $ret[$key] = $field;
                 unset($field);
@@ -553,7 +565,7 @@ class SmartObjectTable
         foreach ($this->_filtersel2options as $key => $value) {
             $field             = array();
             $field['caption']  = $value;
-            $field['selected'] = $this->_filtersel2 == $key ? "selected='selected'" : '';
+            $field['selected'] = $this->_filtersel2 == $key ? 'selected' : '';
             $ret[$key]         = $field;
             unset($field);
         }
@@ -586,31 +598,31 @@ class SmartObjectTable
     {
         $ret                    = array();
         $ret['all']['caption']  = _CO_SOBJECT_LIMIT_ALL;
-        $ret['all']['selected'] = ('all' === $this->_limitsel) ? "selected='selected'" : '';
+        $ret['all']['selected'] = ('all' === $this->_limitsel) ? 'selected' : '';
 
         $ret['5']['caption']  = '5';
-        $ret['5']['selected'] = ('5' == $this->_limitsel) ? "selected='selected'" : '';
+        $ret['5']['selected'] = ('5' == $this->_limitsel) ? 'selected' : '';
 
         $ret['10']['caption']  = '10';
-        $ret['10']['selected'] = ('10' == $this->_limitsel) ? "selected='selected'" : '';
+        $ret['10']['selected'] = ('10' == $this->_limitsel) ? 'selected' : '';
 
         $ret['15']['caption']  = '15';
-        $ret['15']['selected'] = ('15' == $this->_limitsel) ? "selected='selected'" : '';
+        $ret['15']['selected'] = ('15' == $this->_limitsel) ? 'selected' : '';
 
         $ret['20']['caption']  = '20';
-        $ret['20']['selected'] = ('20' == $this->_limitsel) ? "selected='selected'" : '';
+        $ret['20']['selected'] = ('20' == $this->_limitsel) ? 'selected' : '';
 
         $ret['25']['caption']  = '25';
-        $ret['25']['selected'] = ('25' == $this->_limitsel) ? "selected='selected'" : '';
+        $ret['25']['selected'] = ('25' == $this->_limitsel) ? 'selected' : '';
 
         $ret['30']['caption']  = '30';
-        $ret['30']['selected'] = ('30' == $this->_limitsel) ? "selected='selected'" : '';
+        $ret['30']['selected'] = ('30' == $this->_limitsel) ? 'selected' : '';
 
         $ret['35']['caption']  = '35';
-        $ret['35']['selected'] = ('35' == $this->_limitsel) ? "selected='selected'" : '';
+        $ret['35']['selected'] = ('35' == $this->_limitsel) ? 'selected' : '';
 
         $ret['40']['caption']  = '40';
-        $ret['40']['selected'] = ('40' == $this->_limitsel) ? "selected='selected'" : '';
+        $ret['40']['selected'] = ('40' == $this->_limitsel) ? 'selected' : '';
 
         return $ret;
     }
@@ -640,10 +652,10 @@ class SmartObjectTable
     {
         $ret                    = array();
         $ret['ASC']['caption']  = _CO_SOBJECT_SORT_ASC;
-        $ret['ASC']['selected'] = ('ASC' === $this->_ordersel) ? "selected='selected'" : '';
+        $ret['ASC']['selected'] = ('ASC' === $this->_ordersel) ? 'selected' : '';
 
         $ret['DESC']['caption']  = _CO_SOBJECT_SORT_DESC;
-        $ret['DESC']['selected'] = ('DESC' === $this->_ordersel) ? "selected='selected'" : '';
+        $ret['DESC']['selected'] = ('DESC' === $this->_ordersel) ? 'selected' : '';
 
         return $ret;
     }
@@ -667,7 +679,7 @@ class SmartObjectTable
      */
     public function render($fetchOnly = false, $debug = false)
     {
-        include_once XOOPS_ROOT_PATH . '/class/template.php';
+        require_once XOOPS_ROOT_PATH . '/class/template.php';
 
         $this->_tpl = new XoopsTpl();
 
@@ -744,7 +756,7 @@ class SmartObjectTable
 
         $this->_objects = $this->fetchObjects($debug);
 
-        include_once XOOPS_ROOT_PATH . '/class/pagenav.php';
+        require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
         if ($this->_criteria->getLimit() > 0) {
 
             /**
@@ -776,8 +788,7 @@ class SmartObjectTable
             $new_get_array[] = 'limitsel=' . $this->_limitsel;
             $otherParams     = implode('&', $new_get_array);
 
-            $pagenav =
-                new XoopsPageNav($this->_objectHandler->getCount($this->_criteria), $this->_criteria->getLimit(), $this->_criteria->getStart(), 'start' . $this->_objectHandler->keyName, $otherParams);
+            $pagenav = new XoopsPageNav($this->_objectHandler->getCount($this->_criteria), $this->_criteria->getLimit(), $this->_criteria->getStart(), 'start' . $this->_objectHandler->keyName, $otherParams);
             $this->_tpl->assign('smartobject_pagenav', $pagenav->renderNav());
         }
         $this->renderOptionSelection($limitsArray, $params_of_the_options_sel);
@@ -792,7 +803,7 @@ class SmartObjectTable
         $query_stringArray     = explode('&', $query_string);
         $new_query_stringArray = array();
         foreach ($query_stringArray as $query_string) {
-            if (strpos($query_string, 'sortsel') == false && strpos($query_string, 'ordersel') == false) {
+            if (strpos($query_string, 'sortsel') === false && strpos($query_string, 'ordersel') === false) {
                 $new_query_stringArray[] = $query_string;
             }
         }
@@ -813,17 +824,15 @@ class SmartObjectTable
             $aColumn['align'] = $column->getAlign();
             $aColumn['key']   = $column->getKeyName();
             if ($column->_keyname === 'checked') {
-                $aColumn['caption'] = '<input type ="checkbox" id="checkall_smartobjects" name="checkall_smartobjects"'
-                                      . ' value="checkall_smartobjects" onclick="smartobject_checkall(window.document.form_'
-                                      . $this->_id
-                                      . ', \'selected_smartobjects\');" />';
+                $aColumn['caption'] = '<input type ="checkbox" id="checkall_smartobjects" name="checkall_smartobjects"' . ' value="checkall_smartobjects" onclick="smartobject_checkall(window.document.form_' . $this->_id . ', \'selected_smartobjects\');">';
             } elseif ($column->getCustomCaption()) {
                 $aColumn['caption'] = $column->getCustomCaption();
             } else {
                 $aColumn['caption'] = isset($this->_tempObject->vars[$column->getKeyName()]['form_caption']) ? $this->_tempObject->vars[$column->getKeyName()]['form_caption'] : $column->getKeyName();
             }
             // Are we doing a GET sort on this column ?
-            $getSort = (isset($_GET[$this->_objectHandler->_itemname . '_' . 'sortsel']) && $_GET[$this->_objectHandler->_itemname . '_' . 'sortsel'] == $column->getKeyName())
+            $getSort = (isset($_GET[$this->_objectHandler->_itemname . '_' . 'sortsel'])
+                        && $_GET[$this->_objectHandler->_itemname . '_' . 'sortsel'] == $column->getKeyName())
                        || ($this->_sortsel == $column->getKeyName());
             $order   = isset($_GET[$this->_objectHandler->_itemname . '_' . 'ordersel']) ? $_GET[$this->_objectHandler->_itemname . '_' . 'ordersel'] : 'DESC';
 
@@ -853,25 +862,9 @@ class SmartObjectTable
                                       . ' <img src="'
                                       . SMARTOBJECT_IMAGES_ACTIONS_URL
                                       . $orderArray[$order]['image']
-                                      . '" alt="ASC" /></a>';
+                                      . '" alt="ASC"></a>';
             } else {
-                $aColumn['caption'] = '<a href="'
-                                      . $current_url
-                                      . '?'
-                                      . $this->_objectHandler->_itemname
-                                      . '_'
-                                      . 'sortsel='
-                                      . $column->getKeyName()
-                                      . '&'
-                                      . $this->_objectHandler->_itemname
-                                      . '_'
-                                      . 'ordersel=ASC'
-                                      . $qs_param
-                                      . '&'
-                                      . $new_query_string
-                                      . '">'
-                                      . $aColumn['caption']
-                                      . '</a>';
+                $aColumn['caption'] = '<a href="' . $current_url . '?' . $this->_objectHandler->_itemname . '_' . 'sortsel=' . $column->getKeyName() . '&' . $this->_objectHandler->_itemname . '_' . 'ordersel=ASC' . $qs_param . '&' . $new_query_string . '">' . $aColumn['caption'] . '</a>';
             }
             $aColumns[] = $aColumn;
         }

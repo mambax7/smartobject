@@ -9,7 +9,7 @@
  * @package    SmartObject
  * @subpackage SmartObjectForm
  */
-include_once SMARTOBJECT_ROOT_PATH . 'class/form/elements/smartformuploadelement.php';
+require_once SMARTOBJECT_ROOT_PATH . 'class/form/elements/smartformuploadelement.php';
 
 /**
  * Class SmartFormImageUploadElement
@@ -35,8 +35,8 @@ class SmartFormImageUploadElement extends SmartFormUploadElement
      */
     public function render()
     {
-        return "<input type='hidden' name='MAX_FILE_SIZE' value='" . $this->getMaxFileSize() . "' />
-        <input type='file' name='" . $this->getName() . "' id='" . $this->getName() . "'" . $this->getExtra() . " />
-        <input type='hidden' name='smart_upload_image[]' id='smart_upload_image[]' value='" . $this->getName() . "' />";
+        return "<input type='hidden' name='MAX_FILE_SIZE' value='" . $this->getMaxFileSize() . "'>
+        <input type='file' name='" . $this->getName() . "' id='" . $this->getName() . "'" . $this->getExtra() . ">
+        <input type='hidden' name='smart_upload_image[]' id='smart_upload_image[]' value='" . $this->getName() . "'>";
     }
 }

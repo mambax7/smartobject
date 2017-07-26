@@ -1,7 +1,7 @@
 <?php
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once XOOPS_ROOT_PATH . '/modules/smartobject/class/basedurl.php';
+require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/basedurl.php';
 
 /**
  * Class SmartobjectFile

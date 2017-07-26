@@ -35,9 +35,9 @@ function editclass($showmenu = false, $currencyid = 0)
     }
 }
 
-include_once __DIR__ . '/admin_header.php';
-include_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
-include_once SMARTOBJECT_ROOT_PATH . 'class/currency.php';
+require_once __DIR__ . '/admin_header.php';
+require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
+require_once SMARTOBJECT_ROOT_PATH . 'class/currency.php';
 $smartobjectCurrencyHandler = xoops_getModuleHandler('currency');
 
 $op = '';
@@ -86,14 +86,14 @@ switch ($op) {
         break;
 
     case 'addcurrency':
-        include_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
+        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
         $controller = new SmartObjectController($smartobjectCurrencyHandler);
         $controller->storeFromDefaultForm(_AM_SOBJECT_CURRENCIES_CREATED, _AM_SOBJECT_CURRENCIES_MODIFIED, SMARTOBJECT_URL . 'admin/currency.php');
 
         break;
 
     case 'del':
-        include_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
+        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
         $controller = new SmartObjectController($smartobjectCurrencyHandler);
         $controller->handleObjectDeletion();
 
@@ -107,7 +107,7 @@ switch ($op) {
 
         smart_collapsableBar('createdcurrencies', _AM_SOBJECT_CURRENCIES, _AM_SOBJECT_CURRENCIES_DSC);
 
-        include_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
+        require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
         $objectTable = new SmartObjectTable($smartobjectCurrencyHandler);
         $objectTable->addColumn(new SmartObjectColumn('name', 'left', false, 'getCurrencyLink'));
         $objectTable->addColumn(new SmartObjectColumn('rate', 'center', 150));
@@ -129,4 +129,4 @@ switch ($op) {
 
 //smart_modFooter();
 //xoops_cp_footer();
-include_once __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';

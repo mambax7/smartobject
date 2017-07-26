@@ -28,8 +28,8 @@ class SmartFormUploadElement extends XoopsFormFile
      */
     public function render()
     {
-        return "<input type='hidden' name='MAX_FILE_SIZE' value='" . $this->getMaxFileSize() . "' />
-                <input type='file' name='" . $this->getName() . "' id='" . $this->getName() . "'" . $this->getExtra() . " />
-                <input type='hidden' name='smart_upload_file[]' id='smart_upload_file[]' value='" . $this->getName() . "' />";
+        return "<input type='hidden' name='MAX_FILE_SIZE' value='" . $this->getMaxFileSize() . "'>
+                <input type='file' name='" . $this->getName() . "' id='" . $this->getName() . "'" . $this->getExtra() . ">
+                <input type='hidden' name='smart_upload_file[]' id='smart_upload_file[]' value='" . $this->getName() . "'>";
     }
 }

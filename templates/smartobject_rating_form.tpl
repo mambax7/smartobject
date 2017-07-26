@@ -17,7 +17,8 @@
                         <input name="smartobject_rating_value" value="5" type="radio">5
                     </div>
                     <div style="float: right;">
-                        <input name="smartobject_rating_submit" value="<{$smarty.const._SOBJECT_RATING_RATE}>" type="submit">
+                        <input name="smartobject_rating_submit" value="<{$smarty.const._SOBJECT_RATING_RATE}>"
+                               type="submit">
                     </div>
                 </form>
                 <br>

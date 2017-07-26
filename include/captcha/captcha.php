@@ -82,7 +82,14 @@ class XoopsCaptcha
         if (!extension_loaded('gd')) {
             $this->mode = 'text';
         } else {
-            $required_functions = array('imagecreatetruecolor', 'imagecolorallocate', 'imagefilledrectangle', 'imagejpeg', 'imagedestroy', 'imageftbbox');
+            $required_functions = array(
+                'imagecreatetruecolor',
+                'imagecolorallocate',
+                'imagefilledrectangle',
+                'imagejpeg',
+                'imagedestroy',
+                'imageftbbox'
+            );
             foreach ($required_functions as $func) {
                 if (!function_exists($func)) {
                     $this->mode = 'text';
@@ -102,8 +109,15 @@ class XoopsCaptcha
      * @param null   $background_type
      * @param null   $background_num
      */
-    public function init($name = 'xoopscaptcha', $skipmember = null, $num_chars = null, $fontsize_min = null, $fontsize_max = null, $background_type = null, $background_num = null)
-    {
+    public function init(
+        $name = 'xoopscaptcha',
+        $skipmember = null,
+        $num_chars = null,
+        $fontsize_min = null,
+        $fontsize_max = null,
+        $background_type = null,
+        $background_num = null
+    ) {
         // Loading RUN-TIME settings
         foreach (array_keys($this->config) as $key) {
             if (isset(${$key}) && ${$key} !== null) {

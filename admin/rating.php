@@ -51,11 +51,11 @@ function editclass($showmenu = false, $ratingid = 0)
     }
 }
 
-include_once __DIR__ . '/admin_header.php';
-include_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
-include_once SMARTOBJECT_ROOT_PATH . 'class/rating.php';
+require_once __DIR__ . '/admin_header.php';
+require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
+require_once SMARTOBJECT_ROOT_PATH . 'class/rating.php';
 $smartobjectRatingHandler = xoops_getModuleHandler('rating');
-$indexAdmin               = new ModuleAdmin();
+$indexAdmin               = \Xmf\Module\Admin::getInstance();
 
 $op = '';
 
@@ -68,25 +68,25 @@ if (isset($_POST['op'])) {
 
 switch ($op) {
     case 'mod':
-    case 'changedField';
+    case 'changedField':
 
         $ratingid = isset($_GET['ratingid']) ? (int)$_GET['ratingid'] : 0;
 
         smart_xoops_cp_header();
-        echo $indexAdmin->addNavigation(basename(__FILE__));
+        $adminObject->displayNavigation(basename(__FILE__));
 
         editclass(true, $ratingid);
         break;
 
     case 'addrating':
-        include_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
+        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
         $controller = new SmartObjectController($smartobjectRatingHandler);
         $controller->storeFromDefaultForm(_AM_SOBJECT_RATINGS_CREATED, _AM_SOBJECT_RATINGS_MODIFIED, SMARTOBJECT_URL . 'admin/rating.php');
 
         break;
 
     case 'del':
-        include_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
+        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
         $controller = new SmartObjectController($smartobjectRatingHandler);
         $controller->handleObjectDeletion();
 
@@ -95,13 +95,13 @@ switch ($op) {
     default:
 
         smart_xoops_cp_header();
-        echo $indexAdmin->addNavigation(basename(__FILE__));
+        $adminObject->displayNavigation(basename(__FILE__));
 
         //smart_adminMenu(4, _AM_SOBJECT_RATINGS);
 
         smart_collapsableBar('createdratings', _AM_SOBJECT_RATINGS, _AM_SOBJECT_RATINGS_DSC);
 
-        include_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
+        require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
         $objectTable = new SmartObjectTable($smartobjectRatingHandler);
         $objectTable->addColumn(new SmartObjectColumn('name', 'left'));
         $objectTable->addColumn(new SmartObjectColumn('dirname', 'left'));
@@ -149,4 +149,4 @@ switch ($op) {
 
 //smart_modFooter();
 //xoops_cp_footer();
-include_once __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';

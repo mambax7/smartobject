@@ -13,23 +13,23 @@
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once(XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php');
+require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php';
 
 /**
  * Include other classes used by the SmartObject
  */
-include_once(SMARTOBJECT_ROOT_PATH . 'class/smartobjecthandler.php');
-include_once(SMARTOBJECT_ROOT_PATH . 'class/smartobject.php');
-include_once(SMARTOBJECT_ROOT_PATH . 'class/smartobjectsregistry.php');
+require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecthandler.php';
+require_once SMARTOBJECT_ROOT_PATH . 'class/smartobject.php';
+require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectsregistry.php';
 
 /**
  * Including SmartHook feature
  */
 
-include_once(SMARTOBJECT_ROOT_PATH . 'class/smarthookhandler.php');
+require_once SMARTOBJECT_ROOT_PATH . 'class/smarthookhandler.php';
 $smarthookHandler = SmartHookHandler::getInstance();
 
 if (!class_exists('smartmetagen')) {
-    include_once(SMARTOBJECT_ROOT_PATH . 'class/smartmetagen.php');
+    require_once SMARTOBJECT_ROOT_PATH . 'class/smartmetagen.php';
 }
 //$smartobjectConfig = smart_getModuleConfig('smartobject');

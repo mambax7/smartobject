@@ -1,9 +1,9 @@
 <?php
-// 
+//
 // ------------------------------------------------------------------------ //
 //               XOOPS - PHP Content Management System                      //
 //                   Copyright (c) 2000-2016 XOOPS.org                           //
-//                      <https://xoops.org/>                             //
+//                      <https://xoops.org>                             //
 // ------------------------------------------------------------------------ //
 // This program is free software; you can redistribute it and/or modify     //
 // it under the terms of the GNU General Public License as published by     //
@@ -29,7 +29,7 @@
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobject.php';
+require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobject.php';
 
 /**
  * Class SmartobjectAdsense
@@ -194,10 +194,39 @@ google_color_text = "' . $this->getVar('text_color', 'n') . '";
             '/%7E/', // ~
             "/\./" // .
         );
-        $rep_pat = array('-', '-', '-', '-', '-', '-100', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-at-', '-', '-', '-', '-', '-', '-', '-', '-', '-');
+        $rep_pat = array(
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-100',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-at-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-'
+        );
         $title   = preg_replace($pattern, $rep_pat, $title);
 
-        // Transformation des caract�res accentu�s
+        // Transformation des caractères accentués
         $pattern = array(
             '/%B0/', // °
             '/%E8/', // è
@@ -234,17 +263,7 @@ google_color_text = "' . $this->getVar('text_color', 'n') . '";
      */
     public function getCloneLink()
     {
-        $ret = '<a href="' .
-               SMARTOBJECT_URL .
-               'admin/adsense.php?op=clone&adsenseid=' .
-               $this->getVar('adsenseid') .
-               '"><img src="' .
-               SMARTOBJECT_IMAGES_ACTIONS_URL .
-               'editcopy.png" alt="' .
-               _CO_SOBJECT_ADSENSE_CLONE .
-               '" title="' .
-               _CO_SOBJECT_ADSENSE_CLONE .
-               '" /></a>';
+        $ret = '<a href="' . SMARTOBJECT_URL . 'admin/adsense.php?op=clone&adsenseid=' . $this->getVar('adsenseid') . '"><img src="' . SMARTOBJECT_IMAGES_ACTIONS_URL . 'editcopy.png" alt="' . _CO_SOBJECT_ADSENSE_CLONE . '" title="' . _CO_SOBJECT_ADSENSE_CLONE . '"></a>';
 
         return $ret;
     }

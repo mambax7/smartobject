@@ -15,9 +15,9 @@
 /**
  * Including the XoopsFormLoader classes
  */
-include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-include_once SMARTOBJECT_ROOT_PATH . 'class/form/elements/smartformsection.php';
-include_once SMARTOBJECT_ROOT_PATH . 'class/form/elements/smartformsectionclose.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+require_once SMARTOBJECT_ROOT_PATH . 'class/form/elements/smartformsection.php';
+require_once SMARTOBJECT_ROOT_PATH . 'class/form/elements/smartformsectionclose.php';
 
 /**
  * SmartForm base class
@@ -50,8 +50,16 @@ class SmartObjectForm extends XoopsThemeForm
      * @param bool   $cancel_js_action
      * @param bool   $captcha
      */
-    public function __construct(&$target, $form_name, $form_caption, $form_action, $form_fields = null, $submit_button_caption = false, $cancel_js_action = false, $captcha = false)
-    {
+    public function __construct(
+        &$target,
+        $form_name,
+        $form_caption,
+        $form_action,
+        $form_fields = null,
+        $submit_button_caption = false,
+        $cancel_js_action = false,
+        $captcha = false
+    ) {
         $this->targetObject           =& $target;
         $this->form_fields            = $form_fields;
         $this->_cancel_js_action      = $cancel_js_action;
@@ -64,7 +72,7 @@ class SmartObjectForm extends XoopsThemeForm
             $form_action = xoops_getenv('PHP_SELF');
         }
 
-        parent::__construct($form_caption, $form_name, $form_action);
+        parent::__construct($form_caption, $form_name, $form_action, 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
 
         $this->createElements();
@@ -80,7 +88,7 @@ class SmartObjectForm extends XoopsThemeForm
 
     public function addCaptcha()
     {
-        include_once(SMARTOBJECT_ROOT_PATH . 'include/captcha/formcaptcha.php');
+        require_once SMARTOBJECT_ROOT_PATH . 'include/captcha/formcaptcha.php';
         $this->addElement(new XoopsFormCaptcha(), true);
     }
 
@@ -102,10 +110,10 @@ class SmartObjectForm extends XoopsThemeForm
     /**
      * Add an element to the form
      *
-     * @param string|XoopsFormElement      &$formElement reference to a {@link XoopsFormElement}
-     * @param bool        $key
-     * @param bool        $var
-     * @param bool|string $required     is this a "required" element?
+     * @param string|XoopsFormElement &$formElement reference to a {@link XoopsFormElement}
+     * @param bool                    $key
+     * @param bool                    $var
+     * @param bool|string             $required     is this a "required" element?
      */
     public function addElement($formElement, $key = false, $var = false, $required = 'notset')
     {
@@ -359,7 +367,7 @@ class SmartObjectForm extends XoopsThemeForm
     {
         switch ($controlName) {
             case 'check':
-                include_once(SMARTOBJECT_ROOT_PATH . 'class/form/elements/smartformcheckelement.php');
+                require_once SMARTOBJECT_ROOT_PATH . 'class/form/elements/smartformcheckelement.php';
                 $control    = $this->targetObject->getControl($key);
                 $controlObj = new SmartFormCheckElement($this->targetObject->vars[$key]['form_caption'], $key, $this->targetObject->getVar($key));
                 $controlObj->addOptionArray($control['options']);
@@ -426,18 +434,18 @@ class SmartObjectForm extends XoopsThemeForm
                 break;
 
             case 'urllink':
-                include_once(SMARTOBJECT_ROOT_PATH . 'class/form/elements/smartformurllinkelement.php');
+                require_once SMARTOBJECT_ROOT_PATH . 'class/form/elements/smartformurllinkelement.php';
 
                 return new SmartFormUrlLinkElement($this->targetObject->vars[$key]['form_caption'], $key, $this->targetObject->getUrlLinkObj($key));
                 break;
 
             case 'richfile':
-                include_once(SMARTOBJECT_ROOT_PATH . 'class/form/elements/smartformrichfileelement.php');
+                require_once SMARTOBJECT_ROOT_PATH . 'class/form/elements/smartformrichfileelement.php';
 
                 return new SmartFormRichFileElement($this->targetObject->vars[$key]['form_caption'], $key, $this->targetObject->getFileObj($key));
                 break;
             case 'section':
-                include_once(SMARTOBJECT_ROOT_PATH . 'class/form/elements/smartformsection.php');
+                require_once SMARTOBJECT_ROOT_PATH . 'class/form/elements/smartformsection.php';
 
                 return new SmartFormSection($key, $this->targetObject->vars[$key]['form_caption']);
                 break;
@@ -446,7 +454,7 @@ class SmartObjectForm extends XoopsThemeForm
                 $classname = 'SmartForm' . ucfirst($controlName) . 'Element';
                 if (!class_exists($classname)) {
                     if (file_exists(SMARTOBJECT_ROOT_PATH . 'class/form/elements/' . strtolower($classname) . '.php')) {
-                        include_once(SMARTOBJECT_ROOT_PATH . 'class/form/elements/' . strtolower($classname) . '.php');
+                        require_once SMARTOBJECT_ROOT_PATH . 'class/form/elements/' . strtolower($classname) . '.php';
                     } else {
                         // perhaps this is a control created by the module
                         $moduleName             = $this->targetObject->handler->_moduleName;
@@ -455,7 +463,7 @@ class SmartObjectForm extends XoopsThemeForm
                         $classFileName          = strtolower($classname) . '.php';
 
                         if (file_exists($moduleFormElementsPath . $classFileName)) {
-                            include_once($moduleFormElementsPath . $classFileName);
+                            require_once $moduleFormElementsPath . $classFileName;
                         } else {
                             trigger_error($classname . ' Not found', E_USER_WARNING);
 
@@ -529,7 +537,7 @@ class SmartObjectForm extends XoopsThemeForm
         $xoopseditorclass = XOOPS_ROOT_PATH . '/class/xoopsform/formeditor.php';
 
         if (file_exists($xoopseditorclass)) {
-            include_once($xoopseditorclass);
+            require_once $xoopseditorclass;
             $editor = new XoopsFormEditor($caption, $form_editor, $editor_configs, $nohtml = false, $onfailure = 'textarea');
         } else {
             switch ($form_editor) {
@@ -537,8 +545,14 @@ class SmartObjectForm extends XoopsThemeForm
                 case 'tiny':
                     if (!$xoops22) {
                         if (is_readable(XOOPS_ROOT_PATH . '/class/xoopseditor/tinyeditor/formtinytextarea.php')) {
-                            include_once(XOOPS_ROOT_PATH . '/class/xoopseditor/tinyeditor/formtinytextarea.php');
-                            $editor = new XoopsFormTinyTextArea(array('caption' => $caption, 'name' => $name, 'value' => $value, 'width' => '100%', 'height' => '300px'), true);
+                            require_once XOOPS_ROOT_PATH . '/class/xoopseditor/tinyeditor/formtinytextarea.php';
+                            $editor = new XoopsFormTinyTextArea(array(
+                                                                    'caption' => $caption,
+                                                                    'name'    => $name,
+                                                                    'value'   => $value,
+                                                                    'width'   => '100%',
+                                                                    'height'  => '300px'
+                                                                ), true);
                         } else {
                             if ($dhtml) {
                                 $editor = new XoopsFormDhtmlTextArea($caption, $name, $value, 20, 60);
@@ -562,8 +576,14 @@ class SmartObjectForm extends XoopsThemeForm
                 case 'fckeditor':
                     if (!$xoops22) {
                         if (is_readable(XOOPS_ROOT_PATH . '/class/xoopseditor/fckeditor/formfckeditor.php')) {
-                            include_once(XOOPS_ROOT_PATH . '/class/xoopseditor/fckeditor/formfckeditor.php');
-                            $editor = new XoopsFormFckeditor(array('caption' => $caption, 'name' => $name, 'value' => $value, 'width' => '100%', 'height' => '300px'), true);
+                            require_once XOOPS_ROOT_PATH . '/class/xoopseditor/fckeditor/formfckeditor.php';
+                            $editor = new XoopsFormFckeditor(array(
+                                                                 'caption' => $caption,
+                                                                 'name'    => $name,
+                                                                 'value'   => $value,
+                                                                 'width'   => '100%',
+                                                                 'height'  => '300px'
+                                                             ), true);
                         } else {
                             if ($dhtml) {
                                 $editor = new XoopsFormDhtmlTextArea($caption, $name, $value, 20, 60);
@@ -579,8 +599,14 @@ class SmartObjectForm extends XoopsThemeForm
                 case 'inbetween':
                     if (!$xoops22) {
                         if (is_readable(XOOPS_ROOT_PATH . '/class/xoopseditor/inbetween/forminbetweentextarea.php')) {
-                            include_once(XOOPS_ROOT_PATH . '/class/xoopseditor/inbetween/forminbetweentextarea.php');
-                            $editor = new XoopsFormInbetweenTextArea(array('caption' => $caption, 'name' => $name, 'value' => $value, 'width' => '100%', 'height' => '300px'), true);
+                            require_once XOOPS_ROOT_PATH . '/class/xoopseditor/inbetween/forminbetweentextarea.php';
+                            $editor = new XoopsFormInbetweenTextArea(array(
+                                                                         'caption' => $caption,
+                                                                         'name'    => $name,
+                                                                         'value'   => $value,
+                                                                         'width'   => '100%',
+                                                                         'height'  => '300px'
+                                                                     ), true);
                         } else {
                             if ($dhtml) {
                                 $editor = new XoopsFormDhtmlTextArea($caption, $name, $value, 20, 60);
@@ -596,7 +622,7 @@ class SmartObjectForm extends XoopsThemeForm
                 case 'koivi':
                     if (!$xoops22) {
                         if (is_readable(XOOPS_ROOT_PATH . '/class/wysiwyg/formwysiwygtextarea.php')) {
-                            include_once(XOOPS_ROOT_PATH . '/class/wysiwyg/formwysiwygtextarea.php');
+                            require_once XOOPS_ROOT_PATH . '/class/wysiwyg/formwysiwygtextarea.php';
                             $editor = new XoopsFormWysiwygTextArea($caption, $name, $value, '100%', '400px');
                         } else {
                             if ($dhtml) {
@@ -613,7 +639,7 @@ class SmartObjectForm extends XoopsThemeForm
                 case 'spaw':
                     if (!$xoops22) {
                         if (is_readable(XOOPS_ROOT_PATH . '/class/spaw/formspaw.php')) {
-                            include_once(XOOPS_ROOT_PATH . '/class/spaw/formspaw.php');
+                            require_once XOOPS_ROOT_PATH . '/class/spaw/formspaw.php';
                             $editor = new XoopsFormSpaw($caption, $name, $value);
                         }
                     } else {
@@ -624,7 +650,7 @@ class SmartObjectForm extends XoopsThemeForm
                 case 'htmlarea':
                     if (!$xoops22) {
                         if (is_readable(XOOPS_ROOT_PATH . '/class/htmlarea/formhtmlarea.php')) {
-                            include_once(XOOPS_ROOT_PATH . '/class/htmlarea/formhtmlarea.php');
+                            require_once XOOPS_ROOT_PATH . '/class/htmlarea/formhtmlarea.php';
                             $editor = new XoopsFormHtmlarea($caption, $name, $value);
                         }
                     } else {
@@ -663,7 +689,8 @@ class SmartObjectForm extends XoopsThemeForm
         $handle  = opendir(XOOPS_THEME_PATH . '/');
         $dirlist = array();
         while (false !== ($file = readdir($handle))) {
-            if (is_dir(XOOPS_THEME_PATH . '/' . $file) && !preg_match("/^[.]{1,2}$/", $file) && strtolower($file) !== 'cvs') {
+            if (is_dir(XOOPS_THEME_PATH . '/' . $file) && !preg_match("/^[.]{1,2}$/", $file)
+                && strtolower($file) !== 'cvs') {
                 $dirlist[$file] = $file;
             }
         }
@@ -701,23 +728,9 @@ class SmartObjectForm extends XoopsThemeForm
     {
         $required = $this->getRequired();
         $ret      = "
-            <form name='" .
-                    $this->getName() .
-                    "' id='" .
-                    $this->getName() .
-                    "' action='" .
-                    $this->getAction() .
-                    "' method='" .
-                    $this->getMethod() .
-                    "' onsubmit='return xoopsFormValidate_" .
-                    $this->getName() .
-                    "(this);'" .
-                    $this->getExtra() .
-                    ">
+            <form name='" . $this->getName() . "' id='" . $this->getName() . "' action='" . $this->getAction() . "' method='" . $this->getMethod() . "' onsubmit='return xoopsFormValidate_" . $this->getName() . "(this);'" . $this->getExtra() . ">
             <table width='100%' class='outer' cellspacing='1'>
-            <tr><th colspan='2'>" .
-                    $this->getTitle() .
-                    '</th></tr>
+            <tr><th colspan='2'>" . $this->getTitle() . '</th></tr>
         ';
         $hidden   = '';
         $class    = 'even';
@@ -744,8 +757,8 @@ class SmartObjectForm extends XoopsThemeForm
     /**
      * assign to smarty form template instead of displaying directly
      *
-     * @param XoopsTpl &$tpl       reference to a {@link Smarty} object
-     * @param bool   $smartyName
+     * @param XoopsTpl &$tpl reference to a {@link Smarty} object
+     * @param bool     $smartyName
      * @see     Smarty
      */
     public function assign(XoopsTpl $tpl, $smartyName = false)
@@ -783,7 +796,7 @@ class SmartObjectForm extends XoopsThemeForm
     }
 
     /**
-     * @param  bool   $withtags
+     * @param  bool $withtags
      * @return string
      */
     public function renderValidationJS($withtags = true)
@@ -794,7 +807,7 @@ class SmartObjectForm extends XoopsThemeForm
         }
         $myts     = MyTextSanitizer::getInstance();
         $formname = $this->getName();
-        $js .= "function xoopsFormValidate_{$formname}(myform) {";
+        $js       .= "function xoopsFormValidate_{$formname}(myform) {";
         // First, output code to check required elements
         $elements = $this->getRequired();
         foreach ($elements as $elt) {
@@ -819,9 +832,10 @@ class SmartObjectForm extends XoopsThemeForm
                     }
 
                 }
-                if (hasSelections == false) {
+                if (hasSelections === false) {
                     window.alert(\"{$eltmsg}\"); myform['{$eltname}[]'].options[0].focus(); return false; }\n";
-            } elseif (strtolower(get_class($elt)) === 'xoopsformcheckbox' || strtolower(get_class($elt)) === 'smartformcheckelement') {
+            } elseif (strtolower(get_class($elt)) === 'xoopsformcheckbox'
+                      || strtolower(get_class($elt)) === 'smartformcheckelement') {
                 $js .= 'var hasSelections = false;';
                 //sometimes, there is an implicit '[]', sometimes not
                 if (strpos($eltname, '[') === false) {
@@ -831,7 +845,7 @@ class SmartObjectForm extends XoopsThemeForm
                         }
 
                     }
-                    if (hasSelections == false) {
+                    if (hasSelections === false) {
                         window.alert(\"{$eltmsg}\"); myform['{$eltname}[]'][0].focus(); return false; }\n";
                 } else {
                     $js .= "for (var i = 0; i < myform['{$eltname}'].length; i++) {
@@ -840,7 +854,7 @@ class SmartObjectForm extends XoopsThemeForm
                         }
 
                     }
-                    if (hasSelections == false) {
+                    if (hasSelections === false) {
                         window.alert(\"{$eltmsg}\"); myform['{$eltname}'][0].focus(); return false; }\n";
                 }
             } else {

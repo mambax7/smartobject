@@ -1,9 +1,9 @@
 <?php
-// 
+//
 // ------------------------------------------------------------------------ //
 //               XOOPS - PHP Content Management System                      //
 //                   Copyright (c) 2000-2016 XOOPS.org                           //
-//                      <https://xoops.org/>                             //
+//                      <https://xoops.org>                             //
 // ------------------------------------------------------------------------ //
 // This program is free software; you can redistribute it and/or modify     //
 // it under the terms of the GNU General Public License as published by     //
@@ -29,8 +29,8 @@
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobject.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobject.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 
 /**
  * Class SmartobjectCurrency
@@ -140,7 +140,7 @@ class SmartobjectCurrency extends SmartObject
     {
         $radio_box = '<input name="default_currency" value="' . $this->getVar('currencyid') . '" type="radio"';
         if ($this->getVar('default_currency', 'e')) {
-            $radio_box .= 'checked="checked"';
+            $radio_box .= 'checked';
         }
         $radio_box .= '>';
 

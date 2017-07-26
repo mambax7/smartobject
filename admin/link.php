@@ -1,5 +1,5 @@
 <?php
-// 
+//
 
 // 2012-01-01 K.OHWADA
 // PHP 5.3: Assigning the return value of new by reference is now deprecated.
@@ -11,10 +11,10 @@
  * Licence: GNU
  */
 
-include_once __DIR__ . '/admin_header.php';
-include_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
-include_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectlink.php';
-$indexAdmin = new ModuleAdmin();
+require_once __DIR__ . '/admin_header.php';
+require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
+require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectlink.php';
+$adminObject = \Xmf\Module\Admin::getInstance();
 
 $smartobjectLinkHandler = xoops_getModuleHandler('link');
 
@@ -30,7 +30,7 @@ if (isset($_POST['op'])) {
 switch ($op) {
 
     case 'del':
-        include_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
+        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
         $controller = new SmartObjectController($smartobjectLinkHandler);
         $controller->handleObjectDeletion(_AM_SOBJECT_SENT_LINK_DELETE_CONFIRM);
 
@@ -50,7 +50,7 @@ switch ($op) {
 
         smart_collapsableBar('sentlinks', _AM_SOBJECT_SENT_LINK_DISPLAY, _AM_SOBJECT_SENT_LINK_DISPLAY_INFO);
 
-        include_once XOOPS_ROOT_PATH . '/class/template.php';
+        require_once XOOPS_ROOT_PATH . '/class/template.php';
 
         // ---
         // 2012-01-01 PHP 5.3: Assigning the return value of new by reference is now deprecated.
@@ -71,13 +71,13 @@ switch ($op) {
 
         smart_xoops_cp_header();
 
-        echo $indexAdmin->addNavigation(basename(__FILE__));
+        $adminObject->displayNavigation(basename(__FILE__));
 
         //smart_adminMenu(1, _AM_SOBJECT_SENT_LINKS);
 
         smart_collapsableBar('sentlinks', _AM_SOBJECT_SENT_LINKS, _AM_SOBJECT_SENT_LINKS_INFO);
 
-        include_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
+        require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
         $objectTable = new SmartObjectTable($smartobjectLinkHandler, null, array('delete'));
         $objectTable->addColumn(new SmartObjectColumn('date'));
         $objectTable->addColumn(new SmartObjectColumn(_AM_SOBJECT_SENT_LINKS_FROM, $align = 'left', $width = false, 'getFromInfo'));
@@ -100,4 +100,4 @@ switch ($op) {
 
 //smart_modFooter();
 //xoops_cp_footer();
-include_once __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';

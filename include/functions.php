@@ -11,7 +11,7 @@
 
 function smart_get_css_link($cssfile)
 {
-    $ret = '<link rel="stylesheet" type="text/css" href="' . $cssfile . '" />';
+    $ret = '<link rel="stylesheet" type="text/css" href="' . $cssfile . '">';
 
     return $ret;
 }
@@ -29,7 +29,7 @@ function smart_get_page_before_form()
 /**
  * Checks if a user is admin of $module
  *
- * @param  bool  $module
+ * @param  bool $module
  * @return bool: true if user is admin
  */
 function smart_userIsAdmin($module = false)
@@ -74,9 +74,9 @@ function smart_isXoops22()
 }
 
 /**
- * @param  bool   $withLink
- * @param  bool   $forBreadCrumb
- * @param  bool   $moduleName
+ * @param  bool $withLink
+ * @param  bool $forBreadCrumb
+ * @param  bool $moduleName
  * @return string
  */
 function smart_getModuleName($withLink = true, $forBreadCrumb = false, $moduleName = false)
@@ -91,7 +91,9 @@ function smart_getModuleName($withLink = true, $forBreadCrumb = false, $moduleNa
         return '';
     }
 
-    if ($forBreadCrumb && (isset($smartModuleConfig['show_mod_name_breadcrumb']) && !$smartModuleConfig['show_mod_name_breadcrumb'])) {
+    if ($forBreadCrumb
+        && (isset($smartModuleConfig['show_mod_name_breadcrumb'])
+            && !$smartModuleConfig['show_mod_name_breadcrumb'])) {
         return '';
     }
     if (!$withLink) {
@@ -112,7 +114,7 @@ function smart_getModuleName($withLink = true, $forBreadCrumb = false, $moduleNa
 }
 
 /**
- * @param  bool   $moduleName
+ * @param  bool $moduleName
  * @return string
  */
 function smart_getModuleNameForSEO($moduleName = false)
@@ -172,11 +174,10 @@ function smart_xoops_cp_header()
      */
     $fileName = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/' . $xoopsConfig['language'] . '/admin.php';
     if (file_exists($fileName)) {
-        include_once $fileName;
+        require_once $fileName;
     } else {
-        include_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/english/admin.php';
-    }
-    ?>
+        require_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/english/admin.php';
+    } ?>
     <script type='text/javascript'>
         <!--
         var smart_url = '<?php echo SMARTOBJECT_URL ?>';
@@ -185,8 +186,8 @@ function smart_xoops_cp_header()
     </script>
 
     <script
-        type='text/javascript'
-        src='<?php echo SMARTOBJECT_URL ?>include/smart.js'></script>
+            type='text/javascript'
+            src='<?php echo SMARTOBJECT_URL ?>include/smart.js'></script>
     <?php
 
     /**
@@ -196,7 +197,7 @@ function smart_xoops_cp_header()
     if (!file_exists($admin_file)) {
         $admin_file = SMARTOBJECT_ROOT_PATH . 'language/english/admin.php';
     }
-    include_once($admin_file);
+    require_once $admin_file;
 }
 
 /**
@@ -461,7 +462,7 @@ function smart_imageResize($src, $maxWidth, $maxHeight)
 }
 
 /**
- * @param  bool  $moduleName
+ * @param  bool $moduleName
  * @return mixed
  */
 function smart_getModuleInfo($moduleName = false)
@@ -551,7 +552,7 @@ function smart_deleteFile($dirname)
 }
 
 /**
- * @param  array  $errors
+ * @param  array $errors
  * @return string
  */
 function smart_formatErrors($errors = array())
@@ -567,8 +568,8 @@ function smart_formatErrors($errors = array())
 /**
  * smart_getLinkedUnameFromId()
  *
- * @param  integer $userid      Userid of poster etc
- * @param  integer $name        :  0 Use Usenamer 1 Use realname
+ * @param  integer $userid Userid of poster etc
+ * @param  integer $name   :  0 Use Usenamer 1 Use realname
  * @param  array   $users
  * @param  bool    $withContact
  * @return string
@@ -605,27 +606,9 @@ function smart_getLinkedUnameFromId($userid = 0, $name = 0, $users = array(), $w
             }
             // add contact info: email + PM
             if ($withContact) {
-                $linkeduser .= ' <a href="mailto:' .
-                               $user->getVar('email') .
-                               '"><img style="vertical-align: middle;" src="' .
-                               XOOPS_URL .
-                               '/images/icons/email.gif' .
-                               '" alt="' .
-                               _CO_SOBJECT_SEND_EMAIL .
-                               '" title="' .
-                               _CO_SOBJECT_SEND_EMAIL .
-                               '"/></a>';
-                $js = "javascript:openWithSelfMain('" . XOOPS_URL . '/pmlite.php?send2=1&to_userid=' . $userid . "', 'pmlite',450,370);";
-                $linkeduser .= ' <a href="' .
-                               $js .
-                               '"><img style="vertical-align: middle;" src="' .
-                               XOOPS_URL .
-                               '/images/icons/pm.gif' .
-                               '" alt="' .
-                               _CO_SOBJECT_SEND_PM .
-                               '" title="' .
-                               _CO_SOBJECT_SEND_PM .
-                               '"/></a>';
+                $linkeduser .= ' <a href="mailto:' . $user->getVar('email') . '"><img style="vertical-align: middle;" src="' . XOOPS_URL . '/images/icons/email.gif' . '" alt="' . _CO_SOBJECT_SEND_EMAIL . '" title="' . _CO_SOBJECT_SEND_EMAIL . '"></a>';
+                $js         = "javascript:openWithSelfMain('" . XOOPS_URL . '/pmlite.php?send2=1&to_userid=' . $userid . "', 'pmlite',450,370);";
+                $linkeduser .= ' <a href="' . $js . '"><img style="vertical-align: middle;" src="' . XOOPS_URL . '/images/icons/pm.gif' . '" alt="' . _CO_SOBJECT_SEND_PM . '" title="' . _CO_SOBJECT_SEND_PM . '"></a>';
             }
 
             return $linkeduser;
@@ -644,24 +627,24 @@ function smart_getLinkedUnameFromId($userid = 0, $name = 0, $users = array(), $w
 function smart_adminMenu($currentoption = 0, $breadcrumb = '', $submenus = false, $currentsub = -1)
 {
     global $xoopsModule, $xoopsConfig;
-    include_once XOOPS_ROOT_PATH . '/class/template.php';
+    require_once XOOPS_ROOT_PATH . '/class/template.php';
     if (file_exists(XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/' . $xoopsConfig['language'] . '/modinfo.php')) {
-        include_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/' . $xoopsConfig['language'] . '/modinfo.php';
+        require_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/' . $xoopsConfig['language'] . '/modinfo.php';
     } else {
-        include_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/english/modinfo.php';
+        require_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/english/modinfo.php';
     }
     if (file_exists(XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/' . $xoopsConfig['language'] . '/admin.php')) {
-        include_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/' . $xoopsConfig['language'] . '/admin.php';
+        require_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/' . $xoopsConfig['language'] . '/admin.php';
     } else {
-        include_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/english/admin.php';
+        require_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/english/admin.php';
     }
-    $headermenu = array();
-    $adminmenu  = array();
+    $headermenu  = array();
+    $adminObject = array();
     include XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/admin/menu.php';
     $tpl = new XoopsTpl();
     $tpl->assign(array(
                      'headermenu'      => $headermenu,
-                     'adminmenu'       => $adminmenu,
+                     'adminmenu'       => $adminObject,
                      'current'         => $currentoption,
                      'breadcrumb'      => $breadcrumb,
                      'headermenucount' => count($headermenu),
@@ -681,7 +664,7 @@ function smart_collapsableBar($id = '', $title = '', $dsc = '')
 {
     global $xoopsModule;
     echo "<h3 style=\"color: #2F5376; font-weight: bold; font-size: 14px; margin: 6px 0 0 0; \"><a href='javascript:;' onclick=\"togglecollapse('" . $id . "'); toggleIcon('" . $id . "_icon')\";>";
-    echo "<img id='" . $id . "_icon' src=" . SMARTOBJECT_URL . "assets/images/close12.gif alt='' /></a>&nbsp;" . $title . '</h3>';
+    echo "<img id='" . $id . "_icon' src=" . SMARTOBJECT_URL . "assets/images/close12.gif alt=''></a>&nbsp;" . $title . '</h3>';
     echo "<div id='" . $id . "'>";
     if ($dsc !== '') {
         echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-size: small; display: block; \">" . $dsc . '</span>';
@@ -699,7 +682,7 @@ function smart_ajaxCollapsableBar($id = '', $title = '', $dsc = '')
     $onClick = "ajaxtogglecollapse('$id')";
     //$onClick = "togglecollapse('$id'); toggleIcon('" . $id . "_icon')";
     echo '<h3 style="border: 1px solid; color: #2F5376; font-weight: bold; font-size: 14px; margin: 6px 0 0 0; " onclick="' . $onClick . '">';
-    echo "<img id='" . $id . "_icon' src=" . SMARTOBJECT_URL . "assets/images/close12.gif alt='' /></a>&nbsp;" . $title . '</h3>';
+    echo "<img id='" . $id . "_icon' src=" . SMARTOBJECT_URL . "assets/images/close12.gif alt=''></a>&nbsp;" . $title . '</h3>';
     echo "<div id='" . $id . "'>";
     if ($dsc !== '') {
         echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-size: small; display: block; \">" . $dsc . '</span>';
@@ -721,7 +704,7 @@ function smart_ajaxCollapsableBar($id = '', $title = '', $dsc = '')
  <h3 class="smart_collapsable_title"><a href="javascript:Effect.Combo('<?php echo $id ?>');"><?php echo $title ?></a></h3>
  <?php
 
- echo "<img id='" . $id . "_icon' src=" . SMARTOBJECT_URL . "assets/images/close12.gif alt='' /></a>&nbsp;" . $title . "</h3>";
+ echo "<img id='" . $id . "_icon' src=" . SMARTOBJECT_URL . "assets/images/close12.gif alt=''></a>&nbsp;" . $title . "</h3>";
  echo "<div id='" . $id . "'>";
  if ($dsc != '') {
  echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-size: small; display: block; \">" . $dsc . "</span>";
@@ -845,7 +828,7 @@ function smart_getCurrentPage()
  function smart_seo_title($title='', $withExt=true)
  {
  // Transformation de la chaine en minuscule
- // Codage de la chaine afin d'�viter les erreurs 500 en cas de caract�res impr�vus
+ // Codage de la chaine afin d'éviter les erreurs 500 en cas de caractères imprévus
  $title   = rawurlencode(strtolower($title));
 
  // Transformation des ponctuations
@@ -854,7 +837,7 @@ function smart_getCurrentPage()
  $rep_pat = array(  "-"  ,   "-"  ,   ""   ,   ""   ,   ""   , "-100" ,   ""   ,   "-"  ,   ""   ,   ""   ,   ""   ,   "-"  ,   ""   ,   ""   ,   ""   ,   "-"  ,   ""   ,   ""   , "-at-" ,   ""   ,   "-"   ,  ""   ,   "-"  ,   ""   ,   "-"  ,   ""   ,   "-"  ,  ""  );
  $title   = preg_replace($pattern, $rep_pat, $title);
 
- // Transformation des caract�res accentu�s
+ // Transformation des caractères accentués
     $pattern = array(
         '/%B0/', // °
         '/%E8/', // è
@@ -891,23 +874,13 @@ function smart_modFooter()
 {
     global $xoopsConfig, $xoopsModule, $xoopsModuleConfig;
 
-    include_once XOOPS_ROOT_PATH . '/class/template.php';
+    require_once XOOPS_ROOT_PATH . '/class/template.php';
     $tpl = new XoopsTpl();
 
     $hModule      = xoops_getHandler('module');
     $versioninfo  =& $hModule->get($xoopsModule->getVar('mid'));
     $modfootertxt = 'Module ' . $versioninfo->getInfo('name') . ' - Version ' . $versioninfo->getInfo('version') . '';
-    $modfooter    = "<a href='" .
-                    $versioninfo->getInfo('support_site_url') .
-                    "' target='_blank'><img src='" .
-                    XOOPS_URL .
-                    '/modules/' .
-                    $xoopsModule->getVar('dirname') .
-                    "/assets/images/cssbutton.gif' title='" .
-                    $modfootertxt .
-                    "' alt='" .
-                    $modfootertxt .
-                    "'/></a>";
+    $modfooter    = "<a href='" . $versioninfo->getInfo('support_site_url') . "' target='_blank'><img src='" . XOOPS_URL . '/modules/' . $xoopsModule->getVar('dirname') . "/assets/images/cssbutton.gif' title='" . $modfootertxt . "' alt='" . $modfootertxt . "'></a>";
     $tpl->assign('modfooter', $modfooter);
 
     if (!defined('_AM_SOBJECT_XOOPS_PRO')) {
@@ -915,7 +888,7 @@ function smart_modFooter()
     }
     $smartobjectConfig = smart_getModuleConfig('smartobject');
     $tpl->assign('smartobject_enable_admin_footer', $smartobjectConfig['enable_admin_footer']);
-    $tpl->display(SMARTOBJECT_ROOT_PATH . 'templates/smartobject_admin_footer.html');
+    $tpl->display(SMARTOBJECT_ROOT_PATH . 'templates/smartobject_admin_footer.tpl');
 }
 
 function smart_xoops_cp_footer()
@@ -1020,7 +993,9 @@ function smart_getImageSize($url, & $width, & $height)
 function smart_htmlnumericentities($str)
 {
     //    return preg_replace('/[^!-%\x27-;=?-~ ]/e', '"&#".ord("$0").chr(59)', $str);
-    return preg_replace_callback('/[^!-%\x27-;=?-~ ]/', function ($m) { return '&#' . ord($m[0]) . chr(59); }, $str);
+    return preg_replace_callback('/[^!-%\x27-;=?-~ ]/', function ($m) {
+        return '&#' . ord($m[0]) . chr(59);
+    }, $str);
 }
 
 /**
@@ -1038,7 +1013,7 @@ function smart_getcorehandler($name, $optional = false)
         }
         $class = 'Xoops' . ucfirst($name) . 'Handler';
         if (class_exists($class)) {
-            $handlers[$name] = new $class ($GLOBALS['xoopsDB'], 'xoops');
+            $handlers[$name] = new $class($GLOBALS['xoopsDB'], 'xoops');
         }
     }
     if (!isset($handlers[$name]) && !$optional) {
@@ -1127,7 +1102,7 @@ function smart_loadLanguageFile($module, $file)
         $filename = XOOPS_ROOT_PATH . '/modules/' . $module . '/language/english/' . $file . '.php';
     }
     if (file_exists($filename)) {
-        include_once($filename);
+        require_once $filename;
     }
 }
 
@@ -1187,11 +1162,11 @@ function smart_html2text($document)
     // common HTML entities to their text equivalent.
     // Credits: newbb2
     $search = array(
-        "'<script[^>]*?>.*?</script>'si",  // Strip out javascript
-        "'<img.*?/>'si",       // Strip out img tags
-        "'<[\/\!]*?[^<>]*?>'si",          // Strip out HTML tags
-        "'([\r\n])[\s]+'",                // Strip out white space
-        "'&(quot|#34);'i",                // Replace HTML entities
+        "'<script[^>]*?>.*?</script>'si", // Strip out javascript
+        "'<img.*?>'si", // Strip out img tags
+        "'<[\/\!]*?[^<>]*?>'si", // Strip out HTML tags
+        "'([\r\n])[\s]+'", // Strip out white space
+        "'&(quot|#34);'i", // Replace HTML entities
         "'&(amp|#38);'i",
         "'&(lt|#60);'i",
         "'&(gt|#62);'i",
@@ -1199,9 +1174,8 @@ function smart_html2text($document)
         "'&(iexcl|#161);'i",
         "'&(cent|#162);'i",
         "'&(pound|#163);'i",
-        "'&(copy|#169);'i",
-        "'&#(\d+);'e"
-    );                    // evaluate as php
+        "'&(copy|#169);'i"
+    ); // evaluate as php
 
     $replace = array(
         '',
@@ -1217,10 +1191,13 @@ function smart_html2text($document)
         chr(162),
         chr(163),
         chr(169),
-        "chr(\\1)"
     );
 
     $text = preg_replace($search, $replace, $document);
+
+    preg_replace_callback('/&#(\d+);/', function ($matches) {
+        return chr($matches[1]);
+    }, $document);
 
     return $text;
 }
@@ -1247,7 +1224,7 @@ function smart_getfloat($str, $set = false)
             return (float)$str;
         } else {
             // No comma exists, so we have to decide, how a single dot shall be treated
-            if (preg_match("/^[0-9\-]*[\.]{1}[0-9-]+$/", $str) == true && $set['single_dot_as_decimal'] == true) {
+            if (preg_match("/^[0-9\-]*[\.]{1}[0-9-]+$/", $str) === true && $set['single_dot_as_decimal'] === true) {
                 // Treat single dot as decimal separator
                 return (float)$str;
             } else {
@@ -1303,7 +1280,7 @@ function smart_float($var)
 }
 
 /**
- * @param  bool   $moduleName
+ * @param  bool $moduleName
  * @return string
  */
 function smart_getModuleAdminLink($moduleName = false)
@@ -1329,7 +1306,7 @@ function smart_getEditors()
     if (!file_exists($filename)) {
         return false;
     }
-    include_once $filename;
+    require_once $filename;
     $xoopseditorHandler = XoopsEditorHandler::getInstance();
     $aList              = $xoopseditorHandler->getList();
     $ret                = array();

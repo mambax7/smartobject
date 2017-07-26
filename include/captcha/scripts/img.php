@@ -40,7 +40,14 @@ class XoopsCaptchaImageHandler
         if (!extension_loaded('gd')) {
             $this->mode = 'bmp';
         } else {
-            $required_functions = array('imagecreatetruecolor', 'imagecolorallocate', 'imagefilledrectangle', 'imagejpeg', 'imagedestroy', 'imageftbbox');
+            $required_functions = array(
+                'imagecreatetruecolor',
+                'imagecolorallocate',
+                'imagefilledrectangle',
+                'imagejpeg',
+                'imagedestroy',
+                'imageftbbox'
+            );
             foreach ($required_functions as $func) {
                 if (!function_exists($func)) {
                     $this->mode = 'bmp';
@@ -106,7 +113,7 @@ class XoopsCaptchaImageHandler
     }
 
     /**
-     * @param  string      $file
+     * @param  string $file
      * @return string|void
      */
     public function createImage($file = '')
@@ -197,7 +204,7 @@ class XoopsCaptchaImageHandler
     {
         $items = array();
         /*
-         if (@ include_once XOOPS_ROOT_PATH."/Frameworks/art/functions.ini.php") {
+         if (@ require_once XOOPS_ROOT_PATH."/Frameworks/art/functions.ini.php") {
          load_functions("cache");
          if ($items = mod_loadCacheFile("captcha_{$name}", "captcha")) {
          return $items;
@@ -431,7 +438,7 @@ class XoopsCaptchaImageHandler
     }
 }
 
-$config       = @include dirname(__DIR__) . '/config.php';
+$config       = @include __DIR__ . '/../config.php';
 $imageHandler = new XoopsCaptchaImageHandler();
 $imageHandler->setConfig($config);
 $imageHandler->loadImage();

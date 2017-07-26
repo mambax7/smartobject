@@ -12,9 +12,9 @@
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php';
+require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php';
 
-include_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectcontroller.php';
+require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectcontroller.php';
 
 if (!defined('XOBJ_DTYPE_SIMPLE_ARRAY')) {
     define('XOBJ_DTYPE_SIMPLE_ARRAY', 101);
@@ -118,21 +118,32 @@ class SmartObject extends XoopsObject
 
     /**
      *
-     * @param string $key           key of this field. This needs to be the name of the field in the related database table
-     * @param int    $data_type     set to one of XOBJ_DTYPE_XXX constants (set to XOBJ_DTYPE_OTHER if no data type ckecking nor text sanitizing is required)
-     * @param mixed  $value         default value of this variable
-     * @param bool   $required      set to TRUE if this variable needs to have a value set before storing the object in the table
-     * @param int    $maxlength     maximum length of this variable, for XOBJ_DTYPE_TXTBOX type only
-     * @param string $options       does this data have any select options?
-     * @param bool   $multilingual  is this field needs to support multilingual features (NOT YET IMPLEMENTED...)
-     * @param string $form_caption  caption of this variable in a {@link SmartobjectForm} and title of a column in a  {@link SmartObjectTable}
-     * @param string $form_dsc      description of this variable in a {@link SmartobjectForm}
-     * @param bool   $sortby        set to TRUE to make this field used to sort objects in SmartObjectTable
-     * @param bool   $persistent    set to FALSE if this field is not to be saved in the database
+     * @param string $key          key of this field. This needs to be the name of the field in the related database table
+     * @param int    $data_type    set to one of XOBJ_DTYPE_XXX constants (set to XOBJ_DTYPE_OTHER if no data type ckecking nor text sanitizing is required)
+     * @param mixed  $value        default value of this variable
+     * @param bool   $required     set to TRUE if this variable needs to have a value set before storing the object in the table
+     * @param int    $maxlength    maximum length of this variable, for XOBJ_DTYPE_TXTBOX type only
+     * @param string $options      does this data have any select options?
+     * @param bool   $multilingual is this field needs to support multilingual features (NOT YET IMPLEMENTED...)
+     * @param string $form_caption caption of this variable in a {@link SmartobjectForm} and title of a column in a  {@link SmartObjectTable}
+     * @param string $form_dsc     description of this variable in a {@link SmartobjectForm}
+     * @param bool   $sortby       set to TRUE to make this field used to sort objects in SmartObjectTable
+     * @param bool   $persistent   set to FALSE if this field is not to be saved in the database
      * @param bool   $displayOnForm
      */
-    public function initVar($key, $data_type, $value = null, $required = false, $maxlength = null, $options = '', $multilingual = false, $form_caption = '', $form_dsc = '', $sortby = false,
-                            $persistent = true, $displayOnForm = true
+    public function initVar(
+        $key,
+        $data_type,
+        $value = null,
+        $required = false,
+        $maxlength = null,
+        $options = '',
+        $multilingual = false,
+        $form_caption = '',
+        $form_dsc = '',
+        $sortby = false,
+        $persistent = true,
+        $displayOnForm = true
     ) {
         //url_ is reserved for files.
         if (0 === strpos($key, 'url_')) {
@@ -174,8 +185,16 @@ class SmartObject extends XoopsObject
      * @param bool   $displayOnForm
      * @param bool   $required
      */
-    public function initNonPersistableVar($key, $data_type, $itemName = false, $form_caption = '', $sortby = false, $value = '', $displayOnForm = false, $required = false)
-    {
+    public function initNonPersistableVar(
+        $key,
+        $data_type,
+        $itemName = false,
+        $form_caption = '',
+        $sortby = false,
+        $value = '',
+        $displayOnForm = false,
+        $required = false
+    ) {
         $this->initVar($key, $data_type, $value, $required, null, '', false, $form_caption, '', $sortby, false, $displayOnForm);
         $this->vars[$key]['itemName'] = $itemName;
     }
@@ -195,8 +214,14 @@ class SmartObject extends XoopsObject
      * @param string $form_dsc     description of this variable in a {@link SmartobjectForm}
      * @param mixed  $value        default value of this variable
      */
-    public function quickInitVar($key, $data_type, $required = false, $form_caption = '', $form_dsc = '', $value = null)
-    {
+    public function quickInitVar(
+        $key,
+        $data_type,
+        $required = false,
+        $form_caption = '',
+        $form_dsc = '',
+        $value = null
+    ) {
         $maxlength = $data_type === 'XOBJ_DTYPE_TXTBOX' ? 255 : null;
         $this->initVar($key, $data_type, $value, $required, $maxlength, '', false, $form_caption, $form_dsc, false, true, true);
     }
@@ -370,7 +395,7 @@ class SmartObject extends XoopsObject
      *      - htmlarea: HTMLArea
      *      - textarea: basic textarea with no options
      *
-     * @param string $var     name of the variable for which we want to set a control
+     * @param string $var name of the variable for which we want to set a control
      * @param array  $options
      */
     public function setControl($var, $options = array())
@@ -387,7 +412,7 @@ class SmartObject extends XoopsObject
     /**
      * Get control information for an instance variable
      *
-     * @param  string     $var
+     * @param  string $var
      * @return bool|mixed
      */
     public function getControl($var)
@@ -408,9 +433,15 @@ class SmartObject extends XoopsObject
      *                                      object for this object
      * @see SmartObjectForm::SmartObjectForm()
      */
-    public function getForm($form_caption, $form_name, $form_action = false, $submit_button_caption = _CO_SOBJECT_SUBMIT, $cancel_js_action = false, $captcha = false)
-    {
-        include_once SMARTOBJECT_ROOT_PATH . 'class/form/smartobjectform.php';
+    public function getForm(
+        $form_caption,
+        $form_name,
+        $form_action = false,
+        $submit_button_caption = _CO_SOBJECT_SUBMIT,
+        $cancel_js_action = false,
+        $captcha = false
+    ) {
+        require_once SMARTOBJECT_ROOT_PATH . 'class/form/smartobjectform.php';
         $form = new SmartobjectForm($this, $form_name, $form_caption, $form_action, null, $submit_button_caption, $cancel_js_action, $captcha);
 
         return $form;
@@ -440,7 +471,7 @@ class SmartObject extends XoopsObject
         }
 
         // Hightlighting searched words
-        include_once(SMARTOBJECT_ROOT_PATH . 'class/smarthighlighter.php');
+        require_once SMARTOBJECT_ROOT_PATH . 'class/smarthighlighter.php';
         $highlight = smart_getConfig('module_search_highlighter', false, true);
 
         if ($highlight && isset($_GET['keywords'])) {
@@ -549,7 +580,7 @@ class SmartObject extends XoopsObject
     }
 
     /**
-     * @param  bool  $path
+     * @param  bool $path
      * @return mixed
      */
     public function getImageDir($path = false)
@@ -562,7 +593,7 @@ class SmartObject extends XoopsObject
     }
 
     /**
-     * @param  bool  $path
+     * @param  bool $path
      * @return mixed
      */
     public function getUploadDir($path = false)
@@ -628,7 +659,7 @@ class SmartObject extends XoopsObject
     /**
      * Retreive the object admin side link, displayijng a SingleView page
      *
-     * @param  bool   $onlyUrl wether or not to return a simple URL or a full <a> link
+     * @param  bool $onlyUrl wether or not to return a simple URL or a full <a> link
      * @return string user side link to the object
      */
     public function getAdminViewItemLink($onlyUrl = false)
@@ -641,7 +672,7 @@ class SmartObject extends XoopsObject
     /**
      * Retreive the object user side link
      *
-     * @param  bool   $onlyUrl wether or not to return a simple URL or a full <a> link
+     * @param  bool $onlyUrl wether or not to return a simple URL or a full <a> link
      * @return string user side link to the object
      */
     public function getItemLink($onlyUrl = false)
@@ -652,9 +683,9 @@ class SmartObject extends XoopsObject
     }
 
     /**
-     * @param  bool   $onlyUrl
-     * @param  bool   $withimage
-     * @param  bool   $userSide
+     * @param  bool $onlyUrl
+     * @param  bool $withimage
+     * @param  bool $userSide
      * @return string
      */
     public function getEditItemLink($onlyUrl = false, $withimage = true, $userSide = false)
@@ -665,9 +696,9 @@ class SmartObject extends XoopsObject
     }
 
     /**
-     * @param  bool   $onlyUrl
-     * @param  bool   $withimage
-     * @param  bool   $userSide
+     * @param  bool $onlyUrl
+     * @param  bool $withimage
+     * @param  bool $userSide
      * @return string
      */
     public function getDeleteItemLink($onlyUrl = false, $withimage = false, $userSide = false)
@@ -698,7 +729,7 @@ class SmartObject extends XoopsObject
         foreach ($this->vars as $key => $field_info) {
             if ($field_info['sortby']) {
                 $ret[$key]['caption']  = $field_info['form_caption'];
-                $ret[$key]['selected'] = $key == $sortsel ? "selected='selected'" : '';
+                $ret[$key]['selected'] = $key == $sortsel ? 'selected' : '';
             }
         }
 
@@ -756,7 +787,8 @@ class SmartObject extends XoopsObject
         }
 
         if ($editor) {
-            if (defined('XOOPS_EDITOR_IS_HTML') && !in_array($form_editor, array('formtextarea', 'textarea', 'dhtmltextarea'))) {
+            if (defined('XOOPS_EDITOR_IS_HTML')
+                && !in_array($form_editor, array('formtextarea', 'textarea', 'dhtmltextarea'))) {
                 $br       = false;
                 $formatML = !$editor;
             } else {
@@ -844,7 +876,8 @@ class SmartObject extends XoopsObject
                             $this->setErrors(sprintf(_XOBJ_ERR_REQUIRED, $k));
                             continue 2;
                         }
-                        if ($cleanv !== '' && !preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+([\.][a-z0-9-]+)+$/i", $cleanv)) {
+                        if ($cleanv !== ''
+                            && !preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+([\.][a-z0-9-]+)+$/i", $cleanv)) {
                             $this->setErrors('Invalid Email');
                             continue 2;
                         }
@@ -1052,10 +1085,13 @@ class SmartObject extends XoopsObject
                         $ts   = MyTextSanitizer::getInstance();
                         $html = !empty($this->vars['dohtml']['value']) ? 1 : 0;
 
-                        $xcode = (!isset($this->vars['doxcode']['value']) || $this->vars['doxcode']['value'] == 1) ? 1 : 0;
+                        $xcode = (!isset($this->vars['doxcode']['value'])
+                                  || $this->vars['doxcode']['value'] == 1) ? 1 : 0;
 
-                        $smiley = (!isset($this->vars['dosmiley']['value']) || $this->vars['dosmiley']['value'] == 1) ? 1 : 0;
-                        $image  = (!isset($this->vars['doimage']['value']) || $this->vars['doimage']['value'] == 1) ? 1 : 0;
+                        $smiley = (!isset($this->vars['dosmiley']['value'])
+                                   || $this->vars['dosmiley']['value'] == 1) ? 1 : 0;
+                        $image  = (!isset($this->vars['doimage']['value'])
+                                   || $this->vars['doimage']['value'] == 1) ? 1 : 0;
                         $br     = (!isset($this->vars['dobr']['value']) || $this->vars['dobr']['value'] == 1) ? 1 : 0;
 
                         /**
@@ -1065,6 +1101,7 @@ class SmartObject extends XoopsObject
                         if (defined('XOOPS_EDITOR_IS_HTML')) {
                             $br = false;
                         }
+
                         /**
                          * Hack by marcan <INBOX> for SCSPRO
                          * Setting mastop as the main editor
@@ -1080,9 +1117,12 @@ class SmartObject extends XoopsObject
                     case 'preview':
                         $ts     = MyTextSanitizer::getInstance();
                         $html   = !empty($this->vars['dohtml']['value']) ? 1 : 0;
-                        $xcode  = (!isset($this->vars['doxcode']['value']) || $this->vars['doxcode']['value'] == 1) ? 1 : 0;
-                        $smiley = (!isset($this->vars['dosmiley']['value']) || $this->vars['dosmiley']['value'] == 1) ? 1 : 0;
-                        $image  = (!isset($this->vars['doimage']['value']) || $this->vars['doimage']['value'] == 1) ? 1 : 0;
+                        $xcode  = (!isset($this->vars['doxcode']['value'])
+                                   || $this->vars['doxcode']['value'] == 1) ? 1 : 0;
+                        $smiley = (!isset($this->vars['dosmiley']['value'])
+                                   || $this->vars['dosmiley']['value'] == 1) ? 1 : 0;
+                        $image  = (!isset($this->vars['doimage']['value'])
+                                   || $this->vars['doimage']['value'] == 1) ? 1 : 0;
                         $br     = (!isset($this->vars['dobr']['value']) || $this->vars['dobr']['value'] == 1) ? 1 : 0;
 
                         return $ts->previewTarea($ret, $html, $smiley, $xcode, $image, $br);
@@ -1249,15 +1289,19 @@ class SmartObject extends XoopsObject
     /**
      * Display an automatic SingleView of the object, based on the displayOnSingleView param of each vars
      *
-     * @param  bool    $fetchOnly   if set to TRUE, then the content will be return, if set to FALSE, the content will be outputed
-     * @param  bool    $userSide    for futur use, to do something different on the user side
-     * @param  array   $actions
-     * @param  bool    $headerAsRow
+     * @param  bool  $fetchOnly if set to TRUE, then the content will be return, if set to FALSE, the content will be outputed
+     * @param  bool  $userSide  for futur use, to do something different on the user side
+     * @param  array $actions
+     * @param  bool  $headerAsRow
      * @return content of the template if $fetchOnly or nothing if !$fetchOnly
      */
-    public function displaySingleObject($fetchOnly = false, $userSide = false, $actions = array(), $headerAsRow = true)
-    {
-        include_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectsingleview.php';
+    public function displaySingleObject(
+        $fetchOnly = false,
+        $userSide = false,
+        $actions = array(),
+        $headerAsRow = true
+    ) {
+        require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectsingleview.php';
         $singleview = new SmartObjectSingleView($this, $userSide, $actions, $headerAsRow);
         // add all fields mark as displayOnSingleView except the keyid
         foreach ($this->vars as $key => $var) {

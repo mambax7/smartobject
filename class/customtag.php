@@ -1,9 +1,9 @@
 <?php
-// 
+//
 // ------------------------------------------------------------------------ //
 //               XOOPS - PHP Content Management System                      //
 //                   Copyright (c) 2000-2016 XOOPS.org                           //
-//                      <https://xoops.org/>                             //
+//                      <https://xoops.org>                             //
 // ------------------------------------------------------------------------ //
 // This program is free software; you can redistribute it and/or modify     //
 // it under the terms of the GNU General Public License as published by     //
@@ -29,7 +29,7 @@
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-include_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobject.php';
+require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobject.php';
 
 /**
  * Class SmartobjectCustomtag
@@ -132,17 +132,7 @@ class SmartobjectCustomtag extends SmartObject
      */
     public function getCloneLink()
     {
-        $ret = '<a href="' .
-               SMARTOBJECT_URL .
-               'admin/customtag.php?op=clone&customtagid=' .
-               $this->id() .
-               '"><img src="' .
-               SMARTOBJECT_IMAGES_ACTIONS_URL .
-               'editcopy.png" style="vertical-align: middle;" alt="' .
-               _CO_SOBJECT_CUSTOMTAG_CLONE .
-               '" title="' .
-               _CO_SOBJECT_CUSTOMTAG_CLONE .
-               '" /></a>';
+        $ret = '<a href="' . SMARTOBJECT_URL . 'admin/customtag.php?op=clone&customtagid=' . $this->id() . '"><img src="' . SMARTOBJECT_IMAGES_ACTIONS_URL . 'editcopy.png" style="vertical-align: middle;" alt="' . _CO_SOBJECT_CUSTOMTAG_CLONE . '" title="' . _CO_SOBJECT_CUSTOMTAG_CLONE . '"></a>';
 
         return $ret;
     }
@@ -194,10 +184,39 @@ class SmartobjectCustomtag extends SmartObject
             '/%7E/', // ~
             "/\./" // .
         );
-        $rep_pat = array('-', '-', '-', '-', '-', '-100', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-at-', '-', '-', '-', '-', '-', '-', '-', '-', '-');
+        $rep_pat = array(
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-100',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-at-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-',
+            '-'
+        );
         $title   = preg_replace($pattern, $rep_pat, $title);
 
-        // Transformation des caract�res accentu�s
+        // Transformation des caractères accentués
         $pattern = array(
             '/%B0/', // °
             '/%E8/', // è

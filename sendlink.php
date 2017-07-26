@@ -7,7 +7,7 @@
  * Licence: GNU
  */
 
-include_once __DIR__ . '/header.php';
+require_once __DIR__ . '/header.php';
 require_once SMARTOBJECT_ROOT_PATH . 'class/smartloader.php';
 require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectlink.php';
 require_once XOOPS_ROOT_PATH . '/class/template.php';
@@ -28,7 +28,7 @@ $op = isset($_POST['op']) ? $_POST['op'] : '';
 switch ($op) {
     case 'sendlink':
 
-        include_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
+        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
         $controller = new SmartObjectController($smartobjectLinkHandler);
 
         $linkObj = $controller->storeSmartObject();
@@ -38,7 +38,7 @@ switch ($op) {
              */
         }
 
-        $xoopsMailer =& getMailer();
+        $xoopsMailer = xoops_getMailer();
         $xoopsMailer->useMail();
         $xoopsMailer->setTemplateDir('language/' . $xoopsConfig['language'] . '/mail_template');
 
@@ -104,6 +104,6 @@ switch ($op) {
         break;
 }
 
-$xoopsTpl->display('db:smartobject_sendlink.html');
+$xoopsTpl->display('db:smartobject_sendlink.tpl');
 
 xoops_footer();

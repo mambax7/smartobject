@@ -16,13 +16,13 @@
 class JavaScript
 {
     /**
-     * @param       $name
-     * @param  null $function
+     * @param         $name
+     * @param  null   $function
      * @return string
      */
     public function button_to_function($name, $function = null)
     {
-        return '<input type="button" value="' . $name . '" onclick="' . $function . '" />';
+        return '<input type="button" value="' . $name . '" onclick="' . $function . '">';
     }
 
     /**
@@ -47,14 +47,14 @@ class JavaScript
     }
 
     /**
-     * @param       $name
-     * @param       $function
-     * @param  null $html_options
+     * @param         $name
+     * @param         $function
+     * @param  null   $html_options
      * @return string
      */
     public function link_to_function($name, $function, $html_options = null)
     {
-        return '<a href="' . (isset($html_options['href']) ? $html_options['href'] : '#') . '" onclick="' . (isset($html_options['onclick']) ? $html_options['onclick'] . ';' : '') . $function . '; return false;" />' . $name . '</a>';
+        return '<a href="' . (isset($html_options['href']) ? $html_options['href'] : '#') . '" onclick="' . (isset($html_options['onclick']) ? $html_options['onclick'] . ';' : '') . $function . '; return false;">' . $name . '</a>';
     }
 
     /////////////////////////////////////////////////////////////////////////////////////

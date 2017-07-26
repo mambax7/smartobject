@@ -53,9 +53,9 @@ function edittag($tagid = 0, $language = false, $fct = false)
     smart_close_collapsable($collaps_name);
 }
 
-include_once __DIR__ . '/admin_header.php';
-include_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
-include_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttag.php';
+require_once __DIR__ . '/admin_header.php';
+require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
+require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttag.php';
 
 $smartobjectTagHandler = xoops_getModuleHandler('tag');
 
@@ -75,14 +75,14 @@ $language = isset($_GET['language']) ? $_GET['language'] : false;
 switch ($op) {
 
     case 'del':
-        include_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
+        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
         $controller = new SmartObjectController($smartobjectTagHandler);
         $controller->handleObjectDeletion(_AM_SOBJECT_TAG_DELETE_CONFIRM);
 
         break;
 
     case 'addtag':
-        include_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
+        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
         $controller = new SmartObjectController($smartobjectTagHandler);
         $tagObj     = $controller->storeSmartObject();
         if ($tagObj->hasError()) {
@@ -111,7 +111,7 @@ switch ($op) {
 
         smart_collapsableBar('tags', _AM_SOBJECT_TAGS, _AM_SOBJECT_TAGS_INFO);
 
-        include_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
+        require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
         $objectTable = new SmartObjectTable($smartobjectTagHandler, false, array('delete'));
         $objectTable->addColumn(new SmartObjectColumn('name'));
         $objectTable->addColumn(new SmartObjectColumn('language'));
@@ -138,4 +138,4 @@ switch ($op) {
 
 //smart_modFooter();
 //xoops_cp_footer();
-include_once __DIR__ . '/admin_footer.php';
+require_once __DIR__ . '/admin_footer.php';

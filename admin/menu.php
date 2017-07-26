@@ -1,28 +1,22 @@
 <?php
 /**
- * Id: menu.php 2341 2008-05-21 16:34:21Z malanciault
  * Module: SmartObject
  * Author: The SmartFactory <www.smartfactory.ca>
  * Licence: GNU
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+$moduleDirName = basename(dirname(__DIR__));
 
-$path = dirname(dirname(dirname(__DIR__)));
-include_once $path . '/mainfile.php';
-
-$dirname         = basename(dirname(__DIR__));
-$moduleHandler   = xoops_getHandler('module');
-$module          = $moduleHandler->getByDirname($dirname);
-$pathIcon32      = $module->getInfo('icons32');
-$pathModuleAdmin = $module->getInfo('dirmoduleadmin');
-$pathLanguage    = $path . $pathModuleAdmin;
-
-if (!file_exists($fileinc = $pathLanguage . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/' . 'main.php')) {
-    $fileinc = $pathLanguage . '/language/english/main.php';
+if (false !== ($moduleHelper = Xmf\Module\Helper::getHelper($moduleDirName))) {
+} else {
+    $moduleHelper = Xmf\Module\Helper::getHelper('system');
 }
+$adminObject = \Xmf\Module\Admin::getInstance();
 
-include_once $fileinc;
+$pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
+//$pathModIcon32 = $moduleHelper->getModule()->getInfo('modicons32');
+
+$moduleHelper->loadLanguage('modinfo');
 
 $adminmenu              = array();
 $i                      = 0;
@@ -60,7 +54,7 @@ $adminmenu[$i]['icon']  = $pathIcon32 . '/about.png';
 //---------------------------------
 
 if (!defined('SMARTOBJECT_ROOT_PATH')) {
-    include_once XOOPS_ROOT_PATH . '/modules/smartobject/include/functions.php';
+    require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/functions.php';
 }
 
 $smartobjectConfig = smart_getModuleConfig('smartobject');

@@ -10,7 +10,7 @@
 
 smart_loadCommonLanguageFile();
 
-include_once(SMARTOBJECT_ROOT_PATH . 'class/currency.php');
+require_once SMARTOBJECT_ROOT_PATH . 'class/currency.php';
 
 static $smartobjectCurrenciesObj, $smartobjectCurrenciesArray, $smartobjectDefaultCurrency;
 

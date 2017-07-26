@@ -1,5 +1,5 @@
 <?php
-// 
+//
 
 /**
  * Id: xoops_version.php 3439 2008-07-05 11:40:55Z malanciault
@@ -10,42 +10,34 @@
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-$modversion['name']    = 'SmartObject Framework';
-$modversion['version'] = '1.12';
-
-$modversion['description'] = 'Framework providing extra functionality to SmartModules';
-$modversion['author']      = 'The SmartFactory';
-$modversion['credits']     = 'INBOX International, Mithrandir, Sudhaker, Ampersand Design, Technigrafa, Mamba';
-$modversion['help']        = 'page=help';
-$modversion['license']     = 'GNU GPL 2.0 or later';
-$modversion['license_url'] = 'www.gnu.org/licenses/gpl-2.0.html';
-$modversion['official']    = 0; //1 indicates supported by XOOPS Dev Team, 0 means 3rd party supported
-$modversion['image']       = 'assets/images/logo_module.png';
-$modversion['dirname']     = basename(__DIR__);
-
+$modversion['version']       = '1.12';
+$modversion['module_status'] = 'RC 2';
+$modversion['release_date']  = '2017/07/20';
+$modversion['name']          = 'SmartObject Framework';
+$modversion['description']   = 'Framework providing extra functionality to SmartModules';
+$modversion['author']        = 'The SmartFactory';
+$modversion['credits']       = 'INBOX International, Mithrandir, Sudhaker, Ampersand Design, Technigrafa, Mamba';
+$modversion['help']          = 'page=help';
+$modversion['license']       = 'GNU GPL 2.0 or later';
+$modversion['license_url']   = 'www.gnu.org/licenses/gpl-2.0.html';
+$modversion['official']      = 0; //1 indicates supported by XOOPS Dev Team, 0 means 3rd party supported
+$modversion['image']         = 'assets/images/logoModule.png';
+$modversion['dirname']       = basename(__DIR__);
 // Added by marcan for the About page in admin section
 $modversion['developer_website_url']  = 'https://xoops.org';
 $modversion['developer_website_name'] = 'XOOPS';
 $modversion['developer_email']        = '';
 //$modversion['status_version'] = "Final";
 //$modversion['status'] = "Final";
-
-$modversion['dirmoduleadmin'] = '/Frameworks/moduleclasses/moduleadmin';
-$modversion['icons16']        = '../../Frameworks/moduleclasses/icons/16';
-$modversion['icons32']        = '../../Frameworks/moduleclasses/icons/32';
-//about
-$modversion['module_status']       = 'RC 1';
-$modversion['release_date']        = '2016/03/28';
+$modversion['modicons16']          = 'assets/images/icons/16';
+$modversion['modicons32']          = 'assets/images/icons/32';
 $modversion['release_file']        = XOOPS_URL . '/modules/' . $modversion['dirname'] . '/docs/changelog.txt';
 $modversion['module_website_url']  = 'www.xoops.org';
 $modversion['module_website_name'] = 'XOOPS';
 $modversion['min_php']             = '5.5';
-$modversion['min_xoops']           = '2.5.8';
-$modversion['min_admin']           = '1.1';
-$modversion['min_db']              = array(
-    'mysql'  => '5.0.7',
-    'mysqli' => '5.0.7'
-);
+$modversion['min_xoops']           = '2.5.9';
+$modversion['min_admin']           = '1.2';
+$modversion['min_db']              = array('mysql' => '5.5');
 
 // ---
 // version 1.10
@@ -75,9 +67,9 @@ global $xoopsConfig;
 $common_file = XOOPS_ROOT_PATH . '/modules/smartobject/language/' . $xoopsConfig['language'] . '/common.php';
 if (file_exists($common_file)) {
     $flag_common = true;
-    include_once $common_file;
+    require_once $common_file;
 } else {
-    include_once(XOOPS_ROOT_PATH . '/modules/smartobject/language/english/common.php');
+    require_once XOOPS_ROOT_PATH . '/modules/smartobject/language/english/common.php';
 }
 // -----
 

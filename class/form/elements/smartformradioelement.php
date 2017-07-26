@@ -47,7 +47,7 @@ class SmartFormRadioElement extends XoopsFormRadio
                         $controlHandler = xoops_getModuleHandler($control['itemHandler'], $control['module']);
                     }
                 } else {
-                    $controlHandler =& $object->handler;
+                    $controlHandler = $object->handler;
                 }
 
                 // Checking if the specified method exists

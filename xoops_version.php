@@ -103,6 +103,15 @@ $modversion['tables'][7] = 'smartobject_customtag';
 $modversion['tables'][8] = 'smartobject_file';
 $modversion['tables'][9] = 'smartobject_urllink';
 
+// ------------------- Help files ------------------- //
+$modversion['helpsection'] = array(
+    ['name' => _MI_SOBJECT_OVERVIEW, 'link' => 'page=help'],
+    ['name' => _MI_SOBJECT_DISCLAIMER, 'link' => 'page=disclaimer'],
+    ['name' => _MI_SOBJECT_LICENSE, 'link' => 'page=license'],
+    ['name' => _MI_SOBJECT_SUPPORT, 'link' => 'page=support'],
+);
+
+
 // Blocks
 $i = 0;
 

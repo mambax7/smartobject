@@ -84,3 +84,11 @@ define('_AM_SOBJECT_CURRENCIES_MODIFIED', 'The currency was successfully modifie
 define('_AM_SOBJECT_CURRENCY_UPDATE_ALL', 'Update all currencies:');
 define('_AM_SOBJECT_NO_RECORDS_TO_UPDATE', 'There was no record to update.');
 define('_AM_SOBJECT_RECORDS_UPDATED', 'Records updated.');
+//1.12
+define('_AM_SOBJECT_UPGRADEFAILED0', "Update failed - couldn't rename field '%s'");
+define('_AM_SOBJECT_UPGRADEFAILED1', "Update failed - couldn't add new fields");
+define('_AM_SOBJECT_UPGRADEFAILED2', "Update failed - couldn't rename table '%s'");
+define('_AM_SOBJECT_ERROR_COLUMN', 'Could not create column in database : %s');
+define('_AM_SOBJECT_ERROR_BAD_XOOPS', 'This module requires XOOPS %s+ (%s installed)');
+define('_AM_SOBJECT_ERROR_BAD_PHP', 'This module requires PHP version %s+ (%s installed)');
+define('_AM_SOBJECT_ERROR_TAG_REMOVAL', 'Could not remove tags from Tag Module');

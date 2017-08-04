@@ -33,7 +33,7 @@ class SmartFormUserElement extends XoopsFormSelect
         $ret   = array();
         $limit = $start = 0;
         $sql   = 'SELECT uid, uname FROM ' . $xoopsDB->prefix('users');
-        $sql .= ' ORDER BY uname ASC';
+        $sql   .= ' ORDER BY uname ASC';
 
         $result = $xoopsDB->query($sql);
         if ($result) {

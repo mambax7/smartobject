@@ -18,6 +18,7 @@ __DIR__ . '/classes/Prototype.php';
 __DIR__ . '/classes/Scriptaculous.php';
 
 // For $projax = new Projax();
+
 /**
  * Class projax
  */

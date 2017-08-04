@@ -8,6 +8,7 @@
  * @package    SmartObject
  * @subpackage SmartObjectForm
  */
+
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
 class SmartFormUser_sigElement extends XoopsFormElementTray

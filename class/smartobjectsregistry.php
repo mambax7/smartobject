@@ -153,7 +153,7 @@ class SmartObjectsRegistry
      * @param string $itemname
      * @param string $key
      *
-     * @param  bool $modulename
+     * @param  bool  $modulename
      * @return the  requestd object or FALSE if they don't exists in the registry
      */
     public function getSingleObject($itemname, $key, $modulename = false)

@@ -105,8 +105,8 @@ class SmartobjectCategory extends SmartSeoObject
      * Create the complete path of a category
      *
      * @todo this could be improved as it uses multiple queries
-     * @param  bool   $withAllLink     make all name clickable
-     * @param  bool   $currentCategory
+     * @param  bool $withAllLink make all name clickable
+     * @param  bool $currentCategory
      * @return string complete path (breadcrumb)
      */
     public function getCategoryPath($withAllLink = true, $currentCategory = false)
@@ -147,7 +147,7 @@ class SmartobjectCategoryHandler extends SmartPersistableObjectHandler
 
     /**
      * SmartobjectCategoryHandler constructor.
-     * @param XoopsDatabase $db
+     * @param XoopsDatabase        $db
      * @param                      $modulename
      */
     public function __construct(XoopsDatabase $db, $modulename)
@@ -156,10 +156,10 @@ class SmartobjectCategoryHandler extends SmartPersistableObjectHandler
     }
 
     /**
-     * @param  int        $parentid
-     * @param  bool       $perm_name
-     * @param  string     $sort
-     * @param  string     $order
+     * @param  int    $parentid
+     * @param  bool   $perm_name
+     * @param  string $sort
+     * @param  string $order
      * @return array|bool
      */
     public function getAllCategoriesArray($parentid = 0, $perm_name = false, $sort = 'parentid', $order = 'ASC')

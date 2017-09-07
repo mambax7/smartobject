@@ -9,7 +9,7 @@
 
 function smartobject_plugin_smartpartner()
 {
-    $pluginInfo = array();
+    $pluginInfo = [];
 
     $pluginInfo['items']['partner']['caption'] = 'Partner';
     $pluginInfo['items']['partner']['url']     = 'partner.php?partnerid=%u';

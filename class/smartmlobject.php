@@ -10,7 +10,7 @@
  * @subpackage SmartObjectCore
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobject.php';
 
 /**
@@ -52,7 +52,7 @@ class SmartMlObject extends SmartObject
     public function stripMultilanguageFields()
     {
         $objectVars    =& $this->getVars();
-        $newObjectVars = array();
+        $newObjectVars = [];
         foreach ($objectVars as $key => $var) {
             if (!$var['multilingual']) {
                 $newObjectVars[$key] = $var;
@@ -64,7 +64,7 @@ class SmartMlObject extends SmartObject
     public function stripNonMultilanguageFields()
     {
         $objectVars    =& $this->getVars();
-        $newObjectVars = array();
+        $newObjectVars = [];
         foreach ($objectVars as $key => $var) {
             if ($var['multilingual'] || $key == $this->handler->keyName) {
                 $newObjectVars[$key] = $var;

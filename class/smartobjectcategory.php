@@ -10,7 +10,7 @@
  * @subpackage SmartObjectItems
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartseoobject.php';
 
 /**
@@ -33,15 +33,15 @@ class SmartobjectCategory extends SmartSeoObject
 
         $this->initCommonVar('doxcode');
 
-        $this->setControl('image', array('name' => 'image'));
-        $this->setControl('parentid', array('name' => 'parentcategory'));
-        $this->setControl('description', array(
+        $this->setControl('image', ['name' => 'image']);
+        $this->setControl('parentid', ['name' => 'parentcategory']);
+        $this->setControl('description', [
             'name'        => 'textarea',
             'itemHandler' => false,
             'method'      => false,
             'module'      => false,
             'form_editor' => 'default'
-        ));
+        ]);
 
         // call parent constructor to get SEO fields initiated
         parent::__construct();
@@ -57,7 +57,7 @@ class SmartobjectCategory extends SmartSeoObject
      */
     public function getVar($key, $format = 's')
     {
-        if ($format === 's' && in_array($key, array('description', 'image'))) {
+        if ($format === 's' && in_array($key, ['description', 'image'])) {
             //            return call_user_func(array($this, $key));
             return $this->{$key}();
         }
@@ -180,7 +180,7 @@ class SmartobjectCategoryHandler extends SmartPersistableObjectHandler
             $this->allCategoriesObj = $this->getObjects($criteria, 'parentid');
         }
 
-        $ret = array();
+        $ret = [];
         if (isset($this->allCategoriesObj[$parentid])) {
             foreach ($this->allCategoriesObj[$parentid] as $categoryid => $categoryObj) {
                 $ret[$categoryid]['self'] = $categoryObj->toArray();
@@ -202,7 +202,7 @@ class SmartobjectCategoryHandler extends SmartPersistableObjectHandler
     public function getParentIds($parentid, $asString = true)
     {
         if (!$this->allCategoriesId) {
-            $ret = array();
+            $ret = [];
             $sql = 'SELECT categoryid, parentid FROM ' . $this->table . ' AS ' . $this->_itemname . ' ORDER BY parentid';
 
             $result = $this->db->query($sql);
@@ -216,7 +216,7 @@ class SmartobjectCategoryHandler extends SmartPersistableObjectHandler
             }
         }
 
-        $retArray = array($parentid);
+        $retArray = [$parentid];
         while ($parentid != 0) {
             $parentid = $this->allCategoriesId[$parentid];
             if ($parentid != 0) {

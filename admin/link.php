@@ -78,7 +78,7 @@ switch ($op) {
         smart_collapsableBar('sentlinks', _AM_SOBJECT_SENT_LINKS, _AM_SOBJECT_SENT_LINKS_INFO);
 
         require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
-        $objectTable = new SmartObjectTable($smartobjectLinkHandler, null, array('delete'));
+        $objectTable = new SmartObjectTable($smartobjectLinkHandler, null, ['delete']);
         $objectTable->addColumn(new SmartObjectColumn('date'));
         $objectTable->addColumn(new SmartObjectColumn(_AM_SOBJECT_SENT_LINKS_FROM, $align = 'left', $width = false, 'getFromInfo'));
         $objectTable->addColumn(new SmartObjectColumn(_AM_SOBJECT_SENT_LINKS_TO, $align = 'left', $width = false, 'getToInfo'));

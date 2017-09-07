@@ -32,7 +32,7 @@ class SmartObjectTreeTable extends SmartObjectTable
     public function __construct(
         SmartPersistableObjectHandler $objectHandler,
         $criteria = false,
-        $actions = array('edit', 'delete'),
+        $actions = ['edit', 'delete'],
         $userSide = false
     ) {
         $this->SmartObjectTable($objectHandler, $criteria, $actions, $userSide);
@@ -56,15 +56,15 @@ class SmartObjectTreeTable extends SmartObjectTable
      */
     public function createTableRow($object, $level = 0)
     {
-        $aObject = array();
+        $aObject = [];
 
         $i = 0;
 
-        $aColumns        = array();
+        $aColumns        = [];
         $doWeHaveActions = false;
 
         foreach ($this->_columns as $column) {
-            $aColumn = array();
+            $aColumn = [];
 
             if ($i == 0) {
                 $class = 'head';
@@ -114,7 +114,7 @@ class SmartObjectTreeTable extends SmartObjectTable
         $class            = $class === 'even' ? 'odd' : 'even';
         $aObject['class'] = $class;
 
-        $actions = array();
+        $actions = [];
 
         // Adding the custom actions if any
         foreach ($this->_custom_actions as $action) {
@@ -152,7 +152,7 @@ class SmartObjectTreeTable extends SmartObjectTable
 
     public function createTableRows()
     {
-        $this->_aObjects = array();
+        $this->_aObjects = [];
 
         if (count($this->_objects) > 0) {
             foreach ($this->getChildrenOf() as $object) {

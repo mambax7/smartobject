@@ -17,7 +17,7 @@
  * @author       XOOPS Development Team, Kazumi Ono (AKA onokazu)
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 require_once XOOPS_ROOT_PATH . '/kernel/user.php';
 require_once XOOPS_ROOT_PATH . '/kernel/group.php';
 require_once XOOPS_ROOT_PATH . '/kernel/member.php';
@@ -180,7 +180,7 @@ class SmartobjectMemberHandler extends XoopsMemberHandler
     {
         $name = substr($email, 0, strpos($email, '@')); //Take the email adress without domain as username
 
-        $names  = array();
+        $names  = [];
         $userid = explode('@', $email);
 
         $basename    = '';
@@ -233,7 +233,7 @@ class SmartobjectMemberHandler extends XoopsMemberHandler
     public function genRandNumber($digits = 2)
     {
         $this->initRand();
-        $tmp = array();
+        $tmp = [];
 
         for ($i = 0; $i < $digits; ++$i) {
             $tmp[$i] = (mt_rand() % 9);

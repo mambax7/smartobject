@@ -5,7 +5,7 @@
  * Author: The SmartFactory <www.smartfactory.ca>
  * Licence: GNU
  */
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 define('_AM_SOBJECT_CUSTOMTAGS', 'Custom tags');
 define('_AM_SOBJECT_CUSTOMTAGS_DSC', 'Here is a list of the custom tags available in the system.');

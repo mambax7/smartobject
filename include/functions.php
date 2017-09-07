@@ -7,7 +7,7 @@
  * @param $cssfile
  * @return string
  */
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 function smart_get_css_link($cssfile)
 {
@@ -453,12 +453,12 @@ function smart_imageResize($src, $maxWidth, $maxHeight)
         $attr = " width='$width' height='$height'";
     }
 
-    return array(
+    return [
         $width,
         $height,
         $type,
         $attr
-    );
+    ];
 }
 
 /**
@@ -555,7 +555,7 @@ function smart_deleteFile($dirname)
  * @param  array $errors
  * @return string
  */
-function smart_formatErrors($errors = array())
+function smart_formatErrors($errors = [])
 {
     $ret = '';
     foreach ($errors as $key => $value) {
@@ -574,14 +574,14 @@ function smart_formatErrors($errors = array())
  * @param  bool    $withContact
  * @return string
  */
-function smart_getLinkedUnameFromId($userid = 0, $name = 0, $users = array(), $withContact = false)
+function smart_getLinkedUnameFromId($userid = 0, $name = 0, $users = [], $withContact = false)
 {
     if (!is_numeric($userid)) {
         return $userid;
     }
     $userid = (int)$userid;
     if ($userid > 0) {
-        if ($users == array()) {
+        if ($users == []) {
             //fetching users
             $memberHandler = xoops_getHandler('member');
             $user          =& $memberHandler->getUser($userid);
@@ -638,11 +638,11 @@ function smart_adminMenu($currentoption = 0, $breadcrumb = '', $submenus = false
     } else {
         require_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/english/admin.php';
     }
-    $headermenu  = array();
-    $adminObject = array();
+    $headermenu  = [];
+    $adminObject = [];
     include XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/admin/menu.php';
     $tpl = new XoopsTpl();
-    $tpl->assign(array(
+    $tpl->assign([
                      'headermenu'      => $headermenu,
                      'adminmenu'       => $adminObject,
                      'current'         => $currentoption,
@@ -651,7 +651,7 @@ function smart_adminMenu($currentoption = 0, $breadcrumb = '', $submenus = false
                      'submenus'        => $submenus,
                      'currentsub'      => $currentsub,
                      'submenuscount'   => count($submenus)
-                 ));
+                 ]);
     $tpl->display('db:smartobject_admin_menu.tpl');
 }
 
@@ -781,7 +781,7 @@ function smart_getCookieVar($name, $default = '')
  */
 function smart_getCurrentUrls()
 {
-    $urls        = array();
+    $urls        = [];
     $http        = (strpos(XOOPS_URL, 'https://') === false) ? 'http://' : 'https://';
     $phpself     = $_SERVER['PHP_SELF'];
     $httphost    = $_SERVER['HTTP_HOST'];
@@ -790,7 +790,7 @@ function smart_getCurrentUrls()
         $querystring = '?' . $querystring;
     }
     $currenturl           = $http . $httphost . $phpself . $querystring;
-    $urls                 = array();
+    $urls                 = [];
     $urls['http']         = $http;
     $urls['httphost']     = $httphost;
     $urls['phpself']      = $phpself;
@@ -970,10 +970,10 @@ function smart_getImageSize($url, & $width, & $height)
         } elseif (!empty($height)) {
             $width = $dimension[0] * $height / $dimension[1];
         } else {
-            list($width, $height) = array(
+            list($width, $height) = [
                 $dimension[0],
                 $dimension[1]
-            );
+            ];
         }
 
         return true;
@@ -1048,8 +1048,8 @@ function smart_sanitizeAdsenses_callback($matches)
  */
 function smart_sanitizeAdsenses($text)
 {
-    $patterns     = array();
-    $replacements = array();
+    $patterns     = [];
+    $replacements = [];
 
     $patterns[] = "/\[adsense](.*)\[\/adsense\]/sU";
     $text       = preg_replace_callback($patterns, 'smart_sanitizeAdsenses_callback', $text);
@@ -1080,8 +1080,8 @@ function smart_sanitizeCustomtags_callback($matches)
  */
 function smart_sanitizeCustomtags($text)
 {
-    $patterns     = array();
-    $replacements = array();
+    $patterns     = [];
+    $replacements = [];
 
     $patterns[] = "/\[customtag](.*)\[\/customtag\]/sU";
     $text       = preg_replace_callback($patterns, 'smart_sanitizeCustomtags_callback', $text);
@@ -1161,7 +1161,7 @@ function smart_html2text($document)
     // and white space. It will also convert some
     // common HTML entities to their text equivalent.
     // Credits: newbb2
-    $search = array(
+    $search = [
         "'<script[^>]*?>.*?</script>'si", // Strip out javascript
         "'<img.*?>'si", // Strip out img tags
         "'<[\/\!]*?[^<>]*?>'si", // Strip out HTML tags
@@ -1175,9 +1175,9 @@ function smart_html2text($document)
         "'&(cent|#162);'i",
         "'&(pound|#163);'i",
         "'&(copy|#169);'i"
-    ); // evaluate as php
+    ]; // evaluate as php
 
-    $replace = array(
+    $replace = [
         '',
         '',
         '',
@@ -1191,7 +1191,7 @@ function smart_html2text($document)
         chr(162),
         chr(163),
         chr(169),
-    );
+    ];
 
     $text = preg_replace($search, $replace, $document);
 
@@ -1248,7 +1248,7 @@ function smart_getfloat($str, $set = false)
  */
 function smart_currency($var, $currencyObj = false)
 {
-    $ret = smart_getfloat($var, array('single_dot_as_decimal' => true));
+    $ret = smart_getfloat($var, ['single_dot_as_decimal' => true]);
     $ret = round($ret, 2);
     // make sur we have at least .00 in the $var
     $decimal_section_original = strstr($ret, '.');
@@ -1309,7 +1309,7 @@ function smart_getEditors()
     require_once $filename;
     $xoopseditorHandler = XoopsEditorHandler::getInstance();
     $aList              = $xoopseditorHandler->getList();
-    $ret                = array();
+    $ret                = [];
     foreach ($aList as $k => $v) {
         $ret[$v] = $k;
     }
@@ -1324,7 +1324,7 @@ function smart_getEditors()
  */
 function smart_getTablesArray($moduleName, $items)
 {
-    $ret = array();
+    $ret = [];
     foreach ($items as $item) {
         $ret[] = $moduleName . '_' . $item;
     }

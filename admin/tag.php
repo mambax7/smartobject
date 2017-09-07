@@ -87,7 +87,6 @@ switch ($op) {
         $tagObj     = $controller->storeSmartObject();
         if ($tagObj->hasError()) {
             redirect_header($smart_previous_page, 3, _CO_SOBJECT_SAVE_ERROR . $tagObj->getHtmlErrors());
-            exit;
         }
 
         if ($tagObj->hasError()) {
@@ -112,7 +111,7 @@ switch ($op) {
         smart_collapsableBar('tags', _AM_SOBJECT_TAGS, _AM_SOBJECT_TAGS_INFO);
 
         require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
-        $objectTable = new SmartObjectTable($smartobjectTagHandler, false, array('delete'));
+        $objectTable = new SmartObjectTable($smartobjectTagHandler, false, ['delete']);
         $objectTable->addColumn(new SmartObjectColumn('name'));
         $objectTable->addColumn(new SmartObjectColumn('language'));
         $objectTable->addColumn(new SmartObjectColumn('value'));

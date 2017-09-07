@@ -82,7 +82,6 @@ switch ($op) {
             $xoopsCaptcha = XoopsCaptcha::getInstance();
             if (!$xoopsCaptcha->verify()) {
                 redirect_header('javascript:history.go(-1);', 3, $xoopsCaptcha->getMessage());
-                exit;
             }
         }
         require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
@@ -140,7 +139,7 @@ switch ($op) {
                                             'criteria' => $criteria_last30days
                 ));
         */
-        $objectTable->addQuickSearch(array('title', 'summary', 'description'));
+        $objectTable->addQuickSearch(['title', 'summary', 'description']);
         $objectTable->addCustomAction('getCloneLink');
 
         $objectTable->render();

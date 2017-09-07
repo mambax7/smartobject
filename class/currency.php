@@ -27,7 +27,7 @@
 // Project: XOOPS Project                                               //
 // -------------------------------------------------------------------------//
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobject.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
@@ -51,29 +51,29 @@ class SmartobjectCurrency extends SmartObject
         $this->quickInitVar('rate', XOBJ_DTYPE_FLOAT, true, _CO_SOBJECT_CURRENCY_RATE, '', '1.0');
         $this->quickInitVar('default_currency', XOBJ_DTYPE_INT, false, _CO_SOBJECT_CURRENCY_DEFAULT, '', false);
 
-        $this->setControl('symbol', array(
+        $this->setControl('symbol', [
             'name'      => 'text',
             'size'      => '15',
             'maxlength' => '15'
-        ));
+        ]);
 
-        $this->setControl('iso4217', array(
+        $this->setControl('iso4217', [
             'name'      => 'text',
             'size'      => '5',
             'maxlength' => '5'
-        ));
+        ]);
 
-        $this->setControl('rate', array(
+        $this->setControl('rate', [
             'name'      => 'text',
             'size'      => '5',
             'maxlength' => '5'
-        ));
+        ]);
 
-        $this->setControl('rate', array(
+        $this->setControl('rate', [
             'name'      => 'text',
             'size'      => '5',
             'maxlength' => '5'
-        ));
+        ]);
 
         $this->hideFieldFromForm('default_currency');
     }
@@ -85,7 +85,7 @@ class SmartobjectCurrency extends SmartObject
      */
     public function getVar($key, $format = 's')
     {
-        if ($format === 's' && in_array($key, array('rate', 'default_currency'))) {
+        if ($format === 's' && in_array($key, ['rate', 'default_currency'])) {
             //            return call_user_func(array($this, $key));
             return $this->{$key}();
         }

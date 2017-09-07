@@ -9,7 +9,7 @@
 
 function smartobject_plugin_smartsection()
 {
-    $pluginInfo = array();
+    $pluginInfo = [];
 
     $pluginInfo['items']['item']['caption'] = 'Article';
     $pluginInfo['items']['item']['url']     = 'item.php?itemid=%u';

@@ -10,7 +10,7 @@
  * @subpackage SmartObjectCore
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * Persistable SmartObject Controller class.
@@ -320,7 +320,6 @@ class SmartObjectController
         if ($confirm) {
             if (!$this->handler->delete($smartObj)) {
                 redirect_header($_POST['redirect_page'], 3, _CO_SOBJECT_DELETE_ERROR . $smartObj->getHtmlErrors());
-                exit;
             }
 
             redirect_header($_POST['redirect_page'], 3, _CO_SOBJECT_DELETE_SUCCESS);
@@ -333,12 +332,12 @@ class SmartObjectController
                 $confirm_msg = _CO_SOBJECT_DELETE_CONFIRM;
             }
 
-            xoops_confirm(array(
+            xoops_confirm([
                               'op'                    => $op,
                               $this->handler->keyName => $smartObj->getVar($this->handler->keyName),
                               'confirm'               => 1,
                               'redirect_page'         => $smart_previous_page
-                          ), xoops_getenv('PHP_SELF'), sprintf($confirm_msg, $smartObj->getVar($this->handler->identifierName)), _CO_SOBJECT_DELETE);
+                          ], xoops_getenv('PHP_SELF'), sprintf($confirm_msg, $smartObj->getVar($this->handler->identifierName)), _CO_SOBJECT_DELETE);
 
             xoops_cp_footer();
         }
@@ -364,7 +363,6 @@ class SmartObjectController
         if ($confirm) {
             if (!$this->handler->delete($smartObj)) {
                 redirect_header($_POST['redirect_page'], 3, _CO_SOBJECT_DELETE_ERROR . $smartObj->getHtmlErrors());
-                exit;
             }
 
             redirect_header($_POST['redirect_page'], 3, _CO_SOBJECT_DELETE_SUCCESS);
@@ -375,12 +373,12 @@ class SmartObjectController
             }
 
             ob_start();
-            xoops_confirm(array(
+            xoops_confirm([
                               'op'                    => $op,
                               $this->handler->keyName => $smartObj->getVar($this->handler->keyName),
                               'confirm'               => 1,
                               'redirect_page'         => $smart_previous_page
-                          ), xoops_getenv('PHP_SELF'), sprintf($confirm_msg, $smartObj->getVar($this->handler->identifierName)), _CO_SOBJECT_DELETE);
+                          ], xoops_getenv('PHP_SELF'), sprintf($confirm_msg, $smartObj->getVar($this->handler->identifierName)), _CO_SOBJECT_DELETE);
             $smartobjectDeleteConfirm = ob_get_clean();
             $xoopsTpl->assign('smartobject_delete_confirm', $smartobjectDeleteConfirm);
         }

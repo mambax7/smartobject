@@ -94,7 +94,7 @@ switch ($op) {
         $linkObj->setVar('subject', sprintf(_CO_SOBJECT_SUBJECT_DEFAULT, $xoopsConfig['sitename']));
         $linkObj->setVar('body', sprintf(_CO_SOBJECT_BODY_DEFAULT, $xoopsConfig['sitename'], $link));
         $linkObj->setVar('date', time());
-        $linkObj->hideFieldFromForm(array('from_uid', 'to_uid', 'link', 'mid', 'mid_name'));
+        $linkObj->hideFieldFromForm(['from_uid', 'to_uid', 'link', 'mid', 'mid_name']);
 
         $form = $linkObj->getForm(_CO_SOBJECT_SEND_LINK_FORM, 'sendlink', false, _SEND, 'javascript:window.close();');
 

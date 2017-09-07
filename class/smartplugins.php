@@ -108,13 +108,13 @@ class SmartPluginHandler
         $criteria      = new CriteriaCompo();
         $criteria->add(new Criteria('isactive', 1));
         $tempModulesObj = $moduleHandler->getObjects($criteria);
-        $modulesObj     = array();
+        $modulesObj     = [];
         foreach ($tempModulesObj as $moduleObj) {
             $modulesObj[$moduleObj->getVar('dirname')] = $moduleObj;
         }
 
         $aFiles = XoopsLists::getFileListAsArray(SMARTOBJECT_ROOT_PATH . 'plugins/');
-        $ret    = array();
+        $ret    = [];
         foreach ($aFiles as $file) {
             if (substr($file, strlen($file) - 4, 4) === '.php') {
                 $pluginName                = str_replace('.php', '', $file);

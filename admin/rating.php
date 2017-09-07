@@ -25,7 +25,7 @@ function editclass($showmenu = false, $ratingid = 0)
         $sform->display();
         smart_close_collapsable('ratingedit');
     } else {
-        $ratingObj->hideFieldFromForm(array('item', 'itemid', 'uid', 'date', 'rate'));
+        $ratingObj->hideFieldFromForm(['item', 'itemid', 'uid', 'date', 'rate']);
 
         if (isset($_POST['op'])) {
             $controller = new SmartObjectController($smartobjectRatingHandler);
@@ -34,7 +34,7 @@ function editclass($showmenu = false, $ratingid = 0)
             if ($_POST['op'] === 'changedField') {
                 switch ($_POST['changedField']) {
                     case 'dirname':
-                        $ratingObj->showFieldOnForm(array('item', 'itemid', 'uid', 'date', 'rate'));
+                        $ratingObj->showFieldOnForm(['item', 'itemid', 'uid', 'date', 'rate']);
                         break;
                 }
             }

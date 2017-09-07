@@ -6,7 +6,7 @@
  * @credit http://addtobookmarks.com/, James Morris and the XoopsInfo team
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 class SmartAddTo
 {
@@ -65,7 +65,7 @@ class SmartAddTo
 
         $xoTheme->addStylesheet(SMARTOBJECT_URL . 'include/addto/addto.css');
 
-        $block                             = array();
+        $block                             = [];
         $block['smartobject_addto_method'] = $this->_method;
         $block['smartobject_addto_layout'] = $this->_layout;
         $block['smartobject_addto_url']    = SMARTOBJECT_URL . 'include/addto/';

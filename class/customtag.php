@@ -27,7 +27,7 @@
 // Project: XOOPS Project                                               //
 // -------------------------------------------------------------------------//
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobject.php';
 
@@ -54,15 +54,15 @@ class SmartobjectCustomtag extends SmartObject
         $this->initNonPersistableVar('doxcode', XOBJ_DTYPE_INT, 'class', 'doxcode', '', true);
         $this->initNonPersistableVar('dosmiley', XOBJ_DTYPE_INT, 'class', 'dosmiley', '', true);
 
-        $this->setControl('content', array(
+        $this->setControl('content', [
             'name'        => 'textarea',
             'form_editor' => 'textarea',
             'form_rows'   => 25
-        ));
-        $this->setControl('language', array(
+        ]);
+        $this->setControl('language', [
             'name' => 'language',
             'all'  => true
-        ));
+        ]);
     }
 
     /**
@@ -72,7 +72,7 @@ class SmartobjectCustomtag extends SmartObject
      */
     public function getVar($key, $format = 's')
     {
-        if ($format === 's' && in_array($key, array())) {
+        if ($format === 's' && in_array($key, [])) {
             //            return call_user_func(array($this, $key));
             return $this->{$key}();
         }
@@ -154,7 +154,7 @@ class SmartobjectCustomtag extends SmartObject
         $title = rawurlencode(strtolower($this->getVar('description', 'e')));
         $title = xoops_substr($title, 0, 10, '');
         // Transformation des ponctuations
-        $pattern = array(
+        $pattern = [
             '/%09/', // Tab
             '/%20/', // Space
             '/%21/', // !
@@ -183,8 +183,8 @@ class SmartobjectCustomtag extends SmartObject
             '/%7D/', // }
             '/%7E/', // ~
             "/\./" // .
-        );
-        $rep_pat = array(
+        ];
+        $rep_pat = [
             '-',
             '-',
             '-',
@@ -213,11 +213,11 @@ class SmartobjectCustomtag extends SmartObject
             '-',
             '-',
             '-'
-        );
+        ];
         $title   = preg_replace($pattern, $rep_pat, $title);
 
         // Transformation des caractères accentués
-        $pattern = array(
+        $pattern = [
             '/%B0/', // °
             '/%E8/', // è
             '/%E9/', // é
@@ -234,12 +234,12 @@ class SmartobjectCustomtag extends SmartObject
             '/%FB/', // û
             '/%F4/', // ô
             '/%F6/', // ö
-        );
-        $rep_pat = array('-', 'e', 'e', 'e', 'e', 'c', 'a', 'a', 'a', 'i', 'i', 'u', 'u', 'u', 'o', 'o');
+        ];
+        $rep_pat = ['-', 'e', 'e', 'e', 'e', 'c', 'a', 'a', 'a', 'i', 'i', 'u', 'u', 'u', 'o', 'o'];
         $title   = preg_replace($pattern, $rep_pat, $title);
 
         $tableau = explode('-', $title); // Transforme la chaine de caract�res en tableau
-        $tableau = array_filter($tableau, array($this, 'emptyString')); // Supprime les chaines vides du tableau
+        $tableau = array_filter($tableau, [$this, 'emptyString']); // Supprime les chaines vides du tableau
         $title   = implode('-', $tableau); // Transforme un tableau en chaine de caract�res s�par� par un tiret
 
         $title .= time();
@@ -284,7 +284,7 @@ class SmartobjectCustomtagHandler extends SmartPersistableObjectHandler
         if (!$this->objects) {
             global $xoopsConfig;
 
-            $ret = array();
+            $ret = [];
 
             $criteria = new CriteriaCompo();
 

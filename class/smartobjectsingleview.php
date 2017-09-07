@@ -80,7 +80,7 @@ class SmartObjectSingleView
      * @param array $actions
      * @param bool  $headerAsRow
      */
-    public function __construct($object, $userSide = false, $actions = array(), $headerAsRow = true)
+    public function __construct($object, $userSide = false, $actions = [], $headerAsRow = true)
     {
         $this->_object      = $object;
         $this->_userSide    = $userSide;
@@ -107,7 +107,7 @@ class SmartObjectSingleView
 
         $this->_tpl             = new XoopsTpl();
         $vars                   = $this->_object->vars;
-        $smartobjectObjectArray = array();
+        $smartobjectObjectArray = [];
 
         foreach ($this->_rows as $row) {
             $key = $row->getKeyName();

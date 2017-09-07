@@ -8,7 +8,7 @@
  * Licence: GNU
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 class SmartobjectPermissionHandler extends XoopsObjectHandler
 {
@@ -51,7 +51,7 @@ class SmartobjectPermissionHandler extends XoopsObjectHandler
         }
 
         //Return the permission array
-        return isset($groups[$gperm_name][$id]) ? $groups[$gperm_name][$id] : array();
+        return isset($groups[$gperm_name][$id]) ? $groups[$gperm_name][$id] : [];
     }
 
     /**
@@ -92,9 +92,9 @@ class SmartobjectPermissionHandler extends XoopsObjectHandler
 
         //Return the permission array
         if ($gperm_name) {
-            return isset($groups[$gperm_name]) ? $groups[$gperm_name] : array();
+            return isset($groups[$gperm_name]) ? $groups[$gperm_name] : [];
         } else {
-            return isset($groups) ? $groups : array();
+            return isset($groups) ? $groups : [];
         }
     }
 
@@ -125,7 +125,7 @@ class SmartobjectPermissionHandler extends XoopsObjectHandler
                 $gpermHandler = xoops_getHandler('groupperm');
 
                 //Get user's groups
-                $groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : array(XOOPS_GROUP_ANONYMOUS);
+                $groups = is_object($xoopsUser) ? $xoopsUser->getGroups() : [XOOPS_GROUP_ANONYMOUS];
 
                 //Get all allowed item ids in this module and for this user's groups
                 $userpermissions          = $gpermHandler->getItemIds($gperm_name, $groups, $smartModule->getVar('mid'));
@@ -134,7 +134,7 @@ class SmartobjectPermissionHandler extends XoopsObjectHandler
         }
 
         //Return the permission array
-        return isset($permissions[$gperm_name]) ? $permissions[$gperm_name] : array();
+        return isset($permissions[$gperm_name]) ? $permissions[$gperm_name] : [];
     }
 
     /**
@@ -216,7 +216,7 @@ class SmartobjectPermissionHandler extends XoopsObjectHandler
     {
         global $xoopsUser;
 
-        $gperm_groupid = is_object($xoopsUser) ? $xoopsUser->getGroups() : array(XOOPS_GROUP_ANONYMOUS);
+        $gperm_groupid = is_object($xoopsUser) ? $xoopsUser->getGroups() : [XOOPS_GROUP_ANONYMOUS];
         $smartModule   = $this->handler->getModuleInfo();
         $gperm_modid   = $smartModule->getVar('mid');
 

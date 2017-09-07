@@ -27,7 +27,7 @@
 // Project: XOOPS Project                                               //
 // -------------------------------------------------------------------------//
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobject.php';
 require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartplugins.php';
@@ -54,23 +54,23 @@ class SmartobjectRating extends SmartObject
 
         $this->initNonPersistableVar('name', XOBJ_DTYPE_TXTBOX, 'user', _CO_SOBJECT_RATING_NAME);
 
-        $this->setControl('dirname', array(
+        $this->setControl('dirname', [
             'handler'  => 'rating',
             'method'   => 'getModuleList',
             'onSelect' => 'submit'
-        ));
+        ]);
 
-        $this->setControl('item', array(
+        $this->setControl('item', [
             'object' => &$this,
             'method' => 'getItemList'
-        ));
+        ]);
 
         $this->setControl('uid', 'user');
 
-        $this->setControl('rate', array(
+        $this->setControl('rate', [
             'handler' => 'rating',
             'method'  => 'getRateList'
-        ));
+        ]);
     }
 
     /**
@@ -80,7 +80,7 @@ class SmartobjectRating extends SmartObject
      */
     public function getVar($key, $format = 's')
     {
-        if ($format === 's' && in_array($key, array('name', 'dirname'))) {
+        if ($format === 's' && in_array($key, ['name', 'dirname'])) {
             //            return call_user_func(array($this, $key));
             return $this->{$key}();
         }
@@ -93,7 +93,7 @@ class SmartobjectRating extends SmartObject
      */
     public function name()
     {
-        $ret = smart_getLinkedUnameFromId($this->getVar('uid', 'e'), true, array());
+        $ret = smart_getLinkedUnameFromId($this->getVar('uid', 'e'), true, []);
 
         return $ret;
     }
@@ -163,7 +163,7 @@ class SmartobjectRating extends SmartObject
  */
 class SmartobjectRatingHandler extends SmartPersistableObjectHandler
 {
-    public $_rateOptions = array();
+    public $_rateOptions = [];
     public $_moduleList  = false;
     public $pluginsObject;
 

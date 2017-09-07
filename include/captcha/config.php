@@ -11,7 +11,7 @@
  * D.J.
  */
 
-$config = array(
+$config = [
     'mode'       => 'image',
     'name'       => 'xoopscaptcha',
     'skipmember' => true,
@@ -40,7 +40,7 @@ $config = array(
     'background_num'  => 50,
     // Number of background images to generate
     'polygon_point'   => 3
-);
+];
 
 $language = preg_replace("/[^a-z0-9_\-]/i", '', $GLOBALS['xoopsConfig']['language']);
 

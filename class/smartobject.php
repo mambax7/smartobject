@@ -10,7 +10,7 @@
  * @subpackage SmartObjectCore
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php';
 
@@ -72,7 +72,7 @@ class SmartObject extends XoopsObject
     /**
      * References to control objects, managing the form fields of this object
      */
-    public $controls = array();
+    public $controls = [];
 
     /**
      * SmartObject constructor.
@@ -163,7 +163,7 @@ class SmartObject extends XoopsObject
             }
         }
 
-        $this->vars[$key] = array_merge($this->vars[$key], array(
+        $this->vars[$key] = array_merge($this->vars[$key], [
             'multilingual'        => $multilingual,
             'form_caption'        => $form_caption,
             'form_dsc'            => $form_dsc,
@@ -172,7 +172,7 @@ class SmartObject extends XoopsObject
             'displayOnForm'       => $displayOnForm,
             'displayOnSingleView' => true,
             'readonly'            => false
-        ));
+        ]);
     }
 
     /**
@@ -267,19 +267,19 @@ class SmartObject extends XoopsObject
             case 'meta_keywords':
                 $value = $default !== 'notdefined' ? $default : '';
                 $this->initVar($varname, XOBJ_DTYPE_TXTAREA, $value, false, null, '', false, _CO_SOBJECT_META_KEYWORDS, _CO_SOBJECT_META_KEYWORDS_DSC, false, true, $displayOnForm);
-                $this->setControl('meta_keywords', array(
+                $this->setControl('meta_keywords', [
                     'name'        => 'textarea',
                     'form_editor' => 'textarea'
-                ));
+                ]);
                 break;
 
             case 'meta_description':
                 $value = $default !== 'notdefined' ? $default : '';
                 $this->initVar($varname, XOBJ_DTYPE_TXTAREA, $value, false, null, '', false, _CO_SOBJECT_META_DESCRIPTION, _CO_SOBJECT_META_DESCRIPTION_DSC, false, true, $displayOnForm);
-                $this->setControl('meta_description', array(
+                $this->setControl('meta_description', [
                     'name'        => 'textarea',
                     'form_editor' => 'textarea'
-                ));
+                ]);
                 break;
 
             case 'short_url':
@@ -304,10 +304,10 @@ class SmartObject extends XoopsObject
             case 'custom_css':
                 $value = $default !== 'notdefined' ? $default : '';
                 $this->initVar($varname, XOBJ_DTYPE_TXTAREA, $value, false, null, '', false, _CO_SOBJECT_CUSTOM_CSS, _CO_SOBJECT_CUSTOM_CSS_DSC, false, true, $displayOnForm);
-                $this->setControl('custom_css', array(
+                $this->setControl('custom_css', [
                     'name'        => 'textarea',
                     'form_editor' => 'textarea'
-                ));
+                ]);
                 break;
         }
         $this->hideFieldFromSingleView($varname);
@@ -398,13 +398,13 @@ class SmartObject extends XoopsObject
      * @param string $var name of the variable for which we want to set a control
      * @param array  $options
      */
-    public function setControl($var, $options = array())
+    public function setControl($var, $options = [])
     {
         if (isset($this->controls[$var])) {
             unset($this->controls[$var]);
         }
         if (is_string($options)) {
-            $options = array('name' => $options);
+            $options = ['name' => $options];
         }
         $this->controls[$var] = $options;
     }
@@ -452,7 +452,7 @@ class SmartObject extends XoopsObject
      */
     public function toArray()
     {
-        $ret  = array();
+        $ret  = [];
         $vars =& $this->getVars();
         foreach ($vars as $key => $var) {
             $value     = $this->getVar($key);
@@ -724,7 +724,7 @@ class SmartObject extends XoopsObject
      */
     public function getFieldsForSorting($sortsel)
     {
-        $ret = array();
+        $ret = [];
 
         foreach ($this->vars as $key => $field_info) {
             if ($field_info['sortby']) {
@@ -788,7 +788,7 @@ class SmartObject extends XoopsObject
 
         if ($editor) {
             if (defined('XOOPS_EDITOR_IS_HTML')
-                && !in_array($form_editor, array('formtextarea', 'textarea', 'dhtmltextarea'))) {
+                && !in_array($form_editor, ['formtextarea', 'textarea', 'dhtmltextarea'])) {
                 $br       = false;
                 $formatML = !$editor;
             } else {
@@ -818,7 +818,7 @@ class SmartObject extends XoopsObject
     {
         $ts              = MyTextSanitizer::getInstance();
         $existing_errors = $this->getErrors();
-        $this->_errors   = array();
+        $this->_errors   = [];
         foreach ($this->vars as $k => $v) {
             $cleanv = $v['value'];
             if (!$v['changed']) {
@@ -1180,7 +1180,7 @@ class SmartObject extends XoopsObject
                             $selected = explode('|', $ret);
                             $options  = explode('|', $this->vars[$key]['options']);
                             $i        = 1;
-                            $ret      = array();
+                            $ret      = [];
                             foreach ($options as $op) {
                                 if (in_array($i, $selected)) {
                                     $ret[] = $op;
@@ -1298,7 +1298,7 @@ class SmartObject extends XoopsObject
     public function displaySingleObject(
         $fetchOnly = false,
         $userSide = false,
-        $actions = array(),
+        $actions = [],
         $headerAsRow = true
     ) {
         require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectsingleview.php';

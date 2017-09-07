@@ -145,7 +145,7 @@ class SmartObjectTable
     public $_showFilterAndLimit     = true;
     public $_enableColumnsSorting   = true;
     public $_customTemplate         = false;
-    public $_withSelectedActions    = array();
+    public $_withSelectedActions    = [];
 
     /**
      * Constructor
@@ -159,7 +159,7 @@ class SmartObjectTable
     public function __construct(
         SmartPersistableObjectHandler $objectHandler,
         CriteriaElement $criteria = null,
-        $actions = array('edit', 'delete'),
+        $actions = ['edit', 'delete'],
         $userSide = false
     ) {
         $this->_id            = $objectHandler->className;
@@ -170,7 +170,7 @@ class SmartObjectTable
         }
         $this->_criteria       = $criteria;
         $this->_actions        = $actions;
-        $this->_custom_actions = array();
+        $this->_custom_actions = [];
         $this->_userSide       = $userSide;
         if ($userSide) {
             $this->_head_css_class = 'head';
@@ -184,11 +184,11 @@ class SmartObjectTable
      */
     public function addActionButton($op, $caption = false, $text = false)
     {
-        $action                 = array(
+        $action                 = [
             'op'      => $op,
             'caption' => $caption,
             'text'    => $text
-        );
+        ];
         $this->_actionButtons[] = $action;
     }
 
@@ -207,7 +207,7 @@ class SmartObjectTable
      */
     public function addIntroButton($name, $location, $value)
     {
-        $introButton             = array();
+        $introButton             = [];
         $introButton['name']     = $name;
         $introButton['location'] = $location;
         $introButton['value']    = $value;
@@ -228,7 +228,7 @@ class SmartObjectTable
      */
     public function addQuickSearch($fields, $caption = _CO_SOBJECT_QUICK_SEARCH)
     {
-        $this->_quickSearch = array('fields' => $fields, 'caption' => $caption);
+        $this->_quickSearch = ['fields' => $fields, 'caption' => $caption];
     }
 
     /**
@@ -306,7 +306,7 @@ class SmartObjectTable
     /**
      * @param array $actions
      */
-    public function addWithSelectedActions($actions = array())
+    public function addWithSelectedActions($actions = [])
     {
         $this->addColumn(new SmartObjectColumn('checked', 'center', 20, false, false, '&nbsp;'));
         $this->_withSelectedActions = $actions;
@@ -385,21 +385,21 @@ class SmartObjectTable
 
     public function createTableRows()
     {
-        $this->_aObjects = array();
+        $this->_aObjects = [];
 
         $doWeHaveActions = false;
 
         $objectclass = 'odd';
         if (count($this->_objects) > 0) {
             foreach ($this->_objects as $object) {
-                $aObject = array();
+                $aObject = [];
 
                 $i = 0;
 
-                $aColumns = array();
+                $aColumns = [];
 
                 foreach ($this->_columns as $column) {
-                    $aColumn = array();
+                    $aColumn = [];
 
                     if ($i == 0) {
                         $class = 'head';
@@ -448,7 +448,7 @@ class SmartObjectTable
 
                 $aObject['class'] = $objectclass;
 
-                $actions = array();
+                $actions = [];
 
                 // Adding the custom actions if any
                 foreach ($this->_custom_actions as $action) {
@@ -508,8 +508,8 @@ class SmartObjectTable
      */
     public function getFiltersArray()
     {
-        $ret               = array();
-        $field             = array();
+        $ret               = [];
+        $field             = [];
         $field['caption']  = _CO_OBJ_NONE;
         $field['selected'] = '';
         $ret['default']    = $field;
@@ -517,7 +517,7 @@ class SmartObjectTable
 
         if ($this->_filterseloptions) {
             foreach ($this->_filterseloptions as $key => $value) {
-                $field = array();
+                $field = [];
                 if (is_array($value)) {
                     $field['caption']  = $key;
                     $field['selected'] = $this->_filtersel == $key ? 'selected' : '';
@@ -560,10 +560,10 @@ class SmartObjectTable
      */
     public function getFilters2Array()
     {
-        $ret = array();
+        $ret = [];
 
         foreach ($this->_filtersel2options as $key => $value) {
-            $field             = array();
+            $field             = [];
             $field['caption']  = $value;
             $field['selected'] = $this->_filtersel2 == $key ? 'selected' : '';
             $ret[$key]         = $field;
@@ -596,7 +596,7 @@ class SmartObjectTable
      */
     public function getLimitsArray()
     {
-        $ret                    = array();
+        $ret                    = [];
         $ret['all']['caption']  = _CO_SOBJECT_LIMIT_ALL;
         $ret['all']['selected'] = ('all' === $this->_limitsel) ? 'selected' : '';
 
@@ -650,7 +650,7 @@ class SmartObjectTable
      */
     public function getOrdersArray()
     {
-        $ret                    = array();
+        $ret                    = [];
         $ret['ASC']['caption']  = _CO_SOBJECT_SORT_ASC;
         $ret['ASC']['selected'] = ('ASC' === $this->_ordersel) ? 'selected' : '';
 
@@ -763,16 +763,16 @@ class SmartObjectTable
              * Geeting rid of the old params
              * $new_get_array is an array containing the new GET parameters
              */
-            $new_get_array = array();
+            $new_get_array = [];
 
             /**
              * $params_of_the_options_sel is an array with all the parameters of the page
              * but without the pagenave parameters. This array will be used in the
              * OptionsSelection
              */
-            $params_of_the_options_sel = array();
+            $params_of_the_options_sel = [];
 
-            $not_needed_params = array('sortsel', 'limitsel', 'ordersel', 'start' . $this->_objectHandler->keyName);
+            $not_needed_params = ['sortsel', 'limitsel', 'ordersel', 'start' . $this->_objectHandler->keyName];
             foreach ($_GET as $k => $v) {
                 if (!in_array($k, $not_needed_params)) {
                     $new_get_array[]             = "$k=$v";
@@ -801,7 +801,7 @@ class SmartObjectTable
             $query_string = str_replace('?', '', $query_string);
         }
         $query_stringArray     = explode('&', $query_string);
-        $new_query_stringArray = array();
+        $new_query_stringArray = [];
         foreach ($query_stringArray as $query_string) {
             if (strpos($query_string, 'sortsel') === false && strpos($query_string, 'ordersel') === false) {
                 $new_query_stringArray[] = $query_string;
@@ -809,17 +809,17 @@ class SmartObjectTable
         }
         $new_query_string = implode('&', $new_query_stringArray);
 
-        $orderArray                     = array();
+        $orderArray                     = [];
         $orderArray['ASC']['image']     = 'desc.png';
         $orderArray['ASC']['neworder']  = 'DESC';
         $orderArray['DESC']['image']    = 'asc.png';
         $orderArray['DESC']['neworder'] = 'ASC';
 
-        $aColumns = array();
+        $aColumns = [];
 
         foreach ($this->_columns as $column) {
             $qs_param         = '';
-            $aColumn          = array();
+            $aColumn          = [];
             $aColumn['width'] = $column->getWidth();
             $aColumn['align'] = $column->getAlign();
             $aColumn['key']   = $column->getKeyName();

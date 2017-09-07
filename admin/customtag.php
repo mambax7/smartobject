@@ -139,7 +139,7 @@ switch ($op) {
                                             'criteria' => $criteria_last30days
                 ));
         */
-        $objectTable->addQuickSearch(array('title', 'summary', 'description'));
+        $objectTable->addQuickSearch(['title', 'summary', 'description']);
         $objectTable->addCustomAction('getCloneLink');
 
         $objectTable->render();

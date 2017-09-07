@@ -32,7 +32,7 @@ class JavaScript
     public function escape($javascript)
     {
         $javascript = addslashes($javascript);
-        $javascript = str_replace(array("\r\n", "\n", "\r"), array("\n"), $javascript);
+        $javascript = str_replace(["\r\n", "\n", "\r"], ["\n"], $javascript);
 
         return $javascript;
     }

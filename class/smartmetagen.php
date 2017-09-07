@@ -10,7 +10,7 @@
  * @subpackage SmartObjectCore
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * Class MetaGen is a class providing some methods to dynamically and automatically customize Meta Tags information
@@ -84,7 +84,7 @@ class SmartMetaGen
         $title = rawurlencode(strtolower($title));
 
         // Transformation des ponctuations
-        $pattern = array(
+        $pattern = [
             '/%09/', // Tab
             '/%20/', // Space
             '/%21/', // !
@@ -113,8 +113,8 @@ class SmartMetaGen
             '/%7D/', // }
             '/%7E/', // ~
             "/\./" // .
-        );
-        $rep_pat = array(
+        ];
+        $rep_pat = [
             '-',
             '-',
             '-',
@@ -143,11 +143,11 @@ class SmartMetaGen
             '-',
             '-',
             '-'
-        );
+        ];
         $title   = preg_replace($pattern, $rep_pat, $title);
 
         // Transformation des caractères accentués
-        $pattern = array(
+        $pattern = [
             '/%B0/', // °
             '/%E8/', // è
             '/%E9/', // é
@@ -164,12 +164,12 @@ class SmartMetaGen
             '/%FB/', // û
             '/%F4/', // ô
             '/%F6/', // ö
-        );
-        $rep_pat = array('-', 'e', 'e', 'e', 'e', 'c', 'a', 'a', 'a', 'i', 'i', 'u', 'u', 'u', 'o', 'o');
+        ];
+        $rep_pat = ['-', 'e', 'e', 'e', 'e', 'c', 'a', 'a', 'a', 'i', 'i', 'u', 'u', 'u', 'o', 'o'];
         $title   = preg_replace($pattern, $rep_pat, $title);
 
         $tableau = explode('-', $title); // Transforme la chaine de caract�res en tableau
-        $tableau = array_filter($tableau, array($this, 'emptyString')); // Supprime les chaines vides du tableau
+        $tableau = array_filter($tableau, [$this, 'emptyString']); // Supprime les chaines vides du tableau
         $title   = implode('-', $tableau); // Transforme un tableau en chaine de caract�res s�par� par un tiret
 
         if (count($title) > 0) {
@@ -204,7 +204,7 @@ class SmartMetaGen
 
         $moduleName = $xoopsModule->getVar('name');
 
-        $titleTag = array();
+        $titleTag = [];
 
         $show_mod_name_breadcrumb = isset($xoopsModuleConfig['show_mod_name_breadcrumb']) ? $xoopsModuleConfig['show_mod_name_breadcrumb'] : true;
 
@@ -298,11 +298,11 @@ class SmartMetaGen
      */
     public function createMetaDescription($maxWords = 100)
     {
-        $words = array();
+        $words = [];
         $words = explode(' ', $this->_description);
 
         // Only keep $maxWords words
-        $newWords = array();
+        $newWords = [];
         $i        = 0;
 
         while ($i < $maxWords - 1 && $i < count($words)) {
@@ -321,7 +321,7 @@ class SmartMetaGen
      */
     public function findMetaKeywords($text, $minChar)
     {
-        $keywords = array();
+        $keywords = [];
 
         $text = $this->purifyText($text);
         $text = $this->html2text($text);
@@ -372,7 +372,7 @@ class SmartMetaGen
          }*/
 
         // Only take the first 90 keywords
-        $newKeywords = array();
+        $newKeywords = [];
         $i           = 0;
         while ($i < 90 - 1 && isset($keywords[$i])) {
             $newKeywords[] = $keywords[$i];

@@ -15,9 +15,9 @@ class XoopsCaptcha
 {
     public $active = true;
     public $mode   = 'text';    // potential values: image, text
-    public $config = array();
+    public $config = [];
 
-    public $message = array(); // Logging error messages
+    public $message = []; // Logging error messages
 
     /**
      * XoopsCaptcha constructor.
@@ -70,7 +70,7 @@ class XoopsCaptcha
      */
     public function setMode($mode = null)
     {
-        if (!empty($mode) && in_array($mode, array('text', 'image'))) {
+        if (!empty($mode) && in_array($mode, ['text', 'image'])) {
             $this->mode = $mode;
 
             if ($this->mode !== 'image') {
@@ -82,14 +82,14 @@ class XoopsCaptcha
         if (!extension_loaded('gd')) {
             $this->mode = 'text';
         } else {
-            $required_functions = array(
+            $required_functions = [
                 'imagecreatetruecolor',
                 'imagecolorallocate',
                 'imagefilledrectangle',
                 'imagejpeg',
                 'imagedestroy',
                 'imageftbbox'
-            );
+            ];
             foreach ($required_functions as $func) {
                 if (!function_exists($func)) {
                     $this->mode = 'text';

@@ -18,7 +18,7 @@ if (empty($_SERVER['HTTP_REFERER']) || !preg_match('/^' . preg_quote(XOOPS_URL, 
  */
 class XoopsCaptchaImageHandler
 {
-    public $config = array();
+    public $config = [];
     //var $mode = "gd"; // GD or bmp
     public $code;
     public $invalid = false;
@@ -40,14 +40,14 @@ class XoopsCaptchaImageHandler
         if (!extension_loaded('gd')) {
             $this->mode = 'bmp';
         } else {
-            $required_functions = array(
+            $required_functions = [
                 'imagecreatetruecolor',
                 'imagecolorallocate',
                 'imagefilledrectangle',
                 'imagejpeg',
                 'imagedestroy',
                 'imageftbbox'
-            );
+            ];
             foreach ($required_functions as $func) {
                 if (!function_exists($func)) {
                     $this->mode = 'bmp';
@@ -61,7 +61,7 @@ class XoopsCaptchaImageHandler
      * Loading configs from CAPTCHA class
      * @param array $config
      */
-    public function setConfig($config = array())
+    public function setConfig($config = [])
     {
         // Loading default preferences
         $this->config = $config;
@@ -202,7 +202,7 @@ class XoopsCaptchaImageHandler
      */
     public function _getList($name, $extension = '')
     {
-        $items = array();
+        $items = [];
         /*
          if (@ require_once XOOPS_ROOT_PATH."/Frameworks/art/functions.ini.php") {
          load_functions("cache");
@@ -241,7 +241,7 @@ class XoopsCaptchaImageHandler
         $FontSize      = $this->config['fontsize_max'];
         for ($Angle = -30; $Angle <= 30; ++$Angle) {
             for ($i = 65; $i <= 90; ++$i) {
-                $CharDetails   = imageftbbox($FontSize, $Angle, $this->font, chr($i), array());
+                $CharDetails   = imageftbbox($FontSize, $Angle, $this->font, chr($i), []);
                 $_MaxCharWidth = abs($CharDetails[0] + $CharDetails[2]);
                 if ($_MaxCharWidth > $MaxCharWidth) {
                     $MaxCharWidth = $_MaxCharWidth;
@@ -321,14 +321,14 @@ class XoopsCaptchaImageHandler
             // select random font size
             $FontSize = mt_rand($this->config['fontsize_min'], $this->config['fontsize_max']);
 
-            $CharDetails = imageftbbox($FontSize, $Angle, $this->font, $this->code[$i], array());
+            $CharDetails = imageftbbox($FontSize, $Angle, $this->font, $this->code[$i], []);
             $CharHeight  = abs($CharDetails[1] + $CharDetails[5]);
 
             // calculate character starting coordinates
             $posX = ($this->spacing / 2) + ($i * $this->spacing);
             $posY = 2 + ($this->height / 2) + ($CharHeight / 4);
 
-            imagefttext($this->oImage, $FontSize, $Angle, $posX, $posY, $text_color, $this->font, $this->code[$i], array());
+            imagefttext($this->oImage, $FontSize, $Angle, $posX, $posY, $text_color, $this->font, $this->code[$i], []);
         }
     }
 
@@ -410,7 +410,7 @@ class XoopsCaptchaImageHandler
     {
         for ($i = 1; $i <= $this->config['background_num']; ++$i) {
             $randomcolor = imagecolorallocate($this->oImage, mt_rand(190, 255), mt_rand(190, 255), mt_rand(190, 255));
-            $coords      = array();
+            $coords      = [];
             for ($j = 1; $j <= $this->config['polygon_point']; ++$j) {
                 $coords[] = mt_rand(0, $this->width);
                 $coords[] = mt_rand(0, $this->height);

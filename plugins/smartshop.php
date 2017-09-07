@@ -9,7 +9,7 @@
 
 function smartobject_plugin_smartshop()
 {
-    $pluginInfo = array();
+    $pluginInfo = [];
 
     $pluginInfo['items']['item']['caption'] = 'Item';
     $pluginInfo['items']['item']['url']     = 'item.php?itemid=%u';

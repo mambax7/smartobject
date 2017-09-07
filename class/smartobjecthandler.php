@@ -10,7 +10,7 @@
  * @subpackage SmartObjectCore
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * Persistable SmartObject Handler class.
@@ -106,14 +106,14 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
 
     public $_maxHeight = 500;
 
-    public $highlightFields = array();
+    public $highlightFields = [];
 
     /**
      * Array containing the events name and functions
      *
      * @var array
      */
-    public $eventArray = array();
+    public $eventArray = [];
 
     /**
      * Array containing the permissions that this handler will manage on the objects
@@ -124,8 +124,8 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
 
     public $generalSQL = false;
 
-    public $_eventHooks     = array();
-    public $_disabledEvents = array();
+    public $_eventHooks     = [];
+    public $_disabledEvents = [];
 
     /**
      * Constructor - called from child classes
@@ -180,11 +180,11 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
     {
         require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectpermission.php';
 
-        $this->permissionsArray[] = array(
+        $this->permissionsArray[] = [
             'perm_name'   => $perm_name,
             'caption'     => $caption,
             'description' => $description
-        );
+        ];
     }
 
     /**
@@ -353,7 +353,7 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
         $sql = false,
         $debug = false
     ) {
-        $ret   = array();
+        $ret   = [];
         $limit = $start = 0;
 
         if ($this->generalSQL) {
@@ -391,7 +391,7 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
      */
     public function query($sql, $criteria, $force = false, $debug = false)
     {
-        $ret = array();
+        $ret = [];
 
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
@@ -444,7 +444,7 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
      */
     public function getObjectsAsArray($arrayObjects)
     {
-        $ret = array();
+        $ret = [];
         foreach ($arrayObjects as $key => $object) {
             $ret[$key] = $object->toArray();
         }
@@ -466,7 +466,7 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
      */
     public function convertResultSet($result, $id_as_key = false, $as_object = true)
     {
-        $ret = array();
+        $ret = [];
         while (false !== ($myrow = $this->db->fetchArray($result))) {
             $obj = $this->create(false);
             $obj->assignVars($myrow);
@@ -517,7 +517,7 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
      */
     public function getList(CriteriaElement $criteria = null, $limit = 0, $start = 0, $debug = false)
     {
-        $ret = array();
+        $ret = [];
         if ($criteria === null) {
             $criteria = new CriteriaCompo();
         }
@@ -600,7 +600,7 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
 
             return $count;
         } else {
-            $ret = array();
+            $ret = [];
             while (false !== (list($id, $count) = $this->db->fetchRow($result))) {
                 $ret[$id] = $count;
             }
@@ -626,7 +626,7 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
         }
 
         if (is_array($this->keyName)) {
-            $clause = array();
+            $clause = [];
             for ($i = 0, $iMax = count($this->keyName); $i < $iMax; ++$i) {
                 $clause[] = $this->keyName[$i] . ' = ' . $obj->getVar($this->keyName[$i]);
             }
@@ -753,7 +753,7 @@ class SmartPersistableObjectHandler extends XoopsObjectHandler
 
             return false;
         }
-        $fieldsToStoreInDB = array();
+        $fieldsToStoreInDB = [];
         foreach ($obj->cleanVars as $k => $v) {
             if ($obj->vars[$k]['data_type'] == XOBJ_DTYPE_INT) {
                 $cleanvars[$k] = (int)$v;

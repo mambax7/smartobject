@@ -67,11 +67,11 @@ class SmartObjectExport
         $this->filename = $filename;
 
         $objects        = $this->handler->getObjects($this->criteria);
-        $rows           = array();
-        $columnsHeaders = array();
+        $rows           = [];
+        $columnsHeaders = [];
         $firstObject    = true;
         foreach ($objects as $object) {
-            $row = array();
+            $row = [];
             foreach ($object->vars as $key => $var) {
                 if ((!$this->fields || in_array($key, $this->fields)) && !in_array($key, $this->notDisplayFields)) {
                     if ($this->outputMethods && isset($this->outputMethods[$key])
@@ -91,7 +91,7 @@ class SmartObjectExport
             $rows[]      = $row;
             unset($row);
         }
-        $data                   = array();
+        $data                   = [];
         $data['rows']           = $rows;
         $data['columnsHeaders'] = $columnsHeaders;
         $smartExportRenderer    = new SmartExportRenderer($data, $this->filename, $this->filepath, $this->format, $this->options);
@@ -121,7 +121,7 @@ class SmartObjectExport
             if (is_array($fields)) {
                 $this->notDisplayFields = $fields;
             } else {
-                $this->notDisplayFields = array($fields);
+                $this->notDisplayFields = [$fields];
             }
         } else {
             if (is_array($fields)) {
@@ -164,7 +164,7 @@ class SmartExportRenderer
         $filename = false,
         $filepath = false,
         $format = 'csv',
-        $options = array('separator' => ';')
+        $options = ['separator' => ';']
     ) {
         $this->data     = $data;
         $this->format   = $format;
@@ -199,7 +199,7 @@ class SmartExportRenderer
                 $trimFunction = 'trim';
                 break;
         }
-        $ret = array();
+        $ret = [];
         foreach ($dataArray as $key => $field) {
             $ret[$key] = $this->valToCsvHelper($field, $separator, $trimFunction);
         }

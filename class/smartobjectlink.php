@@ -27,7 +27,7 @@
 // Project: XOOPS Project                                               //
 // -------------------------------------------------------------------------//
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobject.php';
 
 /**
@@ -65,7 +65,7 @@ class SmartobjectLink extends SmartObject
      */
     public function getVar($key, $format = 's')
     {
-        if ($format === 's' && in_array($key, array('from_uid', 'to_uid', 'date', 'link'))) {
+        if ($format === 's' && in_array($key, ['from_uid', 'to_uid', 'date', 'link'])) {
             //            return call_user_func(array($this, $key));
             return $this->{$key}();
         }

@@ -35,49 +35,49 @@ function update_tables_to_300()
         }
     }
 
-    $download_fields = array(
-        'lid'           => array('Type' => 'int(11) unsigned NOT NULL auto_increment', 'Default' => false),
-        'cid'           => array('Type' => "int(5) unsigned NOT NULL default '0'", 'Default' => true),
-        'title'         => array('Type' => "varchar(100) NOT NULL default ''", 'Default' => true),
-        'url'           => array('Type' => "varchar(255) NOT NULL default ''", 'Default' => true),
-        'filename'      => array('Type' => "varchar(150) NOT NULL default ''", 'Default' => true),
-        'filetype'      => array('Type' => "varchar(100) NOT NULL default ''", 'Default' => true),
-        'homepage'      => array('Type' => "varchar(100) NOT NULL default ''", 'Default' => true),
-        'version'       => array('Type' => "varchar(20) NOT NULL default ''", 'Default' => true),
-        'size'          => array('Type' => "int(8) NOT NULL default '0'", 'Default' => true),
-        'platform'      => array('Type' => "varchar(50) NOT NULL default ''", 'Default' => true),
-        'screenshot'    => array('Type' => "varchar(255) NOT NULL default ''", 'Default' => true),
-        'submitter'     => array('Type' => "int(11) NOT NULL default '0'", 'Default' => true),
-        'publisher'     => array('Type' => "varchar(255) NOT NULL default ''", 'Default' => true),
-        'status'        => array('Type' => "tinyint(2) NOT NULL default '0'", 'Default' => true),
-        'date'          => array('Type' => "int(10) NOT NULL default '0'", 'Default' => true),
-        'hits'          => array('Type' => "int(11) unsigned NOT NULL default '0'", 'Default' => true),
-        'rating'        => array('Type' => "double(6,4) NOT NULL default '0.0000'", 'Default' => true),
-        'votes'         => array('Type' => "int(11) unsigned NOT NULL default '0'", 'Default' => true),
-        'comments'      => array('Type' => "int(11) unsigned NOT NULL default '0'", 'Default' => true),
-        'license'       => array('Type' => "varchar(255) NOT NULL default ''", 'Default' => true),
-        'mirror'        => array('Type' => "varchar(255) NOT NULL default ''", 'Default' => true),
-        'price'         => array('Type' => "varchar(10) NOT NULL default 'Free'", 'Default' => true),
-        'paypalemail'   => array('Type' => "varchar(255) NOT NULL default ''", 'Default' => true),
-        'features'      => array('Type' => 'text NOT NULL', 'Default' => false),
-        'requirements'  => array('Type' => 'text NOT NULL', 'Default' => false),
-        'homepagetitle' => array('Type' => "varchar(255) NOT NULL default ''", 'Default' => true),
-        'forumid'       => array('Type' => "int(11) NOT NULL default '0'", 'Default' => true),
-        'limitations'   => array('Type' => "varchar(255) NOT NULL default '30 day trial'", 'Default' => true),
-        'dhistory'      => array('Type' => 'text NOT NULL', 'Default' => false),
-        'published'     => array('Type' => "int(11) NOT NULL default '1089662528'", 'Default' => true),
-        'expired'       => array('Type' => "int(10) NOT NULL default '0'", 'Default' => true),
-        'updated'       => array('Type' => "int(11) NOT NULL default '0'", 'Default' => true),
-        'offline'       => array('Type' => "tinyint(1) NOT NULL default '0'", 'Default' => true),
-        'description'   => array('Type' => 'text NOT NULL', 'Default' => false),
-        'ipaddress'     => array('Type' => "varchar(120) NOT NULL default '0'", 'Default' => true),
-        'notifypub'     => array('Type' => "int(1) NOT NULL default '0'", 'Default' => true),
-        'summary'       => array('Type' => 'text NOT NULL', 'Default' => false)
-    );
+    $download_fields = [
+        'lid'           => ['Type' => 'int(11) unsigned NOT NULL auto_increment', 'Default' => false],
+        'cid'           => ['Type' => "int(5) unsigned NOT NULL default '0'", 'Default' => true],
+        'title'         => ['Type' => "varchar(100) NOT NULL default ''", 'Default' => true],
+        'url'           => ['Type' => "varchar(255) NOT NULL default ''", 'Default' => true],
+        'filename'      => ['Type' => "varchar(150) NOT NULL default ''", 'Default' => true],
+        'filetype'      => ['Type' => "varchar(100) NOT NULL default ''", 'Default' => true],
+        'homepage'      => ['Type' => "varchar(100) NOT NULL default ''", 'Default' => true],
+        'version'       => ['Type' => "varchar(20) NOT NULL default ''", 'Default' => true],
+        'size'          => ['Type' => "int(8) NOT NULL default '0'", 'Default' => true],
+        'platform'      => ['Type' => "varchar(50) NOT NULL default ''", 'Default' => true],
+        'screenshot'    => ['Type' => "varchar(255) NOT NULL default ''", 'Default' => true],
+        'submitter'     => ['Type' => "int(11) NOT NULL default '0'", 'Default' => true],
+        'publisher'     => ['Type' => "varchar(255) NOT NULL default ''", 'Default' => true],
+        'status'        => ['Type' => "tinyint(2) NOT NULL default '0'", 'Default' => true],
+        'date'          => ['Type' => "int(10) NOT NULL default '0'", 'Default' => true],
+        'hits'          => ['Type' => "int(11) unsigned NOT NULL default '0'", 'Default' => true],
+        'rating'        => ['Type' => "double(6,4) NOT NULL default '0.0000'", 'Default' => true],
+        'votes'         => ['Type' => "int(11) unsigned NOT NULL default '0'", 'Default' => true],
+        'comments'      => ['Type' => "int(11) unsigned NOT NULL default '0'", 'Default' => true],
+        'license'       => ['Type' => "varchar(255) NOT NULL default ''", 'Default' => true],
+        'mirror'        => ['Type' => "varchar(255) NOT NULL default ''", 'Default' => true],
+        'price'         => ['Type' => "varchar(10) NOT NULL default 'Free'", 'Default' => true],
+        'paypalemail'   => ['Type' => "varchar(255) NOT NULL default ''", 'Default' => true],
+        'features'      => ['Type' => 'text NOT NULL', 'Default' => false],
+        'requirements'  => ['Type' => 'text NOT NULL', 'Default' => false],
+        'homepagetitle' => ['Type' => "varchar(255) NOT NULL default ''", 'Default' => true],
+        'forumid'       => ['Type' => "int(11) NOT NULL default '0'", 'Default' => true],
+        'limitations'   => ['Type' => "varchar(255) NOT NULL default '30 day trial'", 'Default' => true],
+        'dhistory'      => ['Type' => 'text NOT NULL', 'Default' => false],
+        'published'     => ['Type' => "int(11) NOT NULL default '1089662528'", 'Default' => true],
+        'expired'       => ['Type' => "int(10) NOT NULL default '0'", 'Default' => true],
+        'updated'       => ['Type' => "int(11) NOT NULL default '0'", 'Default' => true],
+        'offline'       => ['Type' => "tinyint(1) NOT NULL default '0'", 'Default' => true],
+        'description'   => ['Type' => 'text NOT NULL', 'Default' => false],
+        'ipaddress'     => ['Type' => "varchar(120) NOT NULL default '0'", 'Default' => true],
+        'notifypub'     => ['Type' => "int(1) NOT NULL default '0'", 'Default' => true],
+        'summary'       => ['Type' => 'text NOT NULL', 'Default' => false]
+    ];
 
-    $renamed_fields = array(
+    $renamed_fields = [
         'logourl' => 'screenshot'
-    );
+    ];
 
     echo '<br><b>Checking Download table</b><br>';
     $downloadHandler = xoops_getModuleHandler('download', 'wfdownloads');
@@ -91,50 +91,50 @@ function update_tables_to_300()
     }
     unset($fields);
 
-    $mod_fields = array(
-        'requestid'       => array('Type' => 'int(11) NOT NULL auto_increment', 'Default' => false),
-        'lid'             => array('Type' => "int(11) unsigned NOT NULL default '0'", 'Default' => true),
-        'cid'             => array('Type' => "int(5) unsigned NOT NULL default '0'", 'Default' => true),
-        'title'           => array('Type' => "varchar(255) NOT NULL default ''", 'Default' => true),
-        'url'             => array('Type' => "varchar(255) NOT NULL default ''", 'Default' => true),
-        'filename'        => array('Type' => "varchar(150) NOT NULL default ''", 'Default' => true),
-        'filetype'        => array('Type' => "varchar(100) NOT NULL default ''", 'Default' => true),
-        'homepage'        => array('Type' => "varchar(255) NOT NULL default ''", 'Default' => true),
-        'version'         => array('Type' => "varchar(20) NOT NULL default ''", 'Default' => true),
-        'size'            => array('Type' => "int(8) NOT NULL default '0'", 'Default' => true),
-        'platform'        => array('Type' => "varchar(50) NOT NULL default ''", 'Default' => true),
-        'screenshot'      => array('Type' => "varchar(255) NOT NULL default ''", 'Default' => true),
-        'submitter'       => array('Type' => "int(11) NOT NULL default '0'", 'Default' => true),
-        'publisher'       => array('Type' => 'text NOT NULL', 'Default' => false),
-        'status'          => array('Type' => "tinyint(2) NOT NULL default '0'", 'Default' => true),
-        'date'            => array('Type' => "int(10) NOT NULL default '0'", 'Default' => true),
-        'hits'            => array('Type' => "int(11) unsigned NOT NULL default '0'", 'Default' => true),
-        'rating'          => array('Type' => "double(6,4) NOT NULL default '0.0000'", 'Default' => true),
-        'votes'           => array('Type' => "int(11) unsigned NOT NULL default '0'", 'Default' => true),
-        'comments'        => array('Type' => "int(11) unsigned NOT NULL default '0'", 'Default' => true),
-        'license'         => array('Type' => "varchar(255) NOT NULL default ''", 'Default' => true),
-        'mirror'          => array('Type' => "varchar(255) NOT NULL default ''", 'Default' => true),
-        'price'           => array('Type' => "varchar(10) NOT NULL default 'Free'", 'Default' => true),
-        'paypalemail'     => array('Type' => "varchar(255) NOT NULL default ''", 'Default' => true),
-        'features'        => array('Type' => 'text NOT NULL', 'Default' => false),
-        'requirements'    => array('Type' => 'text NOT NULL', 'Default' => false),
-        'homepagetitle'   => array('Type' => "varchar(255) NOT NULL default ''", 'Default' => true),
-        'forumid'         => array('Type' => "int(11) NOT NULL default '0'", 'Default' => true),
-        'limitations'     => array('Type' => "varchar(255) NOT NULL default '30 day trial'", 'Default' => true),
-        'dhistory'        => array('Type' => 'text NOT NULL', 'Default' => false),
-        'published'       => array('Type' => "int(10) NOT NULL default '0'", 'Default' => true),
-        'expired'         => array('Type' => "int(10) NOT NULL default '0'", 'Default' => true),
-        'updated'         => array('Type' => "int(11) NOT NULL default '0'", 'Default' => true),
-        'offline'         => array('Type' => "tinyint(1) NOT NULL default '0'", 'Default' => true),
-        'summary'         => array('Type' => 'text NOT NULL', 'Default' => false),
-        'description'     => array('Type' => 'text NOT NULL', 'Default' => false),
-        'modifysubmitter' => array('Type' => "int(11) NOT NULL default '0'", 'Default' => true),
-        'requestdate'     => array('Type' => "int(11) NOT NULL default '0'", 'Default' => true)
-    );
+    $mod_fields = [
+        'requestid'       => ['Type' => 'int(11) NOT NULL auto_increment', 'Default' => false],
+        'lid'             => ['Type' => "int(11) unsigned NOT NULL default '0'", 'Default' => true],
+        'cid'             => ['Type' => "int(5) unsigned NOT NULL default '0'", 'Default' => true],
+        'title'           => ['Type' => "varchar(255) NOT NULL default ''", 'Default' => true],
+        'url'             => ['Type' => "varchar(255) NOT NULL default ''", 'Default' => true],
+        'filename'        => ['Type' => "varchar(150) NOT NULL default ''", 'Default' => true],
+        'filetype'        => ['Type' => "varchar(100) NOT NULL default ''", 'Default' => true],
+        'homepage'        => ['Type' => "varchar(255) NOT NULL default ''", 'Default' => true],
+        'version'         => ['Type' => "varchar(20) NOT NULL default ''", 'Default' => true],
+        'size'            => ['Type' => "int(8) NOT NULL default '0'", 'Default' => true],
+        'platform'        => ['Type' => "varchar(50) NOT NULL default ''", 'Default' => true],
+        'screenshot'      => ['Type' => "varchar(255) NOT NULL default ''", 'Default' => true],
+        'submitter'       => ['Type' => "int(11) NOT NULL default '0'", 'Default' => true],
+        'publisher'       => ['Type' => 'text NOT NULL', 'Default' => false],
+        'status'          => ['Type' => "tinyint(2) NOT NULL default '0'", 'Default' => true],
+        'date'            => ['Type' => "int(10) NOT NULL default '0'", 'Default' => true],
+        'hits'            => ['Type' => "int(11) unsigned NOT NULL default '0'", 'Default' => true],
+        'rating'          => ['Type' => "double(6,4) NOT NULL default '0.0000'", 'Default' => true],
+        'votes'           => ['Type' => "int(11) unsigned NOT NULL default '0'", 'Default' => true],
+        'comments'        => ['Type' => "int(11) unsigned NOT NULL default '0'", 'Default' => true],
+        'license'         => ['Type' => "varchar(255) NOT NULL default ''", 'Default' => true],
+        'mirror'          => ['Type' => "varchar(255) NOT NULL default ''", 'Default' => true],
+        'price'           => ['Type' => "varchar(10) NOT NULL default 'Free'", 'Default' => true],
+        'paypalemail'     => ['Type' => "varchar(255) NOT NULL default ''", 'Default' => true],
+        'features'        => ['Type' => 'text NOT NULL', 'Default' => false],
+        'requirements'    => ['Type' => 'text NOT NULL', 'Default' => false],
+        'homepagetitle'   => ['Type' => "varchar(255) NOT NULL default ''", 'Default' => true],
+        'forumid'         => ['Type' => "int(11) NOT NULL default '0'", 'Default' => true],
+        'limitations'     => ['Type' => "varchar(255) NOT NULL default '30 day trial'", 'Default' => true],
+        'dhistory'        => ['Type' => 'text NOT NULL', 'Default' => false],
+        'published'       => ['Type' => "int(10) NOT NULL default '0'", 'Default' => true],
+        'expired'         => ['Type' => "int(10) NOT NULL default '0'", 'Default' => true],
+        'updated'         => ['Type' => "int(11) NOT NULL default '0'", 'Default' => true],
+        'offline'         => ['Type' => "tinyint(1) NOT NULL default '0'", 'Default' => true],
+        'summary'         => ['Type' => 'text NOT NULL', 'Default' => false],
+        'description'     => ['Type' => 'text NOT NULL', 'Default' => false],
+        'modifysubmitter' => ['Type' => "int(11) NOT NULL default '0'", 'Default' => true],
+        'requestdate'     => ['Type' => "int(11) NOT NULL default '0'", 'Default' => true]
+    ];
 
-    $renamed_fields = array(
+    $renamed_fields = [
         'logourl' => 'screenshot'
-    );
+    ];
 
     echo '<br><b>Checking Modified Downloads table</b><br>';
     $moduleHandler = xoops_getModuleHandler('modification', 'wfdownloads');
@@ -147,23 +147,23 @@ function update_tables_to_300()
     }
     unset($fields);
 
-    $cat_fields = array(
-        'cid'          => array('Type' => 'int(5) unsigned NOT NULL auto_increment', 'Default' => false),
-        'pid'          => array('Type' => "int(5) unsigned NOT NULL default '0'", 'Default' => true),
-        'title'        => array('Type' => "varchar(50) NOT NULL default ''", 'Default' => true),
-        'imgurl'       => array('Type' => "varchar(255) NOT NULL default ''", 'Default' => true),
-        'description'  => array('Type' => "text NULL", 'Default' => true),
-        'total'        => array('Type' => "int(11) NOT NULL default '0'", 'Default' => true),
-        'summary'      => array('Type' => 'text NOT NULL', 'Default' => false),
-        'spotlighttop' => array('Type' => "int(11) NOT NULL default '0'", 'Default' => true),
-        'spotlighthis' => array('Type' => "int(11) NOT NULL default '0'", 'Default' => true),
-        'dohtml'       => array('Type' => "tinyint(1) NOT NULL default '1'", 'Default' => true),
-        'dosmiley'     => array('Type' => "tinyint(1) NOT NULL default '1'", 'Default' => true),
-        'doxcode'      => array('Type' => "tinyint(1) NOT NULL default '1'", 'Default' => true),
-        'doimage'      => array('Type' => "tinyint(1) NOT NULL default '1'", 'Default' => true),
-        'dobr'         => array('Type' => "tinyint(1) NOT NULL default '1'", 'Default' => true),
-        'weight'       => array('Type' => "int(11) NOT NULL default '0'", 'Default' => true)
-    );
+    $cat_fields = [
+        'cid'          => ['Type' => 'int(5) unsigned NOT NULL auto_increment', 'Default' => false],
+        'pid'          => ['Type' => "int(5) unsigned NOT NULL default '0'", 'Default' => true],
+        'title'        => ['Type' => "varchar(50) NOT NULL default ''", 'Default' => true],
+        'imgurl'       => ['Type' => "varchar(255) NOT NULL default ''", 'Default' => true],
+        'description'  => ['Type' => "text NULL", 'Default' => true],
+        'total'        => ['Type' => "int(11) NOT NULL default '0'", 'Default' => true],
+        'summary'      => ['Type' => 'text NOT NULL', 'Default' => false],
+        'spotlighttop' => ['Type' => "int(11) NOT NULL default '0'", 'Default' => true],
+        'spotlighthis' => ['Type' => "int(11) NOT NULL default '0'", 'Default' => true],
+        'dohtml'       => ['Type' => "tinyint(1) NOT NULL default '1'", 'Default' => true],
+        'dosmiley'     => ['Type' => "tinyint(1) NOT NULL default '1'", 'Default' => true],
+        'doxcode'      => ['Type' => "tinyint(1) NOT NULL default '1'", 'Default' => true],
+        'doimage'      => ['Type' => "tinyint(1) NOT NULL default '1'", 'Default' => true],
+        'dobr'         => ['Type' => "tinyint(1) NOT NULL default '1'", 'Default' => true],
+        'weight'       => ['Type' => "int(11) NOT NULL default '0'", 'Default' => true]
+    ];
     echo '<br><b>Checking Category table</b><br>';
     $catHandler = xoops_getModuleHandler('category', 'wfdownloads');
     $cat_table  = new WfdownloadsTable('wfdownloads_cat');
@@ -174,15 +174,15 @@ function update_tables_to_300()
     }
     unset($fields);
 
-    $broken_fields = array(
-        'reportid'     => array('Type' => 'int(5) NOT NULL auto_increment', 'Default' => false),
-        'lid'          => array('Type' => "int(11) NOT NULL default '0'", 'Default' => true),
-        'sender'       => array('Type' => "int(11) NOT NULL default '0'", 'Default' => true),
-        'ip'           => array('Type' => "varchar(20) NOT NULL default ''", 'Default' => true),
-        'date'         => array('Type' => "varchar(11) NOT NULL default '0'", 'Default' => true),
-        'confirmed'    => array('Type' => "enum('0','1') NOT NULL default '0'", 'Default' => true),
-        'acknowledged' => array('Type' => "enum('0','1') NOT NULL default '0'", 'Default' => true)
-    );
+    $broken_fields = [
+        'reportid'     => ['Type' => 'int(5) NOT NULL auto_increment', 'Default' => false],
+        'lid'          => ['Type' => "int(11) NOT NULL default '0'", 'Default' => true],
+        'sender'       => ['Type' => "int(11) NOT NULL default '0'", 'Default' => true],
+        'ip'           => ['Type' => "varchar(20) NOT NULL default ''", 'Default' => true],
+        'date'         => ['Type' => "varchar(11) NOT NULL default '0'", 'Default' => true],
+        'confirmed'    => ['Type' => "enum('0','1') NOT NULL default '0'", 'Default' => true],
+        'acknowledged' => ['Type' => "enum('0','1') NOT NULL default '0'", 'Default' => true]
+    ];
     echo '<br><b>Checking Broken Report table</b><br>';
     $brokenHandler = xoops_getModuleHandler('report', 'wfdownloads');
     $broken_table  = new WfdownloadsTable('wfdownloads_broken');
@@ -204,7 +204,7 @@ function update_tables_to_300()
  */
 function invert_nohtm_dohtml_values()
 {
-    $ret = array();
+    $ret = [];
     global $xoopsDB;
     $catHandler = xoops_getModuleHandler('category', 'wfdownloads');
     $result     = $xoopsDB->query('SHOW COLUMNS FROM ' . $catHandler->table);

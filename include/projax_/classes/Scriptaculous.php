@@ -15,7 +15,7 @@
  */
 class Scriptaculous extends Prototype
 {
-    public $TOGGLE_EFFECTS = array('toggle_appear', 'toggle_slide', 'toggle_blind');
+    public $TOGGLE_EFFECTS = ['toggle_appear', 'toggle_slide', 'toggle_blind'];
 
     /**
      * Scriptaculous constructor.
@@ -102,7 +102,7 @@ class Scriptaculous extends Prototype
             }
         }
 
-        $arr = array('tag', 'overlap', 'contraint', 'handle');
+        $arr = ['tag', 'overlap', 'contraint', 'handle'];
 
         foreach ($arr as $var) {
             if (isset($options[$var])) {
@@ -184,7 +184,7 @@ class Scriptaculous extends Prototype
         $function .= "'$field_id', ";
         $function .= "'" . $options['url'] . "'";
 
-        $js_options = array();
+        $js_options = [];
         if (isset($options['cancel_text'])) {
             $js_options['cancelText'] = $options['cancel_text'];
         }
@@ -254,7 +254,7 @@ class Scriptaculous extends Prototype
         $function .= "'" . (isset($options['update']) ? $options['update'] : $field_id . '_auto_complete') . "', ";
         $function .= "'" . $options['url'] . "'";
 
-        $js_options = array();
+        $js_options = [];
         if (isset($options['tokens'])) {
             $js_options['tokens'] = $this->javascript->_array_or_string_for_javascript($options['tokens']);
         }
@@ -268,7 +268,7 @@ class Scriptaculous extends Prototype
             $js_options['select'] = "'" . $options['select'] . "'";
         }
 
-        foreach (array('on_show' => 'onShow', 'on_hide' => 'onHide', 'min_chars' => 'min_chars') as $var => $val) {
+        foreach (['on_show' => 'onShow', 'on_hide' => 'onHide', 'min_chars' => 'min_chars'] as $var => $val) {
             if (isset($options[$var])) {
                 $js_options['$val'] = $options['var'];
             }

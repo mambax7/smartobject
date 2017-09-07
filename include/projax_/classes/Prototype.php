@@ -15,7 +15,7 @@
  */
 class Prototype extends JavaScript
 {
-    public $CALLBACKS = array(
+    public $CALLBACKS = [
         'uninitialized',
         'loading',
         'loaded',
@@ -23,9 +23,9 @@ class Prototype extends JavaScript
         'complete',
         'failure',
         'success'
-    );
+    ];
 
-    public $AJAX_OPTIONS = array(
+    public $AJAX_OPTIONS = [
         'before',
         'after',
         'condition',
@@ -45,7 +45,7 @@ class Prototype extends JavaScript
         'complete',
         'failure',
         'success'
-    );
+    ];
 
     /**
      * @return string
@@ -200,7 +200,7 @@ class Prototype extends JavaScript
      */
     public function _build_callbacks($options)
     {
-        $callbacks = array();
+        $callbacks = [];
         foreach ($options as $callback => $code) {
             if (in_array($callback, $this->CALLBACKS)) {
                 $name             = 'on' . ucfirst($callback);
@@ -252,7 +252,7 @@ class Prototype extends JavaScript
      */
     public function _options_for_ajax($options)
     {
-        $js_options = is_array($options) ? $this->_build_callbacks($options) : array();
+        $js_options = is_array($options) ? $this->_build_callbacks($options) : [];
 
         if (isset($options['type']) && $option['type'] === 'synchronous') {
             $js_options['asynchronous'] = 'false';
@@ -377,7 +377,7 @@ class Prototype extends JavaScript
      */
     public function insert_html($position, $id, $options_for_render = null)
     {
-        $args = array_merge(array($id), (is_array($options_for_render) ? $options_for_render : array($options_for_render)));
+        $args = array_merge([$id], (is_array($options_for_render) ? $options_for_render : [$options_for_render]));
 
         return $this->call('new Insertion.' . ucfirst($position), $args);
     }
@@ -419,7 +419,7 @@ class Prototype extends JavaScript
      */
     public function replace($id, $options_for_render)
     {
-        $args = array_merge(array($id), (is_array($options_for_render) ? $options_for_render : array($options_for_render)));
+        $args = array_merge([$id], (is_array($options_for_render) ? $options_for_render : [$options_for_render]));
 
         return $this->call('Element.replace', $args);
     }
@@ -431,7 +431,7 @@ class Prototype extends JavaScript
      */
     public function replace_html($id, $options_for_render)
     {
-        $args = array_merge(array($id), (is_array($options_for_render) ? $options_for_render : array($options_for_render)));
+        $args = array_merge([$id], (is_array($options_for_render) ? $options_for_render : [$options_for_render]));
 
         return $this->call('Element.update', $args);
     }

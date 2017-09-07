@@ -7,7 +7,7 @@
  */
 class XoopsCaptchaImage
 {
-    public $config = array();
+    public $config = [];
 
     /**
      * XoopsCaptchaImage constructor.
@@ -34,7 +34,7 @@ class XoopsCaptchaImage
      * Loading configs from CAPTCHA class
      * @param array $config
      */
-    public function loadConfig($config = array())
+    public function loadConfig($config = [])
     {
         // Loading default preferences
         $this->config = $config;

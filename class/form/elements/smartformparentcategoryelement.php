@@ -28,10 +28,10 @@ class SmartFormParentCategoryElement extends XoopsFormSelect
         $mytree = new XoopsObjectTree($categories, 'categoryid', 'parentid');
         parent::__construct($object->vars[$key]['form_caption'], $key, $object->getVar($key, 'e'));
 
-        $ret     = array();
+        $ret     = [];
         $options = $this->getOptionArray($mytree, 'name', 0, '', $ret);
         if ($addNoParent) {
-            $newOptions = array('0' => '----');
+            $newOptions = ['0' => '----'];
             foreach ($options as $k => $v) {
                 $newOptions[$k] = $v;
             }

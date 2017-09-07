@@ -1,5 +1,5 @@
 <?php
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/basedurl.php';
 
@@ -17,12 +17,12 @@ class SmartobjectUrlLink extends SmartobjectBasedUrl
         $this->quickInitVar('urllinkid', XOBJ_DTYPE_TXTBOX, true);
         $this->quickInitVar('target', XOBJ_DTYPE_TXTBOX, true);
 
-        $this->setControl('target', array(
-            'options' => array(
+        $this->setControl('target', [
+            'options' => [
                 '_self'  => _CO_SOBJECT_URLLINK_SELF,
                 '_blank' => _CO_SOBJECT_URLLINK_BLANK
-            )
-        ));
+            ]
+        ]);
     }
 }
 

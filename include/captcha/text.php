@@ -7,7 +7,7 @@
  */
 class XoopsCaptchaText
 {
-    public $config = array();
+    public $config = [];
     public $code;
 
     /**
@@ -34,7 +34,7 @@ class XoopsCaptchaText
      * Loading configs from CAPTCHA class
      * @param array $config
      */
-    public function loadConfig($config = array())
+    public function loadConfig($config = [])
     {
         // Loading default preferences
         $this->config = $config;

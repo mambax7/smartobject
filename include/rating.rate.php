@@ -6,7 +6,7 @@
  * Author: The SmartFactory <www.smartfactory.ca>
  * Licence: GNU
  */
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 if (!defined('SMARTOBJECT_URL')) {
     require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php';
@@ -71,5 +71,4 @@ if (isset($_POST['smartobject_rating_submit'])) {
         $message = _SOBJECT_RATING_SUCCESS;
     }
     redirect_header('', 3, $message);
-    exit;
 }

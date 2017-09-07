@@ -7,7 +7,7 @@
  * Licence: GNU
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 class SmartTip
 {
@@ -39,12 +39,12 @@ class SmartTip
      */
     public function render($outputNow = true)
     {
-        $aTip = array(
+        $aTip = [
             'id'      => $this->id,
             'caption' => $this->caption,
             'message' => $this->message,
             'visible' => $this->visible ? 'block' : 'none'
-        );
+        ];
         $this->_tpl->assign('tip', $aTip);
         if ($outputNow) {
             $this->_tpl->display('db:smartobject_tip.tpl');

@@ -11,7 +11,7 @@
  * Licence: GNU
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * Class About is a simple class that lets you build an about page
@@ -140,11 +140,11 @@ class SmartobjectAbout
 
         $people = $versioninfo->getInfo('people');
         if ($people) {
-            $this->_tpl->assign('module_people_developers', isset($people['developers']) ? array_map(array($this, 'sanitize'), $people['developers']) : false);
-            $this->_tpl->assign('module_people_testers', isset($people['testers']) ? array_map(array($this, 'sanitize'), $people['testers']) : false);
-            $this->_tpl->assign('module_people_translators', isset($people['translators']) ? array_map(array($this, 'sanitize'), $people['translators']) : false);
-            $this->_tpl->assign('module_people_documenters', isset($people['documenters']) ? array_map(array($this, 'sanitize'), $people['documenters']) : false);
-            $this->_tpl->assign('module_people_other', isset($people['other']) ? array_map(array($this, 'sanitize'), $people['other']) : false);
+            $this->_tpl->assign('module_people_developers', isset($people['developers']) ? array_map([$this, 'sanitize'], $people['developers']) : false);
+            $this->_tpl->assign('module_people_testers', isset($people['testers']) ? array_map([$this, 'sanitize'], $people['testers']) : false);
+            $this->_tpl->assign('module_people_translators', isset($people['translators']) ? array_map([$this, 'sanitize'], $people['translators']) : false);
+            $this->_tpl->assign('module_people_documenters', isset($people['documenters']) ? array_map([$this, 'sanitize'], $people['documenters']) : false);
+            $this->_tpl->assign('module_people_other', isset($people['other']) ? array_map([$this, 'sanitize'], $people['other']) : false);
         }
         //$this->_tpl->assign('module_developers', $versioninfo->getInfo('developer_email'));
 

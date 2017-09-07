@@ -16,7 +16,7 @@
  * @author  marcan <marcan@smartfactory.ca>
  * @link    http://www.smartfactory.ca The SmartFactory
  */
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 if (!defined('SMARTOBJECT_ROOT_PATH')) {
     require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php';
 }
@@ -90,7 +90,7 @@ class SmartDbTable
     public function __construct($name)
     {
         $this->_name = $name;
-        $this->_data = array();
+        $this->_data = [];
     }
 
     /**
@@ -709,7 +709,7 @@ class SmartobjectDbupdater
         if ($var['value']) {
             return $var['value'];
         } else {
-            if (in_array($var['data_type'], array(
+            if (in_array($var['data_type'], [
                 XOBJ_DTYPE_INT,
                 XOBJ_DTYPE_STIME,
                 XOBJ_DTYPE_MTIME,
@@ -717,7 +717,7 @@ class SmartobjectDbupdater
                 XOBJ_DTYPE_TIME_ONLY,
                 XOBJ_DTYPE_URLLINK,
                 XOBJ_DTYPE_FILE
-            ))) {
+            ])) {
                 return '0';
             } else {
                 return '';

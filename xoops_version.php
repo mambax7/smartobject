@@ -8,7 +8,7 @@
  * Licence: GNU
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 $modversion['version']       = '1.12';
 $modversion['module_status'] = 'RC 2';
@@ -37,7 +37,7 @@ $modversion['module_website_name'] = 'XOOPS';
 $modversion['min_php']             = '5.5';
 $modversion['min_xoops']           = '2.5.9';
 $modversion['min_admin']           = '1.2';
-$modversion['min_db']              = array('mysql' => '5.5');
+$modversion['min_db']              = ['mysql' => '5.5'];
 
 // ---
 // version 1.10
@@ -104,12 +104,12 @@ $modversion['tables'][8] = 'smartobject_file';
 $modversion['tables'][9] = 'smartobject_urllink';
 
 // ------------------- Help files ------------------- //
-$modversion['helpsection'] = array(
+$modversion['helpsection'] = [
     ['name' => _MI_SOBJECT_OVERVIEW, 'link' => 'page=help'],
     ['name' => _MI_SOBJECT_DISCLAIMER, 'link' => 'page=disclaimer'],
     ['name' => _MI_SOBJECT_LICENSE, 'link' => 'page=license'],
     ['name' => _MI_SOBJECT_SUPPORT, 'link' => 'page=support'],
-);
+];
 
 
 // Blocks

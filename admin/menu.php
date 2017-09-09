@@ -20,37 +20,37 @@ $moduleHelper->loadLanguage('modinfo');
 
 $adminmenu              = [];
 $i                      = 0;
-$adminmenu[$i]['title'] = _AM_MODULEADMIN_HOME;
-$adminmenu[$i]['link']  = 'admin/index.php';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/home.png';
+'title' =>  _AM_MODULEADMIN_HOME,
+'link' =>  'admin/index.php',
+'icon' =>  $pathIcon32 . '/home.png',
 //++$i;
-//$adminmenu[$i]['title'] = _MI_SOBJECT_INDEX;
-//$adminmenu[$i]['link'] = "admin/main.php";
+//'title' =>  _MI_SOBJECT_INDEX,
+//'link' =>  "admin/main.php",
 //$adminmenu[$i]["icon"]  = $pathIcon32 . '/manage.png';
 
 ++$i;
-$adminmenu[$i]['title'] = _MI_SOBJECT_SENT_LINKS;
-$adminmenu[$i]['link']  = 'admin/link.php';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/addlink.png';
+'title' =>  _MI_SOBJECT_SENT_LINKS,
+'link' =>  'admin/link.php',
+'icon' =>  $pathIcon32 . '/addlink.png',
 
 ++$i;
-$adminmenu[$i]['title'] = _MI_SOBJECT_TAGS;
-$adminmenu[$i]['link']  = 'admin/customtag.php';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/identity.png';
+'title' =>  _MI_SOBJECT_TAGS,
+'link' =>  'admin/customtag.php',
+'icon' =>  $pathIcon32 . '/identity.png',
 
 ++$i;
-$adminmenu[$i]['title'] = _MI_SOBJECT_ADSENSES;
-$adminmenu[$i]['link']  = 'admin/adsense.php';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/alert.png';
+'title' =>  _MI_SOBJECT_ADSENSES,
+'link' =>  'admin/adsense.php',
+'icon' =>  $pathIcon32 . '/alert.png',
 ++$i;
-$adminmenu[$i]['title'] = _MI_SOBJECT_RATINGS;
-$adminmenu[$i]['link']  = 'admin/rating.php';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/stats.png';
+'title' =>  _MI_SOBJECT_RATINGS,
+'link' =>  'admin/rating.php',
+'icon' =>  $pathIcon32 . '/stats.png',
 
 ++$i;
-$adminmenu[$i]['title'] = _AM_MODULEADMIN_ABOUT;
-$adminmenu[$i]['link']  = 'admin/about.php';
-$adminmenu[$i]['icon']  = $pathIcon32 . '/about.png';
+'title' =>  _AM_MODULEADMIN_ABOUT,
+'link' =>  'admin/about.php',
+'icon' =>  $pathIcon32 . '/about.png',
 //---------------------------------
 
 if (!defined('SMARTOBJECT_ROOT_PATH')) {
@@ -61,9 +61,9 @@ $smartobjectConfig = smart_getModuleConfig('smartobject');
 
 if (isset($smartobjectConfig['enable_currencyman']) && $smartobjectConfig['enable_currencyman'] === true) {
     ++$i;
-    $adminmenu[$i]['title'] = _MI_SOBJECT_CURRENCIES;
-    $adminmenu[$i]['link']  = 'admin/currency.php';
-    $adminmenu[$i]['icon']  = $pathIcon32 . '/cash_stack.png';
+    'title' =>  _MI_SOBJECT_CURRENCIES,
+    'link' =>  'admin/currency.php',
+    'icon' =>  $pathIcon32 . '/cash_stack.png',
 }
 
 global $xoopsModule;

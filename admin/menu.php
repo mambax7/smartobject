@@ -12,45 +12,55 @@ if (false !== ($moduleHelper = Xmf\Module\Helper::getHelper($moduleDirName))) {
     $moduleHelper = Xmf\Module\Helper::getHelper('system');
 }
 
-
 $pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
 //$pathModIcon32 = $moduleHelper->getModule()->getInfo('modicons32');
 
 $moduleHelper->loadLanguage('modinfo');
 
-$adminmenu              = [];
-$i                      = 0;
-'title' =>  _AM_MODULEADMIN_HOME,
-'link' =>  'admin/index.php',
-'icon' =>  $pathIcon32 . '/home.png',
-//++$i;
+$adminmenu = [];
+
+$adminmenu[] = [
+    'title' => _AM_MODULEADMIN_HOME,
+    'link'  => 'admin/index.php',
+    'icon'  => $pathIcon32 . '/home.png',
+];
+
+//$adminmenu[] = [
 //'title' =>  _MI_SOBJECT_INDEX,
 //'link' =>  "admin/main.php",
 //$adminmenu[$i]["icon"]  = $pathIcon32 . '/manage.png';
+//];
 
-++$i;
-'title' =>  _MI_SOBJECT_SENT_LINKS,
-'link' =>  'admin/link.php',
-'icon' =>  $pathIcon32 . '/addlink.png',
+$adminmenu[] = [
+    'title' => _MI_SOBJECT_SENT_LINKS,
+    'link'  => 'admin/link.php',
+    'icon'  => $pathIcon32 . '/addlink.png',
+];
 
-++$i;
-'title' =>  _MI_SOBJECT_TAGS,
-'link' =>  'admin/customtag.php',
-'icon' =>  $pathIcon32 . '/identity.png',
+$adminmenu[] = [
+    'title' => _MI_SOBJECT_TAGS,
+    'link'  => 'admin/customtag.php',
+    'icon'  => $pathIcon32 . '/identity.png',
+];
 
-++$i;
-'title' =>  _MI_SOBJECT_ADSENSES,
-'link' =>  'admin/adsense.php',
-'icon' =>  $pathIcon32 . '/alert.png',
-++$i;
-'title' =>  _MI_SOBJECT_RATINGS,
-'link' =>  'admin/rating.php',
-'icon' =>  $pathIcon32 . '/stats.png',
+$adminmenu[] = [
+    'title' => _MI_SOBJECT_ADSENSES,
+    'link'  => 'admin/adsense.php',
+    'icon'  => $pathIcon32 . '/alert.png',
+];
 
-++$i;
-'title' =>  _AM_MODULEADMIN_ABOUT,
-'link' =>  'admin/about.php',
-'icon' =>  $pathIcon32 . '/about.png',
+$adminmenu[] = [
+    'title' => _MI_SOBJECT_RATINGS,
+    'link'  => 'admin/rating.php',
+    'icon'  => $pathIcon32 . '/stats.png',
+];
+
+$adminmenu[] = [
+    'title' => _AM_MODULEADMIN_ABOUT,
+    'link'  => 'admin/about.php',
+    'icon'  => $pathIcon32 . '/about.png',
+];
+
 //---------------------------------
 
 if (!defined('SMARTOBJECT_ROOT_PATH')) {
@@ -60,10 +70,11 @@ if (!defined('SMARTOBJECT_ROOT_PATH')) {
 $smartobjectConfig = smart_getModuleConfig('smartobject');
 
 if (isset($smartobjectConfig['enable_currencyman']) && $smartobjectConfig['enable_currencyman'] === true) {
-    ++$i;
-    'title' =>  _MI_SOBJECT_CURRENCIES,
-    'link' =>  'admin/currency.php',
-    'icon' =>  $pathIcon32 . '/cash_stack.png',
+    $adminmenu[] = [
+        'title' => _MI_SOBJECT_CURRENCIES,
+        'link'  => 'admin/currency.php',
+        'icon'  => $pathIcon32 . '/cash_stack.png',
+    ];
 }
 
 global $xoopsModule;

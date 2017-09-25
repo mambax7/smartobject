@@ -221,16 +221,16 @@ class SmartExportRenderer
         //If there is a separator (;) or a quote (") or a linebreak in the string, we need to quote it.
         $needQuote = false;
         do {
-            if (strpos($val, '"') !== false) {
+            if (false !== strpos($val, '"')) {
                 $val       = str_replace('"', '""', $val);
                 $needQuote = true;
                 break;
             }
-            if (strpos($val, $separator) !== false) {
+            if (false !== strpos($val, $separator)) {
                 $needQuote = true;
                 break;
             }
-            if ((strpos($val, "\n") !== false) || (strpos($val, "\r") !== false)) { // \r is for mac
+            if ((false !== strpos($val, "\n")) || (false !== strpos($val, "\r"))) { // \r is for mac
                 $needQuote = true;
                 break;
             }
@@ -289,13 +289,13 @@ class SmartExportRenderer
 
         if (!$handle = fopen($fullFileName, 'a+')) {
             trigger_error('Unable to open ' . $fullFileName, E_USER_WARNING);
-        } elseif (fwrite($handle, $content) === false) {
+        } elseif (false === fwrite($handle, $content)) {
             trigger_error('Unable to write in ' . $fullFileName, E_USER_WARNING);
         } else {
             $mimeType  = 'text/csv';
             $file      = strrev($this->filename);
             $temp_name = strtolower(strrev(substr($file, 0, strpos($file, '--'))));
-            if ($temp_name === '') {
+            if ('' === $temp_name) {
                 $file_name = $this->filename;
             } else {
                 $file_name = $temp_name;

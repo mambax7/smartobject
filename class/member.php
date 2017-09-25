@@ -54,7 +54,7 @@ class SmartobjectMemberHandler extends XoopsMemberHandler
     public function addAndActivateUser($userObj, $groups = false, $notifyUser = true, &$password = false)
     {
         $email = $userObj->getVar('email');
-        if (!$userObj->getVar('email') || $email === '') {
+        if (!$userObj->getVar('email') || '' === $email) {
             $userObj->setErrors(_CO_SOBJECT_USER_NEED_EMAIL);
 
             return false;
@@ -70,14 +70,14 @@ class SmartobjectMemberHandler extends XoopsMemberHandler
         // if no username is set, let's generate one
         $unamecount = 20;
         $uname      = $userObj->getVar('uname');
-        if (!$uname || $uname === '') {
+        if (!$uname || '' === $uname) {
             $usernames = $this->genUserNames($email, $unamecount);
             $newuser   = false;
             $i         = 0;
-            while ($newuser === false) {
+            while (false === $newuser) {
                 $crit  = new Criteria('uname', $usernames[$i]);
                 $count = $this->getUserCount($crit);
-                if ($count == 0) {
+                if (0 == $count) {
                     $newuser = true;
                 } else {
                     //Move to next username

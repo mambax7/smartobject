@@ -69,7 +69,7 @@ if (!defined('SMARTOBJECT_ROOT_PATH')) {
 
 $smartobjectConfig = smart_getModuleConfig('smartobject');
 
-if (isset($smartobjectConfig['enable_currencyman']) && $smartobjectConfig['enable_currencyman'] === true) {
+if (isset($smartobjectConfig['enable_currencyman']) && true === $smartobjectConfig['enable_currencyman']) {
     $adminmenu[] = [
         'title' => _MI_SOBJECT_CURRENCIES,
         'link'  => 'admin/currency.php',

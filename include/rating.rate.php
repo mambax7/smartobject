@@ -62,7 +62,7 @@ if (isset($_POST['smartobject_rating_submit'])) {
     $ratingObj->setVar('date', time());
     $ratingObj->setVar('rate', $_POST['smartobject_rating_value']);
     if (!$smartobjectRatingHandler->insert($ratingObj)) {
-        if ($xoopsDB->errno() == 1062) {
+        if (1062 == $xoopsDB->errno()) {
             $message = _SOBJECT_RATING_DUPLICATE_ENTRY;
         } else {
             $message = _SOBJECT_RATING_ERROR;

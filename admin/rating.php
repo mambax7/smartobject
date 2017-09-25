@@ -31,7 +31,7 @@ function editclass($showmenu = false, $ratingid = 0)
             $controller = new SmartObjectController($smartobjectRatingHandler);
             $controller->postDataToObject($ratingObj);
 
-            if ($_POST['op'] === 'changedField') {
+            if ('changedField' === $_POST['op']) {
                 switch ($_POST['changedField']) {
                     case 'dirname':
                         $ratingObj->showFieldOnForm(['item', 'itemid', 'uid', 'date', 'rate']);

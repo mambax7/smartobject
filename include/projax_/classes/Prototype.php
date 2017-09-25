@@ -254,7 +254,7 @@ class Prototype extends JavaScript
     {
         $js_options = is_array($options) ? $this->_build_callbacks($options) : [];
 
-        if (isset($options['type']) && $option['type'] === 'synchronous') {
+        if (isset($options['type']) && 'synchronous' === $option['type']) {
             $js_options['asynchronous'] = 'false';
         }
 

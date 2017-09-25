@@ -32,7 +32,7 @@ class SmartFormUrlLinkElement extends XoopsFormElementTray
 
         $this->addElement(new XoopsFormLabel('', '<br>' . _CO_SOBJECT_URLLINK_TARGET));
         $targ_val    = $object->getVar('target');
-        $targetRadio = new XoopsFormRadio('', 'target_' . $key, $targ_val !== '' ? $targ_val : '_blank');
+        $targetRadio = new XoopsFormRadio('', 'target_' . $key, '' !== $targ_val ? $targ_val : '_blank');
         $control     = $object->getControl('target');
         $targetRadio->addOptionArray($control['options']);
 

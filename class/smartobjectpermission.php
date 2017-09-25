@@ -40,7 +40,7 @@ class SmartobjectPermissionHandler extends XoopsObjectHandler
     {
         static $groups;
 
-        if (!isset($groups[$gperm_name]) || ($id !== null && !isset($groups[$gperm_name][$id]))) {
+        if (!isset($groups[$gperm_name]) || (null !== $id && !isset($groups[$gperm_name][$id]))) {
             $smartModule = $this->handler->getModuleInfo();
             //Get group permissions handler
             $gpermHandler = xoops_getHandler('groupperm');
@@ -116,7 +116,7 @@ class SmartobjectPermissionHandler extends XoopsObjectHandler
         global $xoopsUser;
         static $permissions;
 
-        if (!isset($permissions[$gperm_name]) || ($id !== null && !isset($permissions[$gperm_name][$id]))) {
+        if (!isset($permissions[$gperm_name]) || (null !== $id && !isset($permissions[$gperm_name][$id]))) {
             $smartModule = $this->handler->getModuleInfo();
 
             if (is_object($smartModule)) {

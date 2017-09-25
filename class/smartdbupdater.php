@@ -126,16 +126,16 @@ class SmartDbTable
         $result = $xoopsDB->query('SHOW COLUMNS FROM ' . $this->name());
         while ($existing_field = $xoopsDB->fetchArray($result)) {
             $fields[$existing_field['Field']] = $existing_field['Type'];
-            if ($existing_field['Null'] !== 'YES') {
+            if ('YES' !== $existing_field['Null']) {
                 $fields[$existing_field['Field']] .= ' NOT NULL';
             }
             if ($existing_field['Extra']) {
                 $fields[$existing_field['Field']] .= ' ' . $existing_field['Extra'];
             }
-            if (!($existing_field['Default'] === null)
+            if (!(null === $existing_field['Default'])
                 && ($existing_field['Default']
-                    || $existing_field['Default'] === ''
-                    || $existing_field['Default'] == 0)) {
+                    || '' === $existing_field['Default']
+                    || 0 == $existing_field['Default'])) {
                 $fields[$existing_field['Field']] .= " default '" . $existing_field['Default'] . "'";
             }
         }

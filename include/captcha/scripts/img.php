@@ -83,7 +83,7 @@ class XoopsCaptchaImageHandler
             return;
         }
 
-        if ($this->mode === 'bmp') {
+        if ('bmp' === $this->mode) {
             $this->config['num_chars'] = 4;
             $this->code                = mt_rand(pow(10, $this->config['num_chars'] - 1), (int)str_pad('9', $this->config['num_chars'], '9'));
         } else {
@@ -125,7 +125,7 @@ class XoopsCaptchaImageHandler
             return;
         }
 
-        if ($this->mode === 'bmp') {
+        if ('bmp' === $this->mode) {
             return $this->createImageBmp();
         } else {
             return $this->createImageGd();

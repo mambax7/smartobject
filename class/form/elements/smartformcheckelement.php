@@ -17,7 +17,7 @@ class SmartFormCheckElement extends XoopsFormCheckBox
     public function render()
     {
         $ret = '';
-        if (count($this->getOptions()) > 1 && substr($this->getName(), -2, 2) !== '[]') {
+        if (count($this->getOptions()) > 1 && '[]' !== substr($this->getName(), -2, 2)) {
             $newname = $this->getName() . '[]';
             $this->setName($newname);
         }
@@ -40,7 +40,7 @@ class SmartFormCheckElement extends XoopsFormCheckBox
         $js .= 'var hasSelections = false;';
         //sometimes, there is an implicit '[]', sometimes not
         $eltname = $this->getName();
-        if (strpos($eltname, '[') === false) {
+        if (false === strpos($eltname, '[')) {
             $js .= "for (var i = 0; i < myform['{$eltname}[]'].length; i++) {
                 if (myform['{$eltname}[]'][i].checked) {
                     hasSelections = true;

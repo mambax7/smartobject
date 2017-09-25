@@ -401,9 +401,9 @@ class SmartObjectTable
                 foreach ($this->_columns as $column) {
                     $aColumn = [];
 
-                    if ($i == 0) {
+                    if (0 == $i) {
                         $class = 'head';
-                    } elseif ($i % 2 == 0) {
+                    } elseif (0 == $i % 2) {
                         $class = 'even';
                     } else {
                         $class = 'odd';
@@ -411,7 +411,7 @@ class SmartObjectTable
                     if (method_exists($object, 'initiateCustomFields')) {
                         //$object->initiateCustomFields();
                     }
-                    if ($column->_keyname === 'checked') {
+                    if ('checked' === $column->_keyname) {
                         $value = '<input type ="checkbox" name="selected_smartobjects[]" value="' . $object->id() . '">';
                     } elseif ($column->_customMethodForValue
                               && method_exists($object, $column->_customMethodForValue)) {
@@ -444,7 +444,7 @@ class SmartObjectTable
                 $aObject['columns'] = $aColumns;
                 $aObject['id']      = $object->id();
 
-                $objectclass = ($objectclass === 'even') ? 'odd' : 'even';
+                $objectclass = ('even' === $objectclass) ? 'odd' : 'even';
 
                 $aObject['class'] = $objectclass;
 
@@ -734,7 +734,7 @@ class SmartObjectTable
                     $this->_tpl->assign('smartobject_optionssel_filters2Array', $filters2Array);
 
                     smart_setCookieVar($_SERVER['PHP_SELF'] . '_filtersel2', $this->_filtersel2);
-                    if ($this->_filtersel2 !== 'default') {
+                    if ('default' !== $this->_filtersel2) {
                         $this->_criteria->add(new Criteria($this->_filtersel, $this->_filtersel2));
                     }
                 }
@@ -742,7 +742,7 @@ class SmartObjectTable
         }
         // Check if we have a quicksearch
 
-        if (isset($_POST['quicksearch_' . $this->_id]) && $_POST['quicksearch_' . $this->_id] != '') {
+        if (isset($_POST['quicksearch_' . $this->_id]) && '' != $_POST['quicksearch_' . $this->_id]) {
             $quicksearch_criteria = new CriteriaCompo();
             if (is_array($this->_quickSearch['fields'])) {
                 foreach ($this->_quickSearch['fields'] as $v) {
@@ -803,7 +803,7 @@ class SmartObjectTable
         $query_stringArray     = explode('&', $query_string);
         $new_query_stringArray = [];
         foreach ($query_stringArray as $query_string) {
-            if (strpos($query_string, 'sortsel') === false && strpos($query_string, 'ordersel') === false) {
+            if (false === strpos($query_string, 'sortsel') && false === strpos($query_string, 'ordersel')) {
                 $new_query_stringArray[] = $query_string;
             }
         }
@@ -823,7 +823,7 @@ class SmartObjectTable
             $aColumn['width'] = $column->getWidth();
             $aColumn['align'] = $column->getAlign();
             $aColumn['key']   = $column->getKeyName();
-            if ($column->_keyname === 'checked') {
+            if ('checked' === $column->_keyname) {
                 $aColumn['caption'] = '<input type ="checkbox" id="checkall_smartobjects" name="checkall_smartobjects"' . ' value="checkall_smartobjects" onclick="smartobject_checkall(window.document.form_' . $this->_id . ', \'selected_smartobjects\');">';
             } elseif ($column->getCustomCaption()) {
                 $aColumn['caption'] = $column->getCustomCaption();
@@ -836,10 +836,10 @@ class SmartObjectTable
                        || ($this->_sortsel == $column->getKeyName());
             $order   = isset($_GET[$this->_objectHandler->_itemname . '_' . 'ordersel']) ? $_GET[$this->_objectHandler->_itemname . '_' . 'ordersel'] : 'DESC';
 
-            if (isset($_REQUEST['quicksearch_' . $this->_id]) && $_REQUEST['quicksearch_' . $this->_id] != '') {
+            if (isset($_REQUEST['quicksearch_' . $this->_id]) && '' != $_REQUEST['quicksearch_' . $this->_id]) {
                 $qs_param = '&quicksearch_' . $this->_id . '=' . $_REQUEST['quicksearch_' . $this->_id];
             }
-            if (!$this->_enableColumnsSorting || $column->_keyname === 'checked' || !$column->isSortable()) {
+            if (!$this->_enableColumnsSorting || 'checked' === $column->_keyname || !$column->isSortable()) {
                 $aColumn['caption'] = $aColumn['caption'];
             } elseif ($getSort) {
                 $aColumn['caption'] = '<a href="'

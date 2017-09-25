@@ -116,7 +116,7 @@ class SmartPluginHandler
         $aFiles = XoopsLists::getFileListAsArray(SMARTOBJECT_ROOT_PATH . 'plugins/');
         $ret    = [];
         foreach ($aFiles as $file) {
-            if (substr($file, strlen($file) - 4, 4) === '.php') {
+            if ('.php' === substr($file, strlen($file) - 4, 4)) {
                 $pluginName                = str_replace('.php', '', $file);
                 $module_xoops_version_file = XOOPS_ROOT_PATH . "/modules/$pluginName/xoops_version.php";
                 if (file_exists($module_xoops_version_file) && isset($modulesObj[$pluginName])) {

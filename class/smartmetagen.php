@@ -212,24 +212,24 @@ class SmartMetaGen
             $titleTag['module'] = $moduleName;
         }
 
-        if (isset($this->_title) && ($this->_title !== '') && (strtoupper($this->_title) != strtoupper($moduleName))) {
+        if (isset($this->_title) && ('' !== $this->_title) && (strtoupper($this->_title) != strtoupper($moduleName))) {
             $titleTag['title'] = $this->_title;
         }
 
-        if (isset($this->_categoryPath) && ($this->_categoryPath !== '')) {
+        if (isset($this->_categoryPath) && ('' !== $this->_categoryPath)) {
             $titleTag['category'] = $this->_categoryPath;
         }
 
         $ret = isset($titleTag['title']) ? $titleTag['title'] : '';
 
-        if (isset($titleTag['category']) && $titleTag['category'] !== '') {
-            if ($ret !== '') {
+        if (isset($titleTag['category']) && '' !== $titleTag['category']) {
+            if ('' !== $ret) {
                 $ret .= ' - ';
             }
             $ret .= $titleTag['category'];
         }
-        if (isset($titleTag['module']) && $titleTag['module'] !== '') {
-            if ($ret !== '') {
+        if (isset($titleTag['module']) && '' !== $titleTag['module']) {
+            if ('' !== $ret) {
                 $ret .= ' - ';
             }
             $ret .= $titleTag['module'];
@@ -356,7 +356,7 @@ class SmartMetaGen
         global $xoopsModuleConfig;
         $keywords = $this->findMetaKeywords($this->_original_title . ' ' . $this->_description, $this->_minChar);
         if (isset($xoopsModuleConfig) && isset($xoopsModuleConfig['moduleMetaKeywords'])
-            && $xoopsModuleConfig['moduleMetaKeywords'] !== '') {
+            && '' !== $xoopsModuleConfig['moduleMetaKeywords']) {
             $moduleKeywords = explode(',', $xoopsModuleConfig['moduleMetaKeywords']);
             $keywords       = array_merge($keywords, $moduleKeywords);
         }

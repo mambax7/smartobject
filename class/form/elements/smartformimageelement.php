@@ -24,11 +24,11 @@ class SmartFormImageElement extends XoopsFormElementTray
 
         $objectArray['image'] = str_replace('{XOOPS_URL}', XOOPS_URL, $objectArray['image']);
 
-        if ($object->getVar($key) !== ''
+        if ('' !== $object->getVar($key)
             && (0 === strpos($object->getVar($key), 'http')
                 || 0 === strpos($object->getVar($key), '{XOOPS_URL}'))) {
             $this->addElement(new XoopsFormLabel('', "<img src='" . str_replace('{XOOPS_URL}', XOOPS_URL, $object->getVar($key)) . "' alt=''><br><br>"));
-        } elseif ($object->getVar($key) !== '') {
+        } elseif ('' !== $object->getVar($key)) {
             $this->addElement(new XoopsFormLabel('', "<img src='" . $object_imageurl . $object->getVar($key) . "' alt=''><br><br>"));
         }
 

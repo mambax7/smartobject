@@ -60,7 +60,7 @@ switch ($op) {
 
     case 'updateCurrencies':
 
-        if (!isset($_POST['SmartobjectCurrency_objects']) || count($_POST['SmartobjectCurrency_objects']) == 0) {
+        if (!isset($_POST['SmartobjectCurrency_objects']) || 0 == count($_POST['SmartobjectCurrency_objects'])) {
             redirect_header($smart_previous_page, 3, _AM_SOBJECT_NO_RECORDS_TO_UPDATE);
         }
 

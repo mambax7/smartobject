@@ -66,9 +66,9 @@ class SmartObjectTreeTable extends SmartObjectTable
         foreach ($this->_columns as $column) {
             $aColumn = [];
 
-            if ($i == 0) {
+            if (0 == $i) {
                 $class = 'head';
-            } elseif ($i % 2 == 0) {
+            } elseif (0 == $i % 2) {
                 $class = 'even';
             } else {
                 $class = 'odd';
@@ -95,7 +95,7 @@ class SmartObjectTreeTable extends SmartObjectTable
                 }
             }
 
-            if ($space !== '') {
+            if ('' !== $space) {
                 $space .= '&nbsp;';
             }
 
@@ -111,7 +111,7 @@ class SmartObjectTreeTable extends SmartObjectTable
 
         $aObject['columns'] = $aColumns;
 
-        $class            = $class === 'even' ? 'odd' : 'even';
+        $class            = 'even' === $class ? 'odd' : 'even';
         $aObject['class'] = $class;
 
         $actions = [];

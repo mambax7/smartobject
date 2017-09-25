@@ -57,7 +57,7 @@ class SmartobjectCategory extends SmartSeoObject
      */
     public function getVar($key, $format = 's')
     {
-        if ($format === 's' && in_array($key, ['description', 'image'])) {
+        if ('s' === $format && in_array($key, ['description', 'image'])) {
             //            return call_user_func(array($this, $key));
             return $this->{$key}();
         }
@@ -79,7 +79,7 @@ class SmartobjectCategory extends SmartSeoObject
     public function image()
     {
         $ret = $this->getVar('image', 'e');
-        if ($ret == '-1') {
+        if ('-1' == $ret) {
             return false;
         } else {
             return $ret;
@@ -122,7 +122,7 @@ class SmartobjectCategory extends SmartSeoObject
                 $ret             = $this->getVar('name');
             }
             $parentid = $this->getVar('parentid');
-            if ($parentid != 0) {
+            if (0 != $parentid) {
                 $parentObj = $this->handler->get($parentid);
                 if ($parentObj->isNew()) {
                     exit;
@@ -217,9 +217,9 @@ class SmartobjectCategoryHandler extends SmartPersistableObjectHandler
         }
 
         $retArray = [$parentid];
-        while ($parentid != 0) {
+        while (0 != $parentid) {
             $parentid = $this->allCategoriesId[$parentid];
-            if ($parentid != 0) {
+            if (0 != $parentid) {
                 $retArray[] = $parentid;
             }
         }

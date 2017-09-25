@@ -85,7 +85,7 @@ class SmartobjectCurrency extends SmartObject
      */
     public function getVar($key, $format = 's')
     {
-        if ($format === 's' && in_array($key, ['rate', 'default_currency'])) {
+        if ('s' === $format && in_array($key, ['rate', 'default_currency'])) {
             //            return call_user_func(array($this, $key));
             return $this->{$key}();
         }
@@ -126,7 +126,7 @@ class SmartobjectCurrency extends SmartObject
      */
     public function defaultCurrency()
     {
-        if ($this->getVar('default_currency', 'e') === true) {
+        if (true === $this->getVar('default_currency', 'e')) {
             return _YES;
         } else {
             return _NO;

@@ -72,7 +72,7 @@ class SmartobjectCustomtag extends SmartObject
      */
     public function getVar($key, $format = 's')
     {
-        if ($format === 's' && in_array($key, [])) {
+        if ('s' === $format && in_array($key, [])) {
             //            return call_user_func(array($this, $key));
             return $this->{$key}();
         }
@@ -106,7 +106,7 @@ class SmartobjectCustomtag extends SmartObject
         }
 
         // check for PHP if we are not on admin side
-        if (!defined('XOOPS_CPFUNC_LOADED') && !(strpos($ret, '[php]') === false)) {
+        if (!defined('XOOPS_CPFUNC_LOADED') && !(false === strpos($ret, '[php]'))) {
             $ret = str_replace('[php]', '', $ret);
             // we have PHP code, let's evaluate
             eval($ret);

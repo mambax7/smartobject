@@ -150,13 +150,13 @@ class SmartObject extends XoopsObject
             trigger_error("Cannot use variable starting with 'url_'.");
         }
         parent::initVar($key, $data_type, $value, $required, $maxlength, $options);
-        if ($this->handler && (!$form_caption || $form_caption === '')) {
+        if ($this->handler && (!$form_caption || '' === $form_caption)) {
             $dyn_form_caption = strtoupper('_CO_' . $this->handler->_moduleName . '_' . $this->handler->_itemname . '_' . $key);
             if (defined($dyn_form_caption)) {
                 $form_caption = constant($dyn_form_caption);
             }
         }
-        if ($this->handler && (!$form_dsc || $form_dsc === '')) {
+        if ($this->handler && (!$form_dsc || '' === $form_dsc)) {
             $dyn_form_dsc = strtoupper('_CO_' . $this->handler->_moduleName . '_' . $this->handler->_itemname . '_' . $key . '_DSC');
             if (defined($dyn_form_dsc)) {
                 $form_dsc = constant($dyn_form_dsc);
@@ -222,7 +222,7 @@ class SmartObject extends XoopsObject
         $form_dsc = '',
         $value = null
     ) {
-        $maxlength = $data_type === 'XOBJ_DTYPE_TXTBOX' ? 255 : null;
+        $maxlength = 'XOBJ_DTYPE_TXTBOX' === $data_type ? 255 : null;
         $this->initVar($key, $data_type, $value, $required, $maxlength, '', false, $form_caption, $form_dsc, false, true, true);
     }
 
@@ -235,37 +235,37 @@ class SmartObject extends XoopsObject
     {
         switch ($varname) {
             case 'dohtml':
-                $value = $default !== 'notdefined' ? $default : true;
+                $value = 'notdefined' !== $default ? $default : true;
                 $this->initVar($varname, XOBJ_DTYPE_INT, $value, false, null, '', false, _CO_SOBJECT_DOHTML_FORM_CAPTION, '', false, true, $displayOnForm);
                 $this->setControl($varname, 'yesno');
                 break;
 
             case 'dobr':
-                $value = ($default === 'notdefined') ? true : $default;
+                $value = ('notdefined' === $default) ? true : $default;
                 $this->initVar($varname, XOBJ_DTYPE_INT, $value, false, null, '', false, _CO_SOBJECT_DOBR_FORM_CAPTION, '', false, true, $displayOnForm);
                 $this->setControl($varname, 'yesno');
                 break;
 
             case 'doimage':
-                $value = $default !== 'notdefined' ? $default : true;
+                $value = 'notdefined' !== $default ? $default : true;
                 $this->initVar($varname, XOBJ_DTYPE_INT, $value, false, null, '', false, _CO_SOBJECT_DOIMAGE_FORM_CAPTION, '', false, true, $displayOnForm);
                 $this->setControl($varname, 'yesno');
                 break;
 
             case 'dosmiley':
-                $value = $default !== 'notdefined' ? $default : true;
+                $value = 'notdefined' !== $default ? $default : true;
                 $this->initVar($varname, XOBJ_DTYPE_INT, $value, false, null, '', false, _CO_SOBJECT_DOSMILEY_FORM_CAPTION, '', false, true, $displayOnForm);
                 $this->setControl($varname, 'yesno');
                 break;
 
             case 'doxcode':
-                $value = $default !== 'notdefined' ? $default : true;
+                $value = 'notdefined' !== $default ? $default : true;
                 $this->initVar($varname, XOBJ_DTYPE_INT, $value, false, null, '', false, _CO_SOBJECT_DOXCODE_FORM_CAPTION, '', false, true, $displayOnForm);
                 $this->setControl($varname, 'yesno');
                 break;
 
             case 'meta_keywords':
-                $value = $default !== 'notdefined' ? $default : '';
+                $value = 'notdefined' !== $default ? $default : '';
                 $this->initVar($varname, XOBJ_DTYPE_TXTAREA, $value, false, null, '', false, _CO_SOBJECT_META_KEYWORDS, _CO_SOBJECT_META_KEYWORDS_DSC, false, true, $displayOnForm);
                 $this->setControl('meta_keywords', [
                     'name'        => 'textarea',
@@ -274,7 +274,7 @@ class SmartObject extends XoopsObject
                 break;
 
             case 'meta_description':
-                $value = $default !== 'notdefined' ? $default : '';
+                $value = 'notdefined' !== $default ? $default : '';
                 $this->initVar($varname, XOBJ_DTYPE_TXTAREA, $value, false, null, '', false, _CO_SOBJECT_META_DESCRIPTION, _CO_SOBJECT_META_DESCRIPTION_DSC, false, true, $displayOnForm);
                 $this->setControl('meta_description', [
                     'name'        => 'textarea',
@@ -283,26 +283,26 @@ class SmartObject extends XoopsObject
                 break;
 
             case 'short_url':
-                $value = $default !== 'notdefined' ? $default : '';
+                $value = 'notdefined' !== $default ? $default : '';
                 $this->initVar($varname, XOBJ_DTYPE_TXTBOX, $value, false, null, '', false, _CO_SOBJECT_SHORT_URL, _CO_SOBJECT_SHORT_URL_DSC, false, true, $displayOnForm);
                 break;
 
             case 'hierarchy_path':
-                $value = $default !== 'notdefined' ? $default : '';
+                $value = 'notdefined' !== $default ? $default : '';
                 $this->initVar($varname, XOBJ_DTYPE_ARRAY, $value, false, null, '', false, _CO_SOBJECT_HIERARCHY_PATH, _CO_SOBJECT_HIERARCHY_PATH_DSC, false, true, $displayOnForm);
                 break;
 
             case 'counter':
-                $value = $default !== 'notdefined' ? $default : 0;
+                $value = 'notdefined' !== $default ? $default : 0;
                 $this->initVar($varname, XOBJ_DTYPE_INT, $value, false, null, '', false, _CO_SOBJECT_COUNTER_FORM_CAPTION, '', false, true, $displayOnForm);
                 break;
 
             case 'weight':
-                $value = $default !== 'notdefined' ? $default : 0;
+                $value = 'notdefined' !== $default ? $default : 0;
                 $this->initVar($varname, XOBJ_DTYPE_INT, $value, false, null, '', false, _CO_SOBJECT_WEIGHT_FORM_CAPTION, '', true, true, $displayOnForm);
                 break;
             case 'custom_css':
-                $value = $default !== 'notdefined' ? $default : '';
+                $value = 'notdefined' !== $default ? $default : '';
                 $this->initVar($varname, XOBJ_DTYPE_TXTAREA, $value, false, null, '', false, _CO_SOBJECT_CUSTOM_CSS, _CO_SOBJECT_CUSTOM_CSS_DSC, false, true, $displayOnForm);
                 $this->setControl('custom_css', [
                     'name'        => 'textarea',
@@ -458,7 +458,7 @@ class SmartObject extends XoopsObject
             $value     = $this->getVar($key);
             $ret[$key] = $value;
         }
-        if ($this->handler->identifierName !== '') {
+        if ('' !== $this->handler->identifierName) {
             $controller = new SmartObjectController($this->handler);
             /**
              * Addition of some automatic value
@@ -572,7 +572,7 @@ class SmartObject extends XoopsObject
         $smartPermissionsHandler = new SmartobjectPermissionHandler($this->handler);
         $ret                     = $smartPermissionsHandler->getGrantedGroups($group_perm, $this->id());
 
-        if (count($ret) == 0) {
+        if (0 == count($ret)) {
             return false;
         } else {
             return $ret;
@@ -614,7 +614,7 @@ class SmartObject extends XoopsObject
     {
         if (isset($this->vars[$key][$info])) {
             return $this->vars[$key][$info];
-        } elseif ($info === '' && isset($this->vars[$key])) {
+        } elseif ('' === $info && isset($this->vars[$key])) {
             return $this->vars[$key];
         } else {
             return $this->vars;
@@ -781,7 +781,7 @@ class SmartObject extends XoopsObject
         $br       = isset($this->vars['dobr']) ? $this->getVar('dobr') : true;
         $formatML = true;
 
-        if ($form_editor === 'default') {
+        if ('default' === $form_editor) {
             global $xoopsModuleConfig;
             $form_editor = isset($xoopsModuleConfig['default_editor']) ? $xoopsModuleConfig['default_editor'] : 'textarea';
         }
@@ -826,7 +826,7 @@ class SmartObject extends XoopsObject
                 $cleanv = is_string($cleanv) ? trim($cleanv) : $cleanv;
                 switch ($v['data_type']) {
                     case XOBJ_DTYPE_TXTBOX:
-                        if ($v['required'] && $cleanv != '0' && $cleanv == '') {
+                        if ($v['required'] && '0' != $cleanv && '' == $cleanv) {
                             $this->setErrors(sprintf(_XOBJ_ERR_REQUIRED, $k));
                             continue 2;
                         }
@@ -841,7 +841,7 @@ class SmartObject extends XoopsObject
                         }
                         break;
                     case XOBJ_DTYPE_TXTAREA:
-                        if ($v['required'] && $cleanv != '0' && $cleanv == '') {
+                        if ($v['required'] && '0' != $cleanv && '' == $cleanv) {
                             $this->setErrors(sprintf(_XOBJ_ERR_REQUIRED, $k));
                             continue 2;
                         }
@@ -872,11 +872,11 @@ class SmartObject extends XoopsObject
                         break;
 
                     case XOBJ_DTYPE_EMAIL:
-                        if ($v['required'] && $cleanv === '') {
+                        if ($v['required'] && '' === $cleanv) {
                             $this->setErrors(sprintf(_XOBJ_ERR_REQUIRED, $k));
                             continue 2;
                         }
-                        if ($cleanv !== ''
+                        if ('' !== $cleanv
                             && !preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+([\.][a-z0-9-]+)+$/i", $cleanv)) {
                             $this->setErrors('Invalid Email');
                             continue 2;
@@ -886,11 +886,11 @@ class SmartObject extends XoopsObject
                         }
                         break;
                     case XOBJ_DTYPE_URL:
-                        if ($v['required'] && $cleanv === '') {
+                        if ($v['required'] && '' === $cleanv) {
                             $this->setErrors(sprintf(_XOBJ_ERR_REQUIRED, $k));
                             continue 2;
                         }
-                        if ($cleanv !== '' && !preg_match("/^http[s]*:\/\//i", $cleanv)) {
+                        if ('' !== $cleanv && !preg_match("/^http[s]*:\/\//i", $cleanv)) {
                             $cleanv = 'http://' . $cleanv;
                         }
                         if (!$v['not_gpc']) {
@@ -1067,9 +1067,9 @@ class SmartObject extends XoopsObject
                 $decimal_section_original = strstr($ret, '.');
                 $decimal_section          = $decimal_section_original;
                 if ($decimal_section) {
-                    if (strlen($decimal_section) == 1) {
+                    if (1 == strlen($decimal_section)) {
                         $decimal_section = '.00';
-                    } elseif (strlen($decimal_section) == 2) {
+                    } elseif (2 == strlen($decimal_section)) {
                         $decimal_section .= '0';
                     }
                     $ret = str_replace($decimal_section_original, $decimal_section, $ret);
@@ -1086,13 +1086,13 @@ class SmartObject extends XoopsObject
                         $html = !empty($this->vars['dohtml']['value']) ? 1 : 0;
 
                         $xcode = (!isset($this->vars['doxcode']['value'])
-                                  || $this->vars['doxcode']['value'] == 1) ? 1 : 0;
+                                  || 1 == $this->vars['doxcode']['value']) ? 1 : 0;
 
                         $smiley = (!isset($this->vars['dosmiley']['value'])
-                                   || $this->vars['dosmiley']['value'] == 1) ? 1 : 0;
+                                   || 1 == $this->vars['dosmiley']['value']) ? 1 : 0;
                         $image  = (!isset($this->vars['doimage']['value'])
-                                   || $this->vars['doimage']['value'] == 1) ? 1 : 0;
-                        $br     = (!isset($this->vars['dobr']['value']) || $this->vars['dobr']['value'] == 1) ? 1 : 0;
+                                   || 1 == $this->vars['doimage']['value']) ? 1 : 0;
+                        $br     = (!isset($this->vars['dobr']['value']) || 1 == $this->vars['dobr']['value']) ? 1 : 0;
 
                         /**
                          * Hack by marcan <INBOX> for SCSPRO
@@ -1118,12 +1118,12 @@ class SmartObject extends XoopsObject
                         $ts     = MyTextSanitizer::getInstance();
                         $html   = !empty($this->vars['dohtml']['value']) ? 1 : 0;
                         $xcode  = (!isset($this->vars['doxcode']['value'])
-                                   || $this->vars['doxcode']['value'] == 1) ? 1 : 0;
+                                   || 1 == $this->vars['doxcode']['value']) ? 1 : 0;
                         $smiley = (!isset($this->vars['dosmiley']['value'])
-                                   || $this->vars['dosmiley']['value'] == 1) ? 1 : 0;
+                                   || 1 == $this->vars['dosmiley']['value']) ? 1 : 0;
                         $image  = (!isset($this->vars['doimage']['value'])
-                                   || $this->vars['doimage']['value'] == 1) ? 1 : 0;
-                        $br     = (!isset($this->vars['dobr']['value']) || $this->vars['dobr']['value'] == 1) ? 1 : 0;
+                                   || 1 == $this->vars['doimage']['value']) ? 1 : 0;
+                        $br     = (!isset($this->vars['dobr']['value']) || 1 == $this->vars['dobr']['value']) ? 1 : 0;
 
                         return $ts->previewTarea($ret, $html, $smiley, $xcode, $image, $br);
                         break 1;
@@ -1173,7 +1173,7 @@ class SmartObject extends XoopsObject
                 }
                 break;
             default:
-                if ($this->vars[$key]['options'] !== '' && $ret != '') {
+                if ('' !== $this->vars[$key]['options'] && '' != $ret) {
                     switch (strtolower($format)) {
                         case 's':
                         case 'show':
@@ -1406,8 +1406,8 @@ class SmartObject extends XoopsObject
     public function getUrlLinkObj($key)
     {
         $smartobjectLinkurlHandler = xoops_getModuleHandler('urllink', 'smartobject');
-        $urllinkid                 = $this->getVar($key) !== null ? $this->getVar($key) : 0;
-        if ($urllinkid != 0) {
+        $urllinkid                 = null !== $this->getVar($key) ? $this->getVar($key) : 0;
+        if (0 != $urllinkid) {
             return $smartobjectLinkurlHandler->get($urllinkid);
         } else {
             return $smartobjectLinkurlHandler->create();
@@ -1432,8 +1432,8 @@ class SmartObject extends XoopsObject
     public function getFileObj($key)
     {
         $smartobjectFileHandler = xoops_getModuleHandler('file', 'smartobject');
-        $fileid                 = $this->getVar($key) !== null ? $this->getVar($key) : 0;
-        if ($fileid != 0) {
+        $fileid                 = null !== $this->getVar($key) ? $this->getVar($key) : 0;
+        if (0 != $fileid) {
             return $smartobjectFileHandler->get($fileid);
         } else {
             return $smartobjectFileHandler->create();

@@ -50,7 +50,7 @@ class XoopsCaptcha
      */
     public function setConfig($name, $val)
     {
-        if ($name === 'mode') {
+        if ('mode' === $name) {
             $this->setMode($val);
         } elseif (isset($this->$name)) {
             $this->$name = $val;
@@ -73,7 +73,7 @@ class XoopsCaptcha
         if (!empty($mode) && in_array($mode, ['text', 'image'])) {
             $this->mode = $mode;
 
-            if ($this->mode !== 'image') {
+            if ('image' !== $this->mode) {
                 return;
             }
         }
@@ -120,7 +120,7 @@ class XoopsCaptcha
     ) {
         // Loading RUN-TIME settings
         foreach (array_keys($this->config) as $key) {
-            if (isset(${$key}) && ${$key} !== null) {
+            if (isset(${$key}) && null !== ${$key}) {
                 $this->config[$key] = ${$key};
             }
         }
@@ -140,7 +140,7 @@ class XoopsCaptcha
     public function verify($skipMember = null)
     {
         $sessionName = @$_SESSION['XoopsCaptcha_name'];
-        $skipMember  = ($skipMember === null) ? @$_SESSION['XoopsCaptcha_skipmember'] : $skipMember;
+        $skipMember  = (null === $skipMember) ? @$_SESSION['XoopsCaptcha_skipmember'] : $skipMember;
         $maxAttempts = (int)(@$_SESSION['XoopsCaptcha_maxattempts']);
 
         $is_valid = false;

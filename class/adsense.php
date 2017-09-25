@@ -96,7 +96,7 @@ class SmartobjectAdsense extends SmartObject
      */
     public function getVar($key, $format = 's')
     {
-        if ($format === 's' && in_array($key, [])) {
+        if ('s' === $format && in_array($key, [])) {
             //            return call_user_func(array($this, $key));
             return $this->{$key}();
         }
@@ -110,7 +110,7 @@ class SmartobjectAdsense extends SmartObject
     public function render()
     {
         global $smartobjectAdsenseHandler;
-        if ($this->getVar('style', 'n') !== '') {
+        if ('' !== $this->getVar('style', 'n')) {
             $ret = '<div style="' . $this->getVar('style', 'n') . '">';
         } else {
             $ret = '<div>';
@@ -363,7 +363,7 @@ class SmartobjectAdsenseHandler extends SmartPersistableObjectHandler
      */
     public function beforeSave($obj)
     {
-        if ($obj->getVar('tag') === '') {
+        if ('' === $obj->getVar('tag')) {
             $obj->setVar('tag', $title = $obj->generateTag());
         }
 

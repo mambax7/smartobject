@@ -66,7 +66,7 @@ function smart_isXoops22()
 {
     $xoops22 = false;
     $xv      = str_replace('XOOPS ', '', XOOPS_VERSION);
-    if (substr($xv, 2, 1) == '2') {
+    if ('2' == substr($xv, 2, 1)) {
         $xoops22 = true;
     }
 
@@ -100,10 +100,10 @@ function smart_getModuleName($withLink = true, $forBreadCrumb = false, $moduleNa
         return $smartModule->getVar('name');
     } else {
         $seoMode = smart_getModuleModeSEO($moduleName);
-        if ($seoMode === 'rewrite') {
+        if ('rewrite' === $seoMode) {
             $seoModuleName = smart_getModuleNameForSEO($moduleName);
             $ret           = XOOPS_URL . '/' . $seoModuleName . '/';
-        } elseif ($seoMode === 'pathinfo') {
+        } elseif ('pathinfo' === $seoMode) {
             $ret = XOOPS_URL . '/modules/' . $moduleName . '/seo.php/' . $seoModuleName . '/';
         } else {
             $ret = XOOPS_URL . '/modules/' . $moduleName . '/';
@@ -286,7 +286,7 @@ function smart_SetMeta($key, $value, $moduleName = false)
     }
     $xoopsDB = XoopsDatabaseFactory::getDatabaseConnection();
     $ret     = smart_GetMeta($key, $moduleName);
-    if ($ret === '0' || $ret > 0) {
+    if ('0' === $ret || $ret > 0) {
         $sql = sprintf('UPDATE %s SET metavalue = %s WHERE metakey = %s', $xoopsDB->prefix($moduleName . '_meta'), $xoopsDB->quoteString($value), $xoopsDB->quoteString($key));
     } else {
         $sql = sprintf('INSERT INTO %s (metakey, metavalue) VALUES (%s, %s)', $xoopsDB->prefix($moduleName . '_meta'), $xoopsDB->quoteString($key), $xoopsDB->quoteString($value));
@@ -310,7 +310,7 @@ function smart_SetMeta($key, $value, $moduleName = false)
 function smart_substr($str, $start, $length, $trimmarker = '...')
 {
     // if the string is empty, let's get out ;-)
-    if ($str === '') {
+    if ('' === $str) {
         return $str;
     }
     // reverse a string that is shortened with '' as trimmarker
@@ -340,7 +340,7 @@ function smart_getConfig($key, $moduleName = false, $default = 'default_is_undef
     if (isset($configs[$key])) {
         return $configs[$key];
     } else {
-        if ($default === 'default_is_undefined') {
+        if ('default_is_undefined' === $default) {
             return null;
         } else {
             return $default;
@@ -370,11 +370,11 @@ function smart_copyr($source, $dest)
     $dir = dir($source);
     while (false !== $entry = $dir->read()) {
         // Skip pointers
-        if ($entry === '.' || $entry === '..') {
+        if ('.' === $entry || '..' === $entry) {
             continue;
         }
         // Deep copy directories
-        if (is_dir("$source/$entry") && ($dest !== "$source/$entry")) {
+        if (is_dir("$source/$entry") && ("$source/$entry" !== $dest)) {
             copyr("$source/$entry", "$dest/$entry");
         } else {
             copy("$source/$entry", "$dest/$entry");
@@ -486,7 +486,7 @@ function smart_getModuleInfo($moduleName = false)
             $smartModules[$moduleName] = $xoopsModule;
         } else {
             $hModule = xoops_getHandler('module');
-            if ($moduleName !== 'xoops') {
+            if ('xoops' !== $moduleName) {
                 $smartModules[$moduleName] = $hModule->getByDirname($moduleName);
             } else {
                 $smartModules[$moduleName] = $hModule->getByDirname('system');
@@ -666,7 +666,7 @@ function smart_collapsableBar($id = '', $title = '', $dsc = '')
     echo "<h3 style=\"color: #2F5376; font-weight: bold; font-size: 14px; margin: 6px 0 0 0; \"><a href='javascript:;' onclick=\"togglecollapse('" . $id . "'); toggleIcon('" . $id . "_icon')\";>";
     echo "<img id='" . $id . "_icon' src=" . SMARTOBJECT_URL . "assets/images/close12.gif alt=''></a>&nbsp;" . $title . '</h3>';
     echo "<div id='" . $id . "'>";
-    if ($dsc !== '') {
+    if ('' !== $dsc) {
         echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-size: small; display: block; \">" . $dsc . '</span>';
     }
 }
@@ -684,7 +684,7 @@ function smart_ajaxCollapsableBar($id = '', $title = '', $dsc = '')
     echo '<h3 style="border: 1px solid; color: #2F5376; font-weight: bold; font-size: 14px; margin: 6px 0 0 0; " onclick="' . $onClick . '">';
     echo "<img id='" . $id . "_icon' src=" . SMARTOBJECT_URL . "assets/images/close12.gif alt=''></a>&nbsp;" . $title . '</h3>';
     echo "<div id='" . $id . "'>";
-    if ($dsc !== '') {
+    if ('' !== $dsc) {
         echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-size: small; display: block; \">" . $dsc . '</span>';
     }
 }
@@ -718,7 +718,7 @@ function smart_openclose_collapsable($name)
     $cookie_name = $path . '_smart_collaps_' . $name;
     $cookie_name = str_replace('.', '_', $cookie_name);
     $cookie      = smart_getCookieVar($cookie_name, '');
-    if ($cookie === 'none') {
+    if ('none' === $cookie) {
         echo '
                 <script type="text/javascript"><!--
                 togglecollapse("' . $name . '"); toggleIcon("' . $name . '_icon");
@@ -754,7 +754,7 @@ function smart_close_collapsable($name)
  */
 function smart_setCookieVar($name, $value, $time = 0)
 {
-    if ($time == 0) {
+    if (0 == $time) {
         $time = time() + 3600 * 24 * 365;
         //$time = '';
     }
@@ -782,11 +782,11 @@ function smart_getCookieVar($name, $default = '')
 function smart_getCurrentUrls()
 {
     $urls        = [];
-    $http        = (strpos(XOOPS_URL, 'https://') === false) ? 'http://' : 'https://';
+    $http        = (false === strpos(XOOPS_URL, 'https://')) ? 'http://' : 'https://';
     $phpself     = $_SERVER['PHP_SELF'];
     $httphost    = $_SERVER['HTTP_HOST'];
     $querystring = $_SERVER['QUERY_STRING'];
-    if ($querystring !== '') {
+    if ('' !== $querystring) {
         $querystring = '?' . $querystring;
     }
     $currenturl           = $http . $httphost . $phpself . $querystring;
@@ -923,7 +923,7 @@ function smart_addScript($src)
  */
 function smart_addStyle($src)
 {
-    if ($src === 'smartobject') {
+    if ('smartobject' === $src) {
         $src = SMARTOBJECT_URL . 'assets/css/module.css';
     }
     echo smart_get_css_link($src);
@@ -1224,7 +1224,7 @@ function smart_getfloat($str, $set = false)
             return (float)$str;
         } else {
             // No comma exists, so we have to decide, how a single dot shall be treated
-            if (preg_match("/^[0-9\-]*[\.]{1}[0-9-]+$/", $str) === true && $set['single_dot_as_decimal'] === true) {
+            if (true === preg_match("/^[0-9\-]*[\.]{1}[0-9-]+$/", $str) && true === $set['single_dot_as_decimal']) {
                 // Treat single dot as decimal separator
                 return (float)$str;
             } else {
@@ -1254,9 +1254,9 @@ function smart_currency($var, $currencyObj = false)
     $decimal_section_original = strstr($ret, '.');
     $decimal_section          = $decimal_section_original;
     if ($decimal_section) {
-        if (strlen($decimal_section) == 1) {
+        if (1 == strlen($decimal_section)) {
             $decimal_section = '.00';
-        } elseif (strlen($decimal_section) == 2) {
+        } elseif (2 == strlen($decimal_section)) {
             $decimal_section .= '0';
         }
         $ret = str_replace($decimal_section_original, $decimal_section, $ret);

@@ -50,14 +50,14 @@ class SmartObjectController
         foreach (array_keys($smartObj->vars) as $key) {
             switch ($smartObj->vars[$key]['data_type']) {
                 case XOBJ_DTYPE_IMAGE:
-                    if (isset($_POST['url_' . $key]) && $_POST['url_' . $key] !== '') {
+                    if (isset($_POST['url_' . $key]) && '' !== $_POST['url_' . $key]) {
                         $oldFile = $smartObj->getUploadDir(true) . $smartObj->getVar($key, 'e');
                         $smartObj->setVar($key, $_POST['url_' . $key]);
                         if (file_exists($oldFile)) {
                             unlink($oldFile);
                         }
                     }
-                    if (isset($_POST['delete_' . $key]) && $_POST['delete_' . $key] == '1') {
+                    if (isset($_POST['delete_' . $key]) && '1' == $_POST['delete_' . $key]) {
                         $oldFile = $smartObj->getUploadDir(true) . $smartObj->getVar($key, 'e');
                         $smartObj->setVar($key, '');
                         if (file_exists($oldFile)) {
@@ -72,7 +72,7 @@ class SmartObjectController
                     $linkObj->setVar('description', $_POST['desc_' . $key]);
                     $linkObj->setVar('target', $_POST['target_' . $key]);
                     $linkObj->setVar('url', $_POST['url_' . $key]);
-                    if ($linkObj->getVar('url') !== '') {
+                    if ('' !== $linkObj->getVar('url')) {
                         $smartObj->storeUrlLinkObj($linkObj);
                     }
                     //todo: catch errors
@@ -80,13 +80,13 @@ class SmartObjectController
                     break;
 
                 case XOBJ_DTYPE_FILE:
-                    if (!isset($_FILES['upload_' . $key]['name']) || $_FILES['upload_' . $key]['name'] === '') {
+                    if (!isset($_FILES['upload_' . $key]['name']) || '' === $_FILES['upload_' . $key]['name']) {
                         $fileObj = $smartObj->getFileObj($key);
                         $fileObj->setVar('caption', $_POST['caption_' . $key]);
                         $fileObj->setVar('description', $_POST['desc_' . $key]);
                         $fileObj->setVar('url', $_POST['url_' . $key]);
-                        if (!($fileObj->getVar('url') === '' && $fileObj->getVar('url') === ''
-                              && $fileObj->getVar('url') === '')) {
+                        if (!('' === $fileObj->getVar('url') && '' === $fileObj->getVar('url')
+                              && '' === $fileObj->getVar('url'))) {
                             $res = $smartObj->storeFileObj($fileObj);
                             if ($res) {
                                 $smartObj->setVar($key, $fileObj->getVar('fileid'));
@@ -154,7 +154,7 @@ class SmartObjectController
             require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartuploader.php';
             $uploaderObj = new SmartUploader($smartObj->getImageDir(true), $this->handler->_allowedMimeTypes, $this->handler->_maxFileSize, $this->handler->_maxWidth, $this->handler->_maxHeight);
             foreach ($_FILES as $name => $file_array) {
-                if (isset($file_array['name']) && $file_array['name'] !== ''
+                if (isset($file_array['name']) && '' !== $file_array['name']
                     && in_array(str_replace('upload_', '', $name), array_keys($smartObj->vars))) {
                     if ($uploaderObj->fetchMedia($name)) {
                         $uploaderObj->setTargetFileName(time() . '_' . $uploaderObj->getMediaName());
@@ -163,7 +163,7 @@ class SmartObjectController
                             $related_field   = str_replace('upload_', '', $name);
                             $uploadedArray[] = $related_field;
                             //si c'est un fichier Rich
-                            if ($smartObj->vars[$related_field]['data_type'] === XOBJ_DTYPE_FILE) {
+                            if (XOBJ_DTYPE_FILE === $smartObj->vars[$related_field]['data_type']) {
                                 $object_fileurl = $smartObj->getUploadDir();
                                 $fileObj        = $smartObj->getFileObj($related_field);
                                 $fileObj->setVar('url', $object_fileurl . $uploaderObj->getSavedFileName());
@@ -200,7 +200,7 @@ class SmartObjectController
             }
         }
 
-        if ($redirect_page === null) {
+        if (null === $redirect_page) {
             return $smartObj;
         } else {
             if (!$storeResult) {
@@ -422,9 +422,9 @@ class SmartObjectController
         //$seoIncludeId = smart_getModuleIncludeIdSEO($this->handler->_moduleName);
         $seoIncludeId = true;
 
-        if ($seoMode === 'rewrite') {
+        if ('rewrite' === $seoMode) {
             $ret = XOOPS_URL . '/' . $seoModuleName . '.' . $this->handler->_itemname . ($seoIncludeId ? '.' . $smartObj->getVar($this->handler->keyName) : '') . '/' . $smartObj->getVar('short_url') . '.html';
-        } elseif ($seoMode === 'pathinfo') {
+        } elseif ('pathinfo' === $seoMode) {
             $ret = SMARTOBJECT_URL . 'seo.php/' . $seoModuleName . '.' . $this->handler->_itemname . ($seoIncludeId ? '.' . $smartObj->getVar($this->handler->keyName) : '') . '/' . $smartObj->getVar('short_url') . '.html';
         } else {
             $ret = $this->handler->_moduleUrl . $this->handler->_page . '?' . $this->handler->keyName . '=' . $smartObj->getVar($this->handler->keyName);
@@ -518,11 +518,11 @@ class SmartObjectController
                        . $mid
                        . "', ',',',',',','sendmessage', 674, 500);\"><img src=\""
                        . SMARTOBJECT_IMAGES_ACTIONS_URL
-                       . "mail_send.png\"  alt=\""
+                       . 'mail_send.png"  alt="'
                        . _CO_SOBJECT_EMAIL
-                       . "\" title=\""
+                       . '" title="'
                        . _CO_SOBJECT_EMAIL
-                       . "\" style=\"vertical-align: middle;\"></a>";
+                       . '" style="vertical-align: middle;"></a>';
 
         $ret = '<span id="smartobject_print_button">' . $printlink . '&nbsp;</span>' . '<span id="smartobject_mail_button">' . $friendlink . '</span>';
 

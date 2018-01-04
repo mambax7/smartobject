@@ -689,7 +689,7 @@ class SmartObjectForm extends XoopsThemeForm
         $handle  = opendir(XOOPS_THEME_PATH . '/');
         $dirlist = [];
         while (false !== ($file = readdir($handle))) {
-            if (is_dir(XOOPS_THEME_PATH . '/' . $file) && !preg_match("/^[.]{1,2}$/", $file)
+            if (is_dir(XOOPS_THEME_PATH . '/' . $file) && !preg_match('/^[.]{1,2}$/', $file)
                 && 'cvs' !== strtolower($file)) {
                 $dirlist[$file] = $file;
             }
@@ -805,7 +805,7 @@ class SmartObjectForm extends XoopsThemeForm
         if ($withtags) {
             $js .= "\n<!-- Start Form Validation JavaScript //-->\n<script type='text/javascript'>\n<!--//\n";
         }
-        $myts     = MyTextSanitizer::getInstance();
+        $myts     = \MyTextSanitizer::getInstance();
         $formname = $this->getName();
         $js       .= "function xoopsFormValidate_{$formname}(myform) {";
         // First, output code to check required elements

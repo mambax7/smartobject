@@ -80,7 +80,7 @@ class SmartobjectRating extends SmartObject
      */
     public function getVar($key, $format = 's')
     {
-        if ($format === 's' && in_array($key, ['name', 'dirname'])) {
+        if ('s' === $format && in_array($key, ['name', 'dirname'])) {
             //            return call_user_func(array($this, $key));
             return $this->{$key}();
         }

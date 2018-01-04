@@ -37,3 +37,6 @@ define('_MI_SOBJECT_OVERVIEW', 'Overview');
 define('_MI_SOBJECT_DISCLAIMER', 'Disclaimer');
 define('_MI_SOBJECT_LICENSE', 'License');
 define('_MI_SOBJECT_SUPPORT', 'Support');
+
+define('_MI_SOBJECT_HOME', 'Home');
+define('_MI_SOBJECT_ABOUT', 'About');

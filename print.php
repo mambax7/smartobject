@@ -11,7 +11,7 @@ require_once SMARTOBJECT_ROOT_PATH . 'class/smartloader.php';
 require_once XOOPS_ROOT_PATH . '/class/template.php';
 
 $xoopsTpl                = new XoopsTpl();
-$myts                    = MyTextSanitizer::getInstance();
+$myts                    = \MyTextSanitizer::getInstance();
 $xoopsConfig['sitename'] = $myts->displayTarea($xoopsConfig['sitename']);
 
 $xoopsTpl->display('db:smartobject_print.tpl');

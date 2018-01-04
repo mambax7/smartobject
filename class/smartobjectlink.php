@@ -65,7 +65,7 @@ class SmartobjectLink extends SmartObject
      */
     public function getVar($key, $format = 's')
     {
-        if ($format === 's' && in_array($key, ['from_uid', 'to_uid', 'date', 'link'])) {
+        if ('s' === $format && in_array($key, ['from_uid', 'to_uid', 'date', 'link'])) {
             //            return call_user_func(array($this, $key));
             return $this->{$key}();
         }
@@ -112,7 +112,7 @@ class SmartobjectLink extends SmartObject
     {
         $ret = $this->getVar('link', 'e');
         if ($full) {
-            $myts = MyTextSanitizer::getInstance();
+            $myts = \MyTextSanitizer::getInstance();
             $ret  = $myts->displayTarea($ret);
 
             return $ret;

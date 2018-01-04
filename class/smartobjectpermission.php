@@ -194,7 +194,7 @@ class SmartobjectPermissionHandler extends XoopsObjectHandler
     {
         global $xoopsModule;
 
-        $smartModule =& smartsection_getModuleInfo();
+        $smartModule = smartsection_getModuleInfo();
 
         $result       = true;
         $module_id    = $smartModule->getVar('mid');

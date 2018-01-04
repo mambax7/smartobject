@@ -81,7 +81,7 @@ class SmartobjectAbout
      */
     public function sanitize($value)
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
 
         return $myts->displayTarea($value, 1);
     }
@@ -93,7 +93,7 @@ class SmartobjectAbout
          * @todo make the output XHTML compliant
          */
 
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
 
         global $xoopsModule;
 

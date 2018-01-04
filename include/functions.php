@@ -667,7 +667,7 @@ function smart_collapsableBar($id = '', $title = '', $dsc = '')
     echo "<img id='" . $id . "_icon' src=" . SMARTOBJECT_URL . "assets/images/close12.gif alt=''></a>&nbsp;" . $title . '</h3>';
     echo "<div id='" . $id . "'>";
     if ('' !== $dsc) {
-        echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-size: small; display: block; \">" . $dsc . '</span>';
+        echo '<span style="color: #567; margin: 3px 0 12px 0; font-size: small; display: block; ">' . $dsc . '</span>';
     }
 }
 
@@ -685,7 +685,7 @@ function smart_ajaxCollapsableBar($id = '', $title = '', $dsc = '')
     echo "<img id='" . $id . "_icon' src=" . SMARTOBJECT_URL . "assets/images/close12.gif alt=''></a>&nbsp;" . $title . '</h3>';
     echo "<div id='" . $id . "'>";
     if ('' !== $dsc) {
-        echo "<span style=\"color: #567; margin: 3px 0 12px 0; font-size: small; display: block; \">" . $dsc . '</span>';
+        echo '<span style="color: #567; margin: 3px 0 12px 0; font-size: small; display: block; ">' . $dsc . '</span>';
     }
 }
 
@@ -1182,7 +1182,7 @@ function smart_html2text($document)
         '',
         '',
         "\\1",
-        "\"",
+        '"',
         '&',
         '<',
         '>',

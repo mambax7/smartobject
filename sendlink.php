@@ -13,7 +13,7 @@ require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectlink.php';
 require_once XOOPS_ROOT_PATH . '/class/template.php';
 
 $xoopsTpl                = new XoopsTpl();
-$myts                    = MyTextSanitizer::getInstance();
+$myts                    = \MyTextSanitizer::getInstance();
 $xoopsConfig['sitename'] = $myts->displayTarea($xoopsConfig['sitename']);
 
 xoops_header(false);
@@ -87,7 +87,7 @@ switch ($op) {
 
         if (is_object($xoopsUser)) {
             $linkObj->setVar('from_uid', $xoopsUser->getVar('uid'));
-            $linkObj->setVar('from_name', $xoopsUser->getVar('name') !== '' ? $xoopsUser->getVar('name') : $xoopsUser->getVar('uname'));
+            $linkObj->setVar('from_name', '' !== $xoopsUser->getVar('name') ? $xoopsUser->getVar('name') : $xoopsUser->getVar('uname'));
             $linkObj->setVar('from_email', $xoopsUser->getVar('email'));
         }
 

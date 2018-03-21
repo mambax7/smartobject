@@ -9,7 +9,7 @@ include dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/mainfile.php';
 error_reporting(0);
 $xoopsLogger->activated = false;
 
-if (empty($_SERVER['HTTP_REFERER']) || !preg_match('/^' . preg_quote(XOOPS_URL, '/') . '/', $_SERVER['HTTP_REFERER'])) {
+if (empty(Request::getString('HTTP_REFERER', '', 'SERVER')) || !preg_match('/^' . preg_quote(XOOPS_URL, '/') . '/', Request::getString('HTTP_REFERER', '', 'SERVER'))) {
     exit();
 }
 

@@ -1,5 +1,9 @@
 <?php
 
+use XoopsModules\Smartobject\SmartObjectColumn;
+use XoopsModules\Smartobject\SmartObjectController;
+use XoopsModules\Smartobject\SmartObjectTable;
+
 /**
  * Module: Class_Booking
  * Author: The SmartFactory <www.smartfactory.ca>
@@ -73,8 +77,8 @@ switch ($op) {
         }
 
         /*
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('currencyid', '(' . implode(', ', $_POST['SmartobjectCurrency_objects']) . ')', 'IN'));
+        $criteria = new \CriteriaCompo();
+        $criteria->add(new \Criteria('currencyid', '(' . implode(', ', $_POST['SmartobjectCurrency_objects']) . ')', 'IN'));
         $currenciesObj = $smartobjectCurrencyHandler->getObjects($criteria, true);
 
         foreach ($currenciesObj as $currencyid=>$currencyObj) {

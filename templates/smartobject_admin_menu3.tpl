@@ -106,9 +106,9 @@
     }
 
     #submenuswraper {
-        border-left: 1px solid grey;
-        border-right: 1px solid grey;
-        border-bottom: 1px solid grey;
+        border-left: 1px solid #808080;
+        border-right: 1px solid #808080;
+        border-bottom: 1px solid #808080;
         float: left;
         width: 100%;
     }

@@ -85,14 +85,14 @@ switch ($op) {
             }
         }
         require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
-        $controller = new SmartObjectController($smartobjectAdsenseHandler);
+        $controller = new XoopsModules\Smartobject\SmartObjectController($smartobjectAdsenseHandler);
         $controller->storeFromDefaultForm(_AM_SOBJECT_ADSENSES_CREATED, _AM_SOBJECT_ADSENSES_MODIFIED);
         break;
 
     case 'del':
 
         require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
-        $controller = new SmartObjectController($smartobjectAdsenseHandler);
+        $controller = new XoopsModules\Smartobject\SmartObjectController($smartobjectAdsenseHandler);
         $controller->handleObjectDeletion();
 
         break;
@@ -107,33 +107,33 @@ switch ($op) {
         smart_collapsableBar('createdadsenses', _AM_SOBJECT_ADSENSES, _AM_SOBJECT_ADSENSES_DSC);
 
         require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
-        $objectTable = new SmartObjectTable($smartobjectAdsenseHandler);
-        $objectTable->addColumn(new SmartObjectColumn('description', 'left'));
-        $objectTable->addColumn(new SmartObjectColumn(_AM_SOBJECT_ADSENSE_TAG, 'center', 200, 'getXoopsCode'));
+        $objectTable = new XoopsModules\Smartobject\SmartObjectTable($smartobjectAdsenseHandler);
+        $objectTable->addColumn(new XoopsModules\Smartobject\SmartObjectColumn('description', 'left'));
+        $objectTable->addColumn(new XoopsModules\Smartobject\SmartObjectColumn(_AM_SOBJECT_ADSENSE_TAG, 'center', 200, 'getXoopsCode'));
 
         //      $objectTable->addCustomAction('getCreateItemLink');
         //      $objectTable->addCustomAction('getCreateAttributLink');
 
         $objectTable->addIntroButton('addadsense', 'adsense.php?op=mod', _AM_SOBJECT_ADSENSES_CREATE);
         /*
-                $criteria_upcoming = new CriteriaCompo();
-                $criteria_upcoming->add(new Criteria('start_date', time(), '>'));
+                $criteria_upcoming = new \CriteriaCompo();
+                $criteria_upcoming->add(new \Criteria('start_date', time(), '>'));
                 $objectTable->addFilter(_AM_SOBJECT_FILTER_UPCOMING, array(
                                             'key' => 'start_date',
                                             'criteria' => $criteria_upcoming
                 ));
 
-                $criteria_last7days = new CriteriaCompo();
-                $criteria_last7days->add(new Criteria('start_date', time() - 30 *(60 * 60 * 24), '>'));
-                $criteria_last7days->add(new Criteria('start_date', time(), '<'));
+                $criteria_last7days = new \CriteriaCompo();
+                $criteria_last7days->add(new \Criteria('start_date', time() - 30 *(60 * 60 * 24), '>'));
+                $criteria_last7days->add(new \Criteria('start_date', time(), '<'));
                 $objectTable->addFilter(_AM_SOBJECT_FILTER_LAST7DAYS, array(
                                             'key' => 'start_date',
                                             'criteria' => $criteria_last7days
                 ));
 
-                $criteria_last30days = new CriteriaCompo();
-                $criteria_last30days->add(new Criteria('start_date', time() - 30 *(60 * 60 * 24), '>'));
-                $criteria_last30days->add(new Criteria('start_date', time(), '<'));
+                $criteria_last30days = new \CriteriaCompo();
+                $criteria_last30days->add(new \Criteria('start_date', time() - 30 *(60 * 60 * 24), '>'));
+                $criteria_last30days->add(new \Criteria('start_date', time(), '<'));
                 $objectTable->addFilter(_AM_SOBJECT_FILTER_LAST30DAYS, array(
                                             'key' => 'start_date',
                                             'criteria' => $criteria_last30days

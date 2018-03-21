@@ -7,7 +7,7 @@
  * Licence: GNU
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 define('_MI_SOBJECT_INDEX', 'Index');
 define('_MI_SOBJECT_SENT_LINKS', 'Links');

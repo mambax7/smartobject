@@ -6,7 +6,7 @@
  * Licence: GNU
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 define('_CO_OBJ_ALL', 'All'); // deprecated
 define('_CO_OBJ_FILTER', 'Filter');

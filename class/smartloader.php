@@ -1,4 +1,4 @@
-<?php
+<?php namespace XoopsModules\Smartobject;
 /**
  * Loader for the SmartObject framework
  *
@@ -11,25 +11,27 @@
  * @subpackage SmartObjectCore
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+use XoopsModules\Smartobject;
+
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php';
 
 /**
  * Include other classes used by the SmartObject
  */
-require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecthandler.php';
-require_once SMARTOBJECT_ROOT_PATH . 'class/smartobject.php';
-require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectsregistry.php';
+//require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecthandler.php';
+//require_once SMARTOBJECT_ROOT_PATH . 'class/smartobject.php';
+//require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectsregistry.php';
 
 /**
  * Including SmartHook feature
  */
 
-require_once SMARTOBJECT_ROOT_PATH . 'class/smarthookhandler.php';
-$smarthookHandler = SmartHookHandler::getInstance();
+//require_once SMARTOBJECT_ROOT_PATH . 'class/smarthookhandler.php';
+$smarthookHandler = Smartobject\SmartHookHandler::getInstance();
 
 if (!class_exists('smartmetagen')) {
-    require_once SMARTOBJECT_ROOT_PATH . 'class/smartmetagen.php';
+//    require_once SMARTOBJECT_ROOT_PATH . 'class/smartmetagen.php';
 }
 //$smartobjectConfig = smart_getModuleConfig('smartobject');

@@ -7,6 +7,7 @@
  * Licence: GNU
  */
 
+use XoopsModules\Wfdownloads;
 require_once __DIR__ . '/admin_header.php';
 require_once SMARTCONTENT_ROOT_PATH . 'class/dbupdater.php';
 
@@ -18,12 +19,12 @@ smartcontent_xoops_cp_header();
 // =========================================================================================
 function update_tables_to_300()
 {
-    $dbupdater = new WfdownloadsDbupdater();
+    $dbupdater = new Wfdownloads\Dbupdater();
 
     if (!wfdownloads_TableExists('wfdownloads_meta')) {
         // Create table wfdownloads_meta
-        $table = new WfdownloadsTable('wfdownloads_meta');
-        $table->setStructure("CREATE TABLE %s (
+        $table = new Wfdownloads\DbupdaterTable('wfdownloads_meta');
+        $table->setStructure("CREATE TABLE `%s` (
                                 metakey varchar(50) NOT NULL default '',
                                 metavalue varchar(255) NOT NULL default '',
                                 PRIMARY KEY (metakey))
@@ -81,7 +82,7 @@ function update_tables_to_300()
 
     echo '<br><b>Checking Download table</b><br>';
     $downloadHandler = xoops_getModuleHandler('download', 'wfdownloads');
-    $download_table  = new WfdownloadsTable('wfdownloads_downloads');
+    $download_table  = new Wfdownloads\DbupdaterTable('wfdownloads_downloads');
     $fields          = get_table_info($downloadHandler->table, $download_fields);
     // Check for renamed fields
     rename_fields($download_table, $renamed_fields, $fields, $download_fields);
@@ -138,7 +139,7 @@ function update_tables_to_300()
 
     echo '<br><b>Checking Modified Downloads table</b><br>';
     $moduleHandler = xoops_getModuleHandler('modification', 'wfdownloads');
-    $mod_table     = new WfdownloadsTable('wfdownloads_mod');
+    $mod_table     = new Wfdownloads\DbupdaterTable('wfdownloads_mod');
     $fields        = get_table_info($moduleHandler->table, $mod_fields);
     rename_fields($mod_table, $renamed_fields, $fields, $mod_fields);
     update_table($mod_fields, $fields, $mod_table);
@@ -166,7 +167,7 @@ function update_tables_to_300()
     ];
     echo '<br><b>Checking Category table</b><br>';
     $catHandler = xoops_getModuleHandler('category', 'wfdownloads');
-    $cat_table  = new WfdownloadsTable('wfdownloads_cat');
+    $cat_table  = new Wfdownloads\DbupdaterTable('wfdownloads_cat');
     $fields     = get_table_info($catHandler->table, $cat_fields);
     update_table($cat_fields, $fields, $cat_table);
     if ($dbupdater->updateTable($cat_table)) {
@@ -185,7 +186,7 @@ function update_tables_to_300()
     ];
     echo '<br><b>Checking Broken Report table</b><br>';
     $brokenHandler = xoops_getModuleHandler('report', 'wfdownloads');
-    $broken_table  = new WfdownloadsTable('wfdownloads_broken');
+    $broken_table  = new Wfdownloads\DbupdaterTable('wfdownloads_broken');
     $fields        = get_table_info($brokenHandler->table, $broken_fields);
     update_table($broken_fields, $fields, $broken_table);
     if ($dbupdater->updateTable($broken_table)) {
@@ -208,14 +209,14 @@ function invert_nohtm_dohtml_values()
     global $xoopsDB;
     $catHandler = xoops_getModuleHandler('category', 'wfdownloads');
     $result     = $xoopsDB->query('SHOW COLUMNS FROM ' . $catHandler->table);
-    while ($existing_field = $xoopsDB->fetchArray($result)) {
+    while (false !== ($existing_field = $xoopsDB->fetchArray($result))) {
         $fields[$existing_field['field']] = $existing_field['type'];
     }
     if (in_array('nohtml', array_keys($fields))) {
-        $dbupdater = new WfdownloadsDbupdater();
+        $dbupdater = new Wfdownloads\Dbupdater();
         //Invert column values
         // alter options in wfdownloads_cat
-        $table = new WfdownloadsTable('wfdownloads_cat');
+        $table = new Wfdownloads\DbupdaterTable('wfdownloads_cat');
         $table->addAlteredField('nohtml', "dohtml tinyint(1) NOT NULL DEFAULT '1'");
         $table->addAlteredField('nosmiley', "dosmiley tinyint(1) NOT NULL DEFAULT '1'");
         $table->addAlteredField('noxcodes', "doxcode tinyint(1) NOT NULL DEFAULT '1'");
@@ -253,7 +254,7 @@ function invert_nohtm_dohtml_values()
  *
  * @param  array            $new_fields
  * @param  array            $existing_fields
- * @param  WfDownloadsTable $table
+ * @param  Wfdownloads\DbupdaterTable $table
  * @return void
  */
 function update_table($new_fields, $existing_fields, &$table)
@@ -263,11 +264,11 @@ function update_table($new_fields, $existing_fields, &$table)
         if (!in_array($field, array_keys($existing_fields))) {
             //Add field as it is missing
             $table->addNewField($field, $type);
-            //$xoopsDB->query("ALTER TABLE ".$table." ADD ".$field." ".$type);
+        //$xoopsDB->query("ALTER TABLE ".$table." ADD ".$field." ".$type);
             //echo $field."(".$type.") <FONT COLOR='##22DD51'>Added</FONT><br>";
         } elseif ($existing_fields[$field] != $type) {
             $table->addAlteredField($field, $field . ' ' . $type);
-            // check $fields[$field]['type'] for things like "int(10) unsigned"
+        // check $fields[$field]['type'] for things like "int(10) unsigned"
             //$xoopsDB->query("ALTER TABLE ".$table." CHANGE ".$field." ".$field." ".$type);
             //echo $field." <FONT COLOR='#FF6600'>Changed to</FONT> ".$type."<br>";
         } else {
@@ -288,7 +289,7 @@ function get_table_info($table, $default_fields)
 {
     global $xoopsDB;
     $result = $xoopsDB->query('SHOW COLUMNS FROM ' . $table);
-    while ($existing_field = $xoopsDB->fetchArray($result)) {
+    while (false !== ($existing_field = $xoopsDB->fetchArray($result))) {
         $fields[$existing_field['Field']] = $existing_field['Type'];
         if ('YES' !== $existing_field['Null']) {
             $fields[$existing_field['Field']] .= ' NOT NULL';
@@ -307,11 +308,11 @@ function get_table_info($table, $default_fields)
 /**
  * Renames fields in a table and updates the existing fields array to reflect it.
  *
- * @param  WfDownloadsTable $table
+ * @param  Wfdownloads\DbupdaterTable $table
  * @param  array            $renamed_fields
  * @param  array            $fields
  * @param  array            $new_fields
- * @return array
+ * @return void
  */
 function rename_fields(&$table, $renamed_fields, &$fields, $new_fields)
 {
@@ -348,25 +349,25 @@ switch ($op) {
     default:
         //ask what to do
         include XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-        $form = new XoopsThemeForm('Upgrade WF-Downloads', 'form', $_SERVER['REQUEST_URI']);
+        $form = new \XoopsThemeForm('Upgrade WF-Downloads', 'form', $_SERVER['REQUEST_URI']);
 
         //Is MyDownloads installed?
         /** @var XoopsModuleHandler $moduleHandler */
         $moduleHandler     = xoops_getHandler('module');
         $mydownloadsModule = $moduleHandler->getByDirname('mydownloads');
         if (is_object($mydownloadsModule)) {
-            $mydownloadsButton = new XoopsFormButton('Import data from MyDownloads', 'myd_button', 'Import', 'submit');
+            $mydownloadsButton = new \XoopsFormButton('Import data from MyDownloads', 'myd_button', 'Import', 'submit');
             $mydownloadsButton->setExtra("onclick='document.forms.form.op.value=\"1\"'");
             $form->addElement($mydownloadsButton);
         }
 
         if (!wfdownloads_TableExists('wfdownloads_meta')) {
-            $updateButton = new XoopsFormButton('Update WF-Downloads', 'upd_button', 'Update', 'submit');
+            $updateButton = new \XoopsFormButton('Update WF-Downloads', 'upd_button', 'Update', 'submit');
             $updateButton->setExtra("onclick='document.forms.form.op.value=\"2\"'");
             $form->addElement($updateButton);
         }
 
-        $form->addElement(new XoopsFormHidden('op', 0));
+        $form->addElement(new \XoopsFormHidden('op', 0));
         $form->display();
         break;
 }

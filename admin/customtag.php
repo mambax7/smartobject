@@ -1,5 +1,9 @@
 <?php
 
+use XoopsModules\Smartobject\SmartObjectColumn;
+use XoopsModules\Smartobject\SmartObjectController;
+use XoopsModules\Smartobject\SmartObjectTable;
+
 /**
  *
  * Module: Class_Booking
@@ -81,14 +85,14 @@ switch ($op) {
 
     case 'addcustomtag':
         require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
-        $controller = new SmartObjectController($smartobjectCustomtagHandler);
+        $controller = new XoopsModules\Smartobject\SmartObjectController($smartobjectCustomtagHandler);
         $controller->storeFromDefaultForm(_AM_SOBJECT_CUSTOMTAGS_CREATED, _AM_SOBJECT_CUSTOMTAGS_MODIFIED);
         break;
 
     case 'del':
 
         require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
-        $controller = new SmartObjectController($smartobjectCustomtagHandler);
+        $controller = new XoopsModules\Smartobject\SmartObjectController($smartobjectCustomtagHandler);
         $controller->handleObjectDeletion();
 
         break;
@@ -105,10 +109,10 @@ switch ($op) {
         smart_collapsableBar('createdcustomtags', _AM_SOBJECT_CUSTOMTAGS, _AM_SOBJECT_CUSTOMTAGS_DSC);
 
         require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
-        $objectTable = new SmartObjectTable($smartobjectCustomtagHandler);
-        $objectTable->addColumn(new SmartObjectColumn('name', 'left', 150, 'getCustomtagName'));
-        $objectTable->addColumn(new SmartObjectColumn('description', 'left'));
-        $objectTable->addColumn(new SmartObjectColumn('language', 'center', 150));
+        $objectTable = new XoopsModules\Smartobject\SmartObjectTable($smartobjectCustomtagHandler);
+        $objectTable->addColumn(new XoopsModules\Smartobject\SmartObjectColumn('name', 'left', 150, 'getCustomtagName'));
+        $objectTable->addColumn(new XoopsModules\Smartobject\SmartObjectColumn('description', 'left'));
+        $objectTable->addColumn(new XoopsModules\Smartobject\SmartObjectColumn('language', 'center', 150));
 
         //      $objectTable->addCustomAction('getCreateItemLink');
         //      $objectTable->addCustomAction('getCreateAttributLink');
@@ -116,24 +120,24 @@ switch ($op) {
         //      $objectTable->addIntroButton('addcustomtag', 'customtag.php?op=mod', _AM_SOBJECT_CUSTOMTAGS_CREATE); //mb button
 
         /*
-                $criteria_upcoming = new CriteriaCompo();
-                $criteria_upcoming->add(new Criteria('start_date', time(), '>'));
+                $criteria_upcoming = new \CriteriaCompo();
+                $criteria_upcoming->add(new \Criteria('start_date', time(), '>'));
                 $objectTable->addFilter(_AM_SOBJECT_FILTER_UPCOMING, array(
                                             'key' => 'start_date',
                                             'criteria' => $criteria_upcoming
                 ));
 
-                $criteria_last7days = new CriteriaCompo();
-                $criteria_last7days->add(new Criteria('start_date', time() - 30 *(60 * 60 * 24), '>'));
-                $criteria_last7days->add(new Criteria('start_date', time(), '<'));
+                $criteria_last7days = new \CriteriaCompo();
+                $criteria_last7days->add(new \Criteria('start_date', time() - 30 *(60 * 60 * 24), '>'));
+                $criteria_last7days->add(new \Criteria('start_date', time(), '<'));
                 $objectTable->addFilter(_AM_SOBJECT_FILTER_LAST7DAYS, array(
                                             'key' => 'start_date',
                                             'criteria' => $criteria_last7days
                 ));
 
-                $criteria_last30days = new CriteriaCompo();
-                $criteria_last30days->add(new Criteria('start_date', time() - 30 *(60 * 60 * 24), '>'));
-                $criteria_last30days->add(new Criteria('start_date', time(), '<'));
+                $criteria_last30days = new \CriteriaCompo();
+                $criteria_last30days->add(new \Criteria('start_date', time() - 30 *(60 * 60 * 24), '>'));
+                $criteria_last30days->add(new \Criteria('start_date', time(), '<'));
                 $objectTable->addFilter(_AM_SOBJECT_FILTER_LAST30DAYS, array(
                                             'key' => 'start_date',
                                             'criteria' => $criteria_last30days

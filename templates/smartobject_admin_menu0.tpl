@@ -5,9 +5,9 @@
         background: #e7e7e7;
         font-size: 93%;
         line-height: normal;
-        border-top: 1px solid black;
-        border-left: 1px solid black;
-        border-right: 1px solid black;
+        border-top: 1px solid #000000;
+        border-left: 1px solid #000000;
+        border-right: 1px solid #000000;
         margin: 0;
     }
 
@@ -17,8 +17,8 @@
         background: #e7e7e7 url('<{$xoops_url}>/modules/smartobject/assets/images/bg.gif') repeat-x left bottom;
         font-size: 93%;
         line-height: normal;
-        border-left: 1px solid black;
-        border-right: 1px solid black;
+        border-left: 1px solid #000000;
+        border-right: 1px solid #000000;
         margin-bottom: 0px;
     }
 

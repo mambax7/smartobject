@@ -11,7 +11,7 @@
  * D.J.
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/formelement.php';
 
@@ -20,7 +20,7 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsform/formelement.php';
  *
  * For form creation:
  * 1 Add [require_once XOOPS_ROOT_PATH."/Frameworks/captcha/formcaptcha.php";] to class/xoopsformloader.php, OR add to the file that uses CAPTCHA before calling XoopsFormCaptcha
- * 2 Add form element where proper: $xoopsform->addElement(new XoopsFormCaptcha($caption, $name, $skipmember, ...);
+ * 2 Add form element where proper: $xoopsform->addElement(new \XoopsFormCaptcha($caption, $name, $skipmember, ...);
  *
  * For verification:
  *   if (@require_once XOOPS_ROOT_PATH."/class/captcha/xoopscaptcha.php") {
@@ -36,7 +36,7 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsform/formelement.php';
 /**
  * Class XoopsFormCaptcha
  */
-class XoopsFormCaptcha extends XoopsFormElement
+class XoopsFormCaptcha extends \XoopsFormElement
 {
     public $_captchaHandler;
 

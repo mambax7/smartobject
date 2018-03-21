@@ -7,8 +7,15 @@
  * @param $cssfile
  * @return string
  */
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
+use XoopsModules\Smartobject;
+
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
+
+/**
+ * @param $cssfile
+ * @return string
+ */
 function smart_get_css_link($cssfile)
 {
     $ret = '<link rel="stylesheet" type="text/css" href="' . $cssfile . '">';
@@ -172,12 +179,10 @@ function smart_xoops_cp_header()
     /**
      * include SmartObject admin language file
      */
-    $fileName = XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/' . $xoopsConfig['language'] . '/admin.php';
-    if (file_exists($fileName)) {
-        require_once $fileName;
-    } else {
-        require_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/english/admin.php';
-    } ?>
+    /** @var Smartobject\Helper $helper */
+    $helper = Smartobject\Helper::getInstance();
+    $helper->loadLanguage('admin'); ?>
+
     <script type='text/javascript'>
         <!--
         var smart_url = '<?php echo SMARTOBJECT_URL ?>';
@@ -193,11 +198,9 @@ function smart_xoops_cp_header()
     /**
      * Include the admin language constants for the SmartObject Framework
      */
-    $admin_file = SMARTOBJECT_ROOT_PATH . 'language/' . $xoopsConfig['language'] . '/admin.php';
-    if (!file_exists($admin_file)) {
-        $admin_file = SMARTOBJECT_ROOT_PATH . 'language/english/admin.php';
-    }
-    require_once $admin_file;
+    /** @var Smartobject\Helper $helper */
+    $helper = Smartobject\Helper::getInstance();
+    $helper->loadLanguage('admin');
 }
 
 /**
@@ -213,11 +216,11 @@ function smart_TableExists($table)
 {
     $bRetVal = false;
     //Verifies that a MySQL table exists
-    $xoopsDB  = XoopsDatabaseFactory::getDatabaseConnection();
+    $xoopsDB  = \XoopsDatabaseFactory::getDatabaseConnection();
     $realname = $xoopsDB->prefix($table);
     $sql      = 'SHOW TABLES FROM ' . XOOPS_DB_NAME;
     $ret      = $xoopsDB->queryF($sql);
-    while (list($m_table) = $xoopsDB->fetchRow($ret)) {
+    while (false !== (list($m_table) = $xoopsDB->fetchRow($ret))) {
         if ($m_table == $realname) {
             $bRetVal = true;
             break;
@@ -243,8 +246,8 @@ function smart_GetMeta($key, $moduleName = false)
     if (!$moduleName) {
         $moduleName = smart_getCurrentModuleName();
     }
-    $xoopsDB = XoopsDatabaseFactory::getDatabaseConnection();
-    $sql     = sprintf('SELECT metavalue FROM %s WHERE metakey=%s', $xoopsDB->prefix($moduleName . '_meta'), $xoopsDB->quoteString($key));
+    $xoopsDB = \XoopsDatabaseFactory::getDatabaseConnection();
+    $sql     = sprintf('SELECT metavalue FROM `%s` WHERE metakey=%s', $xoopsDB->prefix($moduleName . '_meta'), $xoopsDB->quoteString($key));
     $ret     = $xoopsDB->query($sql);
     if (!$ret) {
         $value = false;
@@ -284,7 +287,7 @@ function smart_SetMeta($key, $value, $moduleName = false)
     if (!$moduleName) {
         $moduleName = smart_getCurrentModuleName();
     }
-    $xoopsDB = XoopsDatabaseFactory::getDatabaseConnection();
+    $xoopsDB = \XoopsDatabaseFactory::getDatabaseConnection();
     $ret     = smart_GetMeta($key, $moduleName);
     if ('0' === $ret || $ret > 0) {
         $sql = sprintf('UPDATE %s SET metavalue = %s WHERE metakey = %s', $xoopsDB->prefix($moduleName . '_meta'), $xoopsDB->quoteString($value), $xoopsDB->quoteString($key));
@@ -628,20 +631,16 @@ function smart_adminMenu($currentoption = 0, $breadcrumb = '', $submenus = false
 {
     global $xoopsModule, $xoopsConfig;
     require_once XOOPS_ROOT_PATH . '/class/template.php';
-    if (file_exists(XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/' . $xoopsConfig['language'] . '/modinfo.php')) {
-        require_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/' . $xoopsConfig['language'] . '/modinfo.php';
-    } else {
-        require_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/english/modinfo.php';
-    }
-    if (file_exists(XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/' . $xoopsConfig['language'] . '/admin.php')) {
-        require_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/' . $xoopsConfig['language'] . '/admin.php';
-    } else {
-        require_once XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/language/english/admin.php';
-    }
+
+
+    /** @var Smartobject\Helper $helper */
+    $helper = Smartobject\Helper::getInstance();
+    $helper->loadLanguage('admin');
+    $helper->loadLanguage('modinfo');
     $headermenu  = [];
     $adminObject = [];
     include XOOPS_ROOT_PATH . '/modules/' . $xoopsModule->getVar('dirname') . '/admin/menu.php';
-    $tpl = new XoopsTpl();
+    $tpl = new \XoopsTpl();
     $tpl->assign([
                      'headermenu'      => $headermenu,
                      'adminmenu'       => $adminObject,
@@ -875,7 +874,7 @@ function smart_modFooter()
     global $xoopsConfig, $xoopsModule, $xoopsModuleConfig;
 
     require_once XOOPS_ROOT_PATH . '/class/template.php';
-    $tpl = new XoopsTpl();
+    $tpl = new \XoopsTpl();
 
     $hModule      = xoops_getHandler('module');
     $versioninfo  =& $hModule->get($xoopsModule->getVar('mid'));

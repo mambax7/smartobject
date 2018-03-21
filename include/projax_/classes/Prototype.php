@@ -243,7 +243,7 @@ class Prototype extends JavaScript
      */
     public function _method_option_to_s($method)
     {
-        return strstr($method, "'") ? $method : "'$method'";
+        return false !== strpos($method, "'") ? $method : "'$method'";
     }
 
     /**

@@ -11,6 +11,10 @@
  * Licence: GNU
  */
 
+use XoopsModules\Smartobject\SmartObjectColumn;
+use XoopsModules\Smartobject\SmartObjectController;
+use XoopsModules\Smartobject\SmartObjectTable;
+
 require_once __DIR__ . '/admin_header.php';
 require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
 require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectlink.php';
@@ -31,7 +35,7 @@ switch ($op) {
 
     case 'del':
         require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
-        $controller = new SmartObjectController($smartobjectLinkHandler);
+        $controller = new XoopsModules\Smartobject\SmartObjectController($smartobjectLinkHandler);
         $controller->handleObjectDeletion(_AM_SOBJECT_SENT_LINK_DELETE_CONFIRM);
 
         break;
@@ -54,8 +58,8 @@ switch ($op) {
 
         // ---
         // 2012-01-01 PHP 5.3: Assigning the return value of new by reference is now deprecated.
-        //      $xoopsTpl = new XoopsTpl();
-        $xoopsTpl = new XoopsTpl();
+        //      $xoopsTpl = new \XoopsTpl();
+        $xoopsTpl = new \XoopsTpl();
         //---
 
         $xoopsTpl->assign('link', $linkObj->toArray());
@@ -78,11 +82,11 @@ switch ($op) {
         smart_collapsableBar('sentlinks', _AM_SOBJECT_SENT_LINKS, _AM_SOBJECT_SENT_LINKS_INFO);
 
         require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
-        $objectTable = new SmartObjectTable($smartobjectLinkHandler, null, ['delete']);
-        $objectTable->addColumn(new SmartObjectColumn('date'));
-        $objectTable->addColumn(new SmartObjectColumn(_AM_SOBJECT_SENT_LINKS_FROM, $align = 'left', $width = false, 'getFromInfo'));
-        $objectTable->addColumn(new SmartObjectColumn(_AM_SOBJECT_SENT_LINKS_TO, $align = 'left', $width = false, 'getToInfo'));
-        $objectTable->addColumn(new SmartObjectColumn('link'));
+        $objectTable = new XoopsModules\Smartobject\SmartObjectTable($smartobjectLinkHandler, null, ['delete']);
+        $objectTable->addColumn(new XoopsModules\Smartobject\SmartObjectColumn('date'));
+        $objectTable->addColumn(new XoopsModules\Smartobject\SmartObjectColumn(_AM_SOBJECT_SENT_LINKS_FROM, $align = 'left', $width = false, 'getFromInfo'));
+        $objectTable->addColumn(new XoopsModules\Smartobject\SmartObjectColumn(_AM_SOBJECT_SENT_LINKS_TO, $align = 'left', $width = false, 'getToInfo'));
+        $objectTable->addColumn(new XoopsModules\Smartobject\SmartObjectColumn('link'));
 
         $objectTable->addCustomAction('getViewItemLink');
 

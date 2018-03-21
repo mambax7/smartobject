@@ -262,7 +262,7 @@ class XoopsCaptchaImageHandler
     /**
      * Return random background
      *
-     * @return array
+     * @return null|string
      */
     public function loadBackground()
     {
@@ -439,6 +439,6 @@ class XoopsCaptchaImageHandler
 }
 
 $config       = @include __DIR__ . '/../config.php';
-$imageHandler = new XoopsCaptchaImageHandler();
+$imageHandler = new \XoopsCaptchaImageHandler();
 $imageHandler->setConfig($config);
 $imageHandler->loadImage();

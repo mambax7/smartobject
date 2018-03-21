@@ -5,7 +5,7 @@
  * Author: The SmartFactory <www.smartfactory.ca>
  * Licence: GNU
  */
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 define('_AM_SOBJECT_ABOUT', 'About');
 define('_AM_SOBJECT_AUTHOR_INFO', 'Contributors information');

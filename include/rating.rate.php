@@ -6,7 +6,9 @@
  * Author: The SmartFactory <www.smartfactory.ca>
  * Licence: GNU
  */
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
+
+use XoopsModules\Smartobject\SmartPluginHandler;
 
 if (!defined('SMARTOBJECT_URL')) {
     require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php';
@@ -20,7 +22,7 @@ $module_dirname = $xoopsModule->dirname();
 
 // Retreive the SmartObject Rating plugin for the current module if it exists
 $smartobjectRatingHandler = xoops_getModuleHandler('rating', 'smartobject');
-$smartobjectPluginHandler = new SmartPluginHandler();
+$smartobjectPluginHandler = new XoopsModules\Smartobject\SmartPluginHandler();
 $pluginObj                = $smartobjectPluginHandler->getPlugin($module_dirname);
 if ($pluginObj) {
     $rating_item = $pluginObj->getItem();

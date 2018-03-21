@@ -13,7 +13,7 @@
 
 <form name='pick' id='pick' action='<{$smartobject_optionssel_action}>' method='POST' style='margin: 0;'>
     <table width='100%' cellspacing='1' cellpadding='2' border='0'
-           style='border-left: 1px solid silver; border-top: 1px solid silver; border-right: 1px solid silver;'>
+           style='border-left: 1px solid #c0c0c0; border-top: 1px solid #c0c0c0; border-right: 1px solid #c0c0c0;'>
         <tr>
             <td>
                 <{if $smartobject_optionssel_fieldsForFilter}>

@@ -7,12 +7,14 @@
  * Licence: GNU
  */
 
+use XoopsModules\Smartobject\SmartObjectController;
+
 require_once __DIR__ . '/header.php';
 require_once SMARTOBJECT_ROOT_PATH . 'class/smartloader.php';
 require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectlink.php';
 require_once XOOPS_ROOT_PATH . '/class/template.php';
 
-$xoopsTpl                = new XoopsTpl();
+$xoopsTpl                = new \XoopsTpl();
 $myts                    = \MyTextSanitizer::getInstance();
 $xoopsConfig['sitename'] = $myts->displayTarea($xoopsConfig['sitename']);
 
@@ -29,7 +31,7 @@ switch ($op) {
     case 'sendlink':
 
         require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
-        $controller = new SmartObjectController($smartobjectLinkHandler);
+        $controller = new XoopsModules\Smartobject\SmartObjectController($smartobjectLinkHandler);
 
         $linkObj = $controller->storeSmartObject();
         if ($linkObj->hasError()) {

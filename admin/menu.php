@@ -7,7 +7,7 @@
 
 use XoopsModules\Smartobject;
 
-require_once __DIR__ . '/../class/Helper.php';
+// require_once __DIR__ . '/../class/Helper.php';
 //require_once __DIR__ . '/../include/common.php';
 $helper = Smartobject\Helper::getInstance();
 
@@ -77,7 +77,7 @@ if (isset($smartobjectConfig['enable_currencyman']) && true === $smartobjectConf
 
 global $xoopsModule;
 if (isset($xoopsModule)) {
-    //  $i = -1;
+    $i = -1;
 
     // --- for XCL ---
     //  $headermenu[$i]['link'] = '../../system/admin.php?fct=preferences&amp;op=showmod&amp;mod=' . $xoopsModule->getVar('mid');

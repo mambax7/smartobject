@@ -1,5 +1,9 @@
 <?php
 
+use XoopsModules\Smartobject\SmartObjectColumn;
+use XoopsModules\Smartobject\SmartObjectController;
+use XoopsModules\Smartobject\SmartObjectTable;
+
 /**
  *
  * Module: SmartShop
@@ -23,7 +27,7 @@ function edittag($tagid = 0, $language = false, $fct = false)
         $collaps_name          = 'tagcreate';
         $form_name             = _AM_SOBJECT_TAG_CREATE;
         $submit_button_caption = null;
-        //$tagObj->stripMultilanguageFields();
+    //$tagObj->stripMultilanguageFields();
     } else {
         if ($language) {
             $breadcrumb            = _AM_SOBJECT_TAGS . ' > ' . _AM_SOBJECT_TAG_EDITING_LANGUAGE;

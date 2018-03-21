@@ -7,7 +7,7 @@
  * Licence: GNU
  * @param string $msg
  */
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /* Debug functions to help developers:-)
  * Author: The SmartFactory

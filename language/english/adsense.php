@@ -5,7 +5,7 @@
  * Author: The SmartFactory <www.smartfactory.ca>
  * Licence: GNU
  */
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 define('_AM_SOBJECT_ADSENSES', 'Adense ads');
 define('_AM_SOBJECT_ADSENSES_DSC', 'Here is a list of the adsense ads available in the system.');

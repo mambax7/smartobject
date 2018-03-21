@@ -148,11 +148,11 @@ class XoopsCaptcha
         // Skip CAPTCHA for member if set
         if (is_object($GLOBALS['xoopsUser']) && !empty($skipMember)) {
             $is_valid = true;
-            // Kill too many attempts
+        // Kill too many attempts
         } elseif (!empty($maxAttempts) && $_SESSION['XoopsCaptcha_attempt_' . $sessionName] > $maxAttempts) {
             $this->message[] = XOOPS_CAPTCHA_TOOMANYATTEMPTS;
 
-            // Verify the code
+        // Verify the code
         } elseif (!empty($_SESSION['XoopsCaptcha_sessioncode'])) {
             $func     = $this->config['casesensitive'] ? 'strcmp' : 'strcasecmp';
             $is_valid = !$func(trim(@$_POST[$sessionName]), $_SESSION['XoopsCaptcha_sessioncode']);
@@ -240,7 +240,7 @@ class XoopsCaptcha
         // Fail on too many attempts
         if (!empty($maxAttempts) && @$_SESSION['XoopsCaptcha_attempt_' . $this->config['name']] > $maxAttempts) {
             $form = XOOPS_CAPTCHA_TOOMANYATTEMPTS;
-            // Load the form element
+        // Load the form element
         } else {
             $form = $this->loadForm();
         }

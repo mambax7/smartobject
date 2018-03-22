@@ -20,7 +20,7 @@
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php';
-require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartdbupdater.php';
+//require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartdbupdater.php';
 
 /**
  * @param  XoopsModule $module
@@ -35,7 +35,7 @@ function xoops_module_update_smartobject(\XoopsModule $module)
         $dbVersion = 0;
     }
 
-    $dbupdater = new XoopsModules\Smartobject\SmartObjectDbupdater();
+    $dbupdater = new XoopsModules\Smartobject\Dbupdater();
 
     echo '<code>' . _SDU_UPDATE_UPDATING_DATABASE . '<br>';
 
@@ -45,7 +45,7 @@ function xoops_module_update_smartobject(\XoopsModule $module)
         echo 'Database migrate to version ' . $newDbVersion . '<br>';
 
         // Create table smartobject_link
-        $table = new XoopsModules\Smartobject\SmartDbTable('smartobject_link');
+        $table = new XoopsModules\Smartobject\DbTable('smartobject_link');
         if (!$table->exists()) {
             $table->setStructure("CREATE TABLE `%s` (
               `linkid` int(11) NOT NULL auto_increment,
@@ -72,7 +72,7 @@ function xoops_module_update_smartobject(\XoopsModule $module)
         }
         unset($table);
         // Create table smartobject_link
-        $table = new XoopsModules\Smartobject\SmartDbTable('smartobject_link');
+        $table = new XoopsModules\Smartobject\DbTable('smartobject_link');
         if (!$table->fieldExists('date')) {
             $table->addNewField('date', "int(11) NOT NULL default '0'");
             if (!$dbupdater->updateTable($table)) {
@@ -84,7 +84,7 @@ function xoops_module_update_smartobject(\XoopsModule $module)
         unset($table);
 
         // Create table smartobject_tag
-        $table = new XoopsModules\Smartobject\SmartDbTable('smartobject_tag');
+        $table = new XoopsModules\Smartobject\DbTable('smartobject_tag');
         if (!$table->exists()) {
             $table->setStructure("CREATE TABLE %s (
               `tagid` int(11) NOT NULL auto_increment,
@@ -101,7 +101,7 @@ function xoops_module_update_smartobject(\XoopsModule $module)
         }
 
         // Create table smartobject_tag_text
-        $table = new XoopsModules\Smartobject\SmartDbTable('smartobject_tag_text');
+        $table = new XoopsModules\Smartobject\DbTable('smartobject_tag_text');
         if (!$table->exists()) {
             $table->setStructure("CREATE TABLE %s (
               `tagid` int(11) NOT NULL default 0,
@@ -118,7 +118,7 @@ function xoops_module_update_smartobject(\XoopsModule $module)
         }
 
         // Create table smartobject_adsense
-        $table = new XoopsModules\Smartobject\SmartDbTable('smartobject_adsense');
+        $table = new XoopsModules\Smartobject\DbTable('smartobject_adsense');
         if (!$table->exists()) {
             $table->setStructure("
   `adsenseid` int(11) NOT NULL auto_increment,
@@ -148,7 +148,7 @@ function xoops_module_update_smartobject(\XoopsModule $module)
         echo 'Database migrate to version ' . $newDbVersion . '<br>';
 
         // Create table smartobject_rating
-        $table = new XoopsModules\Smartobject\SmartDbTable('smartobject_rating');
+        $table = new XoopsModules\Smartobject\DbTable('smartobject_rating');
         if (!$table->exists()) {
             $table->setStructure('
   `ratingid` int(11) NOT NULL auto_increment,
@@ -170,7 +170,7 @@ function xoops_module_update_smartobject(\XoopsModule $module)
         }
 
         // Create table smartobject_currency
-        $table = new XoopsModules\Smartobject\SmartDbTable('smartobject_currency');
+        $table = new XoopsModules\Smartobject\DbTable('smartobject_currency');
         $table->setData("2, 'EUR', 'Euro', '�', 0.65, 0");
         $table->setData("3, 'USD', 'American dollar', '$', 0.9, 0");
         $table->setData("1, 'CAD', 'Canadian dollar', '$', 1, 1");
@@ -188,7 +188,7 @@ function xoops_module_update_smartobject(\XoopsModule $module)
         echo 'Database migrate to version ' . $newDbVersion . '<br>';
 
         // Create table smartobject_customtag
-        $table = new XoopsModules\Smartobject\SmartDbTable('smartobject_customtag');
+        $table = new XoopsModules\Smartobject\DbTable('smartobject_customtag');
         if (!$table->exists()) {
             $table->setStructure('
               `customtagid` int(11) NOT NULL auto_increment,
@@ -213,7 +213,7 @@ function xoops_module_update_smartobject(\XoopsModule $module)
         echo 'Database migrate to version ' . $newDbVersion . '<br>';
 
         // Create table smartobject_currency
-        $table = new XoopsModules\Smartobject\SmartDbTable('smartobject_currency');
+        $table = new XoopsModules\Smartobject\DbTable('smartobject_currency');
         if (!$table->exists()) {
             $table->setStructure('
               `currencyid` int(11) NOT NULL auto_increment,
@@ -244,7 +244,7 @@ function xoops_module_update_smartobject(\XoopsModule $module)
         echo 'Database migrate to version ' . $newDbVersion . '<br>';
 
         // Create table smartobject_file
-        $table = new XoopsModules\Smartobject\SmartDbTable('smartobject_file');
+        $table = new XoopsModules\Smartobject\DbTable('smartobject_file');
         if (!$table->exists()) {
             $table->setStructure('
               `fileid` int(11) NOT NULL auto_increment,
@@ -261,7 +261,7 @@ function xoops_module_update_smartobject(\XoopsModule $module)
         }
         unset($table);
         // Create table smartobject_urllink
-        $table = new XoopsModules\Smartobject\SmartDbTable('smartobject_urllink');
+        $table = new XoopsModules\Smartobject\DbTable('smartobject_urllink');
         if (!$table->exists()) {
             $table->setStructure('
               `urllinkid` int(11) NOT NULL auto_increment,

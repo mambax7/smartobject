@@ -8,6 +8,8 @@
  */
 
 use XoopsModules\Wfdownloads;
+use XoopsModules\Smartobject;
+
 require_once __DIR__ . '/admin_header.php';
 require_once SMARTCONTENT_ROOT_PATH . 'class/dbupdater.php';
 
@@ -81,7 +83,8 @@ function update_tables_to_300()
     ];
 
     echo '<br><b>Checking Download table</b><br>';
-    $downloadHandler = xoops_getModuleHandler('download', 'wfdownloads');
+    $helperWfdownloads = \Xmf\Module\Helper::getHelper('wfdownloads');
+    $downloadHandler = $helperWfdownloads->getHandler('Download');
     $download_table  = new Wfdownloads\DbupdaterTable('wfdownloads_downloads');
     $fields          = get_table_info($downloadHandler->table, $download_fields);
     // Check for renamed fields
@@ -138,7 +141,9 @@ function update_tables_to_300()
     ];
 
     echo '<br><b>Checking Modified Downloads table</b><br>';
-    $moduleHandler = xoops_getModuleHandler('modification', 'wfdownloads');
+//    $moduleHandler = xoops_getModuleHandler('modification', 'wfdownloads');
+    $helperWfdownloads = \Xmf\Module\Helper::getHelper('wfdownloads');
+    $moduleHandler = $helperWfdownloads->getHandler('Modification');
     $mod_table     = new Wfdownloads\DbupdaterTable('wfdownloads_mod');
     $fields        = get_table_info($moduleHandler->table, $mod_fields);
     rename_fields($mod_table, $renamed_fields, $fields, $mod_fields);
@@ -166,7 +171,10 @@ function update_tables_to_300()
         'weight'       => ['Type' => "int(11) NOT NULL default '0'", 'Default' => true]
     ];
     echo '<br><b>Checking Category table</b><br>';
-    $catHandler = xoops_getModuleHandler('category', 'wfdownloads');
+//    $catHandler = xoops_getModuleHandler('category', 'wfdownloads');
+    $helperWfdownloads = \Xmf\Module\Helper::getHelper('wfdownloads');
+    $catHandler = $helperWfdownloads->getHandler('Report');
+
     $cat_table  = new Wfdownloads\DbupdaterTable('wfdownloads_cat');
     $fields     = get_table_info($catHandler->table, $cat_fields);
     update_table($cat_fields, $fields, $cat_table);
@@ -185,7 +193,9 @@ function update_tables_to_300()
         'acknowledged' => ['Type' => "enum('0','1') NOT NULL default '0'", 'Default' => true]
     ];
     echo '<br><b>Checking Broken Report table</b><br>';
-    $brokenHandler = xoops_getModuleHandler('report', 'wfdownloads');
+    $helperWfdownloads = \Xmf\Module\Helper::getHelper('wfdownloads');
+    $brokenHandler = $helperWfdownloads->getHandler('Report');
+//    $brokenHandler = xoops_getModuleHandler('report', 'wfdownloads');
     $broken_table  = new Wfdownloads\DbupdaterTable('wfdownloads_broken');
     $fields        = get_table_info($brokenHandler->table, $broken_fields);
     update_table($broken_fields, $fields, $broken_table);
@@ -207,7 +217,8 @@ function invert_nohtm_dohtml_values()
 {
     $ret = [];
     global $xoopsDB;
-    $catHandler = xoops_getModuleHandler('category', 'wfdownloads');
+    $helperWfdownloads = \Xmf\Module\Helper::getHelper('wfdownloads');
+    $catHandler = $helperWfdownloads->getHandler('Category');
     $result     = $xoopsDB->query('SHOW COLUMNS FROM ' . $catHandler->table);
     while (false !== ($existing_field = $xoopsDB->fetchArray($result))) {
         $fields[$existing_field['field']] = $existing_field['type'];

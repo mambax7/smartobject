@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Smartobject;
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -10,23 +11,27 @@
  */
 
 /**
- * @copyright    XOOPS Project (https://xoops.org)
+ * @copyright    XOOPS Project https://xoops.org/
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author       XOOPS Development Team
+ * @author     XOOPS Development Team
  */
 
 use XoopsModules\Smartobject;
 
-require_once __DIR__ . '/../../../include/cp_header.php';
-require_once __DIR__ . '/admin_header.php';
 
-xoops_cp_header();
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-$adminObject = \Xmf\Module\Admin::getInstance();
-
-$adminObject->displayNavigation(basename(__FILE__));
-$adminObject->displayIndex();
-
-require_once __DIR__ . '/admin_footer.php';
+/**
+ * XOOPS user handler class.
+ * This class is responsible for providing data access mechanisms to the data source
+ * of XOOPS user class objects.
+ *
+ * @author    Kazumi Ono <onokazu@xoops.org>
+ * @copyright copyright (c) 2000-2003 XOOPS.org
+ * @package   kernel
+ */
+class UserHandler extends \XoopsUserHandler
+{
+}

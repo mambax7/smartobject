@@ -1,8 +1,9 @@
 <?php
 
-use XoopsModules\Smartobject\SmartObjectColumn;
-use XoopsModules\Smartobject\SmartObjectController;
-use XoopsModules\Smartobject\SmartObjectTable;
+use XoopsModules\Smartobject;
+use XoopsModules\Smartobject\ObjectColumn;
+use XoopsModules\Smartobject\ObjectController;
+use XoopsModules\Smartobject\Table;
 
 /**
  *
@@ -58,10 +59,10 @@ function edittag($tagid = 0, $language = false, $fct = false)
 }
 
 require_once __DIR__ . '/admin_header.php';
-require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
-require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttag.php';
+//require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
+//require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttag.php';
 
-$smartobjectTagHandler = xoops_getModuleHandler('tag');
+$smartobjectTagHandler = Smartobject\Helper::getInstance()->getHandler('Tag');
 
 $op = '';
 
@@ -79,15 +80,15 @@ $language = isset($_GET['language']) ? $_GET['language'] : false;
 switch ($op) {
 
     case 'del':
-        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
-        $controller = new SmartObjectController($smartobjectTagHandler);
+//        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
+        $controller = new ObjectController($smartobjectTagHandler);
         $controller->handleObjectDeletion(_AM_SOBJECT_TAG_DELETE_CONFIRM);
 
         break;
 
     case 'addtag':
-        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
-        $controller = new SmartObjectController($smartobjectTagHandler);
+//        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
+        $controller = new ObjectController($smartobjectTagHandler);
         $tagObj     = $controller->storeSmartObject();
         if ($tagObj->hasError()) {
             redirect_header($smart_previous_page, 3, _CO_SOBJECT_SAVE_ERROR . $tagObj->getHtmlErrors());
@@ -114,11 +115,11 @@ switch ($op) {
 
         Smartobject\Utility::getCollapsableBar('tags', _AM_SOBJECT_TAGS, _AM_SOBJECT_TAGS_INFO);
 
-        require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
-        $objectTable = new SmartObjectTable($smartobjectTagHandler, false, ['delete']);
-        $objectTable->addColumn(new SmartObjectColumn('name'));
-        $objectTable->addColumn(new SmartObjectColumn('language'));
-        $objectTable->addColumn(new SmartObjectColumn('value'));
+//        require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
+        $objectTable = new Table($smartobjectTagHandler, false, ['delete']);
+        $objectTable->addColumn(new ObjectColumn('name'));
+        $objectTable->addColumn(new ObjectColumn('language'));
+        $objectTable->addColumn(new ObjectColumn('value'));
         //      $objectTable->addColumn(new SmartObjectColumn(_AM_SOBJECT_SENT_TAGS_FROM, $align='left', $width=false, 'getFromInfo'));
 
         $objectTable->addFilter('language', 'getLanguages');

@@ -6,6 +6,9 @@
  * Author: The SmartFactory <www.smartfactory.ca>
  * Licence: GNU
  */
+
+use XoopsModules\Smartobject;
+
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 function smart_customtag_initiate()
@@ -25,7 +28,7 @@ if (!defined('SMARTOBJECT_URL')) {
 Smartobject\Utility::loadLanguageFile('smartobject', 'customtag');
 
 //require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/functions.php';
-require_once SMARTOBJECT_ROOT_PATH . 'class/customtag.php';
+//require_once SMARTOBJECT_ROOT_PATH . 'class/customtag.php';
 
-$smartobjectCustomtagHandler = xoops_getModuleHandler('customtag', 'smartobject');
+$smartobjectCustomtagHandler = Smartobject\Helper::getInstance()->getHandler('Customtag');
 $smartobjectCustomTagsObj    = $smartobjectCustomtagHandler->getCustomtagsByName();

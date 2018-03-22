@@ -66,7 +66,7 @@ class BaseSmartObject extends \XoopsObject
     /**
      * Reference to the handler managing this object
      *
-     * @var SmartPersistableObjectHandler reference to {@link SmartPersistableObjectHandler}
+     * @var PersistableObjectHandler reference to {@link SmartPersistableObjectHandler}
      */
     public $handler;
 
@@ -93,7 +93,7 @@ class BaseSmartObject extends \XoopsObject
      */
     public function accessGranted($perm_name)
     {
-        $smartPermissionsHandler = new SmartobjectPermissionHandler($this->handler);
+        $smartPermissionsHandler = new PermissionHandler($this->handler);
 
         return $smartPermissionsHandler->accessGranted($perm_name, $this->id());
     }
@@ -460,7 +460,7 @@ class BaseSmartObject extends \XoopsObject
             $ret[$key] = $value;
         }
         if ('' !== $this->handler->identifierName) {
-            $controller = new SmartObjectController($this->handler);
+            $controller = new ObjectController($this->handler);
             /**
              * Addition of some automatic value
              */
@@ -472,13 +472,13 @@ class BaseSmartObject extends \XoopsObject
         }
 
         // Hightlighting searched words
-        require_once SMARTOBJECT_ROOT_PATH . 'class/smarthighlighter.php';
+//        require_once SMARTOBJECT_ROOT_PATH . 'class/smarthighlighter.php';
         $highlight = Smartobject\Utility::getConfig('module_search_highlighter', false, true);
 
         if ($highlight && isset($_GET['keywords'])) {
             $myts     = \MyTextSanitizer::getInstance();
             $keywords = $myts->htmlSpecialChars(trim(urldecode($_GET['keywords'])));
-            $h        = new SmartHighlighter($keywords, true, 'smart_highlighter');
+            $h        = new Highlighter($keywords, true, 'smart_highlighter');
             foreach ($this->handler->highlightFields as $field) {
                 $ret[$field] = $h->highlight($ret[$field]);
             }
@@ -570,7 +570,7 @@ class BaseSmartObject extends \XoopsObject
             return false;
         }
 
-        $smartPermissionsHandler = new SmartobjectPermissionHandler($this->handler);
+        $smartPermissionsHandler = new PermissionHandler($this->handler);
         $ret                     = $smartPermissionsHandler->getGrantedGroups($group_perm, $this->id());
 
         if (0 == count($ret)) {
@@ -665,7 +665,7 @@ class BaseSmartObject extends \XoopsObject
      */
     public function getAdminViewItemLink($onlyUrl = false)
     {
-        $controller = new SmartObjectController($this->handler);
+        $controller = new ObjectController($this->handler);
 
         return $controller->getAdminViewItemLink($this, $onlyUrl);
     }
@@ -678,7 +678,7 @@ class BaseSmartObject extends \XoopsObject
      */
     public function getItemLink($onlyUrl = false)
     {
-        $controller = new SmartObjectController($this->handler);
+        $controller = new ObjectController($this->handler);
 
         return $controller->getItemLink($this, $onlyUrl);
     }
@@ -691,7 +691,7 @@ class BaseSmartObject extends \XoopsObject
      */
     public function getEditItemLink($onlyUrl = false, $withimage = true, $userSide = false)
     {
-        $controller = new SmartObjectController($this->handler);
+        $controller = new ObjectController($this->handler);
 
         return $controller->getEditItemLink($this, $onlyUrl, $withimage, $userSide);
     }
@@ -704,7 +704,7 @@ class BaseSmartObject extends \XoopsObject
      */
     public function getDeleteItemLink($onlyUrl = false, $withimage = false, $userSide = false)
     {
-        $controller = new SmartObjectController($this->handler);
+        $controller = new ObjectController($this->handler);
 
         return $controller->getDeleteItemLink($this, $onlyUrl, $withimage, $userSide);
     }
@@ -714,7 +714,7 @@ class BaseSmartObject extends \XoopsObject
      */
     public function getPrintAndMailLink()
     {
-        $controller = new SmartObjectController($this->handler);
+        $controller = new ObjectController($this->handler);
 
         return $controller->getPrintAndMailLink($this);
     }
@@ -1302,13 +1302,13 @@ class BaseSmartObject extends \XoopsObject
         $actions = [],
         $headerAsRow = true
     ) {
-        require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectsingleview.php';
-        $singleview = new SmartObjectSingleView($this, $userSide, $actions, $headerAsRow);
+//        require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectsingleview.php';
+        $singleview = new SingleView($this, $userSide, $actions, $headerAsRow);
         // add all fields mark as displayOnSingleView except the keyid
         foreach ($this->vars as $key => $var) {
             if ($key != $this->handler->keyName && $var['displayOnSingleView']) {
                 $is_header = ($key == $this->handler->identifierName);
-                $singleview->addRow(new SmartObjectRow($key, false, $is_header));
+                $singleview->addRow(new ObjectRow($key, false, $is_header));
             }
         }
 
@@ -1406,7 +1406,7 @@ class BaseSmartObject extends \XoopsObject
      */
     public function getUrlLinkObj($key)
     {
-        $smartobjectLinkurlHandler = xoops_getModuleHandler('urllink', 'smartobject');
+        $smartobjectLinkurlHandler = Smartobject\Helper::getInstance()->getHandler('Urllink');
         $urllinkid                 = null !== $this->getVar($key) ? $this->getVar($key) : 0;
         if (0 != $urllinkid) {
             return $smartobjectLinkurlHandler->get($urllinkid);
@@ -1421,7 +1421,7 @@ class BaseSmartObject extends \XoopsObject
      */
     public function &storeUrlLinkObj($urlLinkObj)
     {
-        $smartobjectLinkurlHandler = xoops_getModuleHandler('urllink', 'smartobject');
+        $smartobjectLinkurlHandler = Smartobject\Helper::getInstance()->getHandler('Urllink');
 
         return $smartobjectLinkurlHandler->insert($urlLinkObj);
     }
@@ -1432,7 +1432,7 @@ class BaseSmartObject extends \XoopsObject
      */
     public function getFileObj($key)
     {
-        $smartobjectFileHandler = xoops_getModuleHandler('file', 'smartobject');
+        $smartobjectFileHandler = Smartobject\Helper::getInstance()->getHandler('File');
         $fileid                 = null !== $this->getVar($key) ? $this->getVar($key) : 0;
         if (0 != $fileid) {
             return $smartobjectFileHandler->get($fileid);
@@ -1447,7 +1447,7 @@ class BaseSmartObject extends \XoopsObject
      */
     public function &storeFileObj($fileObj)
     {
-        $smartobjectFileHandler = xoops_getModuleHandler('file', 'smartobject');
+        $smartobjectFileHandler = Smartobject\Helper::getInstance()->getHandler('File');
 
         return $smartobjectFileHandler->insert($fileObj);
     }

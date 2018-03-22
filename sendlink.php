@@ -7,11 +7,11 @@
  * Licence: GNU
  */
 
-use XoopsModules\Smartobject\SmartObjectController;
+use XoopsModules\Smartobject\ObjectController;
 
 require_once __DIR__ . '/header.php';
-require_once SMARTOBJECT_ROOT_PATH . 'class/smartloader.php';
-require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectlink.php';
+//require_once SMARTOBJECT_ROOT_PATH . 'class/smartloader.php';
+//require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectlink.php';
 require_once XOOPS_ROOT_PATH . '/class/template.php';
 
 $xoopsTpl                = new \XoopsTpl();
@@ -22,7 +22,7 @@ xoops_header(false);
 echo Smartobject\Utility::getCssLink(SMARTOBJECT_URL . 'assets/css/module.css');
 echo '</head><body>';
 
-$smartobjectLinkHandler = xoops_getModuleHandler('link', 'smartobject');
+$smartobjectLinkHandler = Smartobject\Helper::getInstance()->getHandler('link', 'smartobject');
 $linkObj                = $smartobjectLinkHandler->create();
 
 $op = isset($_POST['op']) ? $_POST['op'] : '';
@@ -30,8 +30,8 @@ $op = isset($_POST['op']) ? $_POST['op'] : '';
 switch ($op) {
     case 'sendlink':
 
-        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
-        $controller = new XoopsModules\Smartobject\SmartObjectController($smartobjectLinkHandler);
+//        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
+        $controller = new XoopsModules\Smartobject\ObjectController($smartobjectLinkHandler);
 
         $linkObj = $controller->storeSmartObject();
         if ($linkObj->hasError()) {

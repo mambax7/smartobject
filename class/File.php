@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Smartobject;
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -10,23 +11,30 @@
  */
 
 /**
- * @copyright    XOOPS Project (https://xoops.org)
+ * @copyright    XOOPS Project https://xoops.org/
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author       XOOPS Development Team
+ * @author     XOOPS Development Team
  */
 
 use XoopsModules\Smartobject;
 
-require_once __DIR__ . '/../../../include/cp_header.php';
-require_once __DIR__ . '/admin_header.php';
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-xoops_cp_header();
+//require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/basedurl.php';
 
-$adminObject = \Xmf\Module\Admin::getInstance();
-
-$adminObject->displayNavigation(basename(__FILE__));
-$adminObject->displayIndex();
-
-require_once __DIR__ . '/admin_footer.php';
+/**
+ * Class SmartobjectFile
+ */
+class File extends Smartobject\BaseSmartObjectBasedUrl
+{
+    /**
+     * SmartobjectFile constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->quickInitVar('fileid', XOBJ_DTYPE_TXTBOX, true, _CO_SOBJECT_RATING_DIRNAME);
+    }
+}

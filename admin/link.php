@@ -11,16 +11,17 @@
  * Licence: GNU
  */
 
-use XoopsModules\Smartobject\SmartObjectColumn;
-use XoopsModules\Smartobject\SmartObjectController;
-use XoopsModules\Smartobject\SmartObjectTable;
+use XoopsModules\Smartobject;
+use XoopsModules\Smartobject\ObjectColumn;
+use XoopsModules\Smartobject\ObjectController;
+use XoopsModules\Smartobject\Table;
 
 require_once __DIR__ . '/admin_header.php';
-require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
-require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectlink.php';
+//require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
+//require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjectlink.php';
 $adminObject = \Xmf\Module\Admin::getInstance();
 
-$smartobjectLinkHandler = xoops_getModuleHandler('link');
+$smartobjectLinkHandler = Smartobject\Helper::getInstance()->getHandler('Link');
 
 $op = '';
 
@@ -34,8 +35,8 @@ if (isset($_POST['op'])) {
 switch ($op) {
 
     case 'del':
-        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
-        $controller = new XoopsModules\Smartobject\SmartObjectController($smartobjectLinkHandler);
+//        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
+        $controller = new XoopsModules\Smartobject\ObjectController($smartobjectLinkHandler);
         $controller->handleObjectDeletion(_AM_SOBJECT_SENT_LINK_DELETE_CONFIRM);
 
         break;
@@ -81,12 +82,12 @@ switch ($op) {
 
         Smartobject\Utility::getCollapsableBar('sentlinks', _AM_SOBJECT_SENT_LINKS, _AM_SOBJECT_SENT_LINKS_INFO);
 
-        require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
-        $objectTable = new XoopsModules\Smartobject\SmartObjectTable($smartobjectLinkHandler, null, ['delete']);
-        $objectTable->addColumn(new XoopsModules\Smartobject\SmartObjectColumn('date'));
-        $objectTable->addColumn(new XoopsModules\Smartobject\SmartObjectColumn(_AM_SOBJECT_SENT_LINKS_FROM, $align = 'left', $width = false, 'getFromInfo'));
-        $objectTable->addColumn(new XoopsModules\Smartobject\SmartObjectColumn(_AM_SOBJECT_SENT_LINKS_TO, $align = 'left', $width = false, 'getToInfo'));
-        $objectTable->addColumn(new XoopsModules\Smartobject\SmartObjectColumn('link'));
+//        require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
+        $objectTable = new Smartobject\Table($smartobjectLinkHandler, null, ['delete']);
+        $objectTable->addColumn(new Smartobject\ObjectColumn('date'));
+        $objectTable->addColumn(new Smartobject\ObjectColumn(_AM_SOBJECT_SENT_LINKS_FROM, $align = 'left', $width = false, 'getFromInfo'));
+        $objectTable->addColumn(new Smartobject\ObjectColumn(_AM_SOBJECT_SENT_LINKS_TO, $align = 'left', $width = false, 'getToInfo'));
+        $objectTable->addColumn(new Smartobject\ObjectColumn('link'));
 
         $objectTable->addCustomAction('getViewItemLink');
 

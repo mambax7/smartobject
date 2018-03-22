@@ -1,8 +1,9 @@
 <?php
 
-use XoopsModules\Smartobject\SmartObjectColumn;
-use XoopsModules\Smartobject\SmartObjectController;
-use XoopsModules\Smartobject\SmartObjectTable;
+use XoopsModules\Smartobject;
+use XoopsModules\Smartobject\ObjectColumn;
+use XoopsModules\Smartobject\ObjectController;
+use XoopsModules\Smartobject\Table;
 
 /**
  * Module: Class_Booking
@@ -40,9 +41,9 @@ function editclass($showmenu = false, $currencyid = 0)
 }
 
 require_once __DIR__ . '/admin_header.php';
-require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
-require_once SMARTOBJECT_ROOT_PATH . 'class/currency.php';
-$smartobjectCurrencyHandler = xoops_getModuleHandler('currency');
+//require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
+//require_once SMARTOBJECT_ROOT_PATH . 'class/currency.php';
+$smartobjectCurrencyHandler = Smartobject\Helper::getInstance()->getHandler('Currency');
 
 $op = '';
 
@@ -90,15 +91,15 @@ switch ($op) {
         break;
 
     case 'addcurrency':
-        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
-        $controller = new SmartObjectController($smartobjectCurrencyHandler);
+//        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
+        $controller = new ObjectController($smartobjectCurrencyHandler);
         $controller->storeFromDefaultForm(_AM_SOBJECT_CURRENCIES_CREATED, _AM_SOBJECT_CURRENCIES_MODIFIED, SMARTOBJECT_URL . 'admin/currency.php');
 
         break;
 
     case 'del':
-        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
-        $controller = new SmartObjectController($smartobjectCurrencyHandler);
+//        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
+        $controller = new ObjectController($smartobjectCurrencyHandler);
         $controller->handleObjectDeletion();
 
         break;
@@ -111,12 +112,12 @@ switch ($op) {
 
         Smartobject\Utility::getCollapsableBar('createdcurrencies', _AM_SOBJECT_CURRENCIES, _AM_SOBJECT_CURRENCIES_DSC);
 
-        require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
-        $objectTable = new SmartObjectTable($smartobjectCurrencyHandler);
-        $objectTable->addColumn(new SmartObjectColumn('name', 'left', false, 'getCurrencyLink'));
-        $objectTable->addColumn(new SmartObjectColumn('rate', 'center', 150));
-        $objectTable->addColumn(new SmartObjectColumn('iso4217', 'center', 150));
-        $objectTable->addColumn(new SmartObjectColumn('default_currency', 'center', 150, 'getDefaultCurrencyControl'));
+//        require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
+        $objectTable = new Table($smartobjectCurrencyHandler);
+        $objectTable->addColumn(new ObjectColumn('name', 'left', false, 'getCurrencyLink'));
+        $objectTable->addColumn(new ObjectColumn('rate', 'center', 150));
+        $objectTable->addColumn(new ObjectColumn('iso4217', 'center', 150));
+        $objectTable->addColumn(new ObjectColumn('default_currency', 'center', 150, 'getDefaultCurrencyControl'));
 
         $objectTable->addIntroButton('addcurrency', 'currency.php?op=mod', _AM_SOBJECT_CURRENCIES_CREATE);
 

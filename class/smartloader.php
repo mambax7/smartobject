@@ -29,7 +29,7 @@ require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php';
  */
 
 //require_once SMARTOBJECT_ROOT_PATH . 'class/smarthookhandler.php';
-$smarthookHandler = Smartobject\SmartHookHandler::getInstance();
+$smarthookHandler = Smartobject\HookHandler::getInstance();
 
 if (!class_exists('smartmetagen')) {
 //    require_once SMARTOBJECT_ROOT_PATH . 'class/smartmetagen.php';

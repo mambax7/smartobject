@@ -1,8 +1,9 @@
 <?php
 
-use XoopsModules\Smartobject\SmartObjectColumn;
-use XoopsModules\Smartobject\SmartObjectController;
-use XoopsModules\Smartobject\SmartObjectTable;
+use XoopsModules\Smartobject;
+use XoopsModules\Smartobject\ObjectColumn;
+use XoopsModules\Smartobject\ObjectController;
+use XoopsModules\Smartobject\Table;
 
 /**
  *
@@ -32,7 +33,7 @@ function editclass($showmenu = false, $ratingid = 0)
         $ratingObj->hideFieldFromForm(['item', 'itemid', 'uid', 'date', 'rate']);
 
         if (isset($_POST['op'])) {
-            $controller = new XoopsModules\Smartobject\SmartObjectController($smartobjectRatingHandler);
+            $controller = new XoopsModules\Smartobject\ObjectController($smartobjectRatingHandler);
             $controller->postDataToObject($ratingObj);
 
             if ('changedField' === $_POST['op']) {
@@ -56,9 +57,9 @@ function editclass($showmenu = false, $ratingid = 0)
 }
 
 require_once __DIR__ . '/admin_header.php';
-require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
-require_once SMARTOBJECT_ROOT_PATH . 'class/rating.php';
-$smartobjectRatingHandler = xoops_getModuleHandler('rating');
+//require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
+//require_once SMARTOBJECT_ROOT_PATH . 'class/rating.php';
+$smartobjectRatingHandler = Smartobject\Helper::getInstance()->getHandler('Rating');
 $indexAdmin               = \Xmf\Module\Admin::getInstance();
 
 $op = '';
@@ -83,15 +84,15 @@ switch ($op) {
         break;
 
     case 'addrating':
-        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
-        $controller = new XoopsModules\Smartobject\SmartObjectController($smartobjectRatingHandler);
+//        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
+        $controller = new XoopsModules\Smartobject\ObjectController($smartobjectRatingHandler);
         $controller->storeFromDefaultForm(_AM_SOBJECT_RATINGS_CREATED, _AM_SOBJECT_RATINGS_MODIFIED, SMARTOBJECT_URL . 'admin/rating.php');
 
         break;
 
     case 'del':
-        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
-        $controller = new XoopsModules\Smartobject\SmartObjectController($smartobjectRatingHandler);
+//        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
+        $controller = new XoopsModules\Smartobject\ObjectController($smartobjectRatingHandler);
         $controller->handleObjectDeletion();
 
         break;
@@ -105,13 +106,13 @@ switch ($op) {
 
         Smartobject\Utility::getCollapsableBar('createdratings', _AM_SOBJECT_RATINGS, _AM_SOBJECT_RATINGS_DSC);
 
-        require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
-        $objectTable = new XoopsModules\Smartobject\SmartObjectTable($smartobjectRatingHandler);
-        $objectTable->addColumn(new XoopsModules\Smartobject\SmartObjectColumn('name', 'left'));
-        $objectTable->addColumn(new XoopsModules\Smartobject\SmartObjectColumn('dirname', 'left'));
-        $objectTable->addColumn(new XoopsModules\Smartobject\SmartObjectColumn('item', 'left', false, 'getItemValue'));
-        $objectTable->addColumn(new XoopsModules\Smartobject\SmartObjectColumn('date', 'center', 150));
-        $objectTable->addColumn(new XoopsModules\Smartobject\SmartObjectColumn('rate', 'center', 40, 'getRateValue'));
+//        require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
+        $objectTable = new XoopsModules\Smartobject\Table($smartobjectRatingHandler);
+        $objectTable->addColumn(new XoopsModules\Smartobject\ObjectColumn('name', 'left'));
+        $objectTable->addColumn(new XoopsModules\Smartobject\ObjectColumn('dirname', 'left'));
+        $objectTable->addColumn(new XoopsModules\Smartobject\ObjectColumn('item', 'left', false, 'getItemValue'));
+        $objectTable->addColumn(new XoopsModules\Smartobject\ObjectColumn('date', 'center', 150));
+        $objectTable->addColumn(new XoopsModules\Smartobject\ObjectColumn('rate', 'center', 40, 'getRateValue'));
 
         //      $objectTable->addCustomAction('getCreateItemLink');
         //      $objectTable->addCustomAction('getCreateAttributLink');

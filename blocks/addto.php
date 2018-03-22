@@ -9,8 +9,8 @@
 function smartobject_addto_show($options)
 {
     require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php';
-    require_once SMARTOBJECT_ROOT_PATH . 'class/smartaddto.php';
-    $smartaddto = new XoopsModules\Smartobject\SmartAddTo($options[0]);
+//    require_once SMARTOBJECT_ROOT_PATH . 'class/smartaddto.php';
+    $smartaddto = new XoopsModules\Smartobject\AddTo($options[0]);
     $block      = $smartaddto->renderForBlock();
 
     return $block;

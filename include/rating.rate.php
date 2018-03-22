@@ -9,12 +9,12 @@
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 use XoopsModules\Smartobject;
-use XoopsModules\Smartobject\SmartPluginHandler;
+use XoopsModules\Smartobject\PluginHandler;
 
 if (!defined('SMARTOBJECT_URL')) {
     require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php';
 }
-require_once SMARTOBJECT_ROOT_PATH . 'class/rating.php';
+//require_once SMARTOBJECT_ROOT_PATH . 'class/rating.php';
 //require_once SMARTOBJECT_ROOT_PATH . 'include/functions.php';
 
 Smartobject\Utility::loadLanguageFile('smartobject', 'rating');
@@ -22,8 +22,8 @@ Smartobject\Utility::loadLanguageFile('smartobject', 'rating');
 $module_dirname = $xoopsModule->dirname();
 
 // Retreive the SmartObject Rating plugin for the current module if it exists
-$smartobjectRatingHandler = xoops_getModuleHandler('rating', 'smartobject');
-$smartobjectPluginHandler = new XoopsModules\Smartobject\SmartPluginHandler();
+$smartobjectRatingHandler = Smartobject\Helper::getInstance()->getHandler('Rating');
+$smartobjectPluginHandler = new XoopsModules\Smartobject\PluginHandler();
 $pluginObj                = $smartobjectPluginHandler->getPlugin($module_dirname);
 if ($pluginObj) {
     $rating_item = $pluginObj->getItem();

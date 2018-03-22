@@ -1,8 +1,9 @@
 <?php
 
-use XoopsModules\Smartobject\SmartObjectColumn;
-use XoopsModules\Smartobject\SmartObjectController;
-use XoopsModules\Smartobject\SmartObjectTable;
+use XoopsModules\Smartobject;
+use XoopsModules\Smartobject\ObjectColumn;
+use XoopsModules\Smartobject\ObjectController;
+use XoopsModules\Smartobject\Table;
 
 /**
  *
@@ -47,9 +48,9 @@ function editcustomtag($showmenu = false, $customtagid = 0, $clone = false)
 require_once __DIR__ . '/admin_header.php';
 Smartobject\Utility::loadLanguageFile('smartobject', 'customtag');
 
-require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
-require_once SMARTOBJECT_ROOT_PATH . 'class/customtag.php';
-$smartobjectCustomtagHandler = xoops_getModuleHandler('customtag');
+//require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
+//require_once SMARTOBJECT_ROOT_PATH . 'class/customtag.php';
+$smartobjectCustomtagHandler = Smartobject\Helper::getInstance()->getHandler('Customtag');
 
 $adminObject = \Xmf\Module\Admin::getInstance();
 
@@ -84,15 +85,15 @@ switch ($op) {
         break;
 
     case 'addcustomtag':
-        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
-        $controller = new XoopsModules\Smartobject\SmartObjectController($smartobjectCustomtagHandler);
+//        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
+        $controller = new XoopsModules\Smartobject\ObjectController($smartobjectCustomtagHandler);
         $controller->storeFromDefaultForm(_AM_SOBJECT_CUSTOMTAGS_CREATED, _AM_SOBJECT_CUSTOMTAGS_MODIFIED);
         break;
 
     case 'del':
 
-        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
-        $controller = new XoopsModules\Smartobject\SmartObjectController($smartobjectCustomtagHandler);
+//        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
+        $controller = new XoopsModules\Smartobject\ObjectController($smartobjectCustomtagHandler);
         $controller->handleObjectDeletion();
 
         break;
@@ -108,11 +109,11 @@ switch ($op) {
 
         Smartobject\Utility::getCollapsableBar('createdcustomtags', _AM_SOBJECT_CUSTOMTAGS, _AM_SOBJECT_CUSTOMTAGS_DSC);
 
-        require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
-        $objectTable = new XoopsModules\Smartobject\SmartObjectTable($smartobjectCustomtagHandler);
-        $objectTable->addColumn(new XoopsModules\Smartobject\SmartObjectColumn('name', 'left', 150, 'getCustomtagName'));
-        $objectTable->addColumn(new XoopsModules\Smartobject\SmartObjectColumn('description', 'left'));
-        $objectTable->addColumn(new XoopsModules\Smartobject\SmartObjectColumn('language', 'center', 150));
+//        require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
+        $objectTable = new XoopsModules\Smartobject\Table($smartobjectCustomtagHandler);
+        $objectTable->addColumn(new XoopsModules\Smartobject\ObjectColumn('name', 'left', 150, 'getCustomtagName'));
+        $objectTable->addColumn(new XoopsModules\Smartobject\ObjectColumn('description', 'left'));
+        $objectTable->addColumn(new XoopsModules\Smartobject\ObjectColumn('language', 'center', 150));
 
         //      $objectTable->addCustomAction('getCreateItemLink');
         //      $objectTable->addCustomAction('getCreateAttributLink');

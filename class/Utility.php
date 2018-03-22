@@ -63,7 +63,7 @@ class Utility
             return $smart_isAdmin[$module];
         }
         $smart_isAdmin[$module] = false;
-        $smartModule            = getModuleInfo($module);
+        $smartModule            = static::getModuleInfo($module);
         if (!is_object($smartModule)) {
             return false;
         }
@@ -99,8 +99,8 @@ class Utility
             global $xoopsModule;
             $moduleName = $xoopsModule->getVar('dirname');
         }
-        $smartModule       = getModuleInfo($moduleName);
-        $smartModuleConfig = getModuleConfig($moduleName);
+        $smartModule       = static::getModuleInfo($moduleName);
+        $smartModuleConfig = static::getModuleConfig($moduleName);
         if (!isset($smartModule)) {
             return '';
         }
@@ -113,9 +113,9 @@ class Utility
         if (!$withLink) {
             return $smartModule->getVar('name');
         } else {
-            $seoMode = getModuleModeSEO($moduleName);
+            $seoMode = static::getModuleModeSEO($moduleName);
             if ('rewrite' === $seoMode) {
-                $seoModuleName = getModuleNameForSEO($moduleName);
+                $seoModuleName = static::getModuleNameForSEO($moduleName);
                 $ret           = XOOPS_URL . '/' . $seoModuleName . '/';
             } elseif ('pathinfo' === $seoMode) {
                 $ret = XOOPS_URL . '/modules/' . $moduleName . '/seo.php/' . $seoModuleName . '/';
@@ -133,12 +133,12 @@ class Utility
      */
     public static function getModuleNameForSEO($moduleName = false)
     {
-        $smartModule       = getModuleInfo($moduleName);
-        $smartModuleConfig = getModuleConfig($moduleName);
+        $smartModule       = static::getModuleInfo($moduleName);
+        $smartModuleConfig = static::getModuleConfig($moduleName);
         if (isset($smartModuleConfig['seo_module_name'])) {
             return $smartModuleConfig['seo_module_name'];
         }
-        $ret = getModuleName(false, false, $moduleName);
+        $ret = static::getModuleName(false, false, $moduleName);
 
         return strtolower($ret);
     }
@@ -149,8 +149,8 @@ class Utility
      */
     public static function getModuleModeSEO($moduleName = false)
     {
-        $smartModule       = getModuleInfo($moduleName);
-        $smartModuleConfig = getModuleConfig($moduleName);
+        $smartModule       = static::getModuleInfo($moduleName);
+        $smartModuleConfig = static::getModuleConfig($moduleName);
 
         return isset($smartModuleConfig['seo_mode']) ? $smartModuleConfig['seo_mode'] : false;
     }
@@ -161,8 +161,8 @@ class Utility
      */
     public static function getModuleIncludeIdSEO($moduleName = false)
     {
-        $smartModule       = getModuleInfo($moduleName);
-        $smartModuleConfig = getModuleConfig($moduleName);
+        $smartModule       = static::getModuleInfo($moduleName);
+        $smartModuleConfig = static::getModuleConfig($moduleName);
 
         return !empty($smartModuleConfig['seo_inc_id']);
     }
@@ -251,7 +251,7 @@ class Utility
     public static function getMeta($key, $moduleName = false)
     {
         if (!$moduleName) {
-            $moduleName = getCurrentModuleName();
+            $moduleName = static::getCurrentModuleName();
         }
         $xoopsDB = \XoopsDatabaseFactory::getDatabaseConnection();
         $sql     = sprintf('SELECT metavalue FROM `%s` WHERE metakey=%s', $xoopsDB->prefix($moduleName . '_meta'), $xoopsDB->quoteString($key));
@@ -292,10 +292,10 @@ class Utility
     public static function setMeta($key, $value, $moduleName = false)
     {
         if (!$moduleName) {
-            $moduleName = getCurrentModuleName();
+            $moduleName = static::getCurrentModuleName();
         }
         $xoopsDB = \XoopsDatabaseFactory::getDatabaseConnection();
-        $ret     = getMeta($key, $moduleName);
+        $ret     = static::getMeta($key, $moduleName);
         if ('0' === $ret || $ret > 0) {
             $sql = sprintf('UPDATE %s SET metavalue = %s WHERE metakey = %s', $xoopsDB->prefix($moduleName . '_meta'), $xoopsDB->quoteString($value), $xoopsDB->quoteString($key));
         } else {
@@ -344,9 +344,9 @@ class Utility
     public static function getConfig($key, $moduleName = false, $default = 'default_is_undefined')
     {
         if (!$moduleName) {
-            $moduleName = getCurrentModuleName();
+            $moduleName = static::getCurrentModuleName();
         }
-        $configs = getModuleConfig($moduleName);
+        $configs = static::getModuleConfig($moduleName);
         if (isset($configs[$key])) {
             return $configs[$key];
         } else {
@@ -385,7 +385,7 @@ class Utility
             }
             // Deep copy directories
             if (is_dir("$source/$entry") && ("$source/$entry" !== $dest)) {
-                copyr("$source/$entry", "$dest/$entry");
+                static::copyr("$source/$entry", "$dest/$entry");
             } else {
                 copy("$source/$entry", "$dest/$entry");
             }
@@ -415,7 +415,7 @@ class Utility
         if (Smartobject\Utility::mkdirAsAdmin(substr($target, 0, strrpos($target, '/')))) {
             if (!file_exists($target)) {
                 $res = mkdir($target, 0777); // crawl back up & create dir tree
-                chmodAsAdmin($target);
+                static::chmodAsAdmin($target);
 
                 return $res;
             }
@@ -602,7 +602,7 @@ class Utility
                 $user =& $users[$userid];
             }
             if (is_object($user)) {
-                $ts        = MyTextSanitizer:: getInstance();
+                $ts        = \MyTextSanitizer:: getInstance();
                 $username  = $user->getVar('uname');
                 $fullname  = '';
                 $fullname2 = $user->getVar('name');
@@ -719,11 +719,11 @@ class Utility
      */
     public static function opencloseCollapsable($name)
     {
-        $urls        = getCurrentUrls();
+        $urls        = static::getCurrentUrls();
         $path        = $urls['phpself'];
         $cookie_name = $path . '_smart_collaps_' . $name;
         $cookie_name = str_replace('.', '_', $cookie_name);
-        $cookie      = getCookieVar($cookie_name, '');
+        $cookie      = static::getCookieVar($cookie_name, '');
         if ('none' === $cookie) {
             echo '
                 <script type="text/javascript"><!--
@@ -749,7 +749,7 @@ class Utility
     public static function closeCollapsable($name)
     {
         echo '</div>';
-        opencloseCollapsable($name);
+        static::opencloseCollapsable($name);
         echo '<br>';
     }
 
@@ -892,14 +892,14 @@ class Utility
         if (!defined('_AM_SOBJECT_XOOPS_PRO')) {
             define('_AM_SOBJECT_XOOPS_PRO', 'Do you need help with this module ?<br>Do you need new features not yet available?');
         }
-        $smartobjectConfig = getModuleConfig('smartobject');
+        $smartobjectConfig = static::getModuleConfig('smartobject');
         $tpl->assign('smartobject_enable_admin_footer', $smartobjectConfig['enable_admin_footer']);
         $tpl->display(SMARTOBJECT_ROOT_PATH . 'templates/smartobject_admin_footer.tpl');
     }
 
     public static function getXoopsCpFooter()
     {
-        getModFooter();
+        static::getModFooter();
         xoops_cp_footer();
     }
 
@@ -932,14 +932,14 @@ class Utility
         if ('smartobject' === $src) {
             $src = SMARTOBJECT_URL . 'assets/css/module.css';
         }
-        echo getCssLink($src);
+        echo static::getCssLink($src);
     }
 
     public static function addAdminAjaxSupport()
     {
-        addScript(SMARTOBJECT_URL . 'include/scriptaculous/lib/prototype.js');
-        addScript(SMARTOBJECT_URL . 'include/scriptaculous/src/scriptaculous.js');
-        addScript(SMARTOBJECT_URL . 'include/scriptaculous/src/smart.js');
+        static::addScript(SMARTOBJECT_URL . 'include/scriptaculous/lib/prototype.js');
+        static::addScript(SMARTOBJECT_URL . 'include/scriptaculous/src/scriptaculous.js');
+        static::addScript(SMARTOBJECT_URL . 'include/scriptaculous/src/smart.js');
     }
 
     /**
@@ -1114,7 +1114,7 @@ class Utility
 
     public static function loadCommonLanguageFile()
     {
-        loadLanguageFile('smartobject', 'common');
+        static::loadLanguageFile('smartobject', 'common');
     }
 
     /**
@@ -1254,7 +1254,7 @@ class Utility
      */
     public static function getCurrency($var, $currencyObj = false)
     {
-        $ret = getFloat($var, ['single_dot_as_decimal' => true]);
+        $ret = static::getFloat($var, ['single_dot_as_decimal' => true]);
         $ret = round($ret, 2);
         // make sur we have at least .00 in the $var
         $decimal_section_original = strstr($ret, '.');
@@ -1282,7 +1282,7 @@ class Utility
      */
     public static function float($var)
     {
-        return getCurrency($var);
+        return static::getCurrency($var);
     }
 
     /**
@@ -1313,7 +1313,7 @@ class Utility
             return false;
         }
         require_once $filename;
-        $xoopseditorHandler = XoopsEditorHandler::getInstance();
+        $xoopseditorHandler = \XoopsEditorHandler::getInstance();
         $aList              = $xoopseditorHandler->getList();
         $ret                = [];
         foreach ($aList as $k => $v) {

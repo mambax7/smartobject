@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Smartobject;
+
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -10,23 +11,29 @@
  */
 
 /**
- * @copyright    XOOPS Project (https://xoops.org)
+ * @copyright    XOOPS Project https://xoops.org/
  * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @package
  * @since
- * @author       XOOPS Development Team
+ * @author     XOOPS Development Team
  */
 
 use XoopsModules\Smartobject;
 
-require_once __DIR__ . '/../../../include/cp_header.php';
-require_once __DIR__ . '/admin_header.php';
 
-xoops_cp_header();
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-$adminObject = \Xmf\Module\Admin::getInstance();
+require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/projax/projax.php';
 
-$adminObject->displayNavigation(basename(__FILE__));
-$adminObject->displayIndex();
-
-require_once __DIR__ . '/admin_footer.php';
+/**
+ * Class SmartJax
+ */
+class Jax extends \Projax
+{
+    public function initiateFromUserside()
+    {
+        global $xoTheme;
+        $xoTheme->addScript(SMARTOBJECT_URL . 'include/projax/js/prototype.js');
+        $xoTheme->addScript(SMARTOBJECT_URL . 'include/projax/js/scriptaculous.js');
+    }
+}

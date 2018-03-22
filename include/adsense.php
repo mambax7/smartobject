@@ -6,6 +6,9 @@
  * Author: The SmartFactory <www.smartfactory.ca>
  * Licence: GNU
  */
+
+use XoopsModules\Smartobject;
+
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 function smart_adsense_initiate_smartytags()
@@ -23,7 +26,7 @@ if (!defined('SMARTOBJECT_URL')) {
 }
 
 //require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/functions.php';
-require_once SMARTOBJECT_ROOT_PATH . 'class/adsense.php';
+//require_once SMARTOBJECT_ROOT_PATH . 'class/adsense.php';
 
-$smartobjectAdsenseHandler = xoops_getModuleHandler('adsense', 'smartobject');
+$smartobjectAdsenseHandler = Smartobject\Helper::getInstance()->getHandler('Adsense');
 $smartobjectAdsensesObj    = $smartobjectAdsenseHandler->getAdsensesByTag();

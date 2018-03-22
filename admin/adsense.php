@@ -10,6 +10,8 @@
  * @param bool $clone
  */
 
+use XoopsModules\Smartobject;
+
 function editclass($showmenu = false, $adsenseid = 0, $clone = false)
 {
     global $smartobjectAdsenseHandler;
@@ -41,10 +43,14 @@ function editclass($showmenu = false, $adsenseid = 0, $clone = false)
 }
 
 require_once __DIR__ . '/admin_header.php';
-require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
+//require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
 require_once SMARTOBJECT_ROOT_PATH . 'class/adsense.php';
-$smartobjectAdsenseHandler = xoops_getModuleHandler('adsense');
-Smartobject\Utility::loadLanguageFile('smartobject', 'adsense');
+
+//$helper = \XoopsModules\Smartobject\Helper::getInstance();
+//$helper = Smartobject\Helper::getInstance();
+
+$smartobjectAdsenseHandler = $helper->getHandler('Adsense');
+$helper->loadLanguage('adsense');
 $adminObject = \Xmf\Module\Admin::getInstance();
 
 $op = '';
@@ -84,15 +90,15 @@ switch ($op) {
                 redirect_header('javascript:history.go(-1);', 3, $xoopsCaptcha->getMessage());
             }
         }
-        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
-        $controller = new XoopsModules\Smartobject\SmartObjectController($smartobjectAdsenseHandler);
+//        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
+        $controller = new XoopsModules\Smartobject\ObjectController($smartobjectAdsenseHandler);
         $controller->storeFromDefaultForm(_AM_SOBJECT_ADSENSES_CREATED, _AM_SOBJECT_ADSENSES_MODIFIED);
         break;
 
     case 'del':
 
-        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
-        $controller = new XoopsModules\Smartobject\SmartObjectController($smartobjectAdsenseHandler);
+//        require_once XOOPS_ROOT_PATH . '/modules/smartobject/class/smartobjectcontroller.php';
+        $controller = new XoopsModules\Smartobject\ObjectController($smartobjectAdsenseHandler);
         $controller->handleObjectDeletion();
 
         break;
@@ -106,10 +112,10 @@ switch ($op) {
 
         Smartobject\Utility::getCollapsableBar('createdadsenses', _AM_SOBJECT_ADSENSES, _AM_SOBJECT_ADSENSES_DSC);
 
-        require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
-        $objectTable = new XoopsModules\Smartobject\SmartObjectTable($smartobjectAdsenseHandler);
-        $objectTable->addColumn(new XoopsModules\Smartobject\SmartObjectColumn('description', 'left'));
-        $objectTable->addColumn(new XoopsModules\Smartobject\SmartObjectColumn(_AM_SOBJECT_ADSENSE_TAG, 'center', 200, 'getXoopsCode'));
+//        require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
+        $objectTable = new XoopsModules\Smartobject\Table($smartobjectAdsenseHandler);
+        $objectTable->addColumn(new XoopsModules\Smartobject\ObjectColumn('description', 'left'));
+        $objectTable->addColumn(new XoopsModules\Smartobject\ObjectColumn(_AM_SOBJECT_ADSENSE_TAG, 'center', 200, 'getXoopsCode'));
 
         //      $objectTable->addCustomAction('getCreateItemLink');
         //      $objectTable->addCustomAction('getCreateAttributLink');

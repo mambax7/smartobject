@@ -64,7 +64,7 @@ define('_SMART_OBJECT_METHOD', 2);
  }
  */
 // get current page
-$smart_current_page = Smartobject\Utility::getCurrentPage();
+$smart_current_page = \XoopsModules\Smartobject\Utility::getCurrentPage();
 
 // get previous page
 $smart_previous_page = Smartobject\Utility::getEnv('HTTP_REFERER');

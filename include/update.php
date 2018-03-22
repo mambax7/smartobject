@@ -30,7 +30,7 @@ function xoops_module_update_smartobject(\XoopsModule $module)
 {
     ob_start();
 
-    $dbVersion = smart_GetMeta('version', 'smartobject');
+    $dbVersion = Smartobject\Utility::getMeta('version', 'smartobject');
     if (!$dbVersion) {
         $dbVersion = 0;
     }
@@ -287,7 +287,7 @@ function xoops_module_update_smartobject(\XoopsModule $module)
     } else {
         echo $feedback;
     }
-    smart_SetMeta('version', $newDbVersion, 'smartobject'); //Set meta version to current
+    Smartobject\Utility::setMeta('version', $newDbVersion, 'smartobject'); //Set meta version to current
 
     return true;
 }

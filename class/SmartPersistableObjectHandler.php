@@ -49,7 +49,7 @@ class SmartPersistableObjectHandler extends \XoopsObjectHandler
     public $keyName;
 
     /**
-     * Name of the class derived from {@link SmartObject} and which this handler is handling
+     * Name of the class derived from {@link BaseSmartObject} and which this handler is handling
      *
      * Note that this string needs to be lowercase
      *
@@ -231,11 +231,11 @@ class SmartPersistableObjectHandler extends \XoopsObjectHandler
     }
 
     /**
-     * create a new {@link SmartObject}
+     * create a new {@link Smartobject\BaseSmartObject}
      *
      * @param bool $isNew Flag the new objects as "new"?
      *
-     * @return Smartobject\SmartObject {@link SmartObject}
+     * @return Smartobject\BaseSmartObject {@link Smartobject\BaseSmartObject}
      */
     public function create($isNew = true)
     {
@@ -267,7 +267,7 @@ class SmartPersistableObjectHandler extends \XoopsObjectHandler
     {
         $dir = $this->_uploadPath . $this->_itemname;
         if (!file_exists($dir)) {
-            smart_admin_mkdir($dir);
+            Smartobject\Utility::mkdirAsAdmin($dir);
         }
 
         return $dir . '/';
@@ -928,7 +928,7 @@ class SmartPersistableObjectHandler extends \XoopsObjectHandler
      */
     public function getModuleInfo()
     {
-        return smart_getModuleInfo($this->_moduleName);
+        return Smartobject\Utility::getModuleInfo($this->_moduleName);
     }
 
     /**
@@ -936,7 +936,7 @@ class SmartPersistableObjectHandler extends \XoopsObjectHandler
      */
     public function getModuleConfig()
     {
-        return smart_getModuleConfig($this->_moduleName);
+        return Smartobject\Utility::getModuleConfig($this->_moduleName);
     }
 
     /**

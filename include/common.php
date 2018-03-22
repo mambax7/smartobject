@@ -6,6 +6,9 @@
  * Author: The SmartFactory <www.smartfactory.ca>
  * Licence: GNU
  */
+
+use XoopsModules\Smartobject;
+
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 global $xoopsConfig;
@@ -36,7 +39,7 @@ if (!defined('SMARTOBJECT_IMAGES_ACTIONS_ROOT_PATH')) {
  * Version of the SmartObject Framework
  */
 require_once SMARTOBJECT_ROOT_PATH . 'include/version.php';
-require_once SMARTOBJECT_ROOT_PATH . 'include/functions.php';
+//require_once SMARTOBJECT_ROOT_PATH . 'include/functions.php';
 require_once SMARTOBJECT_ROOT_PATH . 'include/xoops_core_common_functions.php';
 
 /**
@@ -61,9 +64,9 @@ define('_SMART_OBJECT_METHOD', 2);
  }
  */
 // get current page
-$smart_current_page = smart_getCurrentPage();
+$smart_current_page = Smartobject\Utility::getCurrentPage();
 
 // get previous page
-$smart_previous_page = smart_getenv('HTTP_REFERER');
+$smart_previous_page = Smartobject\Utility::getEnv('HTTP_REFERER');
 
 require_once SMARTOBJECT_ROOT_PATH . 'class/smartloader.php';

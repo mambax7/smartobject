@@ -86,7 +86,7 @@ class SmartobjectRating extends Smartobject\BaseSmartObject
      */
     public function name()
     {
-        $ret = smart_getLinkedUnameFromId($this->getVar('uid', 'e'), true, []);
+        $ret = Smartobject\Utility::getLinkedUnameFromId($this->getVar('uid', 'e'), true, []);
 
         return $ret;
     }

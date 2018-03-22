@@ -62,10 +62,10 @@ $adminmenu[] = [
 //---------------------------------
 
 if (!defined('SMARTOBJECT_ROOT_PATH')) {
-    require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/functions.php';
+//    require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/functions.php';
 }
 
-$smartobjectConfig = smart_getModuleConfig('smartobject');
+$smartobjectConfig = Smartobject\Utility::getModuleConfig('smartobject');
 
 if (isset($smartobjectConfig['enable_currencyman']) && true === $smartobjectConfig['enable_currencyman']) {
     $adminmenu[] = [

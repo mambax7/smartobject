@@ -349,7 +349,7 @@ class SmartobjectDbupdater
             }
         }
 
-        $dbVersion = smart_GetMeta('version', $dirname);
+        $dbVersion = Smartobject\Utility::getMeta('version', $dirname);
         if (!$dbVersion) {
             $dbVersion = 0;
         }
@@ -371,7 +371,7 @@ class SmartobjectDbupdater
         // if there is a function to execute for this DB version, let's do it
         //$function_
 
-        $module_info = smart_getModuleInfo($dirname);
+        $module_info = Smartobject\Utility::getModuleInfo($dirname);
         $this->automaticUpgrade($dirname, $module_info->modinfo['object_items']);
 
         echo '</code>';
@@ -382,7 +382,7 @@ class SmartobjectDbupdater
         } else {
             echo $feedback;
         }
-        smart_SetMeta('version', $newDbVersion, $dirname); //Set meta version to current
+        Smartobject\Utility::setMeta('version', $newDbVersion, $dirname); //Set meta version to current
 
         return true;
     }

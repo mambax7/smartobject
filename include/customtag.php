@@ -22,9 +22,9 @@ if (!defined('SMARTOBJECT_URL')) {
     require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php';
 }
 
-smart_loadLanguageFile('smartobject', 'customtag');
+Smartobject\Utility::loadLanguageFile('smartobject', 'customtag');
 
-require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/functions.php';
+//require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/functions.php';
 require_once SMARTOBJECT_ROOT_PATH . 'class/customtag.php';
 
 $smartobjectCustomtagHandler = xoops_getModuleHandler('customtag', 'smartobject');

@@ -8,7 +8,7 @@
  */
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
-smart_loadCommonLanguageFile();
+Smartobject\Utility::loadCommonLanguageFile();
 
 require_once SMARTOBJECT_ROOT_PATH . 'class/currency.php';
 

@@ -22,30 +22,30 @@ function editcustomtag($showmenu = false, $customtagid = 0, $clone = false)
 
     if (!$clone && !$customtagObj->isNew()) {
         if ($showmenu) {
-            //smart_adminMenu(2, _AM_SOBJECT_CUSTOMTAGS . " > " . _AM_SOBJECT_EDITING);
+            //Smartobject\Utility::getAdminMenu(2, _AM_SOBJECT_CUSTOMTAGS . " > " . _AM_SOBJECT_EDITING);
         }
-        smart_collapsableBar('customtagedit', _AM_SOBJECT_CUSTOMTAGS_EDIT, _AM_SOBJECT_CUSTOMTAGS_EDIT_INFO);
+        Smartobject\Utility::getCollapsableBar('customtagedit', _AM_SOBJECT_CUSTOMTAGS_EDIT, _AM_SOBJECT_CUSTOMTAGS_EDIT_INFO);
 
         $sform = $customtagObj->getForm(_AM_SOBJECT_CUSTOMTAGS_EDIT, 'addcustomtag');
         $sform->display();
-        smart_close_collapsable('customtagedit');
+        Smartobject\Utility::closeCollapsable('customtagedit');
     } else {
         $customtagObj->setVar('customtagid', 0);
         $customtagObj->setVar('tag', '');
 
         if ($showmenu) {
-            //smart_adminMenu(2, _AM_SOBJECT_CUSTOMTAGS . " > " . _CO_SOBJECT_CREATINGNEW);
+            //Smartobject\Utility::getAdminMenu(2, _AM_SOBJECT_CUSTOMTAGS . " > " . _CO_SOBJECT_CREATINGNEW);
         }
 
-        smart_collapsableBar('customtagcreate', _AM_SOBJECT_CUSTOMTAGS_CREATE, _AM_SOBJECT_CUSTOMTAGS_CREATE_INFO);
+        Smartobject\Utility::getCollapsableBar('customtagcreate', _AM_SOBJECT_CUSTOMTAGS_CREATE, _AM_SOBJECT_CUSTOMTAGS_CREATE_INFO);
         $sform = $customtagObj->getForm(_AM_SOBJECT_CUSTOMTAGS_CREATE, 'addcustomtag');
         $sform->display();
-        smart_close_collapsable('customtagcreate');
+        Smartobject\Utility::closeCollapsable('customtagcreate');
     }
 }
 
 require_once __DIR__ . '/admin_header.php';
-smart_loadLanguageFile('smartobject', 'customtag');
+Smartobject\Utility::loadLanguageFile('smartobject', 'customtag');
 
 require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
 require_once SMARTOBJECT_ROOT_PATH . 'class/customtag.php';
@@ -67,7 +67,7 @@ switch ($op) {
 
         $customtagid = isset($_GET['customtagid']) ? (int)$_GET['customtagid'] : 0;
 
-        smart_xoops_cp_header();
+        Smartobject\Utility::getXoopsCpHeader();
         $adminObject->displayNavigation(basename(__FILE__));
 
         editcustomtag(true, $customtagid);
@@ -77,7 +77,7 @@ switch ($op) {
 
         $customtagid = isset($_GET['customtagid']) ? (int)$_GET['customtagid'] : 0;
 
-        smart_xoops_cp_header();
+        Smartobject\Utility::getXoopsCpHeader();
         $adminObject->displayNavigation(basename(__FILE__));
 
         editcustomtag(true, $customtagid, true);
@@ -99,14 +99,14 @@ switch ($op) {
 
     default:
 
-        smart_xoops_cp_header();
+        Smartobject\Utility::getXoopsCpHeader();
         $adminObject->displayNavigation(basename(__FILE__));
         $adminObject->addItemButton(_AM_SOBJECT_CUSTOMTAGS_CREATE, 'customtag.php?op=mod', 'add', '');
         $adminObject->displayButton('left', '');
 
-        //smart_adminMenu(2, _AM_SOBJECT_CUSTOMTAGS);
+        //Smartobject\Utility::getAdminMenu(2, _AM_SOBJECT_CUSTOMTAGS);
 
-        smart_collapsableBar('createdcustomtags', _AM_SOBJECT_CUSTOMTAGS, _AM_SOBJECT_CUSTOMTAGS_DSC);
+        Smartobject\Utility::getCollapsableBar('createdcustomtags', _AM_SOBJECT_CUSTOMTAGS, _AM_SOBJECT_CUSTOMTAGS_DSC);
 
         require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
         $objectTable = new XoopsModules\Smartobject\SmartObjectTable($smartobjectCustomtagHandler);
@@ -149,12 +149,12 @@ switch ($op) {
         $objectTable->render();
 
         echo '<br>';
-        smart_close_collapsable('createdcustomtags');
+        Smartobject\Utility::closeCollapsable('createdcustomtags');
         echo '<br>';
 
         break;
 }
 
-//smart_modFooter();
+//Smartobject\Utility::getModFooter();
 //xoops_cp_footer();
 require_once __DIR__ . '/admin_footer.php';

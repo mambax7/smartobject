@@ -134,7 +134,7 @@ class SmartDbTable
      */
     public function exists()
     {
-        return smart_TableExists($this->_name);
+        return Smartobject\Utility::isTable($this->_name);
     }
 
     /**

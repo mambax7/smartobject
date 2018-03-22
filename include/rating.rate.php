@@ -8,15 +8,16 @@
  */
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
+use XoopsModules\Smartobject;
 use XoopsModules\Smartobject\SmartPluginHandler;
 
 if (!defined('SMARTOBJECT_URL')) {
     require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php';
 }
 require_once SMARTOBJECT_ROOT_PATH . 'class/rating.php';
-require_once SMARTOBJECT_ROOT_PATH . 'include/functions.php';
+//require_once SMARTOBJECT_ROOT_PATH . 'include/functions.php';
 
-smart_loadLanguageFile('smartobject', 'rating');
+Smartobject\Utility::loadLanguageFile('smartobject', 'rating');
 
 $module_dirname = $xoopsModule->dirname();
 
@@ -42,7 +43,7 @@ if ($pluginObj) {
         } else {
             $xoopsTpl->assign('smartobject_rating_dirname', $module_dirname);
             $xoopsTpl->assign('smartobject_rating_itemid', $rating_itemid);
-            $urls = smart_getCurrentUrls();
+            $urls = Smartobject\Utility::getCurrentUrls();
             $xoopsTpl->assign('smartobject_rating_current_page', $urls['full']);
             if (isset($xoTheme) && is_object($xoTheme)) {
                 $xoTheme->addStylesheet(SMARTOBJECT_URL . 'assets/css/module.css');

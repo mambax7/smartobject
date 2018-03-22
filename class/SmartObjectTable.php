@@ -63,18 +63,13 @@ class SmartObjectTable
     /**
      * Constructor
      *
-     * @param SmartPersistableObjectHandler $objectHandler {@link SmartPersistableObjectHandler}
-     * @param CriteriaElement               $criteria
+     * @param Smartobject\SmartPersistableObjectHandler $objectHandler {@link Smartobject\SmartPersistableObjectHandler}
+     * @param \CriteriaElement               $criteria
      * @param array                         $actions       array representing the actions to offer
      *
      * @param bool                          $userSide
      */
-    public function __construct(
-        SmartPersistableObjectHandler $objectHandler,
-        CriteriaElement $criteria = null,
-        $actions = ['edit', 'delete'],
-        $userSide = false
-    ) {
+    public function __construct(Smartobject\SmartPersistableObjectHandler $objectHandler, \CriteriaElement $criteria = null, $actions = ['edit', 'delete'], $userSide = false) {
         $this->_id            = $objectHandler->className;
         $this->_objectHandler = $objectHandler;
 
@@ -130,7 +125,7 @@ class SmartObjectTable
 
     public function addPrinterFriendlyLink()
     {
-        $current_urls               = smart_getCurrentUrls();
+        $current_urls               = Smartobject\Utility::getCurrentUrls();
         $current_url                = $current_urls['full'];
         $this->_printerFriendlyPage = $current_url . '&print';
     }
@@ -190,9 +185,9 @@ class SmartObjectTable
     public function getDefaultSort()
     {
         if ($this->_sortsel) {
-            return smart_getCookieVar($_SERVER['PHP_SELF'] . '_' . $this->_id . '_sortsel', $this->_sortsel);
+            return Smartobject\Utility::getCookieVar($_SERVER['PHP_SELF'] . '_' . $this->_id . '_sortsel', $this->_sortsel);
         } else {
-            return smart_getCookieVar($_SERVER['PHP_SELF'] . '_' . $this->_id . '_sortsel', $this->_objectHandler->identifierName);
+            return Smartobject\Utility::getCookieVar($_SERVER['PHP_SELF'] . '_' . $this->_id . '_sortsel', $this->_objectHandler->identifierName);
         }
     }
 
@@ -210,9 +205,9 @@ class SmartObjectTable
     public function getDefaultOrder()
     {
         if ($this->_ordersel) {
-            return smart_getCookieVar($_SERVER['PHP_SELF'] . '_' . $this->_id . '_ordersel', $this->_ordersel);
+            return Smartobject\Utility::getCookieVar($_SERVER['PHP_SELF'] . '_' . $this->_id . '_ordersel', $this->_ordersel);
         } else {
-            return smart_getCookieVar($_SERVER['PHP_SELF'] . '_' . $this->_id . '_ordersel', 'ASC');
+            return Smartobject\Utility::getCookieVar($_SERVER['PHP_SELF'] . '_' . $this->_id . '_ordersel', 'ASC');
         }
     }
 
@@ -263,7 +258,7 @@ class SmartObjectTable
     {
         $this->_sortsel = isset($_GET[$this->_objectHandler->_itemname . '_' . 'sortsel']) ? $_GET[$this->_objectHandler->_itemname . '_' . 'sortsel'] : $this->getDefaultSort();
         //$this->_sortsel = isset($_POST['sortsel']) ? $_POST['sortsel']: $this->_sortsel;
-        smart_setCookieVar($_SERVER['PHP_SELF'] . '_' . $this->_id . '_sortsel', $this->_sortsel);
+        Smartobject\Utility::setCookieVar($_SERVER['PHP_SELF'] . '_' . $this->_id . '_sortsel', $this->_sortsel);
         $fieldsForSorting = $this->_tempObject->getFieldsForSorting($this->_sortsel);
 
         if (isset($this->_tempObject->vars[$this->_sortsel]['itemName'])
@@ -275,7 +270,7 @@ class SmartObjectTable
 
         $this->_ordersel = isset($_GET[$this->_objectHandler->_itemname . '_' . 'ordersel']) ? $_GET[$this->_objectHandler->_itemname . '_' . 'ordersel'] : $this->getDefaultOrder();
         //$this->_ordersel = isset($_POST['ordersel']) ? $_POST['ordersel']:$this->_ordersel;
-        smart_setCookieVar($_SERVER['PHP_SELF'] . '_' . $this->_id . '_ordersel', $this->_ordersel);
+        Smartobject\Utility::setCookieVar($_SERVER['PHP_SELF'] . '_' . $this->_id . '_ordersel', $this->_ordersel);
         $ordersArray = $this->getOrdersArray();
         $this->_criteria->setOrder($this->_ordersel);
     }
@@ -410,9 +405,9 @@ class SmartObjectTable
     public function getDefaultFilter()
     {
         if ($this->_filtersel) {
-            return smart_getCookieVar($_SERVER['PHP_SELF'] . '_' . $this->_id . '_filtersel', $this->_filtersel);
+            return Smartobject\Utility::getCookieVar($_SERVER['PHP_SELF'] . '_' . $this->_id . '_filtersel', $this->_filtersel);
         } else {
-            return smart_getCookieVar($_SERVER['PHP_SELF'] . '_' . $this->_id . '_filtersel', 'default');
+            return Smartobject\Utility::getCookieVar($_SERVER['PHP_SELF'] . '_' . $this->_id . '_filtersel', 'default');
         }
     }
 
@@ -462,9 +457,9 @@ class SmartObjectTable
     public function getDefaultFilter2()
     {
         if ($this->_filtersel2) {
-            return smart_getCookieVar($_SERVER['PHP_SELF'] . '_filtersel2', $this->_filtersel2);
+            return Smartobject\Utility::getCookieVar($_SERVER['PHP_SELF'] . '_filtersel2', $this->_filtersel2);
         } else {
-            return smart_getCookieVar($_SERVER['PHP_SELF'] . '_filtersel2', 'default');
+            return Smartobject\Utility::getCookieVar($_SERVER['PHP_SELF'] . '_filtersel2', 'default');
         }
     }
 
@@ -493,7 +488,7 @@ class SmartObjectTable
     public function renderOptionSelection($limitsArray, $params_of_the_options_sel)
     {
         // Rendering the form to select options on the table
-        $current_urls = smart_getCurrentUrls();
+        $current_urls = Smartobject\Utility::getCurrentUrls();
         $current_url  = $current_urls['full'];
 
         /**
@@ -608,19 +603,19 @@ class SmartObjectTable
         $this->setSortOrder();
 
         if (!$this->_isTree) {
-            $this->_limitsel = isset($_GET['limitsel']) ? $_GET['limitsel'] : smart_getCookieVar($_SERVER['PHP_SELF'] . '_limitsel', '15');
+            $this->_limitsel = isset($_GET['limitsel']) ? $_GET['limitsel'] : Smartobject\Utility::getCookieVar($_SERVER['PHP_SELF'] . '_limitsel', '15');
         } else {
             $this->_limitsel = 'all';
         }
 
         $this->_limitsel = isset($_POST['limitsel']) ? $_POST['limitsel'] : $this->_limitsel;
-        smart_setCookieVar($_SERVER['PHP_SELF'] . '_limitsel', $this->_limitsel);
+        Smartobject\Utility::setCookieVar($_SERVER['PHP_SELF'] . '_limitsel', $this->_limitsel);
         $limitsArray = $this->getLimitsArray();
         $this->_criteria->setLimit($this->_limitsel);
 
         $this->_filtersel = isset($_GET['filtersel']) ? $_GET['filtersel'] : $this->getDefaultFilter();
         $this->_filtersel = isset($_POST['filtersel']) ? $_POST['filtersel'] : $this->_filtersel;
-        smart_setCookieVar($_SERVER['PHP_SELF'] . '_' . $this->_id . '_filtersel', $this->_filtersel);
+        Smartobject\Utility::setCookieVar($_SERVER['PHP_SELF'] . '_' . $this->_id . '_filtersel', $this->_filtersel);
         $filtersArray = $this->getFiltersArray();
 
         if ($filtersArray) {
@@ -646,7 +641,7 @@ class SmartObjectTable
                     $filters2Array = $this->getFilters2Array();
                     $this->_tpl->assign('smartobject_optionssel_filters2Array', $filters2Array);
 
-                    smart_setCookieVar($_SERVER['PHP_SELF'] . '_filtersel2', $this->_filtersel2);
+                    Smartobject\Utility::setCookieVar($_SERVER['PHP_SELF'] . '_filtersel2', $this->_filtersel2);
                     if ('default' !== $this->_filtersel2) {
                         $this->_criteria->add(new \Criteria($this->_filtersel, $this->_filtersel2));
                     }
@@ -707,7 +702,7 @@ class SmartObjectTable
         $this->renderOptionSelection($limitsArray, $params_of_the_options_sel);
 
         // retreive the current url and the query string
-        $current_urls = smart_getCurrentUrls();
+        $current_urls = Smartobject\Utility::getCurrentUrls();
         $current_url  = $current_urls['full_phpself'];
         $query_string = $current_urls['querystring'];
         if ($query_string) {

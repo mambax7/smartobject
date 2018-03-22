@@ -72,7 +72,7 @@ class SmartobjectLink extends Smartobject\BaseSmartObject
      */
     public function from_uid()
     {
-        $ret = smart_getLinkedUnameFromId($this->getVar('from_uid', 'e'), 1, null, true);
+        $ret = Smartobject\Utility::getLinkedUnameFromId($this->getVar('from_uid', 'e'), 1, null, true);
 
         return $ret;
     }
@@ -83,7 +83,7 @@ class SmartobjectLink extends Smartobject\BaseSmartObject
      */
     public function to_uid($withContact = false)
     {
-        $ret = smart_getLinkedUnameFromId($this->getVar('to_uid', 'e'), 1, null, true);
+        $ret = Smartobject\Utility::getLinkedUnameFromId($this->getVar('to_uid', 'e'), 1, null, true);
 
         return $ret;
     }
@@ -135,7 +135,7 @@ class SmartobjectLink extends Smartobject\BaseSmartObject
         // check if from_uid represent a user
 
         if ($this->getVar('from_uid')) {
-            $user = smart_getLinkedUnameFromId($this->getVar('from_uid'));
+            $user = Smartobject\Utility::getLinkedUnameFromId($this->getVar('from_uid'));
             if ($user == $GLOBALS['xoopsConfig']['anonymous']) {
                 $user = '<a href="mailto:' . $this->getVar('from_email') . '">' . $this->getVar('from_email') . '</a>';
             }
@@ -167,7 +167,7 @@ class SmartobjectLink extends Smartobject\BaseSmartObject
         // check if from_uid represent a user
 
         if ($this->getVar('to_uid')) {
-            $user = smart_getLinkedUnameFromId($this->getVar('to_uid'));
+            $user = Smartobject\Utility::getLinkedUnameFromId($this->getVar('to_uid'));
             if ($user == $GLOBALS['xoopsConfig']['anonymous']) {
                 $user = '<a href="mailto:' . $this->getVar('to_email') . '">' . $this->getVar('to_email') . '</a>';
             }

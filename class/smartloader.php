@@ -34,4 +34,4 @@ $smarthookHandler = Smartobject\SmartHookHandler::getInstance();
 if (!class_exists('smartmetagen')) {
 //    require_once SMARTOBJECT_ROOT_PATH . 'class/smartmetagen.php';
 }
-//$smartobjectConfig = smart_getModuleConfig('smartobject');
+//$smartobjectConfig = Smartobject\Utility::getModuleConfig('smartobject');

@@ -293,7 +293,7 @@ class SmartObjectForm extends \XoopsThemeForm
             }
         }
         // Add an hidden field to store the URL of the page before this form
-        $this->addElement(new \XoopsFormHidden('smart_page_before_form', smart_get_page_before_form()));
+        $this->addElement(new \XoopsFormHidden('smart_page_before_form', Smartobject\Utility::getPageBeforeForm()));
     }
 
     public function createPermissionControls()
@@ -507,7 +507,7 @@ class SmartObjectForm extends \XoopsThemeForm
         } else {
             $control = $this->targetObject->controls[$key];
         }
-        $xoops22 = smart_isXoops22();
+        $xoops22 = Smartobject\Utility::isXoops22();
 
         $form_editor = isset($control['form_editor']) ? $control['form_editor'] : 'textarea';
         /**

@@ -111,7 +111,7 @@ class SmartobjectCurrency extends Smartobject\BaseSmartObject
      */
     public function rate()
     {
-        return smart_currency($this->getVar('rate', 'e'));
+        return Smartobject\Utility::getCurrency($this->getVar('rate', 'e'));
     }
 
     /**

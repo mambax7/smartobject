@@ -48,13 +48,13 @@ function edittag($tagid = 0, $language = false, $fct = false)
         }
     }
 
-    //smart_adminMenu(2, $breadcrumb);
+    //Smartobject\Utility::getAdminMenu(2, $breadcrumb);
 
-    smart_collapsableBar($collaps_name, $title, $info);
+    Smartobject\Utility::getCollapsableBar($collaps_name, $title, $info);
 
     $sform = $tagObj->getForm($form_name, 'addtag', false, $submit_button_caption);
     $sform->display();
-    smart_close_collapsable($collaps_name);
+    Smartobject\Utility::closeCollapsable($collaps_name);
 }
 
 require_once __DIR__ . '/admin_header.php';
@@ -96,23 +96,23 @@ switch ($op) {
         if ($tagObj->hasError()) {
             redirect_header($smart_previous_page, 3, _CO_SOBJECT_SAVE_ERROR . $tagObj->getHtmlErrors());
         } else {
-            redirect_header(smart_get_page_before_form(), 3, _CO_SOBJECT_SAVE_SUCCESS);
+            redirect_header(Smartobject\Utility::getPageBeforeForm(), 3, _CO_SOBJECT_SAVE_SUCCESS);
         }
         exit;
         break;
 
     case 'mod':
-        smart_xoops_cp_header();
+        Smartobject\Utility::getXoopsCpHeader();
         edittag($tagid, $language, $fct);
         break;
 
     default:
 
-        smart_xoops_cp_header();
+        Smartobject\Utility::getXoopsCpHeader();
 
-        //smart_adminMenu(2, _AM_SOBJECT_TAGS);
+        //Smartobject\Utility::getAdminMenu(2, _AM_SOBJECT_TAGS);
 
-        smart_collapsableBar('tags', _AM_SOBJECT_TAGS, _AM_SOBJECT_TAGS_INFO);
+        Smartobject\Utility::getCollapsableBar('tags', _AM_SOBJECT_TAGS, _AM_SOBJECT_TAGS_INFO);
 
         require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
         $objectTable = new SmartObjectTable($smartobjectTagHandler, false, ['delete']);
@@ -133,12 +133,12 @@ switch ($op) {
         $objectTable->render();
 
         echo '<br>';
-        smart_close_collapsable('tags');
+        Smartobject\Utility::closeCollapsable('tags');
         echo '<br>';
 
         break;
 }
 
-//smart_modFooter();
+//Smartobject\Utility::getModFooter();
 //xoops_cp_footer();
 require_once __DIR__ . '/admin_footer.php';

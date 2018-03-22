@@ -54,7 +54,7 @@ class SmartPrinterFriendly
         $this->_tpl->assign('smartobject_print_content', $this->_content);
         $this->_tpl->assign('smartobject_print_width', $this->_width);
 
-        $current_urls = smart_getCurrentUrls();
+        $current_urls = Smartobject\Utility::getCurrentUrls();
         $current_url  = $current_urls['full'];
 
         $this->_tpl->assign('smartobject_print_currenturl', $current_url);

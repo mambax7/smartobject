@@ -16,7 +16,7 @@ use XoopsModules\Smartobject;
  * @param $cssfile
  * @return string
  */
-function smart_get_css_link($cssfile)
+function Smartobject\Utility::getCssLink($cssfile)
 {
     $ret = '<link rel="stylesheet" type="text/css" href="' . $cssfile . '">';
 
@@ -26,7 +26,7 @@ function smart_get_css_link($cssfile)
 /**
  * @return string
  */
-function smart_get_page_before_form()
+function Smartobject\Utility::getPageBeforeForm()
 {
     global $smart_previous_page;
 
@@ -39,7 +39,7 @@ function smart_get_page_before_form()
  * @param  bool $module
  * @return bool: true if user is admin
  */
-function smart_userIsAdmin($module = false)
+function Smartobject\Utility::userIsAdmin($module = false)
 {
     global $xoopsUser;
     static $smart_isAdmin;
@@ -56,7 +56,7 @@ function smart_userIsAdmin($module = false)
         return $smart_isAdmin[$module];
     }
     $smart_isAdmin[$module] = false;
-    $smartModule            = smart_getModuleInfo($module);
+    $smartModule            = Smartobject\Utility::getModuleInfo($module);
     if (!is_object($smartModule)) {
         return false;
     }
@@ -69,7 +69,7 @@ function smart_userIsAdmin($module = false)
 /**
  * @return bool
  */
-function smart_isXoops22()
+function Smartobject\Utility::isXoops22()
 {
     $xoops22 = false;
     $xv      = str_replace('XOOPS ', '', XOOPS_VERSION);
@@ -86,14 +86,14 @@ function smart_isXoops22()
  * @param  bool $moduleName
  * @return string
  */
-function smart_getModuleName($withLink = true, $forBreadCrumb = false, $moduleName = false)
+function Smartobject\Utility::getModuleName($withLink = true, $forBreadCrumb = false, $moduleName = false)
 {
     if (!$moduleName) {
         global $xoopsModule;
         $moduleName = $xoopsModule->getVar('dirname');
     }
-    $smartModule       = smart_getModuleInfo($moduleName);
-    $smartModuleConfig = smart_getModuleConfig($moduleName);
+    $smartModule       = Smartobject\Utility::getModuleInfo($moduleName);
+    $smartModuleConfig = Smartobject\Utility::getModuleConfig($moduleName);
     if (!isset($smartModule)) {
         return '';
     }
@@ -106,9 +106,9 @@ function smart_getModuleName($withLink = true, $forBreadCrumb = false, $moduleNa
     if (!$withLink) {
         return $smartModule->getVar('name');
     } else {
-        $seoMode = smart_getModuleModeSEO($moduleName);
+        $seoMode = Smartobject\Utility::getModuleModeSEO($moduleName);
         if ('rewrite' === $seoMode) {
-            $seoModuleName = smart_getModuleNameForSEO($moduleName);
+            $seoModuleName = Smartobject\Utility::getModuleNameForSEO($moduleName);
             $ret           = XOOPS_URL . '/' . $seoModuleName . '/';
         } elseif ('pathinfo' === $seoMode) {
             $ret = XOOPS_URL . '/modules/' . $moduleName . '/seo.php/' . $seoModuleName . '/';
@@ -124,14 +124,14 @@ function smart_getModuleName($withLink = true, $forBreadCrumb = false, $moduleNa
  * @param  bool $moduleName
  * @return string
  */
-function smart_getModuleNameForSEO($moduleName = false)
+function Smartobject\Utility::getModuleNameForSEO($moduleName = false)
 {
-    $smartModule       = smart_getModuleInfo($moduleName);
-    $smartModuleConfig = smart_getModuleConfig($moduleName);
+    $smartModule       = Smartobject\Utility::getModuleInfo($moduleName);
+    $smartModuleConfig = Smartobject\Utility::getModuleConfig($moduleName);
     if (isset($smartModuleConfig['seo_module_name'])) {
         return $smartModuleConfig['seo_module_name'];
     }
-    $ret = smart_getModuleName(false, false, $moduleName);
+    $ret = Smartobject\Utility::getModuleName(false, false, $moduleName);
 
     return strtolower($ret);
 }
@@ -140,10 +140,10 @@ function smart_getModuleNameForSEO($moduleName = false)
  * @param  bool $moduleName
  * @return bool
  */
-function smart_getModuleModeSEO($moduleName = false)
+function Smartobject\Utility::getModuleModeSEO($moduleName = false)
 {
-    $smartModule       = smart_getModuleInfo($moduleName);
-    $smartModuleConfig = smart_getModuleConfig($moduleName);
+    $smartModule       = Smartobject\Utility::getModuleInfo($moduleName);
+    $smartModuleConfig = Smartobject\Utility::getModuleConfig($moduleName);
 
     return isset($smartModuleConfig['seo_mode']) ? $smartModuleConfig['seo_mode'] : false;
 }
@@ -152,10 +152,10 @@ function smart_getModuleModeSEO($moduleName = false)
  * @param  bool $moduleName
  * @return bool
  */
-function smart_getModuleIncludeIdSEO($moduleName = false)
+function Smartobject\Utility::getModuleIncludeIdSEO($moduleName = false)
 {
-    $smartModule       = smart_getModuleInfo($moduleName);
-    $smartModuleConfig = smart_getModuleConfig($moduleName);
+    $smartModule       = Smartobject\Utility::getModuleInfo($moduleName);
+    $smartModuleConfig = Smartobject\Utility::getModuleConfig($moduleName);
 
     return !empty($smartModuleConfig['seo_inc_id']);
 }
@@ -164,7 +164,7 @@ function smart_getModuleIncludeIdSEO($moduleName = false)
  * @param $key
  * @return string
  */
-function smart_getenv($key)
+function Smartobject\Utility::getEnv($key)
 {
     $ret = '';
     $ret = isset($_SERVER[$key]) ? $_SERVER[$key] : (isset($_ENV[$key]) ? $_ENV[$key] : '');
@@ -172,7 +172,7 @@ function smart_getenv($key)
     return $ret;
 }
 
-function smart_xoops_cp_header()
+function Smartobject\Utility::getXoopsCpHeader()
 {
     xoops_cp_header();
     global $xoopsModule, $xoopsConfig;
@@ -212,7 +212,7 @@ function smart_xoops_cp_header()
  * @access public
  * @author xhelp development team
  */
-function smart_TableExists($table)
+function Smartobject\Utility::isTable($table)
 {
     $bRetVal = false;
     //Verifies that a MySQL table exists
@@ -241,10 +241,10 @@ function smart_TableExists($table)
  * @access public
  * @author xhelp development team
  */
-function smart_GetMeta($key, $moduleName = false)
+function Smartobject\Utility::getMeta($key, $moduleName = false)
 {
     if (!$moduleName) {
-        $moduleName = smart_getCurrentModuleName();
+        $moduleName = Smartobject\Utility::getCurrentModuleName();
     }
     $xoopsDB = \XoopsDatabaseFactory::getDatabaseConnection();
     $sql     = sprintf('SELECT metavalue FROM `%s` WHERE metakey=%s', $xoopsDB->prefix($moduleName . '_meta'), $xoopsDB->quoteString($key));
@@ -261,7 +261,7 @@ function smart_GetMeta($key, $moduleName = false)
 /**
  * @return bool
  */
-function smart_getCurrentModuleName()
+function Smartobject\Utility::getCurrentModuleName()
 {
     global $xoopsModule;
     if (is_object($xoopsModule)) {
@@ -282,13 +282,13 @@ function smart_getCurrentModuleName()
  * @access public
  * @author xhelp development team
  */
-function smart_SetMeta($key, $value, $moduleName = false)
+function Smartobject\Utility::setMeta($key, $value, $moduleName = false)
 {
     if (!$moduleName) {
-        $moduleName = smart_getCurrentModuleName();
+        $moduleName = Smartobject\Utility::getCurrentModuleName();
     }
     $xoopsDB = \XoopsDatabaseFactory::getDatabaseConnection();
-    $ret     = smart_GetMeta($key, $moduleName);
+    $ret     = Smartobject\Utility::getMeta($key, $moduleName);
     if ('0' === $ret || $ret > 0) {
         $sql = sprintf('UPDATE %s SET metavalue = %s WHERE metakey = %s', $xoopsDB->prefix($moduleName . '_meta'), $xoopsDB->quoteString($value), $xoopsDB->quoteString($key));
     } else {
@@ -310,7 +310,7 @@ function smart_SetMeta($key, $value, $moduleName = false)
  * @param  string $trimmarker
  * @return string
  */
-function smart_substr($str, $start, $length, $trimmarker = '...')
+function Smartobject\Utility::getSubstr($str, $start, $length, $trimmarker = '...')
 {
     // if the string is empty, let's get out ;-)
     if ('' === $str) {
@@ -334,12 +334,12 @@ function smart_substr($str, $start, $length, $trimmarker = '...')
  * @param  string      $default
  * @return null|string
  */
-function smart_getConfig($key, $moduleName = false, $default = 'default_is_undefined')
+function Smartobject\Utility::getConfig($key, $moduleName = false, $default = 'default_is_undefined')
 {
     if (!$moduleName) {
-        $moduleName = smart_getCurrentModuleName();
+        $moduleName = Smartobject\Utility::getCurrentModuleName();
     }
-    $configs = smart_getModuleConfig($moduleName);
+    $configs = Smartobject\Utility::getModuleConfig($moduleName);
     if (isset($configs[$key])) {
         return $configs[$key];
     } else {
@@ -359,7 +359,7 @@ function smart_getConfig($key, $moduleName = false, $default = 'default_is_undef
  * @param  string $dest   The destination
  * @return bool   Returns true on success, false on failure
  */
-function smart_copyr($source, $dest)
+function Smartobject\Utility::copyr($source, $dest)
 {
     // Simple copy for a file
     if (is_file($source)) {
@@ -394,7 +394,7 @@ function smart_copyr($source, $dest)
  * @param $target
  * @return bool
  */
-function smart_admin_mkdir($target)
+function Smartobject\Utility::mkdirAsAdmin($target)
 {
     // http://www.php.net/manual/en/function.mkdir.php
     // saint at corenova.com
@@ -405,10 +405,10 @@ function smart_admin_mkdir($target)
     if (file_exists($target) && !is_dir($target)) {
         return false;
     }
-    if (smart_admin_mkdir(substr($target, 0, strrpos($target, '/')))) {
+    if (Smartobject\Utility::mkdirAsAdmin(substr($target, 0, strrpos($target, '/')))) {
         if (!file_exists($target)) {
             $res = mkdir($target, 0777); // crawl back up & create dir tree
-            smart_admin_chmod($target);
+            Smartobject\Utility::chmodAsAdmin($target);
 
             return $res;
         }
@@ -424,7 +424,7 @@ function smart_admin_mkdir($target)
  * @param  int  $mode
  * @return bool
  */
-function smart_admin_chmod($target, $mode = 0777)
+function Smartobject\Utility::chmodAsAdmin($target, $mode = 0777)
 {
     return @ chmod($target, $mode);
 }
@@ -435,7 +435,7 @@ function smart_admin_chmod($target, $mode = 0777)
  * @param $maxHeight
  * @return array
  */
-function smart_imageResize($src, $maxWidth, $maxHeight)
+function Smartobject\Utility::imageResize($src, $maxWidth, $maxHeight)
 {
     $width  = '';
     $height = '';
@@ -468,7 +468,7 @@ function smart_imageResize($src, $maxWidth, $maxHeight)
  * @param  bool $moduleName
  * @return mixed
  */
-function smart_getModuleInfo($moduleName = false)
+function Smartobject\Utility::getModuleInfo($moduleName = false)
 {
     static $smartModules;
     if (isset($smartModules[$moduleName])) {
@@ -504,7 +504,7 @@ function smart_getModuleInfo($moduleName = false)
  * @param  bool $moduleName
  * @return bool
  */
-function smart_getModuleConfig($moduleName = false)
+function Smartobject\Utility::getModuleConfig($moduleName = false)
 {
     static $smartConfigs;
     if (isset($smartConfigs[$moduleName])) {
@@ -529,7 +529,7 @@ function smart_getModuleConfig($moduleName = false)
     if (isset($xoopsModule) && is_object($xoopsModule) && $xoopsModule->getVar('dirname') == $moduleName) {
         $smartConfigs[$moduleName] = $xoopsModuleConfig;
     } else {
-        $module = smart_getModuleInfo($moduleName);
+        $module = Smartobject\Utility::getModuleInfo($moduleName);
         if (!is_object($module)) {
             $ret = false;
 
@@ -546,7 +546,7 @@ function smart_getModuleConfig($moduleName = false)
  * @param $dirname
  * @return bool
  */
-function smart_deleteFile($dirname)
+function Smartobject\Utility::deleteFile($dirname)
 {
     // Simple delete for a file
     if (is_file($dirname)) {
@@ -558,7 +558,7 @@ function smart_deleteFile($dirname)
  * @param  array $errors
  * @return string
  */
-function smart_formatErrors($errors = [])
+function Smartobject\Utility::formatErrors($errors = [])
 {
     $ret = '';
     foreach ($errors as $key => $value) {
@@ -569,7 +569,7 @@ function smart_formatErrors($errors = [])
 }
 
 /**
- * smart_getLinkedUnameFromId()
+ * Smartobject\Utility::getLinkedUnameFromId()
  *
  * @param  integer $userid Userid of poster etc
  * @param  integer $name   :  0 Use Usenamer 1 Use realname
@@ -577,7 +577,7 @@ function smart_formatErrors($errors = [])
  * @param  bool    $withContact
  * @return string
  */
-function smart_getLinkedUnameFromId($userid = 0, $name = 0, $users = [], $withContact = false)
+function Smartobject\Utility::getLinkedUnameFromId($userid = 0, $name = 0, $users = [], $withContact = false)
 {
     if (!is_numeric($userid)) {
         return $userid;
@@ -627,7 +627,7 @@ function smart_getLinkedUnameFromId($userid = 0, $name = 0, $users = [], $withCo
  * @param bool   $submenus
  * @param int    $currentsub
  */
-function smart_adminMenu($currentoption = 0, $breadcrumb = '', $submenus = false, $currentsub = -1)
+function Smartobject\Utility::getAdminMenu($currentoption = 0, $breadcrumb = '', $submenus = false, $currentsub = -1)
 {
     global $xoopsModule, $xoopsConfig;
     require_once XOOPS_ROOT_PATH . '/class/template.php';
@@ -659,7 +659,7 @@ function smart_adminMenu($currentoption = 0, $breadcrumb = '', $submenus = false
  * @param string $title
  * @param string $dsc
  */
-function smart_collapsableBar($id = '', $title = '', $dsc = '')
+function Smartobject\Utility::getCollapsableBar($id = '', $title = '', $dsc = '')
 {
     global $xoopsModule;
     echo "<h3 style=\"color: #2F5376; font-weight: bold; font-size: 14px; margin: 6px 0 0 0; \"><a href='javascript:;' onclick=\"togglecollapse('" . $id . "'); toggleIcon('" . $id . "_icon')\";>";
@@ -675,7 +675,7 @@ function smart_collapsableBar($id = '', $title = '', $dsc = '')
  * @param string $title
  * @param string $dsc
  */
-function smart_ajaxCollapsableBar($id = '', $title = '', $dsc = '')
+function Smartobject\Utility::getAjaxCollapsableBar($id = '', $title = '', $dsc = '')
 {
     global $xoopsModule;
     $onClick = "ajaxtogglecollapse('$id')";
@@ -693,7 +693,7 @@ function smart_ajaxCollapsableBar($id = '', $title = '', $dsc = '')
  * @param $name
  */
 /*
- function smart_collapsableBar($id = '', $title = '', $dsc='')
+ function Smartobject\Utility::getCollapsableBar($id = '', $title = '', $dsc='')
  {
 
  global $xoopsModule;
@@ -710,13 +710,13 @@ function smart_ajaxCollapsableBar($id = '', $title = '', $dsc = '')
  }
  }
  */
-function smart_openclose_collapsable($name)
+function Smartobject\Utility::opencloseCollapsable($name)
 {
-    $urls        = smart_getCurrentUrls();
+    $urls        = Smartobject\Utility::getCurrentUrls();
     $path        = $urls['phpself'];
     $cookie_name = $path . '_smart_collaps_' . $name;
     $cookie_name = str_replace('.', '_', $cookie_name);
-    $cookie      = smart_getCookieVar($cookie_name, '');
+    $cookie      = Smartobject\Utility::getCookieVar($cookie_name, '');
     if ('none' === $cookie) {
         echo '
                 <script type="text/javascript"><!--
@@ -739,10 +739,10 @@ function smart_openclose_collapsable($name)
 /**
  * @param $name
  */
-function smart_close_collapsable($name)
+function Smartobject\Utility::closeCollapsable($name)
 {
     echo '</div>';
-    smart_openclose_collapsable($name);
+    Smartobject\Utility::opencloseCollapsable($name);
     echo '<br>';
 }
 
@@ -751,7 +751,7 @@ function smart_close_collapsable($name)
  * @param     $value
  * @param int $time
  */
-function smart_setCookieVar($name, $value, $time = 0)
+function Smartobject\Utility::setCookieVar($name, $value, $time = 0)
 {
     if (0 == $time) {
         $time = time() + 3600 * 24 * 365;
@@ -765,7 +765,7 @@ function smart_setCookieVar($name, $value, $time = 0)
  * @param  string $default
  * @return string
  */
-function smart_getCookieVar($name, $default = '')
+function Smartobject\Utility::getCookieVar($name, $default = '')
 {
     $name = str_replace('.', '_', $name);
     if (isset($_COOKIE[$name]) && ($_COOKIE[$name] > '')) {
@@ -778,7 +778,7 @@ function smart_getCookieVar($name, $default = '')
 /**
  * @return array
  */
-function smart_getCurrentUrls()
+function Smartobject\Utility::getCurrentUrls()
 {
     $urls        = [];
     $http        = (false === strpos(XOOPS_URL, 'https://')) ? 'http://' : 'https://';
@@ -804,9 +804,9 @@ function smart_getCurrentUrls()
 /**
  * @return mixed
  */
-function smart_getCurrentPage()
+function Smartobject\Utility::getCurrentPage()
 {
-    $urls = smart_getCurrentUrls();
+    $urls = Smartobject\Utility::getCurrentUrls();
 
     return $urls['full'];
 }
@@ -869,7 +869,7 @@ function smart_getCurrentPage()
  return '';
  }
  */
-function smart_modFooter()
+function Smartobject\Utility::getModFooter()
 {
     global $xoopsConfig, $xoopsModule, $xoopsModuleConfig;
 
@@ -885,14 +885,14 @@ function smart_modFooter()
     if (!defined('_AM_SOBJECT_XOOPS_PRO')) {
         define('_AM_SOBJECT_XOOPS_PRO', 'Do you need help with this module ?<br>Do you need new features not yet available?');
     }
-    $smartobjectConfig = smart_getModuleConfig('smartobject');
+    $smartobjectConfig = Smartobject\Utility::getModuleConfig('smartobject');
     $tpl->assign('smartobject_enable_admin_footer', $smartobjectConfig['enable_admin_footer']);
     $tpl->display(SMARTOBJECT_ROOT_PATH . 'templates/smartobject_admin_footer.tpl');
 }
 
-function smart_xoops_cp_footer()
+function Smartobject\Utility::getXoopsCpFooter()
 {
-    smart_modFooter();
+    Smartobject\Utility::getModFooter();
     xoops_cp_footer();
 }
 
@@ -900,7 +900,7 @@ function smart_xoops_cp_footer()
  * @param $text
  * @return mixed
  */
-function smart_sanitizeForCommonTags($text)
+function Smartobject\Utility::sanitizeForCommonTags($text)
 {
     global $xoopsConfig;
     $text = str_replace('{X_SITENAME}', $xoopsConfig['sitename'], $text);
@@ -912,7 +912,7 @@ function smart_sanitizeForCommonTags($text)
 /**
  * @param $src
  */
-function smart_addScript($src)
+function Smartobject\Utility::addScript($src)
 {
     echo '<script src="' . $src . '" type="text/javascript"></script>';
 }
@@ -920,26 +920,26 @@ function smart_addScript($src)
 /**
  * @param $src
  */
-function smart_addStyle($src)
+function Smartobject\Utility::addStyle($src)
 {
     if ('smartobject' === $src) {
         $src = SMARTOBJECT_URL . 'assets/css/module.css';
     }
-    echo smart_get_css_link($src);
+    echo Smartobject\Utility::getCssLink($src);
 }
 
-function smart_addAdminAjaxSupport()
+function Smartobject\Utility::addAdminAjaxSupport()
 {
-    smart_addScript(SMARTOBJECT_URL . 'include/scriptaculous/lib/prototype.js');
-    smart_addScript(SMARTOBJECT_URL . 'include/scriptaculous/src/scriptaculous.js');
-    smart_addScript(SMARTOBJECT_URL . 'include/scriptaculous/src/smart.js');
+    Smartobject\Utility::addScript(SMARTOBJECT_URL . 'include/scriptaculous/lib/prototype.js');
+    Smartobject\Utility::addScript(SMARTOBJECT_URL . 'include/scriptaculous/src/scriptaculous.js');
+    Smartobject\Utility::addScript(SMARTOBJECT_URL . 'include/scriptaculous/src/smart.js');
 }
 
 /**
  * @param $text
  * @return mixed
  */
-function smart_sanitizeForSmartpopupLink($text)
+function Smartobject\Utility::sanitizeForSmartpopupLink($text)
 {
     $patterns[]     = "/\[smartpopup=(['\"]?)([^\"'<>]*)\\1](.*)\[\/smartpopup\]/sU";
     $replacements[] = "<a href=\"javascript:openWithSelfMain('\\2', 'smartpopup', 700, 519);\">\\3</a>";
@@ -958,7 +958,7 @@ function smart_sanitizeForSmartpopupLink($text)
  * @var    string $height reference to the height
  * @return bool   false if impossible to find dimension
  */
-function smart_getImageSize($url, & $width, & $height)
+function Smartobject\Utility::getImageSize($url, & $width, & $height)
 {
     if (empty($width) || empty($height)) {
         if (!$dimension = @ getimagesize($url)) {
@@ -989,7 +989,7 @@ function smart_getImageSize($url, & $width, & $height)
  * @param $str
  * @return mixed
  */
-function smart_htmlnumericentities($str)
+function Smartobject\Utility::getHtmlnumericentities($str)
 {
     //    return preg_replace('/[^!-%\x27-;=?-~ ]/e', '"&#".ord("$0").chr(59)', $str);
     return preg_replace_callback('/[^!-%\x27-;=?-~ ]/', function ($m) {
@@ -1002,7 +1002,7 @@ function smart_htmlnumericentities($str)
  * @param  bool  $optional
  * @return mixed
  */
-function smart_getcorehandler($name, $optional = false)
+function Smartobject\Utility::getCoreHandler($name, $optional = false)
 {
     static $handlers;
     $name = strtolower(trim($name));
@@ -1028,7 +1028,7 @@ function smart_getcorehandler($name, $optional = false)
  * @param $matches
  * @return string
  */
-function smart_sanitizeAdsenses_callback($matches)
+function Smartobject\Utility::sanitizeAdsenses_callback($matches)
 {
     global $smartobjectAdsenseHandler;
     if (isset($smartobjectAdsenseHandler->objects[$matches[1]])) {
@@ -1045,13 +1045,13 @@ function smart_sanitizeAdsenses_callback($matches)
  * @param $text
  * @return mixed
  */
-function smart_sanitizeAdsenses($text)
+function Smartobject\Utility::sanitizeAdsenses($text)
 {
     $patterns     = [];
     $replacements = [];
 
     $patterns[] = "/\[adsense](.*)\[\/adsense\]/sU";
-    $text       = preg_replace_callback($patterns, 'smart_sanitizeAdsenses_callback', $text);
+    $text       = preg_replace_callback($patterns, 'Smartobject\Utility::sanitizeAdsenses_callback', $text);
 
     return $text;
 }
@@ -1060,7 +1060,7 @@ function smart_sanitizeAdsenses($text)
  * @param $matches
  * @return string
  */
-function smart_sanitizeCustomtags_callback($matches)
+function Smartobject\Utility::sanitizeCustomtags_callback($matches)
 {
     global $smartobjectCustomtagHandler;
     if (isset($smartobjectCustomtagHandler->objects[$matches[1]])) {
@@ -1077,13 +1077,13 @@ function smart_sanitizeCustomtags_callback($matches)
  * @param $text
  * @return mixed
  */
-function smart_sanitizeCustomtags($text)
+function Smartobject\Utility::sanitizeCustomtags($text)
 {
     $patterns     = [];
     $replacements = [];
 
     $patterns[] = "/\[customtag](.*)\[\/customtag\]/sU";
-    $text       = preg_replace_callback($patterns, 'smart_sanitizeCustomtags_callback', $text);
+    $text       = preg_replace_callback($patterns, 'Smartobject\Utility::sanitizeCustomtags_callback', $text);
 
     return $text;
 }
@@ -1092,7 +1092,7 @@ function smart_sanitizeCustomtags($text)
  * @param $module
  * @param $file
  */
-function smart_loadLanguageFile($module, $file)
+function Smartobject\Utility::loadLanguageFile($module, $file)
 {
     global $xoopsConfig;
 
@@ -1105,9 +1105,9 @@ function smart_loadLanguageFile($module, $file)
     }
 }
 
-function smart_loadCommonLanguageFile()
+function Smartobject\Utility::loadCommonLanguageFile()
 {
-    smart_loadLanguageFile('smartobject', 'common');
+    Smartobject\Utility::loadLanguageFile('smartobject', 'common');
 }
 
 /**
@@ -1115,7 +1115,7 @@ function smart_loadCommonLanguageFile()
  * @param  bool         $keyword
  * @return mixed|string
  */
-function smart_purifyText($text, $keyword = false)
+function Smartobject\Utility::purifyText($text, $keyword = false)
 {
     global $myts;
     $text = str_replace('&nbsp;', ' ', $text);
@@ -1152,7 +1152,7 @@ function smart_purifyText($text, $keyword = false)
  * @param $document
  * @return mixed
  */
-function smart_html2text($document)
+function Smartobject\Utility::getHtml2text($document)
 {
     // PHP Manual:: function preg_replace
     // $document should contain an HTML document.
@@ -1210,7 +1210,7 @@ function smart_html2text($document)
  * @param  bool      $set
  * @return float|int
  */
-function smart_getfloat($str, $set = false)
+function Smartobject\Utility::getFloat($str, $set = false)
 {
     if (preg_match("/([0-9\.,-]+)/", $str, $match)) {
         // Found number in $str, so set $str that number
@@ -1245,9 +1245,9 @@ function smart_getfloat($str, $set = false)
  * @param  bool                   $currencyObj
  * @return float|int|mixed|string
  */
-function smart_currency($var, $currencyObj = false)
+function Smartobject\Utility::getCurrency($var, $currencyObj = false)
 {
-    $ret = smart_getfloat($var, ['single_dot_as_decimal' => true]);
+    $ret = Smartobject\Utility::getFloat($var, ['single_dot_as_decimal' => true]);
     $ret = round($ret, 2);
     // make sur we have at least .00 in the $var
     $decimal_section_original = strstr($ret, '.');
@@ -1273,16 +1273,16 @@ function smart_currency($var, $currencyObj = false)
  * @param $var
  * @return float|int|mixed|string
  */
-function smart_float($var)
+function Smartobject\Utility::float($var)
 {
-    return smart_currency($var);
+    return Smartobject\Utility::getCurrency($var);
 }
 
 /**
  * @param  bool $moduleName
  * @return string
  */
-function smart_getModuleAdminLink($moduleName = false)
+function Smartobject\Utility::getModuleAdminLink($moduleName = false)
 {
     global $xoopsModule;
     if (!$moduleName && (isset($xoopsModule) && is_object($xoopsModule))) {
@@ -1299,7 +1299,7 @@ function smart_getModuleAdminLink($moduleName = false)
 /**
  * @return array|bool
  */
-function smart_getEditors()
+function Smartobject\Utility::getEditors()
 {
     $filename = XOOPS_ROOT_PATH . '/class/xoopseditor/xoopseditor.php';
     if (!file_exists($filename)) {
@@ -1321,7 +1321,7 @@ function smart_getEditors()
  * @param $items
  * @return array
  */
-function smart_getTablesArray($moduleName, $items)
+function Smartobject\Utility::getTablesArray($moduleName, $items)
 {
     $ret = [];
     foreach ($items as $item) {

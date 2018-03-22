@@ -21,13 +21,13 @@ function editclass($showmenu = false, $ratingid = 0)
 
     if (!$ratingObj->isNew()) {
         if ($showmenu) {
-            //smart_adminMenu(4, _AM_SOBJECT_RATINGS . " > " . _AM_SOBJECT_EDITING);
+            //Smartobject\Utility::getAdminMenu(4, _AM_SOBJECT_RATINGS . " > " . _AM_SOBJECT_EDITING);
         }
-        smart_collapsableBar('ratingedit', _AM_SOBJECT_RATINGS_EDIT, _AM_SOBJECT_RATINGS_EDIT_INFO);
+        Smartobject\Utility::getCollapsableBar('ratingedit', _AM_SOBJECT_RATINGS_EDIT, _AM_SOBJECT_RATINGS_EDIT_INFO);
 
         $sform = $ratingObj->getForm(_AM_SOBJECT_RATINGS_EDIT, 'addrating');
         $sform->display();
-        smart_close_collapsable('ratingedit');
+        Smartobject\Utility::closeCollapsable('ratingedit');
     } else {
         $ratingObj->hideFieldFromForm(['item', 'itemid', 'uid', 'date', 'rate']);
 
@@ -45,13 +45,13 @@ function editclass($showmenu = false, $ratingid = 0)
         }
 
         if ($showmenu) {
-            //smart_adminMenu(4, _AM_SOBJECT_RATINGS . " > " . _CO_SOBJECT_CREATINGNEW);
+            //Smartobject\Utility::getAdminMenu(4, _AM_SOBJECT_RATINGS . " > " . _CO_SOBJECT_CREATINGNEW);
         }
 
-        smart_collapsableBar('ratingcreate', _AM_SOBJECT_RATINGS_CREATE, _AM_SOBJECT_RATINGS_CREATE_INFO);
+        Smartobject\Utility::getCollapsableBar('ratingcreate', _AM_SOBJECT_RATINGS_CREATE, _AM_SOBJECT_RATINGS_CREATE_INFO);
         $sform = $ratingObj->getForm(_AM_SOBJECT_RATINGS_CREATE, 'addrating');
         $sform->display();
-        smart_close_collapsable('ratingcreate');
+        Smartobject\Utility::closeCollapsable('ratingcreate');
     }
 }
 
@@ -76,7 +76,7 @@ switch ($op) {
 
         $ratingid = isset($_GET['ratingid']) ? (int)$_GET['ratingid'] : 0;
 
-        smart_xoops_cp_header();
+        Smartobject\Utility::getXoopsCpHeader();
         $adminObject->displayNavigation(basename(__FILE__));
 
         editclass(true, $ratingid);
@@ -98,12 +98,12 @@ switch ($op) {
 
     default:
 
-        smart_xoops_cp_header();
+        Smartobject\Utility::getXoopsCpHeader();
         $adminObject->displayNavigation(basename(__FILE__));
 
-        //smart_adminMenu(4, _AM_SOBJECT_RATINGS);
+        //Smartobject\Utility::getAdminMenu(4, _AM_SOBJECT_RATINGS);
 
-        smart_collapsableBar('createdratings', _AM_SOBJECT_RATINGS, _AM_SOBJECT_RATINGS_DSC);
+        Smartobject\Utility::getCollapsableBar('createdratings', _AM_SOBJECT_RATINGS, _AM_SOBJECT_RATINGS_DSC);
 
         require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
         $objectTable = new XoopsModules\Smartobject\SmartObjectTable($smartobjectRatingHandler);
@@ -145,12 +145,12 @@ switch ($op) {
         $objectTable->render();
 
         echo '<br>';
-        smart_close_collapsable('createdratings');
+        Smartobject\Utility::closeCollapsable('createdratings');
         echo '<br>';
 
         break;
 }
 
-//smart_modFooter();
+//Smartobject\Utility::getModFooter();
 //xoops_cp_footer();
 require_once __DIR__ . '/admin_footer.php';

@@ -191,7 +191,7 @@ class SmartMetaGen
      */
     public function html2text($document)
     {
-        return smart_html2text($document);
+        return Smartobject\Utility::getHtml2text($document);
     }
 
     /**
@@ -291,7 +291,7 @@ class SmartMetaGen
      */
     public function purifyText($text, $keyword = false)
     {
-        return smart_purifyText($text, $keyword);
+        return Smartobject\Utility::purifyText($text, $keyword);
     }
 
     /**

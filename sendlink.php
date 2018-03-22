@@ -19,7 +19,7 @@ $myts                    = \MyTextSanitizer::getInstance();
 $xoopsConfig['sitename'] = $myts->displayTarea($xoopsConfig['sitename']);
 
 xoops_header(false);
-echo smart_get_css_link(SMARTOBJECT_URL . 'assets/css/module.css');
+echo Smartobject\Utility::getCssLink(SMARTOBJECT_URL . 'assets/css/module.css');
 echo '</head><body>';
 
 $smartobjectLinkHandler = xoops_getModuleHandler('link', 'smartobject');

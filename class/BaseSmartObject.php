@@ -473,7 +473,7 @@ class BaseSmartObject extends \XoopsObject
 
         // Hightlighting searched words
         require_once SMARTOBJECT_ROOT_PATH . 'class/smarthighlighter.php';
-        $highlight = smart_getConfig('module_search_highlighter', false, true);
+        $highlight = Smartobject\Utility::getConfig('module_search_highlighter', false, true);
 
         if ($highlight && isset($_GET['keywords'])) {
             $myts     = \MyTextSanitizer::getInstance();
@@ -865,11 +865,11 @@ class BaseSmartObject extends \XoopsObject
                         break;
 
                     case XOBJ_DTYPE_CURRENCY:
-                        $cleanv = smart_currency($cleanv);
+                        $cleanv = Smartobject\Utility::getCurrency($cleanv);
                         break;
 
                     case XOBJ_DTYPE_FLOAT:
-                        $cleanv = smart_float($cleanv);
+                        $cleanv = Smartobject\Utility::float($cleanv);
                         break;
 
                     case XOBJ_DTYPE_EMAIL:
@@ -969,8 +969,8 @@ class BaseSmartObject extends \XoopsObject
                     case 'clean':
                         $ts = \MyTextSanitizer::getInstance();
 
-                        $ret = smart_html2text($ret);
-                        $ret = smart_purifyText($ret);
+                        $ret = Smartobject\Utility::getHtml2text($ret);
+                        $ret = Smartobject\Utility::purifyText($ret);
 
                         if (method_exists($myts, 'formatForML')) {
                             return $ts->formatForML($ret);

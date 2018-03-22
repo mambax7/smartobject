@@ -79,8 +79,8 @@ After these lines insert the following code :
          * Hack by marcan <INBOX>
          * Adding SmartObject Adsense Feature
          */
-        if (function_exists('smart_sanitizeAdsenses')) {
-            $text = smart_sanitizeAdsenses($text);
+        if (function_exists('Smartobject\Utility::sanitizeAdsenses')) {
+            $text = Smartobject\Utility::sanitizeAdsenses($text);
         }
         /**
          * End of Hack by marcan <INBOX>
@@ -159,8 +159,8 @@ After these lines insert the following code :
          * Hack by marcan <INBOX>
          * Adding SmartObject Custom tag Feature
          */
-        if (function_exists('smart_sanitizeCustomtags')) {
-            $text = smart_sanitizeCustomtags($text);
+        if (function_exists('Smartobject\Utility::sanitizeCustomtags')) {
+            $text = Smartobject\Utility::sanitizeCustomtags($text);
         }
         /**
          * End of Hack by marcan <INBOX>

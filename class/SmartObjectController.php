@@ -209,7 +209,7 @@ class SmartObjectController
                 redirect_header($smart_previous_page, 3, _CO_SOBJECT_SAVE_ERROR . $smartObj->getHtmlErrors());
             }
 
-            $redirect_page = $redirect_page ?: smart_get_page_before_form();
+            $redirect_page = $redirect_page ?: Smartobject\Utility::getPageBeforeForm();
 
             redirect_header($redirect_page, 2, $redirect_msg);
         }
@@ -415,13 +415,13 @@ class SmartObjectController
      */
     public function getItemLink(SmartObject $smartObj, $onlyUrl = false)
     {
-        $seoMode       = smart_getModuleModeSEO($this->handler->_moduleName);
-        $seoModuleName = smart_getModuleNameForSEO($this->handler->_moduleName);
+        $seoMode       = Smartobject\Utility::getModuleModeSEO($this->handler->_moduleName);
+        $seoModuleName = Smartobject\Utility::getModuleNameForSEO($this->handler->_moduleName);
 
         /**
          * $seoIncludeId feature is not finished yet, so let's put it always to true
          */
-        //$seoIncludeId = smart_getModuleIncludeIdSEO($this->handler->_moduleName);
+        //$seoIncludeId = Smartobject\Utility::getModuleIncludeIdSEO($this->handler->_moduleName);
         $seoIncludeId = true;
 
         if ('rewrite' === $seoMode) {
@@ -509,8 +509,8 @@ class SmartObjectController
         $js        = "javascript:openWithSelfMain('" . $printlink . "', 'smartpopup', 700, 519);";
         $printlink = '<a href="' . $js . '"><img  src="' . SMARTOBJECT_IMAGES_ACTIONS_URL . 'fileprint.png" alt="" style="vertical-align: middle;"></a>';
 
-        $smartModule = smart_getModuleInfo($smartObj->handler->_moduleName);
-        $link        = smart_getCurrentPage();
+        $smartModule = Smartobject\Utility::getModuleInfo($smartObj->handler->_moduleName);
+        $link        = Smartobject\Utility::getCurrentPage();
         $mid         = $smartModule->getVar('mid');
         $friendlink  = "<a href=\"javascript:openWithSelfMain('"
                        . SMARTOBJECT_URL

@@ -22,7 +22,7 @@ if (!defined('SMARTOBJECT_URL')) {
     require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/common.php';
 }
 
-require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/functions.php';
+//require_once XOOPS_ROOT_PATH . '/modules/smartobject/include/functions.php';
 require_once SMARTOBJECT_ROOT_PATH . 'class/adsense.php';
 
 $smartobjectAdsenseHandler = xoops_getModuleHandler('adsense', 'smartobject');

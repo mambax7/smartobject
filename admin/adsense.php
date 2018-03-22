@@ -18,25 +18,25 @@ function editclass($showmenu = false, $adsenseid = 0, $clone = false)
 
     if (!$clone && !$adsenseObj->isNew()) {
         if ($showmenu) {
-            //smart_adminMenu(3, _AM_SOBJECT_ADSENSES . " > " . _AM_SOBJECT_EDITING);
+            //Smartobject\Utility::getAdminMenu(3, _AM_SOBJECT_ADSENSES . " > " . _AM_SOBJECT_EDITING);
         }
-        smart_collapsableBar('adsenseedit', _AM_SOBJECT_ADSENSES_EDIT, _AM_SOBJECT_ADSENSES_EDIT_INFO);
+        Smartobject\Utility::getCollapsableBar('adsenseedit', _AM_SOBJECT_ADSENSES_EDIT, _AM_SOBJECT_ADSENSES_EDIT_INFO);
 
         $sform = $adsenseObj->getForm(_AM_SOBJECT_ADSENSES_EDIT, 'addadsense');
         $sform->display();
-        smart_close_collapsable('adsenseedit');
+        Smartobject\Utility::closeCollapsable('adsenseedit');
     } else {
         $adsenseObj->setVar('adsenseid', 0);
         $adsenseObj->setVar('tag', '');
 
         if ($showmenu) {
-            //smart_adminMenu(3, _AM_SOBJECT_ADSENSES . " > " . _CO_SOBJECT_CREATINGNEW);
+            //Smartobject\Utility::getAdminMenu(3, _AM_SOBJECT_ADSENSES . " > " . _CO_SOBJECT_CREATINGNEW);
         }
 
-        smart_collapsableBar('adsensecreate', _AM_SOBJECT_ADSENSES_CREATE, _AM_SOBJECT_ADSENSES_CREATE_INFO);
+        Smartobject\Utility::getCollapsableBar('adsensecreate', _AM_SOBJECT_ADSENSES_CREATE, _AM_SOBJECT_ADSENSES_CREATE_INFO);
         $sform = $adsenseObj->getForm(_AM_SOBJECT_ADSENSES_CREATE, 'addadsense', false, false, false, true);
         $sform->display();
-        smart_close_collapsable('adsensecreate');
+        Smartobject\Utility::closeCollapsable('adsensecreate');
     }
 }
 
@@ -44,7 +44,7 @@ require_once __DIR__ . '/admin_header.php';
 require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
 require_once SMARTOBJECT_ROOT_PATH . 'class/adsense.php';
 $smartobjectAdsenseHandler = xoops_getModuleHandler('adsense');
-smart_loadLanguageFile('smartobject', 'adsense');
+Smartobject\Utility::loadLanguageFile('smartobject', 'adsense');
 $adminObject = \Xmf\Module\Admin::getInstance();
 
 $op = '';
@@ -61,7 +61,7 @@ switch ($op) {
 
         $adsenseid = isset($_GET['adsenseid']) ? (int)$_GET['adsenseid'] : 0;
 
-        smart_xoops_cp_header();
+        Smartobject\Utility::getXoopsCpHeader();
         $adminObject->displayNavigation(basename(__FILE__));
 
         editclass(true, $adsenseid);
@@ -71,7 +71,7 @@ switch ($op) {
 
         $adsenseid = isset($_GET['adsenseid']) ? (int)$_GET['adsenseid'] : 0;
 
-        smart_xoops_cp_header();
+        Smartobject\Utility::getXoopsCpHeader();
         $adminObject->displayNavigation(basename(__FILE__));
 
         editclass(true, $adsenseid, true);
@@ -99,12 +99,12 @@ switch ($op) {
 
     default:
 
-        smart_xoops_cp_header();
+        Smartobject\Utility::getXoopsCpHeader();
         $adminObject->displayNavigation(basename(__FILE__));
 
-        //smart_adminMenu(3, _AM_SOBJECT_ADSENSES);
+        //Smartobject\Utility::getAdminMenu(3, _AM_SOBJECT_ADSENSES);
 
-        smart_collapsableBar('createdadsenses', _AM_SOBJECT_ADSENSES, _AM_SOBJECT_ADSENSES_DSC);
+        Smartobject\Utility::getCollapsableBar('createdadsenses', _AM_SOBJECT_ADSENSES, _AM_SOBJECT_ADSENSES_DSC);
 
         require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
         $objectTable = new XoopsModules\Smartobject\SmartObjectTable($smartobjectAdsenseHandler);
@@ -145,12 +145,12 @@ switch ($op) {
         $objectTable->render();
 
         echo '<br>';
-        smart_close_collapsable('createdadsenses');
+        Smartobject\Utility::closeCollapsable('createdadsenses');
         echo '<br>';
 
         break;
 }
 
-//smart_modFooter();
+//Smartobject\Utility::getModFooter();
 //xoops_cp_footer();
 require_once __DIR__ . '/admin_footer.php';

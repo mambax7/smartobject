@@ -20,22 +20,22 @@ function editclass($showmenu = false, $currencyid = 0)
 
     if (!$currencyObj->isNew()) {
         if ($showmenu) {
-            //smart_adminMenu(5, _AM_SOBJECT_CURRENCIES . " > " . _AM_SOBJECT_EDITING);
+            //Smartobject\Utility::getAdminMenu(5, _AM_SOBJECT_CURRENCIES . " > " . _AM_SOBJECT_EDITING);
         }
-        smart_collapsableBar('currencyedit', _AM_SOBJECT_CURRENCIES_EDIT, _AM_SOBJECT_CURRENCIES_EDIT_INFO);
+        Smartobject\Utility::getCollapsableBar('currencyedit', _AM_SOBJECT_CURRENCIES_EDIT, _AM_SOBJECT_CURRENCIES_EDIT_INFO);
 
         $sform = $currencyObj->getForm(_AM_SOBJECT_CURRENCIES_EDIT, 'addcurrency');
         $sform->display();
-        smart_close_collapsable('currencyedit');
+        Smartobject\Utility::closeCollapsable('currencyedit');
     } else {
         if ($showmenu) {
-            //smart_adminMenu(5, _AM_SOBJECT_CURRENCIES . " > " . _CO_SOBJECT_CREATINGNEW);
+            //Smartobject\Utility::getAdminMenu(5, _AM_SOBJECT_CURRENCIES . " > " . _CO_SOBJECT_CREATINGNEW);
         }
 
-        smart_collapsableBar('currencycreate', _AM_SOBJECT_CURRENCIES_CREATE, _AM_SOBJECT_CURRENCIES_CREATE_INFO);
+        Smartobject\Utility::getCollapsableBar('currencycreate', _AM_SOBJECT_CURRENCIES_CREATE, _AM_SOBJECT_CURRENCIES_CREATE_INFO);
         $sform = $currencyObj->getForm(_AM_SOBJECT_CURRENCIES_CREATE, 'addcurrency');
         $sform->display();
-        smart_close_collapsable('currencycreate');
+        Smartobject\Utility::closeCollapsable('currencycreate');
     }
 }
 
@@ -57,7 +57,7 @@ switch ($op) {
     case 'mod':
         $currencyid = isset($_GET['currencyid']) ? (int)$_GET['currencyid'] : 0;
 
-        smart_xoops_cp_header();
+        Smartobject\Utility::getXoopsCpHeader();
 
         editclass(true, $currencyid);
         break;
@@ -105,11 +105,11 @@ switch ($op) {
 
     default:
 
-        smart_xoops_cp_header();
+        Smartobject\Utility::getXoopsCpHeader();
 
-        //smart_adminMenu(5, _AM_SOBJECT_CURRENCIES);
+        //Smartobject\Utility::getAdminMenu(5, _AM_SOBJECT_CURRENCIES);
 
-        smart_collapsableBar('createdcurrencies', _AM_SOBJECT_CURRENCIES, _AM_SOBJECT_CURRENCIES_DSC);
+        Smartobject\Utility::getCollapsableBar('createdcurrencies', _AM_SOBJECT_CURRENCIES, _AM_SOBJECT_CURRENCIES_DSC);
 
         require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
         $objectTable = new SmartObjectTable($smartobjectCurrencyHandler);
@@ -125,12 +125,12 @@ switch ($op) {
         $objectTable->render();
 
         echo '<br>';
-        smart_close_collapsable('createdcurrencies');
+        Smartobject\Utility::closeCollapsable('createdcurrencies');
         echo '<br>';
 
         break;
 }
 
-//smart_modFooter();
+//Smartobject\Utility::getModFooter();
 //xoops_cp_footer();
 require_once __DIR__ . '/admin_footer.php';

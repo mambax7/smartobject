@@ -98,13 +98,13 @@ class SmartobjectAbout
 
         global $xoopsModule;
 
-        smart_xoops_cp_header();
+        Smartobject\Utility::getXoopsCpHeader();
 
         /** @var XoopsModuleHandler $moduleHandler */
         $moduleHandler = xoops_getHandler('module');
         $versioninfo   = $moduleHandler->get($xoopsModule->getVar('mid'));
 
-        //smart_adminMenu(-1, $this->_aboutTitle . " " . $versioninfo->getInfo('name'));
+        //Smartobject\Utility::getAdminMenu(-1, $this->_aboutTitle . " " . $versioninfo->getInfo('name'));
 
         require_once XOOPS_ROOT_PATH . '/class/template.php';
 
@@ -177,7 +177,7 @@ class SmartobjectAbout
 
         $this->_tpl->display('db:smartobject_about.tpl');
 
-        smart_modFooter();
+        Smartobject\Utility::getModFooter();
 
         xoops_cp_footer();
     }

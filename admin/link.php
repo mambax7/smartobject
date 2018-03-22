@@ -48,11 +48,11 @@ switch ($op) {
             redirect_header(SMARTOBJECT_URL . 'admin/link.php', 3, _AM_SOBJECT_LINK_NOT_FOUND);
         }
 
-        smart_xoops_cp_header();
+        Smartobject\Utility::getXoopsCpHeader();
 
-        //smart_adminMenu(1, _AM_SOBJECT_SENT_LINK_DISPLAY);
+        //Smartobject\Utility::getAdminMenu(1, _AM_SOBJECT_SENT_LINK_DISPLAY);
 
-        smart_collapsableBar('sentlinks', _AM_SOBJECT_SENT_LINK_DISPLAY, _AM_SOBJECT_SENT_LINK_DISPLAY_INFO);
+        Smartobject\Utility::getCollapsableBar('sentlinks', _AM_SOBJECT_SENT_LINK_DISPLAY, _AM_SOBJECT_SENT_LINK_DISPLAY_INFO);
 
         require_once XOOPS_ROOT_PATH . '/class/template.php';
 
@@ -66,20 +66,20 @@ switch ($op) {
         $xoopsTpl->display('db:smartobject_sentlink_display.tpl');
 
         echo '<br>';
-        smart_close_collapsable('sentlinks');
+        Smartobject\Utility::closeCollapsable('sentlinks');
         echo '<br>';
 
         break;
 
     default:
 
-        smart_xoops_cp_header();
+        Smartobject\Utility::getXoopsCpHeader();
 
         $adminObject->displayNavigation(basename(__FILE__));
 
-        //smart_adminMenu(1, _AM_SOBJECT_SENT_LINKS);
+        //Smartobject\Utility::getAdminMenu(1, _AM_SOBJECT_SENT_LINKS);
 
-        smart_collapsableBar('sentlinks', _AM_SOBJECT_SENT_LINKS, _AM_SOBJECT_SENT_LINKS_INFO);
+        Smartobject\Utility::getCollapsableBar('sentlinks', _AM_SOBJECT_SENT_LINKS, _AM_SOBJECT_SENT_LINKS_INFO);
 
         require_once SMARTOBJECT_ROOT_PATH . 'class/smartobjecttable.php';
         $objectTable = new XoopsModules\Smartobject\SmartObjectTable($smartobjectLinkHandler, null, ['delete']);
@@ -96,12 +96,12 @@ switch ($op) {
         $objectTable->render();
 
         echo '<br>';
-        smart_close_collapsable('sentlinks');
+        Smartobject\Utility::closeCollapsable('sentlinks');
         echo '<br>';
 
         break;
 }
 
-//smart_modFooter();
+//Smartobject\Utility::getModFooter();
 //xoops_cp_footer();
 require_once __DIR__ . '/admin_footer.php';

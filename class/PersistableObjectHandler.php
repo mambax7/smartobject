@@ -10,7 +10,7 @@
  * @subpackage SmartObjectCore
  */
 
-use CriteriaElement;
+//use \CriteriaElement;
 use XoopsModules\Smartobject;
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');

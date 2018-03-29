@@ -412,7 +412,7 @@ class Utility
         if (file_exists($target) && !is_dir($target)) {
             return false;
         }
-        if (Smartobject\Utility::mkdirAsAdmin(substr($target, 0, strrpos($target, '/')))) {
+        if (static::mkdirAsAdmin(substr($target, 0, strrpos($target, '/')))) {
             if (!file_exists($target)) {
                 $res = mkdir($target, 0777); // crawl back up & create dir tree
                 static::chmodAsAdmin($target);
@@ -878,7 +878,7 @@ class Utility
      */
     public static function getModFooter()
     {
-        global $xoopsConfig, $xoopsModule, $xoopsModuleConfig;
+        global $xoopsConfig, $xoopsModule;
 
         require_once XOOPS_ROOT_PATH . '/class/template.php';
         $tpl = new \XoopsTpl();

@@ -9,6 +9,8 @@
 
 use XoopsModules\Smartobject;
 
+require_once __DIR__ . '/../preloads/autoloader.php';
+
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 global $xoopsConfig;
@@ -64,9 +66,9 @@ define('_SMART_OBJECT_METHOD', 2);
  }
  */
 // get current page
-$smart_current_page = \XoopsModules\Smartobject\Utility::getCurrentPage();
+$smart_current_page = Smartobject\Utility::getCurrentPage();
 
 // get previous page
 $smart_previous_page = Smartobject\Utility::getEnv('HTTP_REFERER');
 
-require_once SMARTOBJECT_ROOT_PATH . 'class/smartloader.php';
+//require_once SMARTOBJECT_ROOT_PATH . 'class/smartloader.php';

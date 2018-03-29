@@ -11,6 +11,8 @@
  */
 
 use XoopsModules\Smartobject;
+/** @var Smartobject\Helper $helper */
+$helper = Smartobject\Helper::getInstance();
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
@@ -199,7 +201,10 @@ class MetaGen
      */
     public function setTitle($title)
     {
-        global $xoopsModule, $xoopsModuleConfig;
+        global $xoopsModule;
+        /** @var Smartobject\Helper $helper */
+        $helper = Smartobject\Helper::getInstance();
+
         $this->_title          = $this->html2text($title);
         $this->_title          = $this->purifyText($this->_title);
         $this->_original_title = $this->_title;
@@ -208,7 +213,7 @@ class MetaGen
 
         $titleTag = [];
 
-        $show_mod_name_breadcrumb = isset($xoopsModuleConfig['show_mod_name_breadcrumb']) ? $xoopsModuleConfig['show_mod_name_breadcrumb'] : true;
+        $show_mod_name_breadcrumb = null !==($helper->getConfig('show_mod_name_breadcrumb')) ? $helper->getConfig('show_mod_name_breadcrumb') : true;
 
         if ($moduleName && $show_mod_name_breadcrumb) {
             $titleTag['module'] = $moduleName;
@@ -262,9 +267,11 @@ class MetaGen
     public function setDescription($description)
     {
         if (!$description) {
-            global $xoopsModuleConfig;
-            if (isset($xoopsModuleConfig['module_meta_description'])) {
-                $description = $xoopsModuleConfig['module_meta_description'];
+            /** @var Smartobject\Helper $helper */
+            $helper = Smartobject\Helper::getInstance();
+
+            if  (null !== ($helper->getConfig('module_meta_description'))) {
+                $description = $helper->getConfig('module_meta_description');
             }
         }
 
@@ -355,11 +362,13 @@ class MetaGen
      */
     public function createMetaKeywords()
     {
-        global $xoopsModuleConfig;
+        /** @var Smartobject\Helper $helper */
+        $helper = Smartobject\Helper::getInstance();
+
         $keywords = $this->findMetaKeywords($this->_original_title . ' ' . $this->_description, $this->_minChar);
-        if (isset($xoopsModuleConfig) && isset($xoopsModuleConfig['moduleMetaKeywords'])
-            && '' !== $xoopsModuleConfig['moduleMetaKeywords']) {
-            $moduleKeywords = explode(',', $xoopsModuleConfig['moduleMetaKeywords']);
+        if (null !== ($helper->getModule()) && null !== ($helper->getConfig('moduleMetaKeywords'))
+            && '' !== $helper->getConfig('moduleMetaKeywords')) {
+            $moduleKeywords = explode(',', $helper->getConfig('moduleMetaKeywords'));
             $keywords       = array_merge($keywords, $moduleKeywords);
         }
 
@@ -391,7 +400,9 @@ class MetaGen
 
     public function buildAutoMetaTags()
     {
-        global $xoopsModule, $xoopsModuleConfig;
+        global $xoopsModule;
+        /** @var Smartobject\Helper $helper */
+        $helper = Smartobject\Helper::getInstance();
 
         $this->_keywords         = $this->createMetaKeywords();
         $this->_meta_description = $this->createMetaDescription();

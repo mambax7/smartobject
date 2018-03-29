@@ -12,6 +12,11 @@
 
 use XoopsModules\Smartobject;
 
+/**
+ * @param bool $showmenu
+ * @param int  $adsenseid
+ * @param bool $clone
+ */
 function editclass($showmenu = false, $adsenseid = 0, $clone = false)
 {
     global $smartobjectAdsenseHandler;

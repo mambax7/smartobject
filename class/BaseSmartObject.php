@@ -10,7 +10,9 @@
  * @subpackage SmartObjectCore
  */
 
-use XoopsModules\Smartobject;
+use XoopsModules\Smartmedia;
+/** @var Smartmedia\Helper $helper */
+$helper = Smartmedia\Helper::getInstance();
 
 
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
@@ -379,7 +381,7 @@ class BaseSmartObject extends \XoopsObject
      *
      * In this example, SmartObject will create a TextArea for the variable 'body'. And it will use
      * the 'default' editor, providing it is defined in the module
-     * preferences: $xoopsModuleConfig['default_editor']
+     * preferences: $helper->getConfig('default_editor')
      *
      * Of course, you can force the use of a specific editor:
      *
@@ -767,7 +769,8 @@ class BaseSmartObject extends \XoopsObject
      */
     public function getValueFor($key, $editor = true)
     {
-        global $xoopsModuleConfig;
+        /** @var Smartmedia\Helper $helper */
+        $helper = Smartmedia\Helper::getInstance();
 
         $ret  = $this->getVar($key, 'n');
         $myts = \MyTextSanitizer::getInstance();
@@ -783,8 +786,10 @@ class BaseSmartObject extends \XoopsObject
         $formatML = true;
 
         if ('default' === $form_editor) {
-            global $xoopsModuleConfig;
-            $form_editor = isset($xoopsModuleConfig['default_editor']) ? $xoopsModuleConfig['default_editor'] : 'textarea';
+            /** @var Smartmedia\Helper $helper */
+            $helper = Smartmedia\Helper::getInstance();
+
+            $form_editor = null !==($helper->getConfig('default_editor')) ? $helper->getConfig('default_editor') : 'textarea';
         }
 
         if ($editor) {

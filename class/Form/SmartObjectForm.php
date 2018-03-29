@@ -10,6 +10,10 @@
  * @subpackage SmartObjectForm
  */
 
+use XoopsModules\Smartobject;
+/** @var Smartobject\Helper $helper */
+$helper = Smartobject\Helper::getInstance();
+
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
@@ -514,8 +518,9 @@ class SmartObjectForm extends \XoopsThemeForm
          * If the editor is 'default', retreive the default editor of this module
          */
         if ('default' === $form_editor) {
-            global $xoopsModuleConfig;
-            $form_editor = isset($xoopsModuleConfig['default_editor']) ? $xoopsModuleConfig['default_editor'] : 'textarea';
+               /** @var Smartobject\Helper $helper */
+            $helper = Smartobject\Helper::getInstance();
+            $form_editor = null !== ($helper->getConfig('default_editor')) ? $helper->getConfig('default_editor') : 'textarea';
         }
 
         $caption = $var['form_caption'];

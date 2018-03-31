@@ -56,7 +56,7 @@ if (isset($_POST['op'])) {
 
 switch ($op) {
     case 'mod':
-        $currencyid = isset($_GET['currencyid']) ? (int)$_GET['currencyid'] : 0;
+        $currencyid = \Xmf\Request::getInt('currencyid', 0, 'GET');
 
         Smartobject\Utility::getXoopsCpHeader();
 

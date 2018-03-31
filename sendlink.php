@@ -25,7 +25,7 @@ echo '</head><body>';
 $smartobjectLinkHandler = Smartobject\Helper::getInstance()->getHandler('link', 'smartobject');
 $linkObj                = $smartobjectLinkHandler->create();
 
-$op = isset($_POST['op']) ? $_POST['op'] : '';
+$op = \Xmf\Request::getString('op', '', 'POST');
 
 switch ($op) {
     case 'sendlink':

@@ -66,7 +66,7 @@ if (isset($_POST['op'])) {
 switch ($op) {
     case 'mod':
 
-        $customtagid = isset($_GET['customtagid']) ? (int)$_GET['customtagid'] : 0;
+        $customtagid = \Xmf\Request::getInt('customtagid', 0, 'GET');
 
         Smartobject\Utility::getXoopsCpHeader();
         $adminObject->displayNavigation(basename(__FILE__));
@@ -76,7 +76,7 @@ switch ($op) {
 
     case 'clone':
 
-        $customtagid = isset($_GET['customtagid']) ? (int)$_GET['customtagid'] : 0;
+        $customtagid = \Xmf\Request::getInt('customtagid', 0, 'GET');
 
         Smartobject\Utility::getXoopsCpHeader();
         $adminObject->displayNavigation(basename(__FILE__));

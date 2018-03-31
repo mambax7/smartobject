@@ -70,7 +70,7 @@ if (isset($_POST['op'])) {
 switch ($op) {
     case 'mod':
 
-        $adsenseid = isset($_GET['adsenseid']) ? (int)$_GET['adsenseid'] : 0;
+        $adsenseid = \Xmf\Request::getInt('adsenseid', 0, 'GET');
 
         Smartobject\Utility::getXoopsCpHeader();
         $adminObject->displayNavigation(basename(__FILE__));
@@ -80,7 +80,7 @@ switch ($op) {
 
     case 'clone':
 
-        $adsenseid = isset($_GET['adsenseid']) ? (int)$_GET['adsenseid'] : 0;
+        $adsenseid = \Xmf\Request::getInt('adsenseid', 0, 'GET');
 
         Smartobject\Utility::getXoopsCpHeader();
         $adminObject->displayNavigation(basename(__FILE__));

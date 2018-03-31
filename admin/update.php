@@ -340,7 +340,7 @@ function rename_fields(&$table, $renamed_fields, &$fields, $new_fields)
     //return $fields;
 }
 
-$op = isset($_REQUEST['op']) ? (int)$_REQUEST['op'] : 0;
+$op = \Xmf\Request::getInt('op', 0, 'REQUEST');
 switch ($op) {
     case 1:
         // Make sure that nohtml is properly changed to dohtml

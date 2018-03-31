@@ -42,7 +42,7 @@ switch ($op) {
         break;
 
     case 'view':
-        $linkid  = isset($_GET['linkid']) ? $_GET['linkid'] : 0;
+        $linkid  = \Xmf\Request::getInt('linkid', 0, GET);
         $linkObj = $smartobjectLinkHandler->get($linkid);
 
         if ($linkObj->isNew()) {

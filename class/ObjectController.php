@@ -318,7 +318,7 @@ class ObjectController
             redirect_header('javascript:history.go(-1)', 3, _CO_SOBJECT_NOT_SELECTED);
         }
 
-        $confirm = isset($_POST['confirm']) ? $_POST['confirm'] : 0;
+        $confirm = \Xmf\Request::getInt('confirm', 0, POST);
         if ($confirm) {
             if (!$this->handler->delete($smartObj)) {
                 redirect_header($_POST['redirect_page'], 3, _CO_SOBJECT_DELETE_ERROR . $smartObj->getHtmlErrors());
@@ -361,7 +361,7 @@ class ObjectController
             redirect_header('javascript:history.go(-1)', 3, _CO_SOBJECT_NOT_SELECTED);
         }
 
-        $confirm = isset($_POST['confirm']) ? $_POST['confirm'] : 0;
+        $confirm = \Xmf\Request::getInt('confirm', 0, POST);
         if ($confirm) {
             if (!$this->handler->delete($smartObj)) {
                 redirect_header($_POST['redirect_page'], 3, _CO_SOBJECT_DELETE_ERROR . $smartObj->getHtmlErrors());

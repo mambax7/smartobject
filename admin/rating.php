@@ -75,7 +75,7 @@ switch ($op) {
     case 'mod':
     case 'changedField':
 
-        $ratingid = isset($_GET['ratingid']) ? (int)$_GET['ratingid'] : 0;
+        $ratingid = \Xmf\Request::getInt('ratingid', 0, 'GET');
 
         Smartobject\Utility::getXoopsCpHeader();
         $adminObject->displayNavigation(basename(__FILE__));

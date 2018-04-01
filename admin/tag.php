@@ -73,7 +73,7 @@ if (isset($_POST['op'])) {
     $op = $_POST['op'];
 }
 
-$tagid    = \Xmf\Request::getInt('tagid', 0, GET);
+$tagid    = \Xmf\Request::getInt('tagid', 0, 'GET');
 $fct      = \Xmf\Request::getString('fct', '', 'GET');
 $language = isset($_GET['language']) ? $_GET['language'] : false;
 
